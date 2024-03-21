@@ -5,3 +5,4 @@ Members:
  Rayanne Ohara
  Andy Pham
  Huy Tran
+ Luke Simoni
