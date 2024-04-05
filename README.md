@@ -6,3 +6,4 @@ Members:
  Andy Pham
  Huy Tran
  Luke Simoni
+ Tran Chi
