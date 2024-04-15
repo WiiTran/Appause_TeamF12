@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  Appause
 //
-//  Created by Dakshina Ethdath Waduge on 04/15/2024.
+//  Created by Dakshina Ethdath Waduge on 04/15/24.
 //
 
 import SwiftUI
