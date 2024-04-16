@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		001A9BE22BCE04BA00D36F6B /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001A9BE12BCE04BA00D36F6B /* ResetPasswordView.swift */; };
+		001A9BE42BCE055400D36F6B /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001A9BE32BCE055400D36F6B /* ForgotPasswordView.swift */; };
+		004077F22BCE0F3600BBB180 /* StudentSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004077F12BCE0F3600BBB180 /* StudentSettingsView.swift */; };
+		004077F42BCE0F4C00BBB180 /* TeacherSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004077F32BCE0F4C00BBB180 /* TeacherSettingsView.swift */; };
+		004077F62BCE220B00BBB180 /* GlobalStyleVar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004077F52BCE220B00BBB180 /* GlobalStyleVar.swift */; };
+		00DC102A2BCCA98E003B4ABA /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DC10292BCCA98E003B4ABA /* LoginView.swift */; };
+		00DC10342BCCB526003B4ABA /* 2FactorAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DC10332BCCB526003B4ABA /* 2FactorAuthentication.swift */; };
+		00DC10362BCCB548003B4ABA /* PWCodeVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DC10352BCCB548003B4ABA /* PWCodeVerificationView.swift */; };
+		00DC10382BCCB562003B4ABA /* StudentMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DC10372BCCB562003B4ABA /* StudentMainView.swift */; };
 		EDC236B62BC1107700DC47C5 /* AppauseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC236B52BC1107700DC47C5 /* AppauseApp.swift */; };
 		EDC236B82BC1107700DC47C5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC236B72BC1107700DC47C5 /* ContentView.swift */; };
 		EDC236BA2BC1107800DC47C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDC236B92BC1107800DC47C5 /* Assets.xcassets */; };
@@ -35,6 +44,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		001A9BE02BCCE5D500D36F6B /* keychain-swift-master */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "keychain-swift-master"; path = "../keychain-swift-master"; sourceTree = "<group>"; };
+		001A9BE12BCE04BA00D36F6B /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
+		001A9BE32BCE055400D36F6B /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
+		004077F12BCE0F3600BBB180 /* StudentSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentSettingsView.swift; sourceTree = "<group>"; };
+		004077F32BCE0F4C00BBB180 /* TeacherSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherSettingsView.swift; sourceTree = "<group>"; };
+		004077F52BCE220B00BBB180 /* GlobalStyleVar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalStyleVar.swift; sourceTree = "<group>"; };
+		00DC10292BCCA98E003B4ABA /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		00DC10332BCCB526003B4ABA /* 2FactorAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2FactorAuthentication.swift; sourceTree = "<group>"; };
+		00DC10352BCCB548003B4ABA /* PWCodeVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PWCodeVerificationView.swift; sourceTree = "<group>"; };
+		00DC10372BCCB562003B4ABA /* StudentMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentMainView.swift; sourceTree = "<group>"; };
 		ED8477562BC3945900F5C716 /* Appause.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Appause.entitlements; sourceTree = "<group>"; };
 		EDC236B22BC1107700DC47C5 /* Appause.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Appause.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDC236B52BC1107700DC47C5 /* AppauseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppauseApp.swift; sourceTree = "<group>"; };
@@ -74,9 +93,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		001A9BDF2BCCE5D500D36F6B /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				001A9BE02BCCE5D500D36F6B /* keychain-swift-master */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 		EDC236A92BC1107600DC47C5 = {
 			isa = PBXGroup;
 			children = (
+				001A9BDF2BCCE5D500D36F6B /* Packages */,
 				EDC236B42BC1107700DC47C5 /* Appause */,
 				EDC236C52BC1107800DC47C5 /* AppauseTests */,
 				EDC236CF2BC1107800DC47C5 /* AppauseUITests */,
@@ -101,6 +129,15 @@
 				ED8477562BC3945900F5C716 /* Appause.entitlements */,
 				EDC236B52BC1107700DC47C5 /* AppauseApp.swift */,
 				EDC236B72BC1107700DC47C5 /* ContentView.swift */,
+				00DC10292BCCA98E003B4ABA /* LoginView.swift */,
+				001A9BE32BCE055400D36F6B /* ForgotPasswordView.swift */,
+				001A9BE12BCE04BA00D36F6B /* ResetPasswordView.swift */,
+				00DC10332BCCB526003B4ABA /* 2FactorAuthentication.swift */,
+				00DC10352BCCB548003B4ABA /* PWCodeVerificationView.swift */,
+				00DC10372BCCB562003B4ABA /* StudentMainView.swift */,
+				004077F12BCE0F3600BBB180 /* StudentSettingsView.swift */,
+				004077F32BCE0F4C00BBB180 /* TeacherSettingsView.swift */,
+				004077F52BCE220B00BBB180 /* GlobalStyleVar.swift */,
 				EDC236B92BC1107800DC47C5 /* Assets.xcassets */,
 				EDC236BB2BC1107800DC47C5 /* Preview Content */,
 			);
@@ -270,9 +307,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00DC10342BCCB526003B4ABA /* 2FactorAuthentication.swift in Sources */,
 				EDC236B82BC1107700DC47C5 /* ContentView.swift in Sources */,
+				00DC10382BCCB562003B4ABA /* StudentMainView.swift in Sources */,
 				EDFB125C2BC3A78D00353B4C /* FamilyControls.swift in Sources */,
+				00DC102A2BCCA98E003B4ABA /* LoginView.swift in Sources */,
+				001A9BE22BCE04BA00D36F6B /* ResetPasswordView.swift in Sources */,
+				004077F62BCE220B00BBB180 /* GlobalStyleVar.swift in Sources */,
+				004077F22BCE0F3600BBB180 /* StudentSettingsView.swift in Sources */,
 				EDC236B62BC1107700DC47C5 /* AppauseApp.swift in Sources */,
+				001A9BE42BCE055400D36F6B /* ForgotPasswordView.swift in Sources */,
+				004077F42BCE0F4C00BBB180 /* TeacherSettingsView.swift in Sources */,
+				00DC10362BCCB548003B4ABA /* PWCodeVerificationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,10 +480,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Appause/Appause.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Appause/Preview Content\"";
-				DEVELOPMENT_TEAM = 53NSY6KM9Q;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 53NSY6KM9Q;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
@@ -452,8 +500,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = csus.TeamF12.Appause;
+				PRODUCT_BUNDLE_IDENTIFIER = csus.TmF12.Appause;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = AppausePL;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -466,10 +516,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Appause/Appause.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Appause/Preview Content\"";
-				DEVELOPMENT_TEAM = 53NSY6KM9Q;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 53NSY6KM9Q;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
@@ -484,8 +536,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = csus.TeamF12.Appause;
+				PRODUCT_BUNDLE_IDENTIFIER = csus.TmF12.Appause;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = AppausePL;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -536,6 +590,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 53NSY6KM9Q;
@@ -554,6 +609,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 53NSY6KM9Q;
