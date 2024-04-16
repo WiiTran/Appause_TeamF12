@@ -1,55 +1,48 @@
 //
 //  ContentView.swift
-//  Appause
+//  AppausePl
 //
-//  Created by Dakshina Ethdath Waduge on 04/15/24.
+//  Created by Tran Chi on 4/15/24.
 //
 
 import SwiftUI
-import CoreBluetooth
 
-class BluetoothViewModel: NSObject, ObservableObject{
-    private var centralManager: CBCentralManager?
-    private var peripherals: [CBPeripheral] = []
-    @Published var peripheralNames: [String] = []
+struct MasterControlView: View {
+    //State vaiable to select the app to block
+    @State private var SelectApp: String = ""
+    // State variable to track app lock status
+    @State private var isAppLocked = false
     
-    override init() {
-        super.init()
-        self.centralManager = CBCentralManager(delegate: self, queue: .main)
-    }
-}
-
-extension BluetoothViewModel: CBCentralManagerDelegate {
-    func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        if central.state == .poweredOn {
-            self.centralManager?.scanForPeripherals(withServices: nil)
-        }
-    }
-    
-    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-        if !peripherals.contains(peripheral) {
-            self.peripherals.append(peripheral)
-            self.peripheralNames.append(peripheral.name ?? "Unnamed Device")
-        }
-    }
-}
-
-
-
-struct ContentView: View {
-    @ObservedObject private var bluetoothViewModel = BluetoothViewModel()
-    
+   // Let apps = ["Youtube", ]
     var body: some View {
-        NavigationView {
-            List(bluetoothViewModel.peripheralNames, id: \.self) { peripheral in Text(peripheral)
+        VStack {
+            Text("")
+                .font(.title)
+                .padding()
+            
+            Button(action: {
+                // Call function to lock or unlock app
+                self.toggleAppLock()
+            }) {
+                Text(isAppLocked ? "Unlock App" : "Lock App")
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(isAppLocked ? Color.green : Color.red)
+                    .cornerRadius(10)
             }
-            .navigationTitle("Peripherals")
         }
+    }
+    
+    // Function to toggle app lock status
+    private func toggleAppLock() {
+        // Implement logic to communicate with backend service to lock or unlock app
+        // For demonstration purposes, we will just toggle the state variable
+        isAppLocked.toggle()
+    }
+}
+struct MasterControlView_Previews: PreviewProvider {
+    static var previews: some View {
+        MasterControlView()
     }
 }
 
-struct ContentView_Preview: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
