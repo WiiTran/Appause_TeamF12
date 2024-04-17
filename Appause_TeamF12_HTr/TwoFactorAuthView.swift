@@ -6,13 +6,28 @@
 //
 
 import SwiftUI
+import Combine
+
 
 struct TwoFactorAuthView: View {
+    @Binding var showNextView: DisplayState
+    var email: String
+    var onVerificationSuccess: () -> Void
+    @Binding var show2FAInput: Bool
+
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("2 Factor Auth View")
     }
 }
 
-#Preview {
-    TwoFactorAuthView()
+struct TwoFactorAuthView_Previews: PreviewProvider {
+    @State static private var showNextView: DisplayState = .twoFactorAuth
+    @State static private var show2FA: Bool = true
+    
+    static var previews: some View {
+        TwoFactorAuthView(showNextView: $showNextView, email: "test@example.com", onVerificationSuccess: {
+            print("Verification successful!")
+        }, show2FAInput: $show2FA)
+    }
 }

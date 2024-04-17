@@ -56,7 +56,7 @@ struct EULAView: View {
                                 Button(action: {
                                     withAnimation {
                                         //show nextView .whateverViewYouWantToShow defined in ContentView Enum
-                                        showNextView = .contentView}
+                                        showNextView = .login}
                                 }) {
                                     Text("Accept")
                                         .padding()

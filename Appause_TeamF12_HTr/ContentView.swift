@@ -6,27 +6,49 @@
 //
 
 import SwiftUI
-enum DisplayState { case eula, contentView }
+enum DisplayState { case eula, login, emailCode, mainTeacher, mainStudent, selectRegistration, twoFactorAuth
+}
 
 struct ContentView: View {
     @State private var displayState: DisplayState = .eula
+    @State private var email: String = "test@example.com"
+    @State private var show2FAInput: Bool = true // Add this line
+    @StateObject var viewSwitcher = ViewSwitcher()
+    
     var body: some View {
         VStack {
+            //add DisplayState transitions here
             switch displayState {
             case .eula:
-         EULAView(showNextView: $displayState)
-            case .contentView:
-                Image(systemName: "globe")
-                    .imageScale(.large)
-                    .foregroundStyle(.tint)
-                Text("Hello, World!")
+                EULAView(showNextView: $displayState)
+            case .login:
+                LoginView(showNextView: $displayState)
+            case .mainStudent:
+                StudentMainView(showNextView: $displayState)
+            case .mainTeacher:
+                TeacherMainView(showNextView: $displayState)
+            case .selectRegistration:
+                SelectRegistrationView(showNextView: $displayState)
+            case .emailCode:
+                ForgotPasswordView(showNextView: $displayState)
+            case .twoFactorAuth:
+                TwoFactorAuthView(showNextView: $displayState, email: email, onVerificationSuccess:
+            {
+                    print("Verification successful!")}, show2FAInput: $show2FAInput)
+
             }
-           
         }
-        .padding()
+        //adds viewSwitcher to the views so that all views can access the values of viewSwitcher
+        .environmentObject(viewSwitcher)
     }
 }
 
-#Preview {
-    ContentView()
+
+struct ContentView_Previews: PreviewProvider {
+    //shows the first state
+    @State static private var showNextView: DisplayState = .eula
+    
+    static var previews: some View {
+        ContentView()
+    }
 }

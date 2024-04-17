@@ -8,11 +8,17 @@
 import SwiftUI
 
 struct ForgotPasswordView: View {
+    @Binding var showNextView: DisplayState
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("Forgot Password")
     }
 }
 
-#Preview {
-    ForgotPasswordView()
+struct ForgotPasswordView_Previews: PreviewProvider {
+    
+    @State static private var showNextView: DisplayState = .emailCode
+    
+    static var previews: some View {
+        ForgotPasswordView(showNextView: $showNextView)
+    }
 }

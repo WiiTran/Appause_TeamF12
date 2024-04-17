@@ -16,6 +16,12 @@
 		3E8F6AFF2BCBD5CE003C4160 /* Appause_TeamF12_HTrUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F6AFE2BCBD5CE003C4160 /* Appause_TeamF12_HTrUITestsLaunchTests.swift */; };
 		3E8F6B0D2BCBD77F003C4160 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3E8F6B0C2BCBD77F003C4160 /* KeychainSwift */; };
 		3E8F6B172BCBD8EE003C4160 /* EULAView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F6B162BCBD8EE003C4160 /* EULAView.swift */; };
+		3EA44B212BCF437C00732432 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA44B202BCF437B00732432 /* LoginView.swift */; };
+		3EA44B232BCF43A000732432 /* TwoFactorAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA44B222BCF43A000732432 /* TwoFactorAuthView.swift */; };
+		3EA44B252BCF43DF00732432 /* SelectRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA44B242BCF43DF00732432 /* SelectRegistrationView.swift */; };
+		3EA44B272BCF43F100732432 /* StudentMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA44B262BCF43F100732432 /* StudentMainView.swift */; };
+		3EA44B292BCF440F00732432 /* TeacherMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA44B282BCF440F00732432 /* TeacherMainView.swift */; };
+		3EA44B2B2BCF455C00732432 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA44B2A2BCF455C00732432 /* ForgotPasswordView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +53,12 @@
 		3E8F6AFC2BCBD5CE003C4160 /* Appause_TeamF12_HTrUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appause_TeamF12_HTrUITests.swift; sourceTree = "<group>"; };
 		3E8F6AFE2BCBD5CE003C4160 /* Appause_TeamF12_HTrUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appause_TeamF12_HTrUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		3E8F6B162BCBD8EE003C4160 /* EULAView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EULAView.swift; sourceTree = "<group>"; };
+		3EA44B202BCF437B00732432 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		3EA44B222BCF43A000732432 /* TwoFactorAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorAuthView.swift; sourceTree = "<group>"; };
+		3EA44B242BCF43DF00732432 /* SelectRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRegistrationView.swift; sourceTree = "<group>"; };
+		3EA44B262BCF43F100732432 /* StudentMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentMainView.swift; sourceTree = "<group>"; };
+		3EA44B282BCF440F00732432 /* TeacherMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherMainView.swift; sourceTree = "<group>"; };
+		3EA44B2A2BCF455C00732432 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +115,12 @@
 				3E8F6AE52BCBD5CE003C4160 /* Assets.xcassets */,
 				3E8F6AE72BCBD5CE003C4160 /* Preview Content */,
 				3E8F6B162BCBD8EE003C4160 /* EULAView.swift */,
+				3EA44B202BCF437B00732432 /* LoginView.swift */,
+				3EA44B222BCF43A000732432 /* TwoFactorAuthView.swift */,
+				3EA44B242BCF43DF00732432 /* SelectRegistrationView.swift */,
+				3EA44B262BCF43F100732432 /* StudentMainView.swift */,
+				3EA44B282BCF440F00732432 /* TeacherMainView.swift */,
+				3EA44B2A2BCF455C00732432 /* ForgotPasswordView.swift */,
 			);
 			path = Appause_TeamF12_HTr;
 			sourceTree = "<group>";
@@ -268,8 +286,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EA44B272BCF43F100732432 /* StudentMainView.swift in Sources */,
 				3E8F6B172BCBD8EE003C4160 /* EULAView.swift in Sources */,
+				3EA44B252BCF43DF00732432 /* SelectRegistrationView.swift in Sources */,
 				3E8F6AE42BCBD5CC003C4160 /* ContentView.swift in Sources */,
+				3EA44B292BCF440F00732432 /* TeacherMainView.swift in Sources */,
+				3EA44B232BCF43A000732432 /* TwoFactorAuthView.swift in Sources */,
+				3EA44B212BCF437C00732432 /* LoginView.swift in Sources */,
+				3EA44B2B2BCF455C00732432 /* ForgotPasswordView.swift in Sources */,
 				3E8F6AE22BCBD5CC003C4160 /* Appause_TeamF12_HTrApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,11 +8,16 @@
 import SwiftUI
 
 struct StudentMainView: View {
+    @Binding var showNextView: DisplayState
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("Student Main View")
     }
 }
 
-#Preview {
-    StudentMainView()
+struct StudentMainView_Previews: PreviewProvider {
+    @State static private var showNextView: DisplayState = .mainStudent
+
+    static var previews: some View {
+        StudentMainView(showNextView: $showNextView)
+    }
 }

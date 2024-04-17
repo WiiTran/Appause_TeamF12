@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+class ViewSwitcher: ObservableObject{
+    @Published var lastView = ""
+}
+
 @main
 struct Appause_TeamF12_HTrApp: App {
     var body: some Scene {

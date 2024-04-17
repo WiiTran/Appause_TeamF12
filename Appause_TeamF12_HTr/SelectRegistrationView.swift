@@ -6,13 +6,21 @@
 //
 
 import SwiftUI
+import KeychainSwift
 
 struct SelectRegistrationView: View {
+    @Binding var showNextView: DisplayState
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("Select Registration View")
     }
 }
 
-#Preview {
-    SelectRegistrationView()
+struct SelectRegistrationView_Previews: PreviewProvider
+{
+    @State static private var showNextView: DisplayState = .selectRegistration
+    
+    static var previews: some View
+    {
+        SelectRegistrationView(showNextView: $showNextView)
+    }
 }
