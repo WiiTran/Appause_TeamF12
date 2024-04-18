@@ -5,8 +5,10 @@
 //  Created by Huy Tran on 4/14/24.
 //
 
+// 
+
 import SwiftUI
-enum DisplayState { case eula, login, emailCode, mainTeacher, mainStudent, selectRegistration, twoFactorAuth
+enum DisplayState { case eula, login, emailCode, mainTeacher, mainStudent, selectRegistration, twoFactorAuth, verification, resetPassword
 }
 
 struct ContentView: View {
@@ -31,6 +33,10 @@ struct ContentView: View {
                 SelectRegistrationView(showNextView: $displayState)
             case .emailCode:
                 ForgotPasswordView(showNextView: $displayState)
+            case .resetPassword:
+            ResetPasswordView(showNextView: $displayState)
+            case .verification:
+                pwVerificationView(showNextView: $displayState)
             case .twoFactorAuth:
                 TwoFactorAuthView(showNextView: $displayState, email: email, onVerificationSuccess:
             {
