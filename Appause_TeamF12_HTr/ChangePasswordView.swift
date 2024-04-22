@@ -221,23 +221,27 @@ struct ChangePasswordView: View {
                     TextFieldWithEyeIcon(placeholder: "Current Password", text: $password, isSecure: true, visibility: $passwordStatus)
                 }
                 Spacer()
-                Button(action: {
-                    updatePassword()
-                    withAnimation {
-                        showNextView = .mainStudent
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        updatePassword()
+                        withAnimation {
+                            showNextView = .mainStudent
+                        }
+                    }) {
+                        Text("Save Changes")
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                            .frame(width: 300, height: 20, alignment: .center)
                     }
-                }) {
-                    Text("Save Changes")
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                        .frame(width: 300, height: 20, alignment: .center)
+                    .padding()
+                    .background(Color.black)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10) // Apply the corner radius to the overlay
+                            .stroke(Color.black, lineWidth: 1) // Add a border with 1 point width
+                    )
+                    Spacer()
                 }
-                .padding()
-                .background(Color.black)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10) // Apply the corner radius to the overlay
-                        .stroke(Color.black, lineWidth: 1) // Add a border with 1 point width
-                )
                 Spacer()
             }
             Spacer()
