@@ -10,6 +10,10 @@
 		0022DF8A2BD0CA4400DC8188 /* pwVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0022DF892BD0CA4400DC8188 /* pwVerificationView.swift */; };
 		0022DF8C2BD0CEE100DC8188 /* TimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0022DF8B2BD0CEE100DC8188 /* TimerViewModel.swift */; };
 		0022DF8E2BD0D03D00DC8188 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0022DF8D2BD0D03D00DC8188 /* ResetPasswordView.swift */; };
+		002762722BD573F7007BF4B9 /* GlobalStyleVar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002762712BD573F7007BF4B9 /* GlobalStyleVar.swift */; };
+		0075986D2BD60E37008ACC3D /* StudentSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0075986C2BD60E37008ACC3D /* StudentSettingsView.swift */; };
+		0075986F2BD60E53008ACC3D /* StudentConnectCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0075986E2BD60E53008ACC3D /* StudentConnectCodeView.swift */; };
+		007598712BD6117B008ACC3D /* StudentChooseAdminView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007598702BD6117B008ACC3D /* StudentChooseAdminView.swift */; };
 		3E8F6AE22BCBD5CC003C4160 /* Appause_TeamF12_HTrApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F6AE12BCBD5CC003C4160 /* Appause_TeamF12_HTrApp.swift */; };
 		3E8F6AE42BCBD5CC003C4160 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F6AE32BCBD5CC003C4160 /* ContentView.swift */; };
 		3E8F6AE62BCBD5CE003C4160 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F6AE52BCBD5CE003C4160 /* Assets.xcassets */; };
@@ -48,6 +52,10 @@
 		0022DF892BD0CA4400DC8188 /* pwVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pwVerificationView.swift; sourceTree = "<group>"; };
 		0022DF8B2BD0CEE100DC8188 /* TimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModel.swift; sourceTree = "<group>"; };
 		0022DF8D2BD0D03D00DC8188 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
+		002762712BD573F7007BF4B9 /* GlobalStyleVar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalStyleVar.swift; sourceTree = "<group>"; };
+		0075986C2BD60E37008ACC3D /* StudentSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentSettingsView.swift; sourceTree = "<group>"; };
+		0075986E2BD60E53008ACC3D /* StudentConnectCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentConnectCodeView.swift; sourceTree = "<group>"; };
+		007598702BD6117B008ACC3D /* StudentChooseAdminView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentChooseAdminView.swift; sourceTree = "<group>"; };
 		3E8F6ADE2BCBD5CC003C4160 /* Appause_TeamF12_HTr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Appause_TeamF12_HTr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E8F6AE12BCBD5CC003C4160 /* Appause_TeamF12_HTrApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appause_TeamF12_HTrApp.swift; sourceTree = "<group>"; };
 		3E8F6AE32BCBD5CC003C4160 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -125,11 +133,15 @@
 				3EA44B202BCF437B00732432 /* LoginView.swift */,
 				3EA44B222BCF43A000732432 /* TwoFactorAuthView.swift */,
 				3EA44B242BCF43DF00732432 /* SelectRegistrationView.swift */,
-				3EA44B262BCF43F100732432 /* StudentMainView.swift */,
-				3EA44B282BCF440F00732432 /* TeacherMainView.swift */,
 				3EA44B2A2BCF455C00732432 /* ForgotPasswordView.swift */,
 				0022DF892BD0CA4400DC8188 /* pwVerificationView.swift */,
 				0022DF8D2BD0D03D00DC8188 /* ResetPasswordView.swift */,
+				3EA44B262BCF43F100732432 /* StudentMainView.swift */,
+				0075986C2BD60E37008ACC3D /* StudentSettingsView.swift */,
+				007598702BD6117B008ACC3D /* StudentChooseAdminView.swift */,
+				0075986E2BD60E53008ACC3D /* StudentConnectCodeView.swift */,
+				3EA44B282BCF440F00732432 /* TeacherMainView.swift */,
+				002762712BD573F7007BF4B9 /* GlobalStyleVar.swift */,
 			);
 			path = Appause_TeamF12_HTr;
 			sourceTree = "<group>";
@@ -298,10 +310,14 @@
 				3EA44B272BCF43F100732432 /* StudentMainView.swift in Sources */,
 				3E8F6B172BCBD8EE003C4160 /* EULAView.swift in Sources */,
 				0022DF8A2BD0CA4400DC8188 /* pwVerificationView.swift in Sources */,
+				007598712BD6117B008ACC3D /* StudentChooseAdminView.swift in Sources */,
+				002762722BD573F7007BF4B9 /* GlobalStyleVar.swift in Sources */,
 				0022DF8E2BD0D03D00DC8188 /* ResetPasswordView.swift in Sources */,
+				0075986D2BD60E37008ACC3D /* StudentSettingsView.swift in Sources */,
 				3EA44B252BCF43DF00732432 /* SelectRegistrationView.swift in Sources */,
 				3E8F6AE42BCBD5CC003C4160 /* ContentView.swift in Sources */,
 				3EA44B292BCF440F00732432 /* TeacherMainView.swift in Sources */,
+				0075986F2BD60E53008ACC3D /* StudentConnectCodeView.swift in Sources */,
 				3EA44B232BCF43A000732432 /* TwoFactorAuthView.swift in Sources */,
 				3EA44B212BCF437C00732432 /* LoginView.swift in Sources */,
 				0022DF8C2BD0CEE100DC8188 /* TimerViewModel.swift in Sources */,

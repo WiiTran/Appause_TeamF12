@@ -3,7 +3,7 @@
 //  Appause_TeamF12_HTr
 //
 //  Created by Huy Tran on 4/16/24.
-//  Edited by Rayanne Ohara
+//  Edited by Rayanne Ohara 04/17/24
 //  Purpose -------------------
 //  Allows users to enter in valid
 //  email for temporary code
@@ -27,9 +27,15 @@ struct ForgotPasswordView: View {
         VStack {
             HStack {
                 Button(action: {
-                    viewSwitcher.lastView = "login"
-                    withAnimation {
-                        showNextView = .login
+                    if(viewSwitcher.lastView == "studentSettings"){
+                        withAnimation {
+                            showNextView = .studentSettings
+                        }
+                    }
+                    if(viewSwitcher.lastView == "login"){
+                        withAnimation {
+                            showNextView = .login
+                        }
                     }
                 }){
                     Image(systemName: "arrow.left")

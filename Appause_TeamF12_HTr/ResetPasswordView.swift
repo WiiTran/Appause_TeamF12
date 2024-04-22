@@ -2,7 +2,7 @@
 //  ResetPasswordView.swift
 //  Project190
 //
-//  Created by Rayanne Ohara
+//  Created by Rayanne Ohara 04/17/24
 //  Purpose -------------------
 //  Used to set a new password to user's
 //  account.

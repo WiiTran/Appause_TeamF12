@@ -3,7 +3,7 @@
 //  Appause_TeamF12_HTr
 //
 //  Created by Huy Tran on 4/16/24.
-//  Edited by Rayanne Ohara
+//  Edited by Rayanne Ohara 04/17/24
 //  Purpose -------------------
 //  has a 10 min timer in which users will enter
 //  in code sent through email.
