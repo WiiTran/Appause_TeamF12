@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-enum DisplayState { case eula, login, emailCode, mainTeacher, mainStudent, selectRegistration, twoFactorAuth, logout, studentConnectCode
+enum DisplayState { case eula, login, emailCode, mainTeacher, mainStudent, selectRegistration, twoFactorAuth, logout, studentConnectCode, studentSettingsView, teacherSettingsView, teacherChangeNameView, changePasswordView
 }
 
 struct ContentView: View {
@@ -27,19 +27,26 @@ struct ContentView: View {
                     LoginView(showNextView: $displayState)
             case .mainStudent:
                 StudentMainView(showNextView: $displayState)
-                case .studentConnectCode:
+            case .studentConnectCode:
                     StudentConnectCodeView()
+            case .studentSettingsView:
+                StudentSettingsView(showNextView: $displayState)
             case .mainTeacher:
                 TeacherMainView(showNextView: $displayState)
+            case .teacherSettingsView:
+                TeacherSettingsView(showNextView: $displayState)
+            case .teacherChangeNameView:
+                TeacherChangeNameView(showNextView: $displayState)
             case .selectRegistration:
                 SelectRegistrationView(showNextView: $displayState)
+            case .changePasswordView:
+                ChangePasswordView(showNextView: $displayState)
             case .emailCode:
                 ForgotPasswordView(showNextView: $displayState)
             case .twoFactorAuth:
-                TwoFactorAuthView(showNextView: $displayState, email: email, onVerificationSuccess:
-            {
-                    print("Verification successful!")}, show2FAInput: $show2FAInput)
-
+                TwoFactorAuthView(showNextView: $displayState, email: email, onVerificationSuccess: {
+                    print("Verification successful!")
+                    }, show2FAInput: $show2FAInput)
             }
         }
         //adds viewSwitcher to the views so that all views can access the values of viewSwitcher
