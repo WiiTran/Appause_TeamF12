@@ -156,10 +156,10 @@ struct ChangePasswordView: View {
             VStack {
                 HStack {
                     Spacer()
-                    Text("Change Name")
+                    Text("Change Password")
                         .fontWeight(.bold)
                         .foregroundColor(.black)
-                        .font(.system(size: 40))
+                        .font(.system(size: 36))
                         .padding(.top, 20)
                     Spacer()
                 }
