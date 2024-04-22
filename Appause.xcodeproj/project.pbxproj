@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ED5148852BD0765400EC5732 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED5148842BD0765400EC5732 /* GoogleService-Info.plist */; };
+		ED5148882BD0770600EC5732 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = ED5148872BD0770600EC5732 /* FirebaseAnalytics */; };
+		ED51488A2BD0770600EC5732 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = ED5148892BD0770600EC5732 /* FirebaseAnalyticsSwift */; };
+		ED51488C2BD07E8200EC5732 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = ED51488B2BD07E8200EC5732 /* FirebaseFirestore */; };
+		ED51488E2BD07E8200EC5732 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = ED51488D2BD07E8200EC5732 /* FirebaseFirestoreSwift */; };
 		EDC236B62BC1107700DC47C5 /* AppauseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC236B52BC1107700DC47C5 /* AppauseApp.swift */; };
 		EDC236B82BC1107700DC47C5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC236B72BC1107700DC47C5 /* ContentView.swift */; };
 		EDC236BA2BC1107800DC47C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDC236B92BC1107800DC47C5 /* Assets.xcassets */; };
@@ -35,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		ED5148842BD0765400EC5732 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ED8477562BC3945900F5C716 /* Appause.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Appause.entitlements; sourceTree = "<group>"; };
 		EDC236B22BC1107700DC47C5 /* Appause.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Appause.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDC236B52BC1107700DC47C5 /* AppauseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppauseApp.swift; sourceTree = "<group>"; };
@@ -54,6 +60,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED51488A2BD0770600EC5732 /* FirebaseAnalyticsSwift in Frameworks */,
+				ED5148882BD0770600EC5732 /* FirebaseAnalytics in Frameworks */,
+				ED51488C2BD07E8200EC5732 /* FirebaseFirestore in Frameworks */,
+				ED51488E2BD07E8200EC5732 /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +84,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		ED5148832BD0760200EC5732 /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				ED5148842BD0765400EC5732 /* GoogleService-Info.plist */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
 		EDC236A92BC1107600DC47C5 = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +115,7 @@
 		EDC236B42BC1107700DC47C5 /* Appause */ = {
 			isa = PBXGroup;
 			children = (
+				ED5148832BD0760200EC5732 /* Firebase */,
 				EDFB125A2BC3A75F00353B4C /* ScreenTimeAPI */,
 				ED8477562BC3945900F5C716 /* Appause.entitlements */,
 				EDC236B52BC1107700DC47C5 /* AppauseApp.swift */,
@@ -156,6 +175,12 @@
 			dependencies = (
 			);
 			name = Appause;
+			packageProductDependencies = (
+				ED5148872BD0770600EC5732 /* FirebaseAnalytics */,
+				ED5148892BD0770600EC5732 /* FirebaseAnalyticsSwift */,
+				ED51488B2BD07E8200EC5732 /* FirebaseFirestore */,
+				ED51488D2BD07E8200EC5732 /* FirebaseFirestoreSwift */,
+			);
 			productName = Appause;
 			productReference = EDC236B22BC1107700DC47C5 /* Appause.app */;
 			productType = "com.apple.product-type.application";
@@ -228,6 +253,9 @@
 				Base,
 			);
 			mainGroup = EDC236A92BC1107600DC47C5;
+			packageReferences = (
+				ED5148862BD0770600EC5732 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = EDC236B32BC1107700DC47C5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -246,6 +274,7 @@
 			files = (
 				EDC236BD2BC1107800DC47C5 /* Preview Assets.xcassets in Resources */,
 				EDC236BA2BC1107800DC47C5 /* Assets.xcassets in Resources */,
+				ED5148852BD0765400EC5732 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,10 +463,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Appause/Appause.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Appause/Preview Content\"";
-				DEVELOPMENT_TEAM = 53NSY6KM9Q;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 53NSY6KM9Q;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
@@ -454,8 +485,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = csus.TeamF12.Appause;
+				PRODUCT_BUNDLE_IDENTIFIER = csus.TmF12.Appause;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = AppausePL;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -468,10 +501,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Appause/Appause.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Appause/Preview Content\"";
-				DEVELOPMENT_TEAM = 53NSY6KM9Q;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 53NSY6KM9Q;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
@@ -488,8 +523,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = csus.TeamF12.Appause;
+				PRODUCT_BUNDLE_IDENTIFIER = csus.TmF12.Appause;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = AppausePL;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -612,6 +649,40 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		ED5148862BD0770600EC5732 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.24.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		ED5148872BD0770600EC5732 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ED5148862BD0770600EC5732 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		ED5148892BD0770600EC5732 /* FirebaseAnalyticsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ED5148862BD0770600EC5732 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsSwift;
+		};
+		ED51488B2BD07E8200EC5732 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ED5148862BD0770600EC5732 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		ED51488D2BD07E8200EC5732 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ED5148862BD0770600EC5732 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = EDC236AA2BC1107600DC47C5 /* Project object */;
 }
