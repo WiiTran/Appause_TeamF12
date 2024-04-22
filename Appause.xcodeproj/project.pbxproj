@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8AF935E62BD6341E00136542 /* AdminHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF935E52BD6341E00136542 /* AdminHomeView.swift */; };
 		EDC236B62BC1107700DC47C5 /* AppauseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC236B52BC1107700DC47C5 /* AppauseApp.swift */; };
 		EDC236B82BC1107700DC47C5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC236B72BC1107700DC47C5 /* ContentView.swift */; };
 		EDC236BA2BC1107800DC47C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDC236B92BC1107800DC47C5 /* Assets.xcassets */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8AF935E52BD6341E00136542 /* AdminHomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminHomeView.swift; sourceTree = "<group>"; };
 		ED8477562BC3945900F5C716 /* Appause.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Appause.entitlements; sourceTree = "<group>"; };
 		EDC236B22BC1107700DC47C5 /* Appause.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Appause.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDC236B52BC1107700DC47C5 /* AppauseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppauseApp.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				ED8477562BC3945900F5C716 /* Appause.entitlements */,
 				EDC236B52BC1107700DC47C5 /* AppauseApp.swift */,
 				EDC236B72BC1107700DC47C5 /* ContentView.swift */,
+				8AF935E52BD6341E00136542 /* AdminHomeView.swift */,
 				EDC236B92BC1107800DC47C5 /* Assets.xcassets */,
 				EDC236BB2BC1107800DC47C5 /* Preview Content */,
 			);
@@ -273,6 +276,7 @@
 				EDC236B82BC1107700DC47C5 /* ContentView.swift in Sources */,
 				EDFB125C2BC3A78D00353B4C /* FamilyControls.swift in Sources */,
 				EDC236B62BC1107700DC47C5 /* AppauseApp.swift in Sources */,
+				8AF935E62BD6341E00136542 /* AdminHomeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
