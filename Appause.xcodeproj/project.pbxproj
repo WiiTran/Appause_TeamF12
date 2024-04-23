@@ -9,13 +9,13 @@
 /* Begin PBXBuildFile section */
 		3E0956D72BD1D0C10037B462 /* GlobalStyleVar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0956D62BD1D0C10037B462 /* GlobalStyleVar.swift */; };
 		3E0956D92BD1E79A0037B462 /* StudentConnectCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0956D82BD1E79A0037B462 /* StudentConnectCodeView.swift */; };
-		3E8F6AE22BCBD5CC003C4160 /* Appause_TeamF12_HTrApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F6AE12BCBD5CC003C4160 /* Appause_TeamF12_HTrApp.swift */; };
+		3E09D9DB2BD8655F008324B7 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E09D9DA2BD8655F008324B7 /* ForgotPasswordView.swift */; };
 		3E8F6AE42BCBD5CC003C4160 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F6AE32BCBD5CC003C4160 /* ContentView.swift */; };
 		3E8F6AE62BCBD5CE003C4160 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F6AE52BCBD5CE003C4160 /* Assets.xcassets */; };
 		3E8F6AE92BCBD5CE003C4160 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F6AE82BCBD5CE003C4160 /* Preview Assets.xcassets */; };
-		3E8F6AF32BCBD5CE003C4160 /* Appause_TeamF12_HTrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F6AF22BCBD5CE003C4160 /* Appause_TeamF12_HTrTests.swift */; };
-		3E8F6AFD2BCBD5CE003C4160 /* Appause_TeamF12_HTrUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F6AFC2BCBD5CE003C4160 /* Appause_TeamF12_HTrUITests.swift */; };
-		3E8F6AFF2BCBD5CE003C4160 /* Appause_TeamF12_HTrUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F6AFE2BCBD5CE003C4160 /* Appause_TeamF12_HTrUITestsLaunchTests.swift */; };
+		3E8F6AF32BCBD5CE003C4160 /* AppauseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F6AF22BCBD5CE003C4160 /* AppauseTests.swift */; };
+		3E8F6AFD2BCBD5CE003C4160 /* AppauseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F6AFC2BCBD5CE003C4160 /* AppauseUITests.swift */; };
+		3E8F6AFF2BCBD5CE003C4160 /* AppauseUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F6AFE2BCBD5CE003C4160 /* AppauseUITestsLaunchTests.swift */; };
 		3E8F6B0D2BCBD77F003C4160 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3E8F6B0C2BCBD77F003C4160 /* KeychainSwift */; };
 		3E8F6B172BCBD8EE003C4160 /* EULAView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F6B162BCBD8EE003C4160 /* EULAView.swift */; };
 		3EA44B212BCF437C00732432 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA44B202BCF437B00732432 /* LoginView.swift */; };
@@ -23,7 +23,7 @@
 		3EA44B252BCF43DF00732432 /* SelectRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA44B242BCF43DF00732432 /* SelectRegistrationView.swift */; };
 		3EA44B272BCF43F100732432 /* StudentMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA44B262BCF43F100732432 /* StudentMainView.swift */; };
 		3EA44B292BCF440F00732432 /* TeacherMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA44B282BCF440F00732432 /* TeacherMainView.swift */; };
-		3EA44B2B2BCF455C00732432 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA44B2A2BCF455C00732432 /* ForgotPasswordView.swift */; };
+		3EA44B2B2BCF455C00732432 /* AppauseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA44B2A2BCF455C00732432 /* AppauseApp.swift */; };
 		C8D38EF52BD35D9E00F0D2BA /* StudentSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D38EF42BD35D9E00F0D2BA /* StudentSettingsView.swift */; };
 		C8D38EF72BD3881700F0D2BA /* TeacherSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D38EF62BD3881700F0D2BA /* TeacherSettingsView.swift */; };
 		C8FB84DE2BD4F9E700A55F71 /* TeacherChangeNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FB84DD2BD4F9E600A55F71 /* TeacherChangeNameView.swift */; };
@@ -50,23 +50,24 @@
 /* Begin PBXFileReference section */
 		3E0956D62BD1D0C10037B462 /* GlobalStyleVar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalStyleVar.swift; sourceTree = "<group>"; };
 		3E0956D82BD1E79A0037B462 /* StudentConnectCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentConnectCodeView.swift; sourceTree = "<group>"; };
+		3E09D9DA2BD8655F008324B7 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		3E8F6ADE2BCBD5CC003C4160 /* Appause_TeamF12_HTr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Appause_TeamF12_HTr.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		3E8F6AE12BCBD5CC003C4160 /* Appause_TeamF12_HTrApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appause_TeamF12_HTrApp.swift; sourceTree = "<group>"; };
+		3E8F6AE12BCBD5CC003C4160 /* AppauseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppauseApp.swift; sourceTree = "<group>"; };
 		3E8F6AE32BCBD5CC003C4160 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3E8F6AE52BCBD5CE003C4160 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3E8F6AE82BCBD5CE003C4160 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3E8F6AEE2BCBD5CE003C4160 /* Appause_TeamF12_HTrTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Appause_TeamF12_HTrTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3E8F6AF22BCBD5CE003C4160 /* Appause_TeamF12_HTrTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appause_TeamF12_HTrTests.swift; sourceTree = "<group>"; };
+		3E8F6AF22BCBD5CE003C4160 /* AppauseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppauseTests.swift; sourceTree = "<group>"; };
 		3E8F6AF82BCBD5CE003C4160 /* Appause_TeamF12_HTrUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Appause_TeamF12_HTrUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3E8F6AFC2BCBD5CE003C4160 /* Appause_TeamF12_HTrUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appause_TeamF12_HTrUITests.swift; sourceTree = "<group>"; };
-		3E8F6AFE2BCBD5CE003C4160 /* Appause_TeamF12_HTrUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appause_TeamF12_HTrUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		3E8F6AFC2BCBD5CE003C4160 /* AppauseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppauseUITests.swift; sourceTree = "<group>"; };
+		3E8F6AFE2BCBD5CE003C4160 /* AppauseUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppauseUITestsLaunchTests.swift; path = /Users/huytran/Desktop/Appause_TeamF12/AppauseUITests/AppauseUITestsLaunchTests.swift; sourceTree = "<absolute>"; };
 		3E8F6B162BCBD8EE003C4160 /* EULAView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EULAView.swift; sourceTree = "<group>"; };
 		3EA44B202BCF437B00732432 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		3EA44B222BCF43A000732432 /* TwoFactorAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoFactorAuthView.swift; sourceTree = "<group>"; };
 		3EA44B242BCF43DF00732432 /* SelectRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRegistrationView.swift; sourceTree = "<group>"; };
 		3EA44B262BCF43F100732432 /* StudentMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentMainView.swift; sourceTree = "<group>"; };
 		3EA44B282BCF440F00732432 /* TeacherMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherMainView.swift; sourceTree = "<group>"; };
-		3EA44B2A2BCF455C00732432 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
+		3EA44B2A2BCF455C00732432 /* AppauseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppauseApp.swift; path = /Users/huytran/Desktop/Appause_TeamF12/Appause/AppauseApp.swift; sourceTree = "<absolute>"; };
 		C8D38EF42BD35D9E00F0D2BA /* StudentSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentSettingsView.swift; sourceTree = "<group>"; };
 		C8D38EF62BD3881700F0D2BA /* TeacherSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherSettingsView.swift; sourceTree = "<group>"; };
 		C8FB84DD2BD4F9E600A55F71 /* TeacherChangeNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherChangeNameView.swift; sourceTree = "<group>"; };
@@ -102,9 +103,9 @@
 		3E8F6AD52BCBD5CC003C4160 = {
 			isa = PBXGroup;
 			children = (
-				3E8F6AE02BCBD5CC003C4160 /* Appause_TeamF12_HTr */,
-				3E8F6AF12BCBD5CE003C4160 /* Appause_TeamF12_HTrTests */,
-				3E8F6AFB2BCBD5CE003C4160 /* Appause_TeamF12_HTrUITests */,
+				3E8F6AE02BCBD5CC003C4160 /* Appause */,
+				3E8F6AF12BCBD5CE003C4160 /* AppauseTests */,
+				3E8F6AFB2BCBD5CE003C4160 /* AppauseUITests */,
 				3E8F6ADF2BCBD5CC003C4160 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -119,10 +120,11 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		3E8F6AE02BCBD5CC003C4160 /* Appause_TeamF12_HTr */ = {
+		3E8F6AE02BCBD5CC003C4160 /* Appause */ = {
 			isa = PBXGroup;
 			children = (
-				3E8F6AE12BCBD5CC003C4160 /* Appause_TeamF12_HTrApp.swift */,
+				3E09D9DA2BD8655F008324B7 /* ForgotPasswordView.swift */,
+				3E8F6AE12BCBD5CC003C4160 /* AppauseApp.swift */,
 				3E8F6AE32BCBD5CC003C4160 /* ContentView.swift */,
 				3E8F6AE52BCBD5CE003C4160 /* Assets.xcassets */,
 				3E8F6AE72BCBD5CE003C4160 /* Preview Content */,
@@ -132,7 +134,7 @@
 				3EA44B242BCF43DF00732432 /* SelectRegistrationView.swift */,
 				3EA44B262BCF43F100732432 /* StudentMainView.swift */,
 				3EA44B282BCF440F00732432 /* TeacherMainView.swift */,
-				3EA44B2A2BCF455C00732432 /* ForgotPasswordView.swift */,
+				3EA44B2A2BCF455C00732432 /* AppauseApp.swift */,
 				3E0956D62BD1D0C10037B462 /* GlobalStyleVar.swift */,
 				3E0956D82BD1E79A0037B462 /* StudentConnectCodeView.swift */,
 				C8D38EF42BD35D9E00F0D2BA /* StudentSettingsView.swift */,
@@ -140,7 +142,7 @@
 				C8FB84DD2BD4F9E600A55F71 /* TeacherChangeNameView.swift */,
 				C8FB84DF2BD5045600A55F71 /* ChangePasswordView.swift */,
 			);
-			path = Appause_TeamF12_HTr;
+			path = Appause;
 			sourceTree = "<group>";
 		};
 		3E8F6AE72BCBD5CE003C4160 /* Preview Content */ = {
@@ -151,21 +153,21 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		3E8F6AF12BCBD5CE003C4160 /* Appause_TeamF12_HTrTests */ = {
+		3E8F6AF12BCBD5CE003C4160 /* AppauseTests */ = {
 			isa = PBXGroup;
 			children = (
-				3E8F6AF22BCBD5CE003C4160 /* Appause_TeamF12_HTrTests.swift */,
+				3E8F6AF22BCBD5CE003C4160 /* AppauseTests.swift */,
 			);
-			path = Appause_TeamF12_HTrTests;
+			path = AppauseTests;
 			sourceTree = "<group>";
 		};
-		3E8F6AFB2BCBD5CE003C4160 /* Appause_TeamF12_HTrUITests */ = {
+		3E8F6AFB2BCBD5CE003C4160 /* AppauseUITests */ = {
 			isa = PBXGroup;
 			children = (
-				3E8F6AFC2BCBD5CE003C4160 /* Appause_TeamF12_HTrUITests.swift */,
-				3E8F6AFE2BCBD5CE003C4160 /* Appause_TeamF12_HTrUITestsLaunchTests.swift */,
+				3E8F6AFC2BCBD5CE003C4160 /* AppauseUITests.swift */,
+				3E8F6AFE2BCBD5CE003C4160 /* AppauseUITestsLaunchTests.swift */,
 			);
-			path = Appause_TeamF12_HTrUITests;
+			path = AppauseUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -250,7 +252,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 3E8F6AD92BCBD5CC003C4160 /* Build configuration list for PBXProject "Appause_TeamF12_HTr" */;
+			buildConfigurationList = 3E8F6AD92BCBD5CC003C4160 /* Build configuration list for PBXProject "Appause" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -315,9 +317,9 @@
 				3EA44B292BCF440F00732432 /* TeacherMainView.swift in Sources */,
 				3EA44B232BCF43A000732432 /* TwoFactorAuthView.swift in Sources */,
 				3EA44B212BCF437C00732432 /* LoginView.swift in Sources */,
-				3EA44B2B2BCF455C00732432 /* ForgotPasswordView.swift in Sources */,
-				3E8F6AE22BCBD5CC003C4160 /* Appause_TeamF12_HTrApp.swift in Sources */,
+				3EA44B2B2BCF455C00732432 /* AppauseApp.swift in Sources */,
 				3E0956D92BD1E79A0037B462 /* StudentConnectCodeView.swift in Sources */,
+				3E09D9DB2BD8655F008324B7 /* ForgotPasswordView.swift in Sources */,
 				C8D38EF72BD3881700F0D2BA /* TeacherSettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -326,7 +328,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E8F6AF32BCBD5CE003C4160 /* Appause_TeamF12_HTrTests.swift in Sources */,
+				3E8F6AF32BCBD5CE003C4160 /* AppauseTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,8 +336,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E8F6AFF2BCBD5CE003C4160 /* Appause_TeamF12_HTrUITestsLaunchTests.swift in Sources */,
-				3E8F6AFD2BCBD5CE003C4160 /* Appause_TeamF12_HTrUITests.swift in Sources */,
+				3E8F6AFF2BCBD5CE003C4160 /* AppauseUITestsLaunchTests.swift in Sources */,
+				3E8F6AFD2BCBD5CE003C4160 /* AppauseUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,7 +483,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Appause_TeamF12_HTr/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Appause/Preview Content\"";
 				DEVELOPMENT_TEAM = 9UY79QFFH9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -510,7 +512,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Appause_TeamF12_HTr/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Appause/Preview Content\"";
 				DEVELOPMENT_TEAM = 9UY79QFFH9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -611,7 +613,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3E8F6AD92BCBD5CC003C4160 /* Build configuration list for PBXProject "Appause_TeamF12_HTr" */ = {
+		3E8F6AD92BCBD5CC003C4160 /* Build configuration list for PBXProject "Appause" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3E8F6B002BCBD5CE003C4160 /* Debug */,

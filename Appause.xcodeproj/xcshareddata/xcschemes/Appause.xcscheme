@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
    LastUpgradeVersion = "1530"
-   version = "2.2">
+   version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES"
@@ -18,17 +18,8 @@
                BlueprintIdentifier = "3E8F6ADD2BCBD5CC003C4160"
                BuildableName = "Appause_TeamF12_HTr.app"
                BlueprintName = "Appause_TeamF12_HTr"
-               ReferencedContainer = "container:Appause_TeamF12_HTr.xcodeproj">
+               ReferencedContainer = "container:Appause.xcodeproj">
             </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "NO"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <AutocreatedTestPlanReference>
-            </AutocreatedTestPlanReference>
          </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
@@ -38,30 +29,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
       shouldAutocreateTestPlan = "YES">
-      <Testables>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3E8F6AED2BCBD5CE003C4160"
-               BuildableName = "Appause_TeamF12_HTrTests.xctest"
-               BlueprintName = "Appause_TeamF12_HTrTests"
-               ReferencedContainer = "container:Appause_TeamF12_HTr.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3E8F6AF72BCBD5CE003C4160"
-               BuildableName = "Appause_TeamF12_HTrUITests.xctest"
-               BlueprintName = "Appause_TeamF12_HTrUITests"
-               ReferencedContainer = "container:Appause_TeamF12_HTr.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-      </Testables>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -80,7 +47,7 @@
             BlueprintIdentifier = "3E8F6ADD2BCBD5CC003C4160"
             BuildableName = "Appause_TeamF12_HTr.app"
             BlueprintName = "Appause_TeamF12_HTr"
-            ReferencedContainer = "container:Appause_TeamF12_HTr.xcodeproj">
+            ReferencedContainer = "container:Appause.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -97,18 +64,9 @@
             BlueprintIdentifier = "3E8F6ADD2BCBD5CC003C4160"
             BuildableName = "Appause_TeamF12_HTr.app"
             BlueprintName = "Appause_TeamF12_HTr"
-            ReferencedContainer = "container:Appause_TeamF12_HTr.xcodeproj">
+            ReferencedContainer = "container:Appause.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3E8F6ADD2BCBD5CC003C4160"
-            BuildableName = "Appause_TeamF12_HTr.app"
-            BlueprintName = "Appause_TeamF12_HTr"
-            ReferencedContainer = "container:Appause_TeamF12_HTr.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
