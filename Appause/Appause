@@ -12,7 +12,7 @@ class ViewSwitcher: ObservableObject{
 }
 
 @main
-struct Appause_TeamF12_HTrApp: App {
+struct AppauseApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
