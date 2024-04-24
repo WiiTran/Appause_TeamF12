@@ -5,6 +5,7 @@
 //  Created by Huy Tran on 4/16/24.
 //
 
+
 import SwiftUI
 
 struct StudentMainView: View {
@@ -38,7 +39,7 @@ struct StudentMainView: View {
                 Spacer()
                 // When pressed, will allow students to view and manage all of their classes
                 Button(action:{withAnimation
-                    {showNextView = .login}
+                    {showNextView = .studentChooseAdmin}
                 }){
                     Text(secondButtonName)
                         .padding(.leading, 25)
@@ -75,7 +76,7 @@ struct StudentMainView: View {
                     .cornerRadius(btnStyle.getBtnRadius())
                     .padding(.bottom, 10)
                 
-                Button(action: {withAnimation {showNextView = .login}}){
+                Button(action: {withAnimation {showNextView = .studentSettings}}){
                     Text(fourthButtonName)
                         .padding(.leading, 25)
                         .foregroundColor(btnStyle.getBtnFontColor())
@@ -120,4 +121,3 @@ struct StudentMainView_Previews: PreviewProvider {
         StudentMainView(showNextView: $showNextView)
     }
 }
-

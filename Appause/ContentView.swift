@@ -6,13 +6,20 @@
 //
 
 import SwiftUI
-enum DisplayState { case eula, login, emailCode, mainTeacher, mainStudent, selectRegistration, twoFactorAuth, logout, studentConnectCode, studentSettingsView, teacherSettingsView, teacherChangeNameView, changePasswordView
+
+// add aditional display states here for additional View transitions
+enum DisplayState {
+
+    case eula, login, emailCode, mainTeacher, mainStudent, teacherMasterControl, logout, studentConnectCode, studentSettings, teacherSettings, studentDeleteAdmin, studentChooseAdmin, studentRegister, teacherRegister, selectRegistration, resetPassword, teacherManageUsers, teacherWhitelist, twoFactorAuth, pwCodeVerification
+
 }
 
 struct ContentView: View {
     @State private var displayState: DisplayState = .eula
     @State private var email: String = "test@example.com"
     @State private var show2FAInput: Bool = true // Add this line
+    
+    //initializes the environment variable that comes from the Project190App file
     @StateObject var viewSwitcher = ViewSwitcher()
     
     var body: some View {
@@ -23,30 +30,45 @@ struct ContentView: View {
                 EULAView(showNextView: $displayState)
             case .login:
                 LoginView(showNextView: $displayState)
-            case .logout :
-                    LoginView(showNextView: $displayState)
             case .mainStudent:
                 StudentMainView(showNextView: $displayState)
-            case .studentConnectCode:
-                    StudentConnectCodeView()
-            case .studentSettingsView:
-                StudentSettingsView(showNextView: $displayState)
             case .mainTeacher:
                 TeacherMainView(showNextView: $displayState)
-            case .teacherSettingsView:
+            case .studentConnectCode:
+                StudentConnectCodeView()
+            case .teacherMasterControl:
+                TeacherMasterControlView(showNextView: $displayState)
+            case .logout :
+                LoginView(showNextView: $displayState)
+            case .studentSettings:
+                StudentSettingsView(showNextView: $displayState)
+            case .teacherSettings:
                 TeacherSettingsView(showNextView: $displayState)
-            case .teacherChangeNameView:
-                TeacherChangeNameView(showNextView: $displayState)
+            case .studentDeleteAdmin:
+                StudentDeleteAdminView()
+            case .studentChooseAdmin:
+                StudentChooseAdminView(showNextView: $displayState)
+            case .teacherWhitelist:
+                TeacherWhitelist()
+            case .resetPassword:
+                ResetPasswordView(showNextView: $displayState)
+            case .teacherManageUsers:
+                TeacherManageUsers()
+            case .studentRegister:
+                StudentRegisterView(showNextView: $displayState)
+            case .teacherRegister:
+                TeacherRegisterView(showNextView: $displayState)
             case .selectRegistration:
                 SelectRegistrationView(showNextView: $displayState)
-            case .changePasswordView:
-                ChangePasswordView(showNextView: $displayState)
             case .emailCode:
                 ForgotPasswordView(showNextView: $displayState)
+            case .pwCodeVerification:
+                PWCodeVerificationView(showNextView: $displayState)
             case .twoFactorAuth:
                 TwoFactorAuthView(showNextView: $displayState, email: email, onVerificationSuccess: {
-                    print("Verification successful!")
-                    }, show2FAInput: $show2FAInput)
+                    // You can add actions here that should be performed on successful verification
+                    print("Verification successful!")}, show2FAInput: $show2FAInput)
+
             }
         }
         //adds viewSwitcher to the views so that all views can access the values of viewSwitcher

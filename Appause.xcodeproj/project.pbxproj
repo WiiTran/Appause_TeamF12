@@ -10,6 +10,23 @@
 		3E0956D72BD1D0C10037B462 /* GlobalStyleVar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0956D62BD1D0C10037B462 /* GlobalStyleVar.swift */; };
 		3E0956D92BD1E79A0037B462 /* StudentConnectCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0956D82BD1E79A0037B462 /* StudentConnectCodeView.swift */; };
 		3E09D9DB2BD8655F008324B7 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E09D9DA2BD8655F008324B7 /* ForgotPasswordView.swift */; };
+		3E1737422BD8A29A00D0F290 /* PWCodeVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1737412BD8A29A00D0F290 /* PWCodeVerificationView.swift */; };
+		3E1737442BD8A2B200D0F290 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1737432BD8A2B200D0F290 /* ResetPasswordView.swift */; };
+		3E1737482BD8A34500D0F290 /* StudentRegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1737472BD8A34500D0F290 /* StudentRegisterView.swift */; };
+		3E17374A2BD8A36000D0F290 /* StudentChooseAdminView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1737492BD8A36000D0F290 /* StudentChooseAdminView.swift */; };
+		3E17374C2BD8A37A00D0F290 /* StudentAppRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E17374B2BD8A37A00D0F290 /* StudentAppRequestView.swift */; };
+		3E17374E2BD8A39400D0F290 /* StudentDeleteAdminView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E17374D2BD8A39400D0F290 /* StudentDeleteAdminView.swift */; };
+		3E1737502BD8A47A00D0F290 /* TeacherUserRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E17374F2BD8A47A00D0F290 /* TeacherUserRequestView.swift */; };
+		3E1737522BD8A48F00D0F290 /* TeacherWhitelist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1737512BD8A48F00D0F290 /* TeacherWhitelist.swift */; };
+		3E1737542BD8A4A300D0F290 /* TeacherManageUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1737532BD8A4A300D0F290 /* TeacherManageUsers.swift */; };
+		3E1737562BD8A4BC00D0F290 /* TeacherDeleteStudentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1737552BD8A4BC00D0F290 /* TeacherDeleteStudentView.swift */; };
+		3E1737582BD8A4CA00D0F290 /* TeacherConnectCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1737572BD8A4CA00D0F290 /* TeacherConnectCodeView.swift */; };
+		3E17375A2BD8A5B400D0F290 /* TeacherMasterControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1737592BD8A5B400D0F290 /* TeacherMasterControlView.swift */; };
+		3E17375C2BD8A69600D0F290 /* TeacherAppDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E17375B2BD8A69600D0F290 /* TeacherAppDescription.swift */; };
+		3E17375E2BD8A6C200D0F290 /* TimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E17375D2BD8A6C200D0F290 /* TimerViewModel.swift */; };
+		3E1737602BD8A6F700D0F290 /* TeacherAllRequestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E17375F2BD8A6F700D0F290 /* TeacherAllRequestsView.swift */; };
+		3E1737622BD8A73300D0F290 /* RequestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1737612BD8A73300D0F290 /* RequestData.swift */; };
+		3E1737642BD8AA2C00D0F290 /* TeacherRegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1737632BD8AA2C00D0F290 /* TeacherRegisterView.swift */; };
 		3E8F6AE42BCBD5CC003C4160 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F6AE32BCBD5CC003C4160 /* ContentView.swift */; };
 		3E8F6AE62BCBD5CE003C4160 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F6AE52BCBD5CE003C4160 /* Assets.xcassets */; };
 		3E8F6AE92BCBD5CE003C4160 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F6AE82BCBD5CE003C4160 /* Preview Assets.xcassets */; };
@@ -26,8 +43,6 @@
 		3EA44B2B2BCF455C00732432 /* AppauseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA44B2A2BCF455C00732432 /* AppauseApp.swift */; };
 		C8D38EF52BD35D9E00F0D2BA /* StudentSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D38EF42BD35D9E00F0D2BA /* StudentSettingsView.swift */; };
 		C8D38EF72BD3881700F0D2BA /* TeacherSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D38EF62BD3881700F0D2BA /* TeacherSettingsView.swift */; };
-		C8FB84DE2BD4F9E700A55F71 /* TeacherChangeNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FB84DD2BD4F9E600A55F71 /* TeacherChangeNameView.swift */; };
-		C8FB84E02BD5045600A55F71 /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FB84DF2BD5045600A55F71 /* ChangePasswordView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +66,23 @@
 		3E0956D62BD1D0C10037B462 /* GlobalStyleVar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalStyleVar.swift; sourceTree = "<group>"; };
 		3E0956D82BD1E79A0037B462 /* StudentConnectCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentConnectCodeView.swift; sourceTree = "<group>"; };
 		3E09D9DA2BD8655F008324B7 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
+		3E1737412BD8A29A00D0F290 /* PWCodeVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PWCodeVerificationView.swift; sourceTree = "<group>"; };
+		3E1737432BD8A2B200D0F290 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
+		3E1737472BD8A34500D0F290 /* StudentRegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentRegisterView.swift; sourceTree = "<group>"; };
+		3E1737492BD8A36000D0F290 /* StudentChooseAdminView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudentChooseAdminView.swift; path = ../StudentChooseAdminView.swift; sourceTree = "<group>"; };
+		3E17374B2BD8A37A00D0F290 /* StudentAppRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentAppRequestView.swift; sourceTree = "<group>"; };
+		3E17374D2BD8A39400D0F290 /* StudentDeleteAdminView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentDeleteAdminView.swift; sourceTree = "<group>"; };
+		3E17374F2BD8A47A00D0F290 /* TeacherUserRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherUserRequestView.swift; sourceTree = "<group>"; };
+		3E1737512BD8A48F00D0F290 /* TeacherWhitelist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherWhitelist.swift; sourceTree = "<group>"; };
+		3E1737532BD8A4A300D0F290 /* TeacherManageUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherManageUsers.swift; sourceTree = "<group>"; };
+		3E1737552BD8A4BC00D0F290 /* TeacherDeleteStudentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherDeleteStudentView.swift; sourceTree = "<group>"; };
+		3E1737572BD8A4CA00D0F290 /* TeacherConnectCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherConnectCodeView.swift; sourceTree = "<group>"; };
+		3E1737592BD8A5B400D0F290 /* TeacherMasterControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherMasterControlView.swift; sourceTree = "<group>"; };
+		3E17375B2BD8A69600D0F290 /* TeacherAppDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherAppDescription.swift; sourceTree = "<group>"; };
+		3E17375D2BD8A6C200D0F290 /* TimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModel.swift; sourceTree = "<group>"; };
+		3E17375F2BD8A6F700D0F290 /* TeacherAllRequestsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherAllRequestsView.swift; sourceTree = "<group>"; };
+		3E1737612BD8A73300D0F290 /* RequestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestData.swift; sourceTree = "<group>"; };
+		3E1737632BD8AA2C00D0F290 /* TeacherRegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherRegisterView.swift; sourceTree = "<group>"; };
 		3E8F6ADE2BCBD5CC003C4160 /* Appause_TeamF12_HTr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Appause_TeamF12_HTr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E8F6AE12BCBD5CC003C4160 /* AppauseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppauseApp.swift; sourceTree = "<group>"; };
 		3E8F6AE32BCBD5CC003C4160 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -70,8 +102,6 @@
 		3EA44B2A2BCF455C00732432 /* AppauseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppauseApp.swift; path = /Users/huytran/Desktop/Appause_TeamF12/Appause/AppauseApp.swift; sourceTree = "<absolute>"; };
 		C8D38EF42BD35D9E00F0D2BA /* StudentSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentSettingsView.swift; sourceTree = "<group>"; };
 		C8D38EF62BD3881700F0D2BA /* TeacherSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherSettingsView.swift; sourceTree = "<group>"; };
-		C8FB84DD2BD4F9E600A55F71 /* TeacherChangeNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherChangeNameView.swift; sourceTree = "<group>"; };
-		C8FB84DF2BD5045600A55F71 /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,7 +153,11 @@
 		3E8F6AE02BCBD5CC003C4160 /* Appause */ = {
 			isa = PBXGroup;
 			children = (
+				3E1737612BD8A73300D0F290 /* RequestData.swift */,
 				3E09D9DA2BD8655F008324B7 /* ForgotPasswordView.swift */,
+				3E17375F2BD8A6F700D0F290 /* TeacherAllRequestsView.swift */,
+				3E1737492BD8A36000D0F290 /* StudentChooseAdminView.swift */,
+				3E1737412BD8A29A00D0F290 /* PWCodeVerificationView.swift */,
 				3E8F6AE12BCBD5CC003C4160 /* AppauseApp.swift */,
 				3E8F6AE32BCBD5CC003C4160 /* ContentView.swift */,
 				3E8F6AE52BCBD5CE003C4160 /* Assets.xcassets */,
@@ -135,12 +169,23 @@
 				3EA44B262BCF43F100732432 /* StudentMainView.swift */,
 				3EA44B282BCF440F00732432 /* TeacherMainView.swift */,
 				3EA44B2A2BCF455C00732432 /* AppauseApp.swift */,
+				3E1737632BD8AA2C00D0F290 /* TeacherRegisterView.swift */,
 				3E0956D62BD1D0C10037B462 /* GlobalStyleVar.swift */,
 				3E0956D82BD1E79A0037B462 /* StudentConnectCodeView.swift */,
 				C8D38EF42BD35D9E00F0D2BA /* StudentSettingsView.swift */,
 				C8D38EF62BD3881700F0D2BA /* TeacherSettingsView.swift */,
-				C8FB84DD2BD4F9E600A55F71 /* TeacherChangeNameView.swift */,
-				C8FB84DF2BD5045600A55F71 /* ChangePasswordView.swift */,
+				3E1737432BD8A2B200D0F290 /* ResetPasswordView.swift */,
+				3E1737472BD8A34500D0F290 /* StudentRegisterView.swift */,
+				3E17374B2BD8A37A00D0F290 /* StudentAppRequestView.swift */,
+				3E17374D2BD8A39400D0F290 /* StudentDeleteAdminView.swift */,
+				3E17374F2BD8A47A00D0F290 /* TeacherUserRequestView.swift */,
+				3E1737512BD8A48F00D0F290 /* TeacherWhitelist.swift */,
+				3E1737532BD8A4A300D0F290 /* TeacherManageUsers.swift */,
+				3E1737552BD8A4BC00D0F290 /* TeacherDeleteStudentView.swift */,
+				3E1737572BD8A4CA00D0F290 /* TeacherConnectCodeView.swift */,
+				3E1737592BD8A5B400D0F290 /* TeacherMasterControlView.swift */,
+				3E17375B2BD8A69600D0F290 /* TeacherAppDescription.swift */,
+				3E17375D2BD8A6C200D0F290 /* TimerViewModel.swift */,
 			);
 			path = Appause;
 			sourceTree = "<group>";
@@ -308,19 +353,34 @@
 			files = (
 				3EA44B272BCF43F100732432 /* StudentMainView.swift in Sources */,
 				3E8F6B172BCBD8EE003C4160 /* EULAView.swift in Sources */,
+				3E1737642BD8AA2C00D0F290 /* TeacherRegisterView.swift in Sources */,
 				3EA44B252BCF43DF00732432 /* SelectRegistrationView.swift in Sources */,
+				3E1737522BD8A48F00D0F290 /* TeacherWhitelist.swift in Sources */,
+				3E17374E2BD8A39400D0F290 /* StudentDeleteAdminView.swift in Sources */,
 				C8D38EF52BD35D9E00F0D2BA /* StudentSettingsView.swift in Sources */,
 				3E8F6AE42BCBD5CC003C4160 /* ContentView.swift in Sources */,
+				3E1737582BD8A4CA00D0F290 /* TeacherConnectCodeView.swift in Sources */,
 				3E0956D72BD1D0C10037B462 /* GlobalStyleVar.swift in Sources */,
-				C8FB84DE2BD4F9E700A55F71 /* TeacherChangeNameView.swift in Sources */,
-				C8FB84E02BD5045600A55F71 /* ChangePasswordView.swift in Sources */,
+				3E17374C2BD8A37A00D0F290 /* StudentAppRequestView.swift in Sources */,
+				3E1737542BD8A4A300D0F290 /* TeacherManageUsers.swift in Sources */,
+				3E1737482BD8A34500D0F290 /* StudentRegisterView.swift in Sources */,
+				3E1737422BD8A29A00D0F290 /* PWCodeVerificationView.swift in Sources */,
+				3E17375C2BD8A69600D0F290 /* TeacherAppDescription.swift in Sources */,
+				3E17375A2BD8A5B400D0F290 /* TeacherMasterControlView.swift in Sources */,
+				3E17374A2BD8A36000D0F290 /* StudentChooseAdminView.swift in Sources */,
 				3EA44B292BCF440F00732432 /* TeacherMainView.swift in Sources */,
+				3E1737502BD8A47A00D0F290 /* TeacherUserRequestView.swift in Sources */,
 				3EA44B232BCF43A000732432 /* TwoFactorAuthView.swift in Sources */,
+				3E17375E2BD8A6C200D0F290 /* TimerViewModel.swift in Sources */,
 				3EA44B212BCF437C00732432 /* LoginView.swift in Sources */,
 				3EA44B2B2BCF455C00732432 /* AppauseApp.swift in Sources */,
 				3E0956D92BD1E79A0037B462 /* StudentConnectCodeView.swift in Sources */,
+				3E1737622BD8A73300D0F290 /* RequestData.swift in Sources */,
 				3E09D9DB2BD8655F008324B7 /* ForgotPasswordView.swift in Sources */,
 				C8D38EF72BD3881700F0D2BA /* TeacherSettingsView.swift in Sources */,
+				3E1737562BD8A4BC00D0F290 /* TeacherDeleteStudentView.swift in Sources */,
+				3E1737442BD8A2B200D0F290 /* ResetPasswordView.swift in Sources */,
+				3E1737602BD8A6F700D0F290 /* TeacherAllRequestsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
