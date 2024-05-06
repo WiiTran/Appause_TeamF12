@@ -32,6 +32,7 @@
 
 <h2>Relevant Documents</h2>
   </p><a href="https://www.figma.com/file/58eXXgO5sQRfMzSKdFACq2/appause-figjam?type=whiteboard&node-id=0-1"> Click Here</a> to get better view of the Figma. </p>
+   </p><a href="https://mysacstate-my.sharepoint.com/:w:/r/personal/lsimoni_csus_edu/_layouts/15/Doc.aspx?sourcedoc=%7B804A1DDF-1D1C-41D6-BB1C-7059EBC268EB%7D&file=Project%20Charter%20(Team%20F12).docx&action=default&mobileredirect=true"> Click Here</a>  for the product charter. </p>
 
 <h2>Team Members and Contact:</h2> 
 <h3>Luke Simoni (<a href="https://github.com/Lsimoni1">GitHub</a>)</</h3>
