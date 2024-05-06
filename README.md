@@ -20,11 +20,11 @@
   </ul>
 
 <h2>Testing</h2>
-// Next semester
+<!-- Next semester -->
 <h2>Deployment</h2>
-//Next Semester
+<!-- Next Semester-->
 <h2>Installation Instruction</h2>
-// Next Semester
+<!-- Next Semester -->
 <h2>TimeLine</h2>
 <h2>Protype Image</h2>
   <img src="
