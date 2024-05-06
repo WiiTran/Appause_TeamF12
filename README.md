@@ -3,6 +3,7 @@
 <h2>Product Name: Appause</h2>
 <h2>App Logo:</h2>
 <img src="https://github.com/WiiTran/Appause-F12Team/assets/157750304/8c5ee0bd-9deb-44d2-8be8-2c7513888988">
+<h2>OverView</h2>
  
 <h2>Team Members and Contact:</h2> 
 <h3>Luke Simoni (<a href="https://github.com/Lsimoni1">GitHub</a>)</</h3>
