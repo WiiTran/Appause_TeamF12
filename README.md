@@ -26,6 +26,36 @@
 <h2>Installation Instruction</h2>
 <!-- Next Semester -->
 <h2>TimeLine</h2>
+    <ul> <strong> Sprint 5: </strong>
+      <li>Missing Student List</li>
+      <li>Menu Overlay Pop-up</li>
+      <li>App Settings</li>
+      <li>Requests Screen</li>
+      <li>Menu Overlay Pop-up</li>
+      <li>Time Based Restrictions</li>
+    </ul>
+     <ul> <strong> Sprint 6: </strong>
+      <li>Database Implementation</li>
+      <li>User Registration Writes New Student/Teacher Data</li>
+      <li>Login Authentication</li>
+      <li>Email Reset Password Functionality</li>
+      <li>Testing Database Use Cases</li>
+    </ul>
+     <ul> <strong> Sprint 7: </strong>
+      <li>App Restrictions</li>
+      <li>Apple Privacy and Permission Acknowledgement</li>
+      <li>Application Permission Request Flow</li>
+      <li>Testing Phone Restrictions</li>
+    </ul>
+    <ul> <strong> Sprint 8: </strong>
+      <li>Bluetooth Connection Implementation</li>
+      <li>Testing Bluetooth Connection</li>
+    </ul>
+    <ul> <strong> Sprint 9: </strong>
+      <li>Final Testing</li>
+      <li>Bug Fixes if Necessary</li>
+      <li>Deployment to App Store</li>
+    </ul>
 <h2>Protype Image</h2>
   <img src="https://github.com/WiiTran/Appause_TeamF12/blob/main/Appause_Figma.png">
   
