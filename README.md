@@ -27,7 +27,8 @@
 <!-- Next Semester -->
 <h2>TimeLine</h2>
 <h2>Protype Image</h2>
-  <img src="
+  <img src="https://github.com/WiiTran/Appause_TeamF12/blob/main/Appause_Figma.png">
+  
 
 <h2>Documents</h2>
 <h2>Team Members and Contact:</h2> 
