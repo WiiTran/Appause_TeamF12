@@ -26,6 +26,26 @@
 <h2>Installation Instruction</h2>
 <!-- Next Semester -->
 <h2>TimeLine</h2>
+ <ul> <strong> Sprint 1: </strong>
+      <li>Research Databases, API's, Tech Stack</li>
+      <li>Prototype</li>
+      <li>ERD</li>
+    </ul>
+     <ul> <strong> Sprint 2: </strong>
+      <li>Github Creation</li>
+      <li>Cost Estimate</li>
+    </ul>
+     <ul> <strong> Sprint 3: </strong>
+      <li>Database Creation/Organize Information</li>
+    </ul>
+     <ul> <strong> Sprint 4: </strong>
+      <li>Missing Student List</li>
+      <li>Menu Overlay Pop-up</li>
+      <li>App Settings</li>
+      <li>Requests Screen</li>
+      <li>Menu Overlay Pop-up</li>
+      <li>Time Based Restrictions</li>
+    </ul>
     <ul> <strong> Sprint 5: </strong>
       <li>Missing Student List</li>
       <li>Menu Overlay Pop-up</li>
