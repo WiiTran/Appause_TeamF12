@@ -30,7 +30,9 @@
   <img src="https://github.com/WiiTran/Appause_TeamF12/blob/main/Appause_Figma.png">
   
 
-<h2>Documents</h2>
+<h2>Relevant Documents</h2>
+  </p><a href="https://www.figma.com/file/58eXXgO5sQRfMzSKdFACq2/appause-figjam?type=whiteboard&node-id=0-1"> Click Here</a> to get better view of the Figma. </p>
+
 <h2>Team Members and Contact:</h2> 
 <h3>Luke Simoni (<a href="https://github.com/Lsimoni1">GitHub</a>)</</h3>
 <h3>Huy Tran (<a href="https://github.com/WiiTran">GitHub</a>)</h3>
