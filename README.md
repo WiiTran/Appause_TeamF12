@@ -38,6 +38,9 @@
 <h2>Protype Image</h2>
   <img src="https://github.com/WiiTran/Appause_TeamF12/blob/main/Appause_Figma.png">
   
+<h2>Screenshots</h2>
+
+ <img src="https://github.com/WiiTran/Appause_TeamF12/assets/157750304/7a5f00ce-64aa-4b5b-9840-bcbe1b9a67cf" width="210" height="520">       <img src="https://github.com/WiiTran/Appause_TeamF12/assets/157750304/ee7f7d33-f396-4e32-ba52-3a0ebdced448" width="210" height="520">       <img src="https://github.com/WiiTran/Appause_TeamF12/assets/157750304/fb3ce7e1-a126-47ca-85ad-6f4271c0f347" width="210" height="520"> 
 
 <h2>Relevant Documents</h2>
   </p><a href="https://www.figma.com/file/58eXXgO5sQRfMzSKdFACq2/appause-figjam?type=whiteboard&node-id=0-1"> Click Here</a> to get better view of the Figma. </p>
