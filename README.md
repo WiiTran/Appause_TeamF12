@@ -26,7 +26,7 @@
 <h2>Installation Instruction</h2>
 <!-- Next Semester -->
 <h2>TimeLine</h2>
-<p>Sprint 5: Front-End Completion
+    <p>Sprint 5: Front-End Completion</p>
     <ul>
       <li>Missing Student list</li>
       <li>Menu overlay pop-up</li>
@@ -34,7 +34,7 @@
       <li>Requests screen</li>
       <li>Menu overlay pop-up</li>
       <li>Time based restrictions</li>
-</p>
+    </ul>
 <h2>Protype Image</h2>
   <img src="https://github.com/WiiTran/Appause_TeamF12/blob/main/Appause_Figma.png">
   
