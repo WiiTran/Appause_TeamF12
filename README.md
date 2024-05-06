@@ -23,7 +23,8 @@
 <h2>Deployment</h2>
 <h2>Installation Instruction</h2>
 <h2>TimeLine</h2>
-<h2>Figma</h2>
+<h2>Protype Image</h2>
+
 <h2>Documents</h2>
 <h2>Team Members and Contact:</h2> 
 <h3>Luke Simoni (<a href="https://github.com/Lsimoni1">GitHub</a>)</</h3>
