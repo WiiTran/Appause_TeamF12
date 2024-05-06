@@ -14,7 +14,7 @@
     <li>Individuallized Permission</li>
     <li>Bluetooth Connectivity</li>
     <li>Restriction Limitations </li>
-    <li>issing/Unconnected Students List</li>
+    <li>Missing/Unconnected Students List</li>
     <li>Store Teacher and Students Information</li>
     <li>Trusted Student Status</li>
   </ul>
