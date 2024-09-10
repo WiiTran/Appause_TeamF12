@@ -20,8 +20,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "3E8F6AED2BCBD5CE003C4160"
-               BuildableName = "Appause_TeamF12_HTrTests.xctest"
-               BlueprintName = "Appause_TeamF12_HTrTests"
+               BuildableName = "AppauseTests.xctest"
+               BlueprintName = "AppauseTests"
                ReferencedContainer = "container:Appause.xcodeproj">
             </BuildableReference>
          </TestableReference>

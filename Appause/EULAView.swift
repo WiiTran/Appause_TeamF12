@@ -7,15 +7,48 @@
 
 import SwiftUI
 
+
+
 struct EULAView: View {
+    //Add this binding state for transitions from view to view
     @Binding var showNextView: DisplayState
     
     var body: some View {
         VStack {
+            
+            Spacer()
+            
+            Image("logo_3")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 100, height: 120)
+                .padding(-50.0)
+                .offset(x: 120)
+                .offset(y: 25)
+            
+            
+            Spacer()
+                
+            Image("logo_4")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 100, height: 120)
+                .padding(-50.0)
+                .offset(x: -115)
+                .offset(y: -2)
+            
+            
+                
+            
+            
+            
             Text("EULA")
                 .padding(.top, 15)
                 .background(Color.white)
                 .foregroundColor(.black)
+                .bold()
+                
+            
             
             GeometryReader { geometry in
                 ScrollView {

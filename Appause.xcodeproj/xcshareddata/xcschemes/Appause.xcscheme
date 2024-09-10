@@ -16,8 +16,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "3E8F6ADD2BCBD5CC003C4160"
-               BuildableName = "Appause_TeamF12_HTr.app"
-               BlueprintName = "Appause_TeamF12_HTr"
+               BuildableName = "Appause.app"
+               BlueprintName = "Appause"
                ReferencedContainer = "container:Appause.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -46,8 +46,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3E8F6ADD2BCBD5CC003C4160"
-            BuildableName = "Appause_TeamF12_HTr.app"
-            BlueprintName = "Appause_TeamF12_HTr"
+            BuildableName = "Appause.app"
+            BlueprintName = "Appause"
             ReferencedContainer = "container:Appause.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -63,8 +63,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3E8F6ADD2BCBD5CC003C4160"
-            BuildableName = "Appause_TeamF12_HTr.app"
-            BlueprintName = "Appause_TeamF12_HTr"
+            BuildableName = "Appause.app"
+            BlueprintName = "Appause"
             ReferencedContainer = "container:Appause.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

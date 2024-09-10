@@ -27,6 +27,7 @@
 		3E1737602BD8A6F700D0F290 /* TeacherAllRequestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E17375F2BD8A6F700D0F290 /* TeacherAllRequestsView.swift */; };
 		3E1737622BD8A73300D0F290 /* RequestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1737612BD8A73300D0F290 /* RequestData.swift */; };
 		3E1737642BD8AA2C00D0F290 /* TeacherRegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1737632BD8AA2C00D0F290 /* TeacherRegisterView.swift */; };
+		3E8AE2962C90213B00ABDA6E /* AppauseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8AE2952C90213B00ABDA6E /* AppauseApp.swift */; };
 		3E8F6AE42BCBD5CC003C4160 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F6AE32BCBD5CC003C4160 /* ContentView.swift */; };
 		3E8F6AE62BCBD5CE003C4160 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F6AE52BCBD5CE003C4160 /* Assets.xcassets */; };
 		3E8F6AE92BCBD5CE003C4160 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F6AE82BCBD5CE003C4160 /* Preview Assets.xcassets */; };
@@ -40,7 +41,6 @@
 		3EA44B252BCF43DF00732432 /* SelectRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA44B242BCF43DF00732432 /* SelectRegistrationView.swift */; };
 		3EA44B272BCF43F100732432 /* StudentMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA44B262BCF43F100732432 /* StudentMainView.swift */; };
 		3EA44B292BCF440F00732432 /* TeacherMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA44B282BCF440F00732432 /* TeacherMainView.swift */; };
-		3EA44B2B2BCF455C00732432 /* AppauseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA44B2A2BCF455C00732432 /* AppauseApp.swift */; };
 		C8D38EF52BD35D9E00F0D2BA /* StudentSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D38EF42BD35D9E00F0D2BA /* StudentSettingsView.swift */; };
 		C8D38EF72BD3881700F0D2BA /* TeacherSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D38EF62BD3881700F0D2BA /* TeacherSettingsView.swift */; };
 /* End PBXBuildFile section */
@@ -69,7 +69,7 @@
 		3E1737412BD8A29A00D0F290 /* PWCodeVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PWCodeVerificationView.swift; sourceTree = "<group>"; };
 		3E1737432BD8A2B200D0F290 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 		3E1737472BD8A34500D0F290 /* StudentRegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentRegisterView.swift; sourceTree = "<group>"; };
-		3E1737492BD8A36000D0F290 /* StudentChooseAdminView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudentChooseAdminView.swift; path = ../StudentChooseAdminView.swift; sourceTree = "<group>"; };
+		3E1737492BD8A36000D0F290 /* StudentChooseAdminView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentChooseAdminView.swift; sourceTree = "<group>"; };
 		3E17374B2BD8A37A00D0F290 /* StudentAppRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentAppRequestView.swift; sourceTree = "<group>"; };
 		3E17374D2BD8A39400D0F290 /* StudentDeleteAdminView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentDeleteAdminView.swift; sourceTree = "<group>"; };
 		3E17374F2BD8A47A00D0F290 /* TeacherUserRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherUserRequestView.swift; sourceTree = "<group>"; };
@@ -83,14 +83,14 @@
 		3E17375F2BD8A6F700D0F290 /* TeacherAllRequestsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherAllRequestsView.swift; sourceTree = "<group>"; };
 		3E1737612BD8A73300D0F290 /* RequestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestData.swift; sourceTree = "<group>"; };
 		3E1737632BD8AA2C00D0F290 /* TeacherRegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherRegisterView.swift; sourceTree = "<group>"; };
-		3E8F6ADE2BCBD5CC003C4160 /* Appause_TeamF12_HTr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Appause_TeamF12_HTr.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		3E8F6AE12BCBD5CC003C4160 /* AppauseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppauseApp.swift; sourceTree = "<group>"; };
+		3E8AE2952C90213B00ABDA6E /* AppauseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppauseApp.swift; sourceTree = "<group>"; };
+		3E8F6ADE2BCBD5CC003C4160 /* Appause.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Appause.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E8F6AE32BCBD5CC003C4160 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3E8F6AE52BCBD5CE003C4160 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3E8F6AE82BCBD5CE003C4160 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		3E8F6AEE2BCBD5CE003C4160 /* Appause_TeamF12_HTrTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Appause_TeamF12_HTrTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E8F6AEE2BCBD5CE003C4160 /* AppauseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppauseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E8F6AF22BCBD5CE003C4160 /* AppauseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppauseTests.swift; sourceTree = "<group>"; };
-		3E8F6AF82BCBD5CE003C4160 /* Appause_TeamF12_HTrUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Appause_TeamF12_HTrUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E8F6AF82BCBD5CE003C4160 /* AppauseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppauseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E8F6AFC2BCBD5CE003C4160 /* AppauseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppauseUITests.swift; sourceTree = "<group>"; };
 		3E8F6AFE2BCBD5CE003C4160 /* AppauseUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppauseUITestsLaunchTests.swift; path = /Users/huytran/Desktop/Appause_TeamF12/AppauseUITests/AppauseUITestsLaunchTests.swift; sourceTree = "<absolute>"; };
 		3E8F6B162BCBD8EE003C4160 /* EULAView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EULAView.swift; sourceTree = "<group>"; };
@@ -99,7 +99,6 @@
 		3EA44B242BCF43DF00732432 /* SelectRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRegistrationView.swift; sourceTree = "<group>"; };
 		3EA44B262BCF43F100732432 /* StudentMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentMainView.swift; sourceTree = "<group>"; };
 		3EA44B282BCF440F00732432 /* TeacherMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherMainView.swift; sourceTree = "<group>"; };
-		3EA44B2A2BCF455C00732432 /* AppauseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppauseApp.swift; path = /Users/huytran/Desktop/Appause_TeamF12/Appause/AppauseApp.swift; sourceTree = "<absolute>"; };
 		C8D38EF42BD35D9E00F0D2BA /* StudentSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentSettingsView.swift; sourceTree = "<group>"; };
 		C8D38EF62BD3881700F0D2BA /* TeacherSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherSettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -143,9 +142,9 @@
 		3E8F6ADF2BCBD5CC003C4160 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3E8F6ADE2BCBD5CC003C4160 /* Appause_TeamF12_HTr.app */,
-				3E8F6AEE2BCBD5CE003C4160 /* Appause_TeamF12_HTrTests.xctest */,
-				3E8F6AF82BCBD5CE003C4160 /* Appause_TeamF12_HTrUITests.xctest */,
+				3E8F6ADE2BCBD5CC003C4160 /* Appause.app */,
+				3E8F6AEE2BCBD5CE003C4160 /* AppauseTests.xctest */,
+				3E8F6AF82BCBD5CE003C4160 /* AppauseUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -158,7 +157,6 @@
 				3E17375F2BD8A6F700D0F290 /* TeacherAllRequestsView.swift */,
 				3E1737492BD8A36000D0F290 /* StudentChooseAdminView.swift */,
 				3E1737412BD8A29A00D0F290 /* PWCodeVerificationView.swift */,
-				3E8F6AE12BCBD5CC003C4160 /* AppauseApp.swift */,
 				3E8F6AE32BCBD5CC003C4160 /* ContentView.swift */,
 				3E8F6AE52BCBD5CE003C4160 /* Assets.xcassets */,
 				3E8F6AE72BCBD5CE003C4160 /* Preview Content */,
@@ -168,7 +166,6 @@
 				3EA44B242BCF43DF00732432 /* SelectRegistrationView.swift */,
 				3EA44B262BCF43F100732432 /* StudentMainView.swift */,
 				3EA44B282BCF440F00732432 /* TeacherMainView.swift */,
-				3EA44B2A2BCF455C00732432 /* AppauseApp.swift */,
 				3E1737632BD8AA2C00D0F290 /* TeacherRegisterView.swift */,
 				3E0956D62BD1D0C10037B462 /* GlobalStyleVar.swift */,
 				3E0956D82BD1E79A0037B462 /* StudentConnectCodeView.swift */,
@@ -186,6 +183,7 @@
 				3E1737592BD8A5B400D0F290 /* TeacherMasterControlView.swift */,
 				3E17375B2BD8A69600D0F290 /* TeacherAppDescription.swift */,
 				3E17375D2BD8A6C200D0F290 /* TimerViewModel.swift */,
+				3E8AE2952C90213B00ABDA6E /* AppauseApp.swift */,
 			);
 			path = Appause;
 			sourceTree = "<group>";
@@ -218,9 +216,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3E8F6ADD2BCBD5CC003C4160 /* Appause_TeamF12_HTr */ = {
+		3E8F6ADD2BCBD5CC003C4160 /* Appause */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3E8F6B022BCBD5CE003C4160 /* Build configuration list for PBXNativeTarget "Appause_TeamF12_HTr" */;
+			buildConfigurationList = 3E8F6B022BCBD5CE003C4160 /* Build configuration list for PBXNativeTarget "Appause" */;
 			buildPhases = (
 				3E8F6ADA2BCBD5CC003C4160 /* Sources */,
 				3E8F6ADB2BCBD5CC003C4160 /* Frameworks */,
@@ -230,17 +228,17 @@
 			);
 			dependencies = (
 			);
-			name = Appause_TeamF12_HTr;
+			name = Appause;
 			packageProductDependencies = (
 				3E8F6B0C2BCBD77F003C4160 /* KeychainSwift */,
 			);
 			productName = Appause_TeamF12_HTr;
-			productReference = 3E8F6ADE2BCBD5CC003C4160 /* Appause_TeamF12_HTr.app */;
+			productReference = 3E8F6ADE2BCBD5CC003C4160 /* Appause.app */;
 			productType = "com.apple.product-type.application";
 		};
-		3E8F6AED2BCBD5CE003C4160 /* Appause_TeamF12_HTrTests */ = {
+		3E8F6AED2BCBD5CE003C4160 /* AppauseTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3E8F6B052BCBD5CE003C4160 /* Build configuration list for PBXNativeTarget "Appause_TeamF12_HTrTests" */;
+			buildConfigurationList = 3E8F6B052BCBD5CE003C4160 /* Build configuration list for PBXNativeTarget "AppauseTests" */;
 			buildPhases = (
 				3E8F6AEA2BCBD5CE003C4160 /* Sources */,
 				3E8F6AEB2BCBD5CE003C4160 /* Frameworks */,
@@ -251,14 +249,14 @@
 			dependencies = (
 				3E8F6AF02BCBD5CE003C4160 /* PBXTargetDependency */,
 			);
-			name = Appause_TeamF12_HTrTests;
+			name = AppauseTests;
 			productName = Appause_TeamF12_HTrTests;
-			productReference = 3E8F6AEE2BCBD5CE003C4160 /* Appause_TeamF12_HTrTests.xctest */;
+			productReference = 3E8F6AEE2BCBD5CE003C4160 /* AppauseTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		3E8F6AF72BCBD5CE003C4160 /* Appause_TeamF12_HTrUITests */ = {
+		3E8F6AF72BCBD5CE003C4160 /* AppauseUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3E8F6B082BCBD5CE003C4160 /* Build configuration list for PBXNativeTarget "Appause_TeamF12_HTrUITests" */;
+			buildConfigurationList = 3E8F6B082BCBD5CE003C4160 /* Build configuration list for PBXNativeTarget "AppauseUITests" */;
 			buildPhases = (
 				3E8F6AF42BCBD5CE003C4160 /* Sources */,
 				3E8F6AF52BCBD5CE003C4160 /* Frameworks */,
@@ -269,9 +267,9 @@
 			dependencies = (
 				3E8F6AFA2BCBD5CE003C4160 /* PBXTargetDependency */,
 			);
-			name = Appause_TeamF12_HTrUITests;
+			name = AppauseUITests;
 			productName = Appause_TeamF12_HTrUITests;
-			productReference = 3E8F6AF82BCBD5CE003C4160 /* Appause_TeamF12_HTrUITests.xctest */;
+			productReference = 3E8F6AF82BCBD5CE003C4160 /* AppauseUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -313,9 +311,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3E8F6ADD2BCBD5CC003C4160 /* Appause_TeamF12_HTr */,
-				3E8F6AED2BCBD5CE003C4160 /* Appause_TeamF12_HTrTests */,
-				3E8F6AF72BCBD5CE003C4160 /* Appause_TeamF12_HTrUITests */,
+				3E8F6ADD2BCBD5CC003C4160 /* Appause */,
+				3E8F6AED2BCBD5CE003C4160 /* AppauseTests */,
+				3E8F6AF72BCBD5CE003C4160 /* AppauseUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -354,6 +352,7 @@
 				3EA44B272BCF43F100732432 /* StudentMainView.swift in Sources */,
 				3E8F6B172BCBD8EE003C4160 /* EULAView.swift in Sources */,
 				3E1737642BD8AA2C00D0F290 /* TeacherRegisterView.swift in Sources */,
+				3E8AE2962C90213B00ABDA6E /* AppauseApp.swift in Sources */,
 				3EA44B252BCF43DF00732432 /* SelectRegistrationView.swift in Sources */,
 				3E1737522BD8A48F00D0F290 /* TeacherWhitelist.swift in Sources */,
 				3E17374E2BD8A39400D0F290 /* StudentDeleteAdminView.swift in Sources */,
@@ -373,7 +372,6 @@
 				3EA44B232BCF43A000732432 /* TwoFactorAuthView.swift in Sources */,
 				3E17375E2BD8A6C200D0F290 /* TimerViewModel.swift in Sources */,
 				3EA44B212BCF437C00732432 /* LoginView.swift in Sources */,
-				3EA44B2B2BCF455C00732432 /* AppauseApp.swift in Sources */,
 				3E0956D92BD1E79A0037B462 /* StudentConnectCodeView.swift in Sources */,
 				3E1737622BD8A73300D0F290 /* RequestData.swift in Sources */,
 				3E09D9DB2BD8655F008324B7 /* ForgotPasswordView.swift in Sources */,
@@ -406,12 +404,12 @@
 /* Begin PBXTargetDependency section */
 		3E8F6AF02BCBD5CE003C4160 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 3E8F6ADD2BCBD5CC003C4160 /* Appause_TeamF12_HTr */;
+			target = 3E8F6ADD2BCBD5CC003C4160 /* Appause */;
 			targetProxy = 3E8F6AEF2BCBD5CE003C4160 /* PBXContainerItemProxy */;
 		};
 		3E8F6AFA2BCBD5CE003C4160 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 3E8F6ADD2BCBD5CC003C4160 /* Appause_TeamF12_HTr */;
+			target = 3E8F6ADD2BCBD5CC003C4160 /* Appause */;
 			targetProxy = 3E8F6AF92BCBD5CE003C4160 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -601,7 +599,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 53NSY6KM9Q;
+				DEVELOPMENT_TEAM = 9UY79QFFH9;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				MARKETING_VERSION = 1.0;
@@ -621,7 +619,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 53NSY6KM9Q;
+				DEVELOPMENT_TEAM = 9UY79QFFH9;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				MARKETING_VERSION = 1.0;
@@ -640,7 +638,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 53NSY6KM9Q;
+				DEVELOPMENT_TEAM = 9UY79QFFH9;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "F12.Appause-TeamF12-HTrUITests";
@@ -658,7 +656,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 53NSY6KM9Q;
+				DEVELOPMENT_TEAM = 9UY79QFFH9;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "F12.Appause-TeamF12-HTrUITests";
@@ -682,7 +680,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3E8F6B022BCBD5CE003C4160 /* Build configuration list for PBXNativeTarget "Appause_TeamF12_HTr" */ = {
+		3E8F6B022BCBD5CE003C4160 /* Build configuration list for PBXNativeTarget "Appause" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3E8F6B032BCBD5CE003C4160 /* Debug */,
@@ -691,7 +689,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3E8F6B052BCBD5CE003C4160 /* Build configuration list for PBXNativeTarget "Appause_TeamF12_HTrTests" */ = {
+		3E8F6B052BCBD5CE003C4160 /* Build configuration list for PBXNativeTarget "AppauseTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3E8F6B062BCBD5CE003C4160 /* Debug */,
@@ -700,7 +698,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3E8F6B082BCBD5CE003C4160 /* Build configuration list for PBXNativeTarget "Appause_TeamF12_HTrUITests" */ = {
+		3E8F6B082BCBD5CE003C4160 /* Build configuration list for PBXNativeTarget "AppauseUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3E8F6B092BCBD5CE003C4160 /* Debug */,
