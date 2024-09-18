@@ -100,13 +100,18 @@ struct TeacherMainView: View {
                 .padding(.bottom, 10)
                 
                 // create Connect Code button
-                NavigationLink(destination: TeacherConnectCodeView()) {
-                    Text("Connect Code")
+                NavigationLink(destination: TeacherBlacklist()) {
+                    Text("Blacklist")
                         .fontWeight(btnStyle.getFont())
                         .foregroundColor(btnStyle.getBtnFontColor())
-                        .frame(width: btnStyle.getWidth() + 35,
+                        .frame(width: btnStyle.getWidth() + 1,
                                height: btnStyle.getHeight() + 5,
                                alignment: btnStyle.getAlignment())
+                    
+                    Image(systemName: "nosign.app")
+                        .fontWeight(btnStyle.getFont())
+                        .imageScale(.large)
+                        .foregroundColor(btnStyle.getBtnFontColor())
                 }
                 .padding()
                 .background(btnStyle.getBtnColor())

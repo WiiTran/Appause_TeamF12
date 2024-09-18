@@ -27,6 +27,7 @@
 		3E1737602BD8A6F700D0F290 /* TeacherAllRequestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E17375F2BD8A6F700D0F290 /* TeacherAllRequestsView.swift */; };
 		3E1737622BD8A73300D0F290 /* RequestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1737612BD8A73300D0F290 /* RequestData.swift */; };
 		3E1737642BD8AA2C00D0F290 /* TeacherRegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1737632BD8AA2C00D0F290 /* TeacherRegisterView.swift */; };
+		3E8964832C9A907200C75B38 /* TeacherBlacklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8964822C9A907200C75B38 /* TeacherBlacklist.swift */; };
 		3E8AE2962C90213B00ABDA6E /* AppauseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8AE2952C90213B00ABDA6E /* AppauseApp.swift */; };
 		3E8F6AE42BCBD5CC003C4160 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F6AE32BCBD5CC003C4160 /* ContentView.swift */; };
 		3E8F6AE62BCBD5CE003C4160 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F6AE52BCBD5CE003C4160 /* Assets.xcassets */; };
@@ -91,6 +92,7 @@
 		3E17375F2BD8A6F700D0F290 /* TeacherAllRequestsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherAllRequestsView.swift; sourceTree = "<group>"; };
 		3E1737612BD8A73300D0F290 /* RequestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestData.swift; sourceTree = "<group>"; };
 		3E1737632BD8AA2C00D0F290 /* TeacherRegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherRegisterView.swift; sourceTree = "<group>"; };
+		3E8964822C9A907200C75B38 /* TeacherBlacklist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherBlacklist.swift; sourceTree = "<group>"; };
 		3E8AE2952C90213B00ABDA6E /* AppauseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppauseApp.swift; sourceTree = "<group>"; };
 		3E8F6ADE2BCBD5CC003C4160 /* Appause.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Appause.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E8F6AE32BCBD5CC003C4160 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -192,9 +194,10 @@
 				3E17374D2BD8A39400D0F290 /* StudentDeleteAdminView.swift */,
 				3E17374F2BD8A47A00D0F290 /* TeacherUserRequestView.swift */,
 				3E1737512BD8A48F00D0F290 /* TeacherWhitelist.swift */,
+				3E8964822C9A907200C75B38 /* TeacherBlacklist.swift */,
+				3E1737572BD8A4CA00D0F290 /* TeacherConnectCodeView.swift */,
 				3E1737532BD8A4A300D0F290 /* TeacherManageUsers.swift */,
 				3E1737552BD8A4BC00D0F290 /* TeacherDeleteStudentView.swift */,
-				3E1737572BD8A4CA00D0F290 /* TeacherConnectCodeView.swift */,
 				3E1737592BD8A5B400D0F290 /* TeacherMasterControlView.swift */,
 				3E17375B2BD8A69600D0F290 /* TeacherAppDescription.swift */,
 				3E17375D2BD8A6C200D0F290 /* TimerViewModel.swift */,
@@ -387,6 +390,7 @@
 				3E8AE2962C90213B00ABDA6E /* AppauseApp.swift in Sources */,
 				3EA44B252BCF43DF00732432 /* SelectRegistrationView.swift in Sources */,
 				3E1737522BD8A48F00D0F290 /* TeacherWhitelist.swift in Sources */,
+				3E8964832C9A907200C75B38 /* TeacherBlacklist.swift in Sources */,
 				3E17374E2BD8A39400D0F290 /* StudentDeleteAdminView.swift in Sources */,
 				C8D38EF52BD35D9E00F0D2BA /* StudentSettingsView.swift in Sources */,
 				3E8F6AE42BCBD5CC003C4160 /* ContentView.swift in Sources */,
