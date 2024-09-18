@@ -40,6 +40,8 @@ struct SelectRegistrationView: View
     
     let keychain = KeychainSwift()
     let firebaseAuth = Auth.auth()
+    let db = Firestore.firestore()
+    @State var userInfo = AuthDataResult()
     
     struct TextFieldWithEyeIcon: View {
         // Placeholder text for the text field
@@ -347,14 +349,25 @@ struct SelectRegistrationView: View
                             
                             Task {
                                 do {
-                                    try await AuthManager.sharedAuth.createUser(
+                                    userInfo = try await AuthManager.sharedAuth.createUser(
                                         email: studentEmail,
                                             password: studentPassword,
                                             fname: studentFirstName,
                                             lname: studentLastName)
-                                    print("yayyyy")
+                                    print(userInfo.email! + userInfo.fname! + userInfo.lname!)
                                 } catch {
                                     registerError = "Error \(error)"
+                                }
+                                
+                                do {
+                                  let ref = try await db.collection("Users").addDocument(data: [
+                                    "ClassId": "123456",
+                                    "Name": userInfo.fname! + " " + userInfo.lname!,
+                                    "StudentId": 1815
+                                  ])
+                                  print("Document added with ID: \(ref.documentID)")
+                                } catch {
+                                  print("Error adding document: \(error)")
                                 }
                             }
                             

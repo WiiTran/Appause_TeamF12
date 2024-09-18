@@ -7,7 +7,6 @@
 
 import SwiftUI
 import FirebaseCore
-import FirebaseFirestore
 import FirebaseAuth
 
 /*This is an environment variable used to determine which screen the back buttons on

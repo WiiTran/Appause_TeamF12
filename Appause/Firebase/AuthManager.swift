@@ -9,10 +9,17 @@ import Foundation
 import FirebaseAuth
 
 struct AuthDataResult {
-    let uid: String
-    let email: String
-    let fname: String
-    let lname: String
+    let uid: String?
+    let email: String?
+    let fname: String?
+    let lname: String?
+    
+    init() {
+        self.uid = nil
+        self.email = nil
+        self.fname = nil
+        self.lname = nil
+    }
     
     init(user: User, fname: String, lname: String) {
         self.uid = user.uid
