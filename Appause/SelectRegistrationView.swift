@@ -7,6 +7,9 @@
 
 import SwiftUI
 import KeychainSwift
+import FirebaseCore
+import FirebaseFirestore
+import FirebaseAuth
 
 struct SelectRegistrationView: View
 {
@@ -36,6 +39,7 @@ struct SelectRegistrationView: View
     @State var buttonColorTop = Color.black
     
     let keychain = KeychainSwift()
+    let firebaseAuth = Auth.auth()
     
     struct TextFieldWithEyeIcon: View {
         // Placeholder text for the text field
@@ -340,6 +344,20 @@ struct SelectRegistrationView: View
                             keychain.set(studentPassword, forKey: "studentPassKey")
                             keychain.set(studentFirstName, forKey: "studentFirstNameKey")
                             keychain.set(studentLastName, forKey: "studentLastNameKey")
+                            
+                            Task {
+                                do {
+                                    try await AuthManager.sharedAuth.createUser(
+                                        email: studentEmail,
+                                            password: studentPassword,
+                                            fname: studentFirstName,
+                                            lname: studentLastName)
+                                    print("yayyyy")
+                                } catch {
+                                    registerError = "Error \(error)"
+                                }
+                            }
+                            
                             
                             withAnimation {
                                 //show nextView .whateverViewYouWantToShow defined in ContentView Enum
