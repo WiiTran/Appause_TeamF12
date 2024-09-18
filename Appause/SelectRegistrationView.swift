@@ -7,6 +7,9 @@
 
 import SwiftUI
 import KeychainSwift
+import FirebaseCore
+import FirebaseFirestore
+import FirebaseAuth
 
 struct SelectRegistrationView: View
 {
@@ -36,6 +39,9 @@ struct SelectRegistrationView: View
     @State var buttonColorTop = Color.black
     
     let keychain = KeychainSwift()
+    let firebaseAuth = Auth.auth()
+    let db = Firestore.firestore()
+    @State var userInfo = AuthDataResult()
     
     struct TextFieldWithEyeIcon: View {
         // Placeholder text for the text field
@@ -340,6 +346,31 @@ struct SelectRegistrationView: View
                             keychain.set(studentPassword, forKey: "studentPassKey")
                             keychain.set(studentFirstName, forKey: "studentFirstNameKey")
                             keychain.set(studentLastName, forKey: "studentLastNameKey")
+                            
+                            Task {
+                                do {
+                                    userInfo = try await AuthManager.sharedAuth.createUser(
+                                        email: studentEmail,
+                                            password: studentPassword,
+                                            fname: studentFirstName,
+                                            lname: studentLastName)
+                                    print(userInfo.email! + userInfo.fname! + userInfo.lname!)
+                                } catch {
+                                    registerError = "Error \(error)"
+                                }
+                                
+                                do {
+                                  let ref = try await db.collection("Users").addDocument(data: [
+                                    "ClassId": "123456",
+                                    "Name": userInfo.fname! + " " + userInfo.lname!,
+                                    "StudentId": 1815
+                                  ])
+                                  print("Document added with ID: \(ref.documentID)")
+                                } catch {
+                                  print("Error adding document: \(error)")
+                                }
+                            }
+                            
                             
                             withAnimation {
                                 //show nextView .whateverViewYouWantToShow defined in ContentView Enum
