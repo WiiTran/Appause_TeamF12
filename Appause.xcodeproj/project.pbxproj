@@ -43,6 +43,7 @@
 		3EA44B292BCF440F00732432 /* TeacherMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA44B282BCF440F00732432 /* TeacherMainView.swift */; };
 		C8D38EF52BD35D9E00F0D2BA /* StudentSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D38EF42BD35D9E00F0D2BA /* StudentSettingsView.swift */; };
 		C8D38EF72BD3881700F0D2BA /* TeacherSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D38EF62BD3881700F0D2BA /* TeacherSettingsView.swift */; };
+		ED2B5A8E2C9A12EE008AC0AA /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2B5A8D2C9A12EE008AC0AA /* AuthManager.swift */; };
 		ED8FB51A2C910F7B00DFB478 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED8FB5192C910F7B00DFB478 /* GoogleService-Info.plist */; };
 		ED8FB51B2C910F7B00DFB478 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED8FB5192C910F7B00DFB478 /* GoogleService-Info.plist */; };
 		ED8FB51C2C910F7B00DFB478 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED8FB5192C910F7B00DFB478 /* GoogleService-Info.plist */; };
@@ -108,6 +109,7 @@
 		3EA44B282BCF440F00732432 /* TeacherMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherMainView.swift; sourceTree = "<group>"; };
 		C8D38EF42BD35D9E00F0D2BA /* StudentSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentSettingsView.swift; sourceTree = "<group>"; };
 		C8D38EF62BD3881700F0D2BA /* TeacherSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherSettingsView.swift; sourceTree = "<group>"; };
+		ED2B5A8D2C9A12EE008AC0AA /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		ED8FB5192C910F7B00DFB478 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -230,6 +232,7 @@
 			isa = PBXGroup;
 			children = (
 				ED8FB5192C910F7B00DFB478 /* GoogleService-Info.plist */,
+				ED2B5A8D2C9A12EE008AC0AA /* AuthManager.swift */,
 			);
 			path = Firebase;
 			sourceTree = "<group>";
@@ -389,6 +392,7 @@
 				3E8F6AE42BCBD5CC003C4160 /* ContentView.swift in Sources */,
 				3E1737582BD8A4CA00D0F290 /* TeacherConnectCodeView.swift in Sources */,
 				3E0956D72BD1D0C10037B462 /* GlobalStyleVar.swift in Sources */,
+				ED2B5A8E2C9A12EE008AC0AA /* AuthManager.swift in Sources */,
 				3E17374C2BD8A37A00D0F290 /* StudentAppRequestView.swift in Sources */,
 				3E1737542BD8A4A300D0F290 /* TeacherManageUsers.swift in Sources */,
 				3E1737482BD8A34500D0F290 /* StudentRegisterView.swift in Sources */,
