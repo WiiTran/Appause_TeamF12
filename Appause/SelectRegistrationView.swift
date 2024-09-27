@@ -42,6 +42,9 @@ struct SelectRegistrationView: View
     let firebaseAuth = Auth.auth()
     let db = Firestore.firestore()
     @State var userInfo = AuthDataResult()
+    @State var tempString: [String] = []
+    @State var tempNameFirst: String = ""
+    @State var tempNameLast: String = ""
     
     struct TextFieldWithEyeIcon: View {
         // Placeholder text for the text field
@@ -326,8 +329,22 @@ struct SelectRegistrationView: View
                     }
                     
                     Button(action: {
+                        
+                        tempString = studentEmail.components(separatedBy: ".")
+                        tempNameFirst = tempString[0]
+                        tempString = tempString[1].components(separatedBy: "@")
+                        tempNameLast = tempString[0]
+                        //test strings
+                        print(tempNameFirst + " " + studentFirstName)
+                        
                         if (studentFirstName == "" || studentLastName == "" || studentEmail == "" || studentPassword == "" || studentPassConfirm == ""){
                             registerError = "Please fill in all of the fields."
+                        }
+                        else if !(studentLastName.compare(tempNameLast, options: .caseInsensitive) == .orderedSame){
+                            registerError = "Please enter your last name as it appears in your student email address"
+                        }
+                        else if !(studentFirstName.compare(tempNameFirst, options: .caseInsensitive) == .orderedSame) {
+                            registerError = "Please enter your first name as it appears in your student email address"
                         }
                         else if (validateEmail(studentEmail) == false){
                             registerError = "Please enter a valid email address."
