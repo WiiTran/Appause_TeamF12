@@ -1,14 +1,13 @@
 //
-//  Appause_TeamF12_HTrTests.swift
-//  Appause_TeamF12_HTrTests
+//  AppauseTests.swift
+//  AppauseTests
 //
-//  Created by Huy Tran on 4/14/24.
+//  Created by Huy Tran on 9/30/24.
 //
 
 import XCTest
-@testable import Appause_TeamF12_HTr
 
-final class Appause_TeamF12_HTrTests: XCTestCase {
+final class AppauseTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -28,7 +27,7 @@ final class Appause_TeamF12_HTrTests: XCTestCase {
 
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
-        self.measure {
+        measure {
             // Put the code you want to measure the time of here.
         }
     }
