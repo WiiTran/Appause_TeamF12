@@ -39,12 +39,21 @@ struct SelectRegistrationView: View
     @State var buttonColorTop = Color.black
     
     let keychain = KeychainSwift()
+    
+    //helper variables - written by Luke Simoni
     let firebaseAuth = Auth.auth()
     let db = Firestore.firestore()
     @State var userInfo = AuthDataResult()
     @State var tempString: [String] = []
-    @State var tempNameFirst: String = ""
-    @State var tempNameLast: String = ""
+    @State var studentID: String = ""
+    
+    // helper String specifically for matching 'student' portion
+    // of student email
+    @State var tempStudentString: String = ""
+    
+    // helper String specifically for matching 'sanjuan.edu' portion
+    // of student and teacher emails
+    @State var tempSanJuanString: String = ""
     
     struct TextFieldWithEyeIcon: View {
         // Placeholder text for the text field
@@ -331,30 +340,31 @@ struct SelectRegistrationView: View
                     Button(action: {
                         
                         tempString = studentEmail.components(separatedBy: ".")
-                        tempNameFirst = tempString[0]
+                        studentID = tempString[0]
                         tempString = tempString[1].components(separatedBy: "@")
-                        tempNameLast = tempString[0]
+                        tempStudentString = tempString[0]
+                        tempSanJuanString = tempString[1]
                         //test strings
-                        print(tempNameFirst + " " + studentFirstName)
+                        print(studentID + " " + tempStudentString + " " + tempSanJuanString)
 
                         
                         if (studentFirstName == "" || studentLastName == "" || studentEmail == "" || studentPassword == "" || studentPassConfirm == ""){
                             registerError = "Please fill in all of the fields."
                         }
-                        else if !(studentLastName.compare(tempNameLast, options: .caseInsensitive) == .orderedSame){
-                            registerError = "Please enter your last name as it appears in your student email address"
+                        else if !(tempStudentString == "student") {
+                            registerError = "Format of the email submitted is incorrect."
                         }
-                        else if (!(studentFirstName.isNumber) && (studentFirstName.count == 6)) {
-                            registerError = "Please use the student ID number as the first component of the account's email address"
+                        else if !(tempSanJuanString == "sanjuan"){
+                            registerError = "Format of the email submitted is incorrect."
                         }
-//                        else if !(studentFirstName.compare(tempNameFirst, options: .caseInsensitive) == .orderedSame) {
-//                            registerError = "Please enter your first name as it appears in your student email address"
+//                        else if (!(studentID.isNumber) && (studentID.count == 6)) {
+//                            registerError = "Please use the student ID number as the first component of the account's email address."
 //                        }
                         else if (validateEmail(studentEmail) == false){
                             registerError = "Please enter a valid email address."
                         }
                         else if (validatePassword(studentPassword) == false){
-                            registerError = "Password Requires:\nat least 6 Characters and a Number"
+                            registerError = "Password Requires:\nat least 6 Characters and a Number."
                         }
                         else if (studentPassword != studentPassConfirm){
                             registerError = "Passwords do not match. Try again."
@@ -389,7 +399,7 @@ struct SelectRegistrationView: View
                                     
                                     do {
                                         let ref = try await db.collection("Users").addDocument(data: [
-                                            "ClassId": "123456",
+                                            "ClassId": "654321",
                                             "Name": userInfo.fname! + " " + userInfo.lname!,
                                             "StudentId": 1815
                                         ])
@@ -491,16 +501,14 @@ struct SelectRegistrationView: View
         
         return result
     }
-}
-
-//helper extension for student registration
-extension String {
-    var isNumber: Bool{
-        return self.allSatisfy {
-            character in character.isNumber
-        }
+    
+    //helper function for validating student ID numbers
+    func validateStudentID( studentID: String ) -> Bool {
+        return true
     }
 }
+
+
 
 struct SelectRegistrationView_Previews: PreviewProvider
 {
