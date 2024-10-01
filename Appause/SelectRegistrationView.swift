@@ -336,6 +336,7 @@ struct SelectRegistrationView: View
                         tempNameLast = tempString[0]
                         //test strings
                         print(tempNameFirst + " " + studentFirstName)
+
                         
                         if (studentFirstName == "" || studentLastName == "" || studentEmail == "" || studentPassword == "" || studentPassConfirm == ""){
                             registerError = "Please fill in all of the fields."
@@ -343,9 +344,12 @@ struct SelectRegistrationView: View
                         else if !(studentLastName.compare(tempNameLast, options: .caseInsensitive) == .orderedSame){
                             registerError = "Please enter your last name as it appears in your student email address"
                         }
-                        else if !(studentFirstName.compare(tempNameFirst, options: .caseInsensitive) == .orderedSame) {
-                            registerError = "Please enter your first name as it appears in your student email address"
+                        else if (!(studentFirstName.isNumber) && (studentFirstName.count == 6)) {
+                            registerError = "Please use the student ID number as the first component of the account's email address"
                         }
+//                        else if !(studentFirstName.compare(tempNameFirst, options: .caseInsensitive) == .orderedSame) {
+//                            registerError = "Please enter your first name as it appears in your student email address"
+//                        }
                         else if (validateEmail(studentEmail) == false){
                             registerError = "Please enter a valid email address."
                         }
@@ -372,20 +376,43 @@ struct SelectRegistrationView: View
                                             fname: studentFirstName,
                                             lname: studentLastName)
                                     print(userInfo.email! + userInfo.fname! + userInfo.lname!)
-                                } catch {
-                                    registerError = "Error \(error)"
+                                    
+                                    guard let email = userInfo.email,
+                                          let fname = userInfo.fname,
+                                          let lname = userInfo.lname,
+                                          !email.isEmpty,
+                                          !fname.isEmpty,
+                                          !lname.isEmpty
+                                    else {
+                                        return
+                                    }
+                                    
+                                    do {
+                                        let ref = try await db.collection("Users").addDocument(data: [
+                                            "ClassId": "123456",
+                                            "Name": userInfo.fname! + " " + userInfo.lname!,
+                                            "StudentId": 1815
+                                        ])
+                                        
+                                        print("Document added with ID: \(ref.documentID)")
+                                    } catch let dbError{
+                                        print("Error adding document: \(dbError.localizedDescription)")
+                                    }
+                                    
+                                } catch let createUserError {
+                                    registerError = "Registration of user failed.  \(createUserError.localizedDescription)"
                                 }
                                 
-                                do {
-                                  let ref = try await db.collection("Users").addDocument(data: [
-                                    "ClassId": "123456",
-                                    "Name": userInfo.fname! + " " + userInfo.lname!,
-                                    "StudentId": 1815
-                                  ])
-                                  print("Document added with ID: \(ref.documentID)")
-                                } catch {
-                                  print("Error adding document: \(error)")
-                                }
+//                                do {
+//                                  let ref = try await db.collection("Users").addDocument(data: [
+//                                    "ClassId": "123456",
+//                                    "Name": userInfo.fname! + " " + userInfo.lname!,
+//                                    "StudentId": 1815
+//                                  ])
+//                                  print("Document added with ID: \(ref.documentID)")
+//                                } catch {
+//                                  print("Error adding document: \(error)")
+//                                }
                             }
                             
                             
@@ -463,6 +490,15 @@ struct SelectRegistrationView: View
         }
         
         return result
+    }
+}
+
+//helper extension for student registration
+extension String {
+    var isNumber: Bool{
+        return self.allSatisfy {
+            character in character.isNumber
+        }
     }
 }
 
