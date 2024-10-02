@@ -3,6 +3,8 @@
 //  Appause_TeamF12_HTr
 //
 //  Created by Huy Tran on 4/16/24.
+//  Revised by Rayanne Ohara on 09/12/2024
+//  Revised by Rayanne Ohara on 10/01/2024
 //
 
 import SwiftUI
@@ -168,6 +170,11 @@ struct TeacherMainView: View {
                     Text("Students")
                 }
                 .environmentObject(studentList)
+            TeacherScheduleView()
+                .tabItem {
+                    Image(systemName: "bell")
+                    Text("Schedule")
+                }
             TeacherSettingsView(showNextView: $showNextView)
                 .tabItem {
                     Image(systemName: "gear")
