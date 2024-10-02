@@ -1,6 +1,6 @@
 //
 //  AppauseApp.swift
-//  Appause_TeamF12_HTr
+//  Appause
 //
 //  Created by Huy Tran on 9/9/24.
 //
@@ -16,7 +16,7 @@ class ViewSwitcher: ObservableObject{
 }
 
 @main
-struct Project190App: App {
+struct AppauseApp: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     

@@ -10,6 +10,9 @@
 		3E0956D72BD1D0C10037B462 /* GlobalStyleVar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0956D62BD1D0C10037B462 /* GlobalStyleVar.swift */; };
 		3E0956D92BD1E79A0037B462 /* StudentConnectCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0956D82BD1E79A0037B462 /* StudentConnectCodeView.swift */; };
 		3E09D9DB2BD8655F008324B7 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E09D9DA2BD8655F008324B7 /* ForgotPasswordView.swift */; };
+		3E100B162CAC0DA20006E0D3 /* NewPasswordConfirmationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E100B152CAC0DA10006E0D3 /* NewPasswordConfirmationTest.swift */; };
+		3E100B192CAC11410006E0D3 /* PasswordRequirementsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E100B182CAC11410006E0D3 /* PasswordRequirementsTests.swift */; };
+		3E100B1B2CAC11AE0006E0D3 /* EmailValidationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E100B1A2CAC11AE0006E0D3 /* EmailValidationTest.swift */; };
 		3E1737422BD8A29A00D0F290 /* PWCodeVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1737412BD8A29A00D0F290 /* PWCodeVerificationView.swift */; };
 		3E1737442BD8A2B200D0F290 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1737432BD8A2B200D0F290 /* ResetPasswordView.swift */; };
 		3E1737482BD8A34500D0F290 /* StudentRegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1737472BD8A34500D0F290 /* StudentRegisterView.swift */; };
@@ -77,6 +80,9 @@
 		3E0956D62BD1D0C10037B462 /* GlobalStyleVar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalStyleVar.swift; sourceTree = "<group>"; };
 		3E0956D82BD1E79A0037B462 /* StudentConnectCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentConnectCodeView.swift; sourceTree = "<group>"; };
 		3E09D9DA2BD8655F008324B7 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
+		3E100B152CAC0DA10006E0D3 /* NewPasswordConfirmationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordConfirmationTest.swift; sourceTree = "<group>"; };
+		3E100B182CAC11410006E0D3 /* PasswordRequirementsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordRequirementsTests.swift; sourceTree = "<group>"; };
+		3E100B1A2CAC11AE0006E0D3 /* EmailValidationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidationTest.swift; sourceTree = "<group>"; };
 		3E1737412BD8A29A00D0F290 /* PWCodeVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PWCodeVerificationView.swift; sourceTree = "<group>"; };
 		3E1737432BD8A2B200D0F290 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 		3E1737472BD8A34500D0F290 /* StudentRegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentRegisterView.swift; sourceTree = "<group>"; };
@@ -224,6 +230,9 @@
 			isa = PBXGroup;
 			children = (
 				3E8F6AF22BCBD5CE003C4160 /* AppauseTests.swift */,
+				3E100B152CAC0DA10006E0D3 /* NewPasswordConfirmationTest.swift */,
+				3E100B182CAC11410006E0D3 /* PasswordRequirementsTests.swift */,
+				3E100B1A2CAC11AE0006E0D3 /* EmailValidationTest.swift */,
 			);
 			path = AppauseTests;
 			sourceTree = "<group>";
@@ -431,7 +440,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E100B162CAC0DA20006E0D3 /* NewPasswordConfirmationTest.swift in Sources */,
 				3E8F6AF32BCBD5CE003C4160 /* AppauseTests.swift in Sources */,
+				3E100B192CAC11410006E0D3 /* PasswordRequirementsTests.swift in Sources */,
+				3E100B1B2CAC11AE0006E0D3 /* EmailValidationTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -653,7 +665,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Appause_TeamF12_HTr.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Appause_TeamF12_HTr";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Appause.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Appause";
 			};
 			name = Debug;
 		};
@@ -673,7 +685,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Appause_TeamF12_HTr.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Appause_TeamF12_HTr";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Appause.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Appause";
 			};
 			name = Release;
 		};
