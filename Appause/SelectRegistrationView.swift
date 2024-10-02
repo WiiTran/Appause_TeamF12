@@ -230,10 +230,20 @@ struct SelectRegistrationView: View
                         TextFieldWithEyeIcon(placeholder: "Confirm Password", text: $teacherPassConfirm, isSecure: true, visibility: $confirmStatus)
                     }
                     Button(action:
-                            {
+                    {
+                        tempString = teacherEmail.components(separatedBy: ".")
+                        tempString = tempString[1].components(separatedBy: "@")
+                        tempSanJuanString = tempString[1]
+                        //test strings
+                        print(tempSanJuanString)
+                        
+                        
                         if (teacherFirstName == "" || teacherLastName == "" || teacherEmail == "" || teacherPassword == "" || teacherPassConfirm == "")
                         {
                             registerError = "Please fill in all of the fields."
+                        }
+                        else if !(tempSanJuanString == "sanjuan"){
+                            registerError = "Format of the email submitted is incorrect."
                         }
                         else if (validateEmail(teacherEmail) == false)
                         {
@@ -254,6 +264,43 @@ struct SelectRegistrationView: View
                             keychain.set(teacherPassword, forKey: "teacherPassKey")
                             keychain.set(teacherFirstName, forKey: "teacherFirstNameKey")
                             keychain.set(teacherLastName, forKey: "teacherLastNameKey")
+                            
+                            Task {
+                                do {
+                                    userInfo = try await AuthManager.sharedAuth.createUser(
+                                            email: teacherEmail,
+                                            password: teacherPassword,
+                                            fname: teacherFirstName,
+                                            lname: teacherLastName)
+                                    print(userInfo.email! + userInfo.fname! + userInfo.lname!)
+                                    
+                                    guard let email = userInfo.email,
+                                          let fname = userInfo.fname,
+                                          let lname = userInfo.lname,
+                                          !email.isEmpty,
+                                          !fname.isEmpty,
+                                          !lname.isEmpty
+                                    else {
+                                        return
+                                    }
+                                    
+                                    do {
+                                        let ref = try await db.collection("Teachers").addDocument(data: [
+                                            "Name": userInfo.fname! + " " + userInfo.lname!,
+                                            "Email": userInfo.email!,
+                                            "Date Created": Timestamp(date: Date())
+                                        ])
+                                        
+                                        print("Document added with ID: \(ref.documentID)")
+                                    } catch let dbError{
+                                        print("Error adding document: \(dbError.localizedDescription)")
+                                    }
+                                    
+                                } catch let createUserError {
+                                    registerError = "Registration of user failed.  \(createUserError.localizedDescription)"
+                                }
+                            }
+                            
                             
                             withAnimation
                             {
