@@ -2,9 +2,6 @@
 //  StudentSettingsView.swift
 //  Appause_TeamF12_HTr
 //
-//  Created by Dash on 4/19/24.
-//
-
 import SwiftUI
 
 struct StudentSettingsView: View {
@@ -16,7 +13,10 @@ struct StudentSettingsView: View {
     @State var fifthButton = "Dark Mode"
     
     //environment variable used in navigation when the back button is pressed during the password reset process
-    @EnvironmentObject var viewSwitcher: ViewSwitcher
+    @
+//  Created by Dash on 4/19/24.
+//
+EnvironmentObject var viewSwitcher: ViewSwitcher
     
     // Fetch the 2FA setting for the current logged-in student
     @State var isTwoFactorEnabled: Bool = {
