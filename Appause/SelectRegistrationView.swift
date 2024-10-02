@@ -357,9 +357,9 @@ struct SelectRegistrationView: View
                         else if !(tempSanJuanString == "sanjuan"){
                             registerError = "Format of the email submitted is incorrect."
                         }
-//                        else if (!(studentID.isNumber) && (studentID.count == 6)) {
-//                            registerError = "Please use the student ID number as the first component of the account's email address."
-//                        }
+                        else if !validateStudentID(studentID) {
+                            registerError = "Please use the student ID number as the first component of the account's email address."
+                        }
                         else if (validateEmail(studentEmail) == false){
                             registerError = "Please enter a valid email address."
                         }
@@ -399,9 +399,10 @@ struct SelectRegistrationView: View
                                     
                                     do {
                                         let ref = try await db.collection("Users").addDocument(data: [
-                                            "ClassId": "654321",
                                             "Name": userInfo.fname! + " " + userInfo.lname!,
-                                            "StudentId": 1815
+                                            "StudentId": studentID,
+                                            "Email": userInfo.email!,
+                                            "Date Created": Timestamp(date: Date())
                                         ])
                                         
                                         print("Document added with ID: \(ref.documentID)")
@@ -412,17 +413,6 @@ struct SelectRegistrationView: View
                                 } catch let createUserError {
                                     registerError = "Registration of user failed.  \(createUserError.localizedDescription)"
                                 }
-                                
-//                                do {
-//                                  let ref = try await db.collection("Users").addDocument(data: [
-//                                    "ClassId": "123456",
-//                                    "Name": userInfo.fname! + " " + userInfo.lname!,
-//                                    "StudentId": 1815
-//                                  ])
-//                                  print("Document added with ID: \(ref.documentID)")
-//                                } catch {
-//                                  print("Error adding document: \(error)")
-//                                }
                             }
                             
                             
@@ -503,8 +493,16 @@ struct SelectRegistrationView: View
     }
     
     //helper function for validating student ID numbers
-    func validateStudentID( studentID: String ) -> Bool {
-        return true
+    func validateStudentID(_ studentID: String ) -> Bool {
+        let digitsOnlyPattern = "^[0-9]{6}$"
+        
+        do {
+            let regex = try NSRegularExpression(pattern: digitsOnlyPattern)
+            let range = NSRange(location: 0, length: studentID.utf16.count)
+            return regex.firstMatch(in: studentID, options: [], range: range) != nil
+        } catch {
+            return false
+        }
     }
 }
 
