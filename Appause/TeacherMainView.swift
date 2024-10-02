@@ -3,21 +3,39 @@
 //  Appause_TeamF12_HTr
 //
 //  Created by Huy Tran on 4/16/24.
+//  Revised by Rayanne Ohara on 09/12/2024
+//  Revised by Rayanne Ohara on 10/01/2024
 //
 
 import SwiftUI
 
 struct TeacherMainView: View {
-    //Add this binding state for transitions from view to view
+    // Add this binding state for transitions from view to view
     @Binding var showNextView: DisplayState
     @StateObject var studentList = StudentList()
-        
+    @State var studentName = ""
+    // States for Master Control
+    @State private var status: String = "Normal"
+    
+    // States for Connect Code Generation
+    @State private var generatedCode: String = ""
+    // Array used to generate a random character string
+    @State private var charList = ["1","2","3","4","5","6","7","8","9","0",
+                    "a","b","c","d","e","f","g","h","i","j",
+                    "k","l","m","n","o","p","q","r","s","t",
+                    "u","v","w","x","y","z"]
+    
     var body: some View {
-        NavigationView {
-            VStack{
-                // create Main button
-                Button(action:{})
-                {
+        
+        // Main tab
+        TabView {
+            VStack {
+                Button(action: {
+                    withAnimation {
+                        // Make button show nextView .whateverViewYouWantToShow defined in ContentView Enum
+                        showNextView = .mainTeacher
+                    }
+                }) {
                     Text("MAIN")
                         .fontWeight(btnStyle.getFont())
                         .foregroundColor(btnStyle.getPathFontColor())
@@ -28,174 +46,142 @@ struct TeacherMainView: View {
                 .padding()
                 .background(btnStyle.getPathColor())
                 .cornerRadius(btnStyle.getPathRadius())
+                .padding(.top)
                 Spacer()
                 
-                // create Requests button
-                NavigationLink(destination: TeacherAllRequestsView(studentList: studentList)
-                    .navigationBarHidden(true)
-                    .environmentObject(studentList)) {
-                    Text("Requests")
-                        .padding(.leading, 25)
-                        .fontWeight(btnStyle.getFont())
-                        .foregroundColor(btnStyle.getBtnFontColor())
-                        .frame(width: btnStyle.getWidth(),
-                               height: btnStyle.getHeight(),
-                               alignment: btnStyle.getAlignment())
+                // Text displaying the current status of our app with normal meaning unlocked
+                Text("Status: " + status)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .font(.title)
+                    .foregroundColor(Color("BlackWhite"))
+                    .padding(.top, 10)
+                    .padding(.bottom, 10)
+                    .padding(.leading, 105)
                     
-                    Image(systemName: "hand.raised")
-                        .fontWeight(btnStyle.getFont())
-                        .imageScale(.large)
-                        .foregroundColor(btnStyle.getBtnFontColor())
+                // Had to use HStack to align buttons horizontally
+                HStack {
+                    VStack {
+                        // Clicking on this button locks all apps from a student's phone
+                        Button(action: {
+                            status = "Locked"
+                        }, label: {
+                            Image(systemName: "lock")
+                                .padding(.trailing)
+                                .font(.system(size: 100))
+                                .foregroundColor(.red)
+                        })
+                        Text("Lock")
+                            .padding(.trailing)
+                    }
+                    VStack {
+                        // Clicking on this button unlocks all apps from a student's phone
+                        Button(action: {
+                            status = "Unlocked"
+                        }, label: {
+                            Image(systemName: "lock.open")
+                                .padding(.leading)
+                                .font(.system(size: 100))
+                                .foregroundColor(.green)
+                        })
+                        Text("Unlock")
+                    }
                 }
-                .padding()
-                .background(btnStyle.getBtnColor())
-                .border(btnStyle.getBorderColor(), width: btnStyle.getBtnRadius())
-                .cornerRadius(btnStyle.getBtnRadius())
-                .padding(.bottom, 10)
+                Spacer().frame(height: 25)
                 
-                // create Whitelist button
-                NavigationLink(destination: TeacherWhitelist()
-                    .navigationBarHidden(true)) {
-                    Text("Whitelist")
-                        .padding(.leading, 20)
-                        .fontWeight(btnStyle.getFont())
-                        .foregroundColor(btnStyle.getBtnFontColor())
-                        .frame(width: btnStyle.getWidth(),
-                               height: btnStyle.getHeight(),
-                               alignment: btnStyle.getAlignment())
-                    
-                    Image(systemName: "bookmark.slash")
-                        .fontWeight(btnStyle.getFont())
-                        .imageScale(.large)
-                        .foregroundColor(btnStyle.getBtnFontColor())
-                }
-                .padding()
-                .background(btnStyle.getBtnColor())
-                .border(btnStyle.getBorderColor(), width: btnStyle.getBtnRadius())
-                .cornerRadius(btnStyle.getBtnRadius())
-                .padding(.bottom, 10)
-                
-                // create Manage Users button
-                NavigationLink(destination: TeacherManageUsers()
-                    .navigationBarHidden(true)
-                    .environmentObject(studentList)){
-                    Text("Manage Users")
-                        .padding(.leading, 25)
-                        .fontWeight(btnStyle.getFont())
-                        .foregroundColor(btnStyle.getBtnFontColor())
-                        .frame(width: btnStyle.getWidth(),
-                               height: btnStyle.getHeight(),
-                               alignment: btnStyle.getAlignment())
-                    
-                    Image(systemName: "person")
-                        .fontWeight(btnStyle.getFont())
-                        .imageScale(.large)
-                        .foregroundColor(btnStyle.getBtnFontColor())
-                    
-                }
-                .padding()
-                .background(btnStyle.getBtnColor())
-                .border(btnStyle.getBorderColor(), width: btnStyle.getBtnRadius())
-                .cornerRadius(btnStyle.getBtnRadius())
-                .padding(.bottom, 10)
-                
-                // create Connect Code button
-                NavigationLink(destination: TeacherBlacklist()) {
-                    Text("Blacklist")
-                        .fontWeight(btnStyle.getFont())
-                        .foregroundColor(btnStyle.getBtnFontColor())
-                        .frame(width: btnStyle.getWidth() + 1,
-                               height: btnStyle.getHeight() + 5,
-                               alignment: btnStyle.getAlignment())
-                    
-                    Image(systemName: "nosign.app")
-                        .fontWeight(btnStyle.getFont())
-                        .imageScale(.large)
-                        .foregroundColor(btnStyle.getBtnFontColor())
-                }
-                .padding()
-                .background(btnStyle.getBtnColor())
-                .border(btnStyle.getBorderColor(), width: btnStyle.getBtnRadius())
-                .cornerRadius(btnStyle.getBtnRadius())
-                .padding(.bottom, 10)
-                
-                // create Settings button
-                Button(action:{withAnimation{showNextView = .teacherSettings}})
-                {
-                    Text("Settings")
-                        .padding(.leading, 25)
-                        .fontWeight(btnStyle.getFont())
-                        .foregroundColor(btnStyle.getBtnFontColor())
-                        .frame(width: btnStyle.getWidth(),
-                               height: btnStyle.getHeight(),
-                               alignment: btnStyle.getAlignment())
-                    
-                    Image(systemName: "gear")
-                        .fontWeight(btnStyle.getFont())
-                        .imageScale(.large)
-                        .foregroundColor(btnStyle.getBtnFontColor())
-                }
-                .padding()
-                .background(btnStyle.getBtnColor())
-                .border(btnStyle.getBorderColor(), width: btnStyle.getBtnRadius())
-                .cornerRadius(btnStyle.getBtnRadius())
-                .padding(.bottom, 10)
-                
-                
-                
-                // create Master Control button
-                Button(action:{
-                    withAnimation {
-                        //show nextView .whateverViewYouWantToShow defined in ContentView Enum
-                        showNextView = .teacherMasterControl}
-                })
-                {
-                    Text("Master Control")
-                        .padding(.leading, 25)
-                        .fontWeight(btnStyle.getFont())
-                        .foregroundColor(btnStyle.getBtnFontColor())
-                        .frame(width: btnStyle.getWidth() + 5,
-                               height: btnStyle.getHeight(),
-                               alignment: btnStyle.getAlignment())
-                    
-                    Image(systemName: "lock")
-                        .fontWeight(btnStyle.getFont())
-                        .imageScale(.large)
-                        .foregroundColor(btnStyle.getBtnFontColor())
-                    
-                }
-                .padding()
-                .background(btnStyle.getBtnColor())
-                .border(btnStyle.getBorderColor(), width: btnStyle.getBtnRadius())
-                .cornerRadius(btnStyle.getBtnRadius())
-                //.padding(.bottom, 100)
-                
-                Spacer()
-                
+                Text("Connect Code")
+                    .font(.title)
+                    .padding(1)
+                TextField("Press the button to generate a code", text: $generatedCode)
+                    .background(Color.white.opacity(0.25))
+                    .foregroundColor(Color("BlackWhite"))
+                    .multilineTextAlignment(.center)
+                    .overlay(RoundedRectangle(cornerRadius: 5)
+                        .stroke(lineWidth: 1))
+                    .textFieldStyle(.roundedBorder)
+                    .disabled(true)
+                    .padding(5)
+                // Generates a random string of 6 characters using characters from the charList array
                 Button(action: {
-                    withAnimation {
-                        //show nextView .whateverViewYouWantToShow defined in ContentView Enum
-                        showNextView = .logout}
-                }){
-                    Text("Logout")
-                        .foregroundColor(.black)
-                        .fontWeight(.bold)
+                    generatedCode = ""
+                    for _ in 0..<6 {
+                        let randomNum = Int.random(in: 0..<36)
+                        generatedCode += charList[randomNum]
+                    }
+                }) {
+                    Text("Generate New Code")
+                        .padding()
+                        .fontWeight(btnStyle.getFont())
+                        .background(btnStyle.getPathColor())
+                        .foregroundColor(btnStyle.getPathFontColor())
+                        .cornerRadius(100)
                 }
-                .padding()
-                .background(Color.red)
-                .cornerRadius(200)
+                .padding(.bottom, 25)
+                
+                // UserList
+                VStack {
+                    Text("Users")
+                        .font(.title)
+                        .padding(.bottom, 10)
+                    
+                    ScrollView {
+                        VStack {
+                            ForEach(studentList.students) { student in
+                                HStack {
+                                    Text(student.name)
+                                        .font(.callout)
+                                        .foregroundColor(btnStyle.getBtnFontColor())
+                                    Spacer()
+                                }
+                                .padding()
+                                .background(Color.gray.opacity(0.1))
+                                .cornerRadius(0)
+                                .padding(.horizontal)
+                            }
+                        }
+                    }
+                }
             }
-            .padding()
             .preferredColorScheme(btnStyle.getTeacherScheme() == 0 ? .light : .dark)
+            .tabItem {
+                Image(systemName: "house")
+                Text("Home")
+            }
+            
+            // TeacherAllRequestsView
+            TeacherAllRequestsView(studentList: studentList)
+                .tabItem {
+                    Image(systemName: "hand.raised")
+                    Text("Requests")
+                }
+            TeacherWhitelist()
+                .tabItem {
+                    Image(systemName: "bookmark.slash")
+                    Text("WhiteList")
+                }
+            TeacherManageUsers()
+                .tabItem {
+                    Image(systemName: "person.2")
+                    Text("Students")
+                }
+                .environmentObject(studentList)
+            TeacherScheduleView()
+                .tabItem {
+                    Image(systemName: "bell")
+                    Text("Schedule")
+                }
+            TeacherSettingsView(showNextView: $showNextView)
+                .tabItem {
+                    Image(systemName: "gear")
+                    Text("Settings")
+                }
         }
     }
 }
 
 struct MainTeacherView_Previews: PreviewProvider {
-        @State static private var showNextView: DisplayState = .mainTeacher
-
-        static var previews: some View {
-            TeacherMainView(showNextView: $showNextView)
-        }
-
+    @State static private var showNextView: DisplayState = .mainTeacher
+    
+    static var previews: some View {
+        TeacherMainView(showNextView: $showNextView)
+    }
 }

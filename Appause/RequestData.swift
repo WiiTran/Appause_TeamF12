@@ -135,3 +135,8 @@ struct AppRequestView: View {
         }
     }
 }
+
+struct Class {
+    var name: String
+    var period: String
+}

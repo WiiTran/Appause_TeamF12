@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		001AC1812C9A1CA000BC8266 /* TeacherScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001AC1802C9A1CA000BC8266 /* TeacherScheduleView.swift */; };
 		3E0956D72BD1D0C10037B462 /* GlobalStyleVar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0956D62BD1D0C10037B462 /* GlobalStyleVar.swift */; };
 		3E0956D92BD1E79A0037B462 /* StudentConnectCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0956D82BD1E79A0037B462 /* StudentConnectCodeView.swift */; };
 		3E09D9DB2BD8655F008324B7 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E09D9DA2BD8655F008324B7 /* ForgotPasswordView.swift */; };
@@ -77,6 +78,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		001AC1802C9A1CA000BC8266 /* TeacherScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherScheduleView.swift; sourceTree = "<group>"; };
 		3E0956D62BD1D0C10037B462 /* GlobalStyleVar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalStyleVar.swift; sourceTree = "<group>"; };
 		3E0956D82BD1E79A0037B462 /* StudentConnectCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentConnectCodeView.swift; sourceTree = "<group>"; };
 		3E09D9DA2BD8655F008324B7 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				3EA44B242BCF43DF00732432 /* SelectRegistrationView.swift */,
 				3EA44B262BCF43F100732432 /* StudentMainView.swift */,
 				3EA44B282BCF440F00732432 /* TeacherMainView.swift */,
+				001AC1802C9A1CA000BC8266 /* TeacherScheduleView.swift */,
 				3E1737632BD8AA2C00D0F290 /* TeacherRegisterView.swift */,
 				3E0956D62BD1D0C10037B462 /* GlobalStyleVar.swift */,
 				3E0956D82BD1E79A0037B462 /* StudentConnectCodeView.swift */,
@@ -430,6 +433,7 @@
 				C81713DB2C9BD75D00362C37 /* AdminRequestsView.swift in Sources */,
 				3E09D9DB2BD8655F008324B7 /* ForgotPasswordView.swift in Sources */,
 				C8D38EF72BD3881700F0D2BA /* TeacherSettingsView.swift in Sources */,
+				001AC1812C9A1CA000BC8266 /* TeacherScheduleView.swift in Sources */,
 				3E1737562BD8A4BC00D0F290 /* TeacherDeleteStudentView.swift in Sources */,
 				3E1737442BD8A2B200D0F290 /* ResetPasswordView.swift in Sources */,
 				3E1737602BD8A6F700D0F290 /* TeacherAllRequestsView.swift in Sources */,
@@ -599,7 +603,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Appause/Preview Content\"";
+
 				DEVELOPMENT_TEAM = 53NSY6KM9Q;
+
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -607,6 +613,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -628,7 +635,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Appause/Preview Content\"";
+
 				DEVELOPMENT_TEAM = 53NSY6KM9Q;
+        
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -636,6 +645,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
