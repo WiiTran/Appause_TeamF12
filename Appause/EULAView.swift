@@ -29,7 +29,7 @@ struct EULAView: View {
             
             Spacer()
                 
-            Image("logo_4")
+            Image("logo-5")
                 .resizable()
                 .scaledToFit()
                 .frame(width: 100, height: 120)

@@ -10,39 +10,38 @@
 import SwiftUI
 
 struct TeacherMainView: View {
-    //Add this binding state for transitions from view to view
+    // Add this binding state for transitions from view to view
     @Binding var showNextView: DisplayState
     @StateObject var studentList = StudentList()
     @State var studentName = ""
-    //States for Master Control
+    // States for Master Control
     @State private var status: String = "Normal"
     
-    //States for Connect Code Gengeration
+    // States for Connect Code Generation
     @State private var generatedCode: String = ""
-    //array used to generate a random character string
+    // Array used to generate a random character string
     @State private var charList = ["1","2","3","4","5","6","7","8","9","0",
                     "a","b","c","d","e","f","g","h","i","j",
                     "k","l","m","n","o","p","q","r","s","t",
                     "u","v","w","x","y","z"]
     
-    
     var body: some View {
         
-        //main tab
+        // Main tab
         TabView {
             VStack {
                 Button(action: {
                     withAnimation {
-                //make button show nextView .whateverViewYouWantToShow defined in ContentView Enum
-                        showNextView = .mainTeacher}
-                }){// Text displaying our current path
+                        // Make button show nextView .whateverViewYouWantToShow defined in ContentView Enum
+                        showNextView = .mainTeacher
+                    }
+                }) {
                     Text("MAIN")
                         .fontWeight(btnStyle.getFont())
                         .foregroundColor(btnStyle.getPathFontColor())
                         .frame(width: btnStyle.getWidth(),
                                height: btnStyle.getHeight(),
                                alignment: btnStyle.getAlignment())
-                        
                 }
                 .padding()
                 .background(btnStyle.getPathColor())
@@ -50,9 +49,6 @@ struct TeacherMainView: View {
                 .padding(.top)
                 Spacer()
                 
-                //spacer to push button above it to the top. The higher the height value
-                // the more it is pushed to the top. Lower closer to center
-                //Spacer().frame(height:100)
                 // Text displaying the current status of our app with normal meaning unlocked
                 Text("Status: " + status)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -62,7 +58,6 @@ struct TeacherMainView: View {
                     .padding(.bottom, 10)
                     .padding(.leading, 105)
                     
-                
                 // Had to use HStack to align buttons horizontally
                 HStack {
                     VStack {
@@ -91,7 +86,7 @@ struct TeacherMainView: View {
                         Text("Unlock")
                     }
                 }
-                Spacer().frame(height:25)
+                Spacer().frame(height: 25)
                 
                 Text("Connect Code")
                     .font(.title)
@@ -105,10 +100,10 @@ struct TeacherMainView: View {
                     .textFieldStyle(.roundedBorder)
                     .disabled(true)
                     .padding(5)
-                //generates a random string of 6 characters using characters from the charList array
+                // Generates a random string of 6 characters using characters from the charList array
                 Button(action: {
                     generatedCode = ""
-                    for _ in 0..<6{
+                    for _ in 0..<6 {
                         let randomNum = Int.random(in: 0..<36)
                         generatedCode += charList[randomNum]
                     }
@@ -122,7 +117,7 @@ struct TeacherMainView: View {
                 }
                 .padding(.bottom, 25)
                 
-                //UserList
+                // UserList
                 VStack {
                     Text("Users")
                         .font(.title)
@@ -145,7 +140,6 @@ struct TeacherMainView: View {
                         }
                     }
                 }
-                
             }
             .preferredColorScheme(btnStyle.getTeacherScheme() == 0 ? .light : .dark)
             .tabItem {
@@ -153,7 +147,7 @@ struct TeacherMainView: View {
                 Text("Home")
             }
             
-            //TeacherAllRequestsView(studentList: studentList)
+            // TeacherAllRequestsView
             TeacherAllRequestsView(studentList: studentList)
                 .tabItem {
                     Image(systemName: "hand.raised")
@@ -190,6 +184,4 @@ struct MainTeacherView_Previews: PreviewProvider {
     static var previews: some View {
         TeacherMainView(showNextView: $showNextView)
     }
-    
 }
-
