@@ -5,7 +5,7 @@
 //  Created by Luke Simoni on 4/5/24.
 //
 
-import SwiftUI
+/*import SwiftUI
 
 @main
 struct AppauseApp: App {
@@ -15,3 +15,4 @@ struct AppauseApp: App {
         }
     }
 }
+*/

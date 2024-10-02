@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D7BFE7A32CABC97B00A23511 /* registerSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BFE7A22CABC97B00A23511 /* registerSetting.swift */; };
+		D7BFE7A72CAC514A00A23511 /* ClassRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BFE7A62CAC514A00A23511 /* ClassRegistrationView.swift */; };
+		D7BFE7A92CAC5A6900A23511 /* ClassSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BFE7A82CAC5A6900A23511 /* ClassSearchView.swift */; };
 		EDC236B62BC1107700DC47C5 /* AppauseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC236B52BC1107700DC47C5 /* AppauseApp.swift */; };
 		EDC236B82BC1107700DC47C5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC236B72BC1107700DC47C5 /* ContentView.swift */; };
 		EDC236BA2BC1107800DC47C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDC236B92BC1107800DC47C5 /* Assets.xcassets */; };
@@ -35,6 +38,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D7BFE7A22CABC97B00A23511 /* registerSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = registerSetting.swift; sourceTree = "<group>"; };
+		D7BFE7A62CAC514A00A23511 /* ClassRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassRegistrationView.swift; sourceTree = "<group>"; };
+		D7BFE7A82CAC5A6900A23511 /* ClassSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassSearchView.swift; sourceTree = "<group>"; };
 		ED8477562BC3945900F5C716 /* Appause.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Appause.entitlements; sourceTree = "<group>"; };
 		EDC236B22BC1107700DC47C5 /* Appause.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Appause.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDC236B52BC1107700DC47C5 /* AppauseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppauseApp.swift; sourceTree = "<group>"; };
@@ -103,6 +109,9 @@
 				EDC236B72BC1107700DC47C5 /* ContentView.swift */,
 				EDC236B92BC1107800DC47C5 /* Assets.xcassets */,
 				EDC236BB2BC1107800DC47C5 /* Preview Content */,
+				D7BFE7A22CABC97B00A23511 /* registerSetting.swift */,
+				D7BFE7A62CAC514A00A23511 /* ClassRegistrationView.swift */,
+				D7BFE7A82CAC5A6900A23511 /* ClassSearchView.swift */,
 			);
 			path = Appause;
 			sourceTree = "<group>";
@@ -271,8 +280,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDC236B82BC1107700DC47C5 /* ContentView.swift in Sources */,
+				D7BFE7A92CAC5A6900A23511 /* ClassSearchView.swift in Sources */,
 				EDFB125C2BC3A78D00353B4C /* FamilyControls.swift in Sources */,
 				EDC236B62BC1107700DC47C5 /* AppauseApp.swift in Sources */,
+				D7BFE7A32CABC97B00A23511 /* registerSetting.swift in Sources */,
+				D7BFE7A72CAC514A00A23511 /* ClassRegistrationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,10 +446,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Appause/Appause.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Appause/Preview Content\"";
-				DEVELOPMENT_TEAM = 53NSY6KM9Q;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
@@ -456,6 +468,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = csus.TeamF12.Appause;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -468,10 +481,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Appause/Appause.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Appause/Preview Content\"";
-				DEVELOPMENT_TEAM = 53NSY6KM9Q;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
@@ -490,6 +503,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = csus.TeamF12.Appause;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
