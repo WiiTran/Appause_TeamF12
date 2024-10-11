@@ -386,14 +386,21 @@ struct SelectRegistrationView: View
                     
                     Button(action: {
                         
-                        tempString = studentEmail.components(separatedBy: ".")
-                        studentID = tempString[0]
-                        tempString = tempString[1].components(separatedBy: "@")
-                        tempStudentString = tempString[0]
-                        tempSanJuanString = tempString[1]
+                        tempString = studentEmail.components(separatedBy: "@")
+                        
+                        studentID = (tempString.count > 0  && !tempString[0].isEmpty) ? tempString[0] : ""
+                        
+                        if (tempString.count > 1 && !tempString[1].isEmpty) {
+                            tempString = tempString[1].components(separatedBy: ".")
+                        } else {
+                            tempString = []
+                        }
+                        
+                        tempStudentString = (tempString.count > 0 && !tempString[0].isEmpty) ? tempString[0] : ""
+                        tempSanJuanString = (tempString.count > 1 && !tempString[1].isEmpty) ? tempString[1] : ""
+                        
                         //test strings
                         print(studentID + " " + tempStudentString + " " + tempSanJuanString)
-
                         
                         if (studentFirstName == "" || studentLastName == "" || studentEmail == "" || studentPassword == "" || studentPassConfirm == ""){
                             registerError = "Please fill in all of the fields."
