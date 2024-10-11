@@ -297,6 +297,10 @@ struct SelectRegistrationView: View
                                             "Date Created": Timestamp(date: Date())
                                         ])
                                         
+                                        let subref = try await db.collection("Teachers").document(ref.documentID).collection("ClassesTaught").addDocument(data: [
+                                            "Placeholder" : "."
+                                        ])
+                                        
                                         print("Document added with ID: \(ref.documentID)")
                                     } catch let dbError{
                                         print("Error adding document: \(dbError.localizedDescription)")
