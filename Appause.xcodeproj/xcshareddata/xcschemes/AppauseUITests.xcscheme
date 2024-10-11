@@ -19,9 +19,9 @@
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3E8F6AED2BCBD5CE003C4160"
-               BuildableName = "AppauseTests.xctest"
-               BlueprintName = "AppauseTests"
+               BlueprintIdentifier = "3E8F6AF72BCBD5CE003C4160"
+               BuildableName = "AppauseUITests.xctest"
+               BlueprintName = "AppauseUITests"
                ReferencedContainer = "container:Appause.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -47,6 +47,13 @@
             ReferencedContainer = "container:Appause.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "IDEPreferLogStreaming"
+            value = "YES"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Debug"

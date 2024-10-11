@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import Project190
+@testable import Appause
 
 final class EmailValidationTest: XCTestCase
 {
