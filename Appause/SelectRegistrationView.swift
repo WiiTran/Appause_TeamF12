@@ -232,11 +232,17 @@ struct SelectRegistrationView: View
                     Button(action:
                     {
                         tempString = teacherEmail.components(separatedBy: ".")
-                        tempString = tempString[1].components(separatedBy: "@")
-                        tempSanJuanString = tempString[1]
+                        
+                        if(tempString.count > 1 && !tempString[1].isEmpty) {
+                            tempString = tempString[1].components(separatedBy: "@")
+                        } else {
+                            tempString = []
+                        }
+                        
+                        tempSanJuanString = (tempString.count > 1 && !tempString[1].isEmpty) ? tempString[1] : ""
+                        
                         //test strings
                         print(tempSanJuanString)
-                        
                         
                         if (teacherFirstName == "" || teacherLastName == "" || teacherEmail == "" || teacherPassword == "" || teacherPassConfirm == "")
                         {
