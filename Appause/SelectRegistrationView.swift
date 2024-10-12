@@ -257,7 +257,7 @@ struct SelectRegistrationView: View
                         }
                         else if (validatePassword(teacherPassword) == false)
                         {
-                            registerError = "Password Requires:\nat least 6 Characters and a Number"
+                            registerError = "Password Requires:\nAt least 12 characters, a number, an uppercase letter, and a special character."
                         }
                         else if (teacherPassword != teacherPassConfirm){
                             registerError = "Passwords do not match. Try again."
@@ -428,7 +428,7 @@ struct SelectRegistrationView: View
                             registerError = "Please enter a valid email address."
                         }
                         else if (validatePassword(studentPassword) == false){
-                            registerError = "Password Requires:\nat least 6 Characters and a Number."
+                            registerError = "Password Requires:\nAt least 12 characters, a number, an uppercase letter, and a special character."
                         }
                         else if (studentPassword != studentPassConfirm){
                             registerError = "Passwords do not match. Try again."
@@ -542,21 +542,28 @@ struct SelectRegistrationView: View
     
     func validatePassword(_ password: String) -> Bool
     {
-        let passwordLength = password.count
-        let regex = ".*[0-9]+.*"
-        let checkPass = NSPredicate(format: "SELF MATCHES %@", regex)
-        let hasNum = checkPass.evaluate(with: password)
-        var result: Bool = true
+        let regexNumber = ".*[0-9]+.*"
+        let regexUpperCase = ".*[A-Z]+.*"
+        let regexSpecialCharacter = ".*[!\"#$%&'()*+,-./:;<=>?@[\\\\]^_`{|}~].*"
+        let regexWhiteSpace = ".*\\s.*"
         
-        // checks if password contains numbers and if the length of password is short
-        if (hasNum == false || passwordLength < 6){
-            result.toggle()
-        }
+        let checkNumber = NSPredicate(format: "SELF MATCHES %@", regexNumber)
+        let checkUpper = NSPredicate(format: "SELF MATCHES %@", regexUpperCase)
+        let checkSpecial = NSPredicate(format: "SELF MATCHES %@", regexSpecialCharacter)
+        let checkWhite = NSPredicate(format: "SELF MATCHES %@", regexWhiteSpace)
         
-        return result
+        let lengthFlag = password.count >= 12
+        let numberFlag = checkNumber.evaluate(with: password)
+        let upperFlag = checkUpper.evaluate(with: password)
+        let specialFlag = checkSpecial.evaluate(with: password)
+        // note - this flag is using the not operator in order to ensure passwords
+        //        do not contain whitespaces.
+        let whitespaceFlag = !checkWhite.evaluate(with: password)
+        
+        return lengthFlag && numberFlag && upperFlag && specialFlag && whitespaceFlag
     }
     
-    //helper function for validating student ID numbers
+    //helper function for validating student ID numbers - written by Luke Simoni
     func validateStudentID(_ studentID: String ) -> Bool {
         let digitsOnlyPattern = "^[0-9]{6}$"
         
