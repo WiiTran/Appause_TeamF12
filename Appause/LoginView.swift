@@ -87,6 +87,11 @@ struct LoginView: View {
     @State var studentPassVisibility: String = ""
     @State var teacherPassVisibility: String = ""
     
+    //helper strings to parse username and correctly sort account type
+    //written by Luke Simoni
+    @State var tempStudentString: String = ""
+    @State var tempString: [String] = []
+    
     // Custom SwiftUI view to create a text field with an optional eye icon for password visibility
     struct TextFieldWithEyeIcon: View {
         // Placeholder text for the text field
@@ -277,15 +282,27 @@ struct LoginView: View {
                                 print(username + " " + password)
                                 Task {
                                     do {
+                                        //login user
                                         try await AuthManager.sharedAuth.loginUser(email: username, password: password)
                                         isLoginSuccessful = true
                                         print("trying to log in")
                                         
+                                        // filter whether the user is a teacher or student
+                                        tempString = username.components(separatedBy: "@")
+                                        if (tempString.count > 1 && !tempString[1].isEmpty) {
+                                            tempString = tempString[1].components(separatedBy: ".")
+                                        } else {
+                                            tempString = []
+                                        }
+                                        tempStudentString = (tempString.count > 0 && !tempString[0].isEmpty) ? tempString[0] : ""
+                                        tempStudentString == "student" ? isTeacherLogin = false : Login.logV.toggleIsTeacher()
+                                        print(tempStudentString)
+                                        
                                         //user is logged in
                                         if isLoginSuccessful {
-                                            isTeacherLogin = showTextFields
+                                            //isTeacherLogin = showTextFields
                                             currentLoggedInUser = username
-                                            print("success")
+                                            print("isTeacherLogin :  \(isTeacherLogin)")
                                             if isTwoFactorEnabled {
                                                 emailFor2FA = username
                                                 show2FAInput = true
@@ -322,28 +339,7 @@ struct LoginView: View {
                                 
                                 print(isLoginSuccessful)
                                 
-//                                let isSuccessful = username == registeredUsername && password == registeredPassword
-                                
-//                                if isLoginSuccessful {
-//                                    isTeacherLogin = showTextFields
-//                                    currentLoggedInUser = username
-//                                    print("success")
-//                                    if isTwoFactorEnabled {
-//                                        emailFor2FA = username
-//                                        show2FAInput = true
-//                                    } else {
-//                                        showNextView = isTeacherLogin ? .mainTeacher : .mainStudent
-//                                    }
-//                                } else {
-//                                    withAnimation(.easeInOut(duration: 0.05).repeatCount(4, autoreverses: true)) {
-//                                        shakeOffset = 6
-//                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-//                                            shakeOffset = 0
-//                                        }
-//                                    }
-//                                    performShakeAnimation()
-//                                    showErrorMessages = true
-//                                }
+                                //let isSuccessful = username == registeredUsername && password == registeredPassword
                                 
                                 if (buttonColorTop == buttonColorTopActive) {
                                     self.buttonColorTop = isLoginSuccessful ? buttonColorTopSucess : buttonColorLogin
@@ -521,5 +517,9 @@ internal struct Login {
     // Get whether it's a teacher login
     public func getIsTeacher() -> Bool {
         return isTeacherLogin
+    }
+    
+    public func toggleIsTeacher() {
+        isTeacherLogin.toggle()
     }
 }
