@@ -273,11 +273,23 @@ struct LoginView: View {
                                 let registeredPassword = showTextFields ? keychain.get("teacherPassKey") : keychain.get("studentPassKey")
                                 let username = (showTextFields ? usernameText : studentUsernameText).lowercased()
                                 let password = (showTextFields ? passwordText : studentPasswordText)
-                                let isSuccessful = username == registeredUsername && password == registeredPassword
                                 
-                                if isSuccessful {
+                                Task {
+                                    do {
+                                        try await AuthManager.sharedAuth.loginUser(email: username, password: password)
+                                        isLoginSuccessful = true
+                                    } catch let loginUserError {
+                                        showErrorMessages = true
+                                        errorMessages = "Sign in of user failed.  \(loginUserError.localizedDescription)"
+                                    }
+                                }
+                                
+//                                let isSuccessful = username == registeredUsername && password == registeredPassword
+                                
+                                if isLoginSuccessful {
                                     isTeacherLogin = showTextFields
                                     currentLoggedInUser = username
+                                    print("success")
                                     if isTwoFactorEnabled {
                                         emailFor2FA = username
                                         show2FAInput = true
@@ -292,14 +304,15 @@ struct LoginView: View {
                                         }
                                     }
                                     performShakeAnimation()
+                                    showErrorMessages = true
                                 }
                                 
                                 if (buttonColorTop == buttonColorTopActive) {
-                                    self.buttonColorTop = isSuccessful ? buttonColorTopSucess : buttonColorLogin
+                                    self.buttonColorTop = isLoginSuccessful ? buttonColorTopSucess : buttonColorLogin
                                 }
                                 
                                 if (buttonColorBottom == buttonColorBottomActive) {
-                                    self.buttonColorBottom = isSuccessful ? buttonColorTopSucess : buttonColorLogin
+                                    self.buttonColorBottom = isLoginSuccessful ? buttonColorTopSucess : buttonColorLogin
                                 }
                             }) {
                                 Text("Login")
