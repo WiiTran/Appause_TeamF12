@@ -274,38 +274,76 @@ struct LoginView: View {
                                 let username = (showTextFields ? usernameText : studentUsernameText).lowercased()
                                 let password = (showTextFields ? passwordText : studentPasswordText)
                                 
+                                print(username + " " + password)
                                 Task {
                                     do {
                                         try await AuthManager.sharedAuth.loginUser(email: username, password: password)
                                         isLoginSuccessful = true
+                                        print("trying to log in")
+                                        
+                                        //user is logged in
+                                        if isLoginSuccessful {
+                                            isTeacherLogin = showTextFields
+                                            currentLoggedInUser = username
+                                            print("success")
+                                            if isTwoFactorEnabled {
+                                                emailFor2FA = username
+                                                show2FAInput = true
+                                            } else {
+                                                showNextView = isTeacherLogin ? .mainTeacher : .mainStudent
+                                            }
+                                        } else {
+                                            withAnimation(.easeInOut(duration: 0.05).repeatCount(4, autoreverses: true)) {
+                                                shakeOffset = 6
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                                                    shakeOffset = 0
+                                                }
+                                            }
+                                            performShakeAnimation()
+                                            showErrorMessages = true
+                                        }
+                                        
                                     } catch let loginUserError {
                                         showErrorMessages = true
+                                        print("errors occurred")
                                         errorMessages = "Sign in of user failed.  \(loginUserError.localizedDescription)"
+                                        
+                                        
+                                        withAnimation(.easeInOut(duration: 0.05).repeatCount(4, autoreverses: true)) {
+                                            shakeOffset = 6
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                                                    shakeOffset = 0
+                                            }
+                                        }
+                                        performShakeAnimation()
+                                        showErrorMessages = true
+                                        }
                                     }
-                                }
+                                
+                                print(isLoginSuccessful)
                                 
 //                                let isSuccessful = username == registeredUsername && password == registeredPassword
                                 
-                                if isLoginSuccessful {
-                                    isTeacherLogin = showTextFields
-                                    currentLoggedInUser = username
-                                    print("success")
-                                    if isTwoFactorEnabled {
-                                        emailFor2FA = username
-                                        show2FAInput = true
-                                    } else {
-                                        showNextView = isTeacherLogin ? .mainTeacher : .mainStudent
-                                    }
-                                } else {
-                                    withAnimation(.easeInOut(duration: 0.05).repeatCount(4, autoreverses: true)) {
-                                        shakeOffset = 6
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                                            shakeOffset = 0
-                                        }
-                                    }
-                                    performShakeAnimation()
-                                    showErrorMessages = true
-                                }
+//                                if isLoginSuccessful {
+//                                    isTeacherLogin = showTextFields
+//                                    currentLoggedInUser = username
+//                                    print("success")
+//                                    if isTwoFactorEnabled {
+//                                        emailFor2FA = username
+//                                        show2FAInput = true
+//                                    } else {
+//                                        showNextView = isTeacherLogin ? .mainTeacher : .mainStudent
+//                                    }
+//                                } else {
+//                                    withAnimation(.easeInOut(duration: 0.05).repeatCount(4, autoreverses: true)) {
+//                                        shakeOffset = 6
+//                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+//                                            shakeOffset = 0
+//                                        }
+//                                    }
+//                                    performShakeAnimation()
+//                                    showErrorMessages = true
+//                                }
                                 
                                 if (buttonColorTop == buttonColorTopActive) {
                                     self.buttonColorTop = isLoginSuccessful ? buttonColorTopSucess : buttonColorLogin
