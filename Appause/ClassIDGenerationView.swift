@@ -182,11 +182,16 @@ struct ClassIDGenerationView: View {
     
     // Save New Class to Firestore
     private func saveClassToFirestore(classID: String, className: String, days: [String], time: Date, teacherID: String) {
+        // Get only the time in "HH:mm a" format without the date
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "hh:mm a"
+        let formattedTime = timeFormatter.string(from: time) // Only the time will be saved
+        
         let newClass = [
             "classID": classID,
             "className": className,
             "days": days,
-            "time": Timestamp(date: time),
+            "time": formattedTime,
             "teacherID": teacherID
         ] as [String : Any]
         
@@ -201,7 +206,7 @@ struct ClassIDGenerationView: View {
         }
     }
     
-    // Helper function to format the class time
+    // Helper function to format the class time for display
     private func formattedClassTime() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "hh:mm a"
