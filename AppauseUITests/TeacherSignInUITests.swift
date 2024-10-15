@@ -1,13 +1,13 @@
 //
-//  StudentSignInUITests.swift
+//  TeacherSignInUITests.swift
 //  AppauseUITests
 //
-//  Created by Huy Tran on 10/11/24.
+//  Created by Huy Tran on 10/15/24.
 //
 
 import XCTest
 
-final class StudentSignInUITests: XCTestCase {
+final class TeacherSignInUITests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -31,13 +31,13 @@ final class StudentSignInUITests: XCTestCase {
         app.buttons["Accept"].tap()
 
         // Tap the "Student" button to go to student login
-        app.buttons["Student"].tap()
+        app.buttons["Teacher"].tap()
 
         // Enter email in the email text field
         let emailTextField = app.textFields["Email"]
         XCTAssertTrue(emailTextField.exists, "Email text field should exist")
         emailTextField.tap()
-        emailTextField.typeText("223344@student.sanjuan.edu")
+        emailTextField.typeText("h.tr@sanjuan.edu")
         
         // Ensure the password field exists and tap it
         let passwordSecureTextField = app.secureTextFields["Password"]
@@ -58,14 +58,15 @@ final class StudentSignInUITests: XCTestCase {
         loginButton.tap()
         sleep(1)  // Wait for 1 second
         loginButton.tap()
-
+        sleep(10)  // Wait for 1 second
+//
 //        // Ensure the logout button appears after login
 //        let logoutButton = app.buttons["Logout"]
 //        XCTAssertTrue(logoutButton.waitForExistence(timeout: 5), "Logout button should appear after login")
 //        
 //        // Tap logout to complete the test
 //        logoutButton.tap()
-        }
+    }
 
     func testLaunchPerformance() throws {
         if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {

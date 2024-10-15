@@ -4,38 +4,66 @@
 //
 //  Created by Huy Tran on 10/11/24.
 //
-
 import XCTest
 
 final class TeacherSignUpUITests: XCTestCase {
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+    override func tearDownWithError() throws {}
 
-    func testExample() throws {
-        // UI tests must launch the application that they test.
+func testTeacherSignUp() throws {
         let app = XCUIApplication()
         app.launch()
+        app.buttons["Accept"].tap()
+        
+        
+        let teacherButton = app.buttons["Teacher"]
+        XCTAssertTrue(teacherButton.waitForExistence(timeout: 5), "Teacher button should exist")
+        teacherButton.tap()
 
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
+        app.buttons["Sign up here!"].tap()
 
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
-        }
+       
+        let teacherRoleButton = app.buttons["Teacher"]
+        XCTAssertTrue(teacherRoleButton.waitForExistence(timeout: 5), "Teacher role button should exist")
+        teacherRoleButton.tap()
+
+        // Fill in the registration form
+        let teacherFirst = app.textFields["First Name"]
+        XCTAssertTrue(teacherFirst.waitForExistence(timeout: 5), "First Name text field does not exist")
+        teacherFirst.tap()
+        teacherFirst.typeText("Huy")
+        
+        let teacherLast = app.textFields["Last Name"]
+        XCTAssertTrue(teacherLast.exists, "Last Name text field should exist")
+        teacherLast.tap()
+        teacherLast.typeText("Tran")
+        
+        let teacherEmail = app.textFields["Email"]
+        XCTAssertTrue(teacherEmail.exists, "Email text field should exist")
+        teacherEmail.tap()
+        teacherEmail.typeText("huyqtran@student.sanjuan.edu")
+        
+  
+    let passwordSecureTextField = app.secureTextFields["Password"]
+    app.secureTextFields["Password"].tap()
+    passwordSecureTextField.typeText("123456")
+        
+    let confirmPasswordSecureTextField = app.secureTextFields["Confirm Password"]
+    app.secureTextFields["Confirm Password"].tap()
+    confirmPasswordSecureTextField.typeText("123456")
+        
+        // Complete registration
+        let registerButton = app.buttons["Register"]
+        XCTAssertTrue(registerButton.exists, "Register button should exist")
+        registerButton.tap()
+    
+   
+    
+  
+    
     }
 }

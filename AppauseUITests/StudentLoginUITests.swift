@@ -50,17 +50,34 @@ final class StudentLoginUITests: XCTestCase {
             // Email
             let studentEmail = app.textFields["Email"]
         studentEmail.tap()
-        studentEmail.typeText("huyqtran@example.com")
+        studentEmail.typeText("huyqtran@student.sanjuan.edu")
             
-            // Password
-            let studentPassword = app.secureTextFields["Password"]
-        studentPassword.tap()
-        studentPassword.typeText("123456")
-            
-            // Confirm Password
-            let studentConfirmPassword = app.secureTextFields["Confirm Password"]
-        studentConfirmPassword.tap()
-        studentConfirmPassword.typeText("123456")
+        // Ensure the password field exists and tap it
+        let passwordSecureTextField = app.secureTextFields["Password"]
+        XCTAssertTrue(passwordSecureTextField.exists, "Password secure text field should exist")
+        
+        // Tap the password field to activate it
+        passwordSecureTextField.tap()
+        
+        // Add a small delay to ensure the field is in focus
+        sleep(1)  // Wait for 1 second
+        
+        // Type the password
+        passwordSecureTextField.typeText("123456")
+        
+        // Ensure the confirmpassword field exists and tap it
+        let confirmpasswordSecureTextField = app.secureTextFields["Password"]
+        XCTAssertTrue(confirmpasswordSecureTextField.exists, "Password secure text field should exist")
+        
+        // Tap the password field to activate it
+        confirmpasswordSecureTextField.tap()
+        
+        // Add a small delay to ensure the field is in focus
+        sleep(1)  // Wait for 1 second
+        
+        // Type the password
+        confirmpasswordSecureTextField.typeText("123456")
+        
                                 
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         
