@@ -1,13 +1,13 @@
 //
-//  Appause_TeamF12_HTrUITestsLaunchTests.swift
-//  Appause_TeamF12_HTrUITests
+//  AppauseUITestsLaunchTests.swift
+//  AppauseUITests
 //
-//  Created by Huy Tran on 4/14/24.
+//  Created by Huy Tran on 10/15/24.
 //
 
 import XCTest
 
-final class Appause_TeamF12_HTrUITestsLaunchTests: XCTestCase {
+final class AppauseUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true
