@@ -44,7 +44,8 @@
 		3EA44B252BCF43DF00732432 /* SelectRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA44B242BCF43DF00732432 /* SelectRegistrationView.swift */; };
 		3EA44B272BCF43F100732432 /* StudentMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA44B262BCF43F100732432 /* StudentMainView.swift */; };
 		3EA44B292BCF440F00732432 /* TeacherMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA44B282BCF440F00732432 /* TeacherMainView.swift */; };
-		3EA9F4142CBE91FF008903AD /* StudentSignUpUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA9F4132CBE91FF008903AD /* StudentSignUpUITests.swift */; };
+		C804F9E42CB8C59600E6B5B7 /* ClassIDGenerationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C804F9E32CB8C59600E6B5B7 /* ClassIDGenerationView.swift */; };
+    3EA9F4142CBE91FF008903AD /* StudentSignUpUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA9F4132CBE91FF008903AD /* StudentSignUpUITests.swift */; };
 		3EA9F4162CBE922E008903AD /* TeacherSignUpUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA9F4152CBE922E008903AD /* TeacherSignUpUITests.swift */; };
 		3EA9F4182CBE9256008903AD /* StudentSignInUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA9F4172CBE9256008903AD /* StudentSignInUITests.swift */; };
 		3EA9F41A2CBE9280008903AD /* TeacherSignInUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA9F4192CBE9280008903AD /* TeacherSignInUITests.swift */; };
@@ -122,7 +123,8 @@
 		3EA44B242BCF43DF00732432 /* SelectRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRegistrationView.swift; sourceTree = "<group>"; };
 		3EA44B262BCF43F100732432 /* StudentMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentMainView.swift; sourceTree = "<group>"; };
 		3EA44B282BCF440F00732432 /* TeacherMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherMainView.swift; sourceTree = "<group>"; };
-		3EA9F4132CBE91FF008903AD /* StudentSignUpUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentSignUpUITests.swift; sourceTree = "<group>"; };
+		C804F9E32CB8C59600E6B5B7 /* ClassIDGenerationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassIDGenerationView.swift; sourceTree = "<group>"; };
+    3EA9F4132CBE91FF008903AD /* StudentSignUpUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentSignUpUITests.swift; sourceTree = "<group>"; };
 		3EA9F4152CBE922E008903AD /* TeacherSignUpUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherSignUpUITests.swift; sourceTree = "<group>"; };
 		3EA9F4172CBE9256008903AD /* StudentSignInUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentSignInUITests.swift; sourceTree = "<group>"; };
 		3EA9F4192CBE9280008903AD /* TeacherSignInUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherSignInUITests.swift; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 				3E8AE2952C90213B00ABDA6E /* AppauseApp.swift */,
 				C81713DA2C9BD75D00362C37 /* AdminRequestsView.swift */,
 				C8B0A60D2CA64C8F009C0D92 /* BluetoothManagerView.swift */,
+				C804F9E32CB8C59600E6B5B7 /* ClassIDGenerationView.swift */,
 			);
 			path = Appause;
 			sourceTree = "<group>";
@@ -450,6 +453,7 @@
 				3EA44B212BCF437C00732432 /* LoginView.swift in Sources */,
 				3E0956D92BD1E79A0037B462 /* StudentConnectCodeView.swift in Sources */,
 				3E1737622BD8A73300D0F290 /* RequestData.swift in Sources */,
+				C804F9E42CB8C59600E6B5B7 /* ClassIDGenerationView.swift in Sources */,
 				C81713DB2C9BD75D00362C37 /* AdminRequestsView.swift in Sources */,
 				3E09D9DB2BD8655F008324B7 /* ForgotPasswordView.swift in Sources */,
 				C8D38EF72BD3881700F0D2BA /* TeacherSettingsView.swift in Sources */,
@@ -631,7 +635,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Appause/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 53NSY6KM9Q;
+        "DEVELOPMENT_TEAM[sdk=iphoneos*]" = 53NSY6KM9Q;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -664,8 +668,8 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Appause/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 53NSY6KM9Q;
+        DEVELOPMENT_TEAM = "";
+        "DEVELOPMENT_TEAM[sdk=iphoneos*]" = 53NSY6KM9Q;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
