@@ -39,9 +39,21 @@ struct SelectRegistrationView: View
     @State var buttonColorTop = Color.black
     
     let keychain = KeychainSwift()
+    
+    //helper variables - written by Luke Simoni
     let firebaseAuth = Auth.auth()
     let db = Firestore.firestore()
     @State var userInfo = AuthDataResult()
+    @State var tempString: [String] = []
+    @State var studentID: String = ""
+    
+    // helper String specifically for matching 'student' portion
+    // of student email
+    @State var tempStudentString: String = ""
+    
+    // helper String specifically for matching 'sanjuan.edu' portion
+    // of student and teacher emails
+    @State var tempSanJuanString: String = ""
     
     struct TextFieldWithEyeIcon: View {
         // Placeholder text for the text field
@@ -218,10 +230,20 @@ struct SelectRegistrationView: View
                         TextFieldWithEyeIcon(placeholder: "Confirm Password", text: $teacherPassConfirm, isSecure: true, visibility: $confirmStatus)
                     }
                     Button(action:
-                            {
+                    {
+                        tempString = teacherEmail.components(separatedBy: ".")
+                        tempString = tempString[1].components(separatedBy: "@")
+                        tempSanJuanString = tempString[1]
+                        //test strings
+                        print(tempSanJuanString)
+                        
+                        
                         if (teacherFirstName == "" || teacherLastName == "" || teacherEmail == "" || teacherPassword == "" || teacherPassConfirm == "")
                         {
                             registerError = "Please fill in all of the fields."
+                        }
+                        else if !(tempSanJuanString == "sanjuan"){
+                            registerError = "Format of the email submitted is incorrect."
                         }
                         else if (validateEmail(teacherEmail) == false)
                         {
@@ -242,6 +264,43 @@ struct SelectRegistrationView: View
                             keychain.set(teacherPassword, forKey: "teacherPassKey")
                             keychain.set(teacherFirstName, forKey: "teacherFirstNameKey")
                             keychain.set(teacherLastName, forKey: "teacherLastNameKey")
+                            
+                            Task {
+                                do {
+                                    userInfo = try await AuthManager.sharedAuth.createUser(
+                                            email: teacherEmail,
+                                            password: teacherPassword,
+                                            fname: teacherFirstName,
+                                            lname: teacherLastName)
+                                    print(userInfo.email! + userInfo.fname! + userInfo.lname!)
+                                    
+                                    guard let email = userInfo.email,
+                                          let fname = userInfo.fname,
+                                          let lname = userInfo.lname,
+                                          !email.isEmpty,
+                                          !fname.isEmpty,
+                                          !lname.isEmpty
+                                    else {
+                                        return
+                                    }
+                                    
+                                    do {
+                                        let ref = try await db.collection("Teachers").addDocument(data: [
+                                            "Name": userInfo.fname! + " " + userInfo.lname!,
+                                            "Email": userInfo.email!,
+                                            "Date Created": Timestamp(date: Date())
+                                        ])
+                                        
+                                        print("Document added with ID: \(ref.documentID)")
+                                    } catch let dbError{
+                                        print("Error adding document: \(dbError.localizedDescription)")
+                                    }
+                                    
+                                } catch let createUserError {
+                                    registerError = "Registration of user failed.  \(createUserError.localizedDescription)"
+                                }
+                            }
+                            
                             
                             withAnimation
                             {
@@ -326,14 +385,33 @@ struct SelectRegistrationView: View
                     }
                     
                     Button(action: {
+                        
+                        tempString = studentEmail.components(separatedBy: ".")
+                        studentID = tempString[0]
+                        tempString = tempString[1].components(separatedBy: "@")
+                        tempStudentString = tempString[0]
+                        tempSanJuanString = tempString[1]
+                        //test strings
+                        print(studentID + " " + tempStudentString + " " + tempSanJuanString)
+
+                        
                         if (studentFirstName == "" || studentLastName == "" || studentEmail == "" || studentPassword == "" || studentPassConfirm == ""){
                             registerError = "Please fill in all of the fields."
+                        }
+                        else if !(tempStudentString == "student") {
+                            registerError = "Format of the email submitted is incorrect."
+                        }
+                        else if !(tempSanJuanString == "sanjuan"){
+                            registerError = "Format of the email submitted is incorrect."
+                        }
+                        else if !validateStudentID(studentID) {
+                            registerError = "Please use the student ID number as the first component of the account's email address."
                         }
                         else if (validateEmail(studentEmail) == false){
                             registerError = "Please enter a valid email address."
                         }
                         else if (validatePassword(studentPassword) == false){
-                            registerError = "Password Requires:\nat least 6 Characters and a Number"
+                            registerError = "Password Requires:\nat least 6 Characters and a Number."
                         }
                         else if (studentPassword != studentPassConfirm){
                             registerError = "Passwords do not match. Try again."
@@ -355,19 +433,32 @@ struct SelectRegistrationView: View
                                             fname: studentFirstName,
                                             lname: studentLastName)
                                     print(userInfo.email! + userInfo.fname! + userInfo.lname!)
-                                } catch {
-                                    registerError = "Error \(error)"
-                                }
-                                
-                                do {
-                                  let ref = try await db.collection("Users").addDocument(data: [
-                                    "ClassId": "123456",
-                                    "Name": userInfo.fname! + " " + userInfo.lname!,
-                                    "StudentId": 1815
-                                  ])
-                                  print("Document added with ID: \(ref.documentID)")
-                                } catch {
-                                  print("Error adding document: \(error)")
+                                    
+                                    guard let email = userInfo.email,
+                                          let fname = userInfo.fname,
+                                          let lname = userInfo.lname,
+                                          !email.isEmpty,
+                                          !fname.isEmpty,
+                                          !lname.isEmpty
+                                    else {
+                                        return
+                                    }
+                                    
+                                    do {
+                                        let ref = try await db.collection("Users").addDocument(data: [
+                                            "Name": userInfo.fname! + " " + userInfo.lname!,
+                                            "StudentId": studentID,
+                                            "Email": userInfo.email!,
+                                            "Date Created": Timestamp(date: Date())
+                                        ])
+                                        
+                                        print("Document added with ID: \(ref.documentID)")
+                                    } catch let dbError{
+                                        print("Error adding document: \(dbError.localizedDescription)")
+                                    }
+                                    
+                                } catch let createUserError {
+                                    registerError = "Registration of user failed.  \(createUserError.localizedDescription)"
                                 }
                             }
                             
@@ -447,7 +538,22 @@ struct SelectRegistrationView: View
         
         return result
     }
+    
+    //helper function for validating student ID numbers
+    func validateStudentID(_ studentID: String ) -> Bool {
+        let digitsOnlyPattern = "^[0-9]{6}$"
+        
+        do {
+            let regex = try NSRegularExpression(pattern: digitsOnlyPattern)
+            let range = NSRange(location: 0, length: studentID.utf16.count)
+            return regex.firstMatch(in: studentID, options: [], range: range) != nil
+        } catch {
+            return false
+        }
+    }
 }
+
+
 
 struct SelectRegistrationView_Previews: PreviewProvider
 {

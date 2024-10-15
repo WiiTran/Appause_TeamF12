@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import Appause_TeamF12_HTr
+@testable import Appause
 
 final class Appause_TeamF12_HTrTests: XCTestCase {
 

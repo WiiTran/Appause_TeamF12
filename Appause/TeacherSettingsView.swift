@@ -99,6 +99,20 @@ struct TeacherSettingsView: View {
             .cornerRadius(btnStyle.getBtnRadius())
             //.padding(.bottom, 300)
             Spacer()
+            
+            Button(action: {
+                withAnimation {
+                    //show nextView .whateverViewYouWantToShow defined in ContentView Enum
+                    showNextView = .logout}
+            }){
+                Text("Logout")
+                    .foregroundColor(.black)
+                    .fontWeight(.bold)
+            }
+            .padding()
+            .background(Color.red)
+            .cornerRadius(200)
+            
         }
         .preferredColorScheme(colorScheme == 0 ? .light : .dark)
     }
