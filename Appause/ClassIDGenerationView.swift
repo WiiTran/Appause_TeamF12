@@ -9,6 +9,8 @@ import SwiftUI
 import FirebaseFirestore
 
 struct ClassIDGenerationView: View {
+    @Binding var enrolledClass: [(studentClass, Teacher?)]
+    @State private var Name = ""
     @State private var className = ""
     @State private var classTime = Date()
     @State private var selectedDays: [String] = []
@@ -172,7 +174,8 @@ struct ClassIDGenerationView: View {
             
             if querySnapshot?.documents.isEmpty == true {
                 // Class ID is unique, save the new class
-                self.saveClassToFirestore(classID: String(newClassID), className: self.className, days: self.selectedDays, time: self.classTime, teacherID: self.teacherID)
+                self.saveClassToFirestore(classID: String(newClassID), className: self.className,teacherID: self.teacherID,
+                                          Name: self.Name, time: self.classTime, days: self.selectedDays)
             } else {
                 // Retry with a new class ID
                 self.generateClassID()
@@ -181,13 +184,16 @@ struct ClassIDGenerationView: View {
     }
     
     // Save New Class to Firestore
-    private func saveClassToFirestore(classID: String, className: String, days: [String], time: Date, teacherID: String) {
+    private func saveClassToFirestore(classID: String, className: String, teacherID: String, Name: String, time: Date, days: [String] ) {
+        let newClassEnrolled = studentClass(classID: String(classID), className: className, teacherID: teacherID, Name: "Unknown", classTime: classTime, days: days)
         let newClass = [
-            "classID": classID,
-            "className": className,
-            "days": days,
-            "time": Timestamp(date: time),
-            "teacherID": teacherID
+            "classID": newClassEnrolled.classID,
+            "className": newClassEnrolled.className,
+            "teacherID": newClassEnrolled.teacherID,
+            "Name": newClassEnrolled.Name,
+            "classTime": Timestamp(date: classTime),
+            "days": newClassEnrolled.days,
+           
         ] as [String : Any]
         
         db.collection("classes").addDocument(data: newClass) { error in
@@ -197,6 +203,7 @@ struct ClassIDGenerationView: View {
                 self.showAlert = true
             } else {
                 self.generatedClassID = classID
+                self.enrolledClass.append((newClassEnrolled, nil))
             }
         }
     }
@@ -211,6 +218,6 @@ struct ClassIDGenerationView: View {
 
 struct ClassIDGenerationView_Previews: PreviewProvider {
     static var previews: some View {
-        ClassIDGenerationView()
+        ClassIDGenerationView(enrolledClass: .constant([]))
     }
 }
