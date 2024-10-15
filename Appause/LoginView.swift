@@ -87,6 +87,11 @@ struct LoginView: View {
     @State var studentPassVisibility: String = ""
     @State var teacherPassVisibility: String = ""
     
+    //helper strings to parse username and correctly sort account type
+    //written by Luke Simoni
+    @State var tempStudentString: String = ""
+    @State var tempString: [String] = []
+    
     // Custom SwiftUI view to create a text field with an optional eye icon for password visibility
     struct TextFieldWithEyeIcon: View {
         // Placeholder text for the text field
@@ -273,33 +278,75 @@ struct LoginView: View {
                                 let registeredPassword = showTextFields ? keychain.get("teacherPassKey") : keychain.get("studentPassKey")
                                 let username = (showTextFields ? usernameText : studentUsernameText).lowercased()
                                 let password = (showTextFields ? passwordText : studentPasswordText)
-                                let isSuccessful = username == registeredUsername && password == registeredPassword
                                 
-                                if isSuccessful {
-                                    isTeacherLogin = showTextFields
-                                    currentLoggedInUser = username
-                                    if isTwoFactorEnabled {
-                                        emailFor2FA = username
-                                        show2FAInput = true
-                                    } else {
-                                        showNextView = isTeacherLogin ? .mainTeacher : .mainStudent
-                                    }
-                                } else {
-                                    withAnimation(.easeInOut(duration: 0.05).repeatCount(4, autoreverses: true)) {
-                                        shakeOffset = 6
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                                            shakeOffset = 0
+                                print(username + " " + password)
+                                Task {
+                                    do {
+                                        //login user
+                                        try await AuthManager.sharedAuth.loginUser(email: username, password: password)
+                                        isLoginSuccessful = true
+                                        print("trying to log in")
+                                        
+                                        // filter whether the user is a teacher or student
+                                        tempString = username.components(separatedBy: "@")
+                                        if (tempString.count > 1 && !tempString[1].isEmpty) {
+                                            tempString = tempString[1].components(separatedBy: ".")
+                                        } else {
+                                            tempString = []
+                                        }
+                                        tempStudentString = (tempString.count > 0 && !tempString[0].isEmpty) ? tempString[0] : ""
+                                        tempStudentString == "student" ? isTeacherLogin = false : Login.logV.toggleIsTeacher()
+                                        print(tempStudentString)
+                                        
+                                        //user is logged in
+                                        if isLoginSuccessful {
+                                            //isTeacherLogin = showTextFields
+                                            currentLoggedInUser = username
+                                            print("isTeacherLogin :  \(isTeacherLogin)")
+                                            if isTwoFactorEnabled {
+                                                emailFor2FA = username
+                                                show2FAInput = true
+                                            } else {
+                                                showNextView = isTeacherLogin ? .mainTeacher : .mainStudent
+                                            }
+                                        } else {
+                                            withAnimation(.easeInOut(duration: 0.05).repeatCount(4, autoreverses: true)) {
+                                                shakeOffset = 6
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                                                    shakeOffset = 0
+                                                }
+                                            }
+                                            performShakeAnimation()
+                                            showErrorMessages = true
+                                        }
+                                        
+                                    } catch let loginUserError {
+                                        showErrorMessages = true
+                                        print("errors occurred")
+                                        errorMessages = "Sign in of user failed.  \(loginUserError.localizedDescription)"
+                                        
+                                        
+                                        withAnimation(.easeInOut(duration: 0.05).repeatCount(4, autoreverses: true)) {
+                                            shakeOffset = 6
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                                                    shakeOffset = 0
+                                            }
+                                        }
+                                        performShakeAnimation()
+                                        showErrorMessages = true
                                         }
                                     }
-                                    performShakeAnimation()
-                                }
+                                
+                                print(isLoginSuccessful)
+                                
+                                //let isSuccessful = username == registeredUsername && password == registeredPassword
                                 
                                 if (buttonColorTop == buttonColorTopActive) {
-                                    self.buttonColorTop = isSuccessful ? buttonColorTopSucess : buttonColorLogin
+                                    self.buttonColorTop = isLoginSuccessful ? buttonColorTopSucess : buttonColorLogin
                                 }
                                 
                                 if (buttonColorBottom == buttonColorBottomActive) {
-                                    self.buttonColorBottom = isSuccessful ? buttonColorTopSucess : buttonColorLogin
+                                    self.buttonColorBottom = isLoginSuccessful ? buttonColorTopSucess : buttonColorLogin
                                 }
                             }) {
                                 Text("Login")
@@ -470,5 +517,9 @@ internal struct Login {
     // Get whether it's a teacher login
     public func getIsTeacher() -> Bool {
         return isTeacherLogin
+    }
+    
+    public func toggleIsTeacher() {
+        isTeacherLogin.toggle()
     }
 }
