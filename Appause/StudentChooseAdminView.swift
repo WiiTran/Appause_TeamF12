@@ -5,7 +5,7 @@
 //  Created by Huy Tran on 4/18/24.
 //
 
-/*import SwiftUI
+import SwiftUI
 
 
 struct StudentChooseAdminView: View {
@@ -100,4 +100,4 @@ struct StudentChooseAdminView_Previews: PreviewProvider {
     static var previews: some View {
         StudentChooseAdminView(showNextView: $showNextView)
     }
-}*/
+}
