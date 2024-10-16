@@ -39,7 +39,7 @@ struct StudentMainView: View {
                 Spacer()
                 // When pressed, will allow students to view and manage all of their classes
                 Button(action:{withAnimation
-                    {showNextView = .studentChooseAdmin}
+                    {showNextView = .enrolledClass}
                 }){
                     Text(secondButtonName)
                         .padding(.leading, 25)
