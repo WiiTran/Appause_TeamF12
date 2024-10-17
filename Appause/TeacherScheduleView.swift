@@ -38,7 +38,7 @@ struct TeacherScheduleView: View {
                 }
                 
                 // Add new class button
-                NavigationLink(destination: TeacherScheduleCView()) {
+                NavigationLink(destination: TeacherScheduleView()) {
                     Text("+ Add Class")
                         .font(.headline)
                         .foregroundColor(.blue)

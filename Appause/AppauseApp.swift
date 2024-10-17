@@ -22,7 +22,9 @@ struct AppauseApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RegisterSettingView()
+            //ClassRegistrationView
+            //ContentView()
         }
     }
 }
