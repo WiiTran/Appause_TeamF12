@@ -62,13 +62,6 @@ struct TeacherScheduleView: View {
                     }
                     .onDelete(perform: deletePeriod)
                 }
-                
-                // Add new class button
-                NavigationLink(destination: TeacherScheduleView()) {
-                    Text("+ Add Class")
-                        .font(.headline)
-                        .foregroundColor(.blue)
-                        .padding()
 
                 if editingMode {
                     VStack {
@@ -266,7 +259,6 @@ struct TeacherScheduleView: View {
             if i != index {
                 if period.startTime == newStartTime || period.endTime == newEndTime {
                     return true
->>>>>>> origin/main
                 }
             }
         }
