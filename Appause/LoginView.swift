@@ -12,6 +12,7 @@ import KeychainSwift
 import Combine
 import CoreHaptics
 import LocalAuthentication
+import FirebaseAuth
 
 var currentLoggedInUser: String? = nil
 
@@ -302,6 +303,7 @@ struct LoginView: View {
                                         if isLoginSuccessful {
                                             //isTeacherLogin = showTextFields
                                             currentLoggedInUser = username
+                                            print("Logged in: " + (Auth.auth().currentUser?.email ?? "nil"))
                                             print("isTeacherLogin :  \(isTeacherLogin)")
                                             if isTwoFactorEnabled {
                                                 emailFor2FA = username
