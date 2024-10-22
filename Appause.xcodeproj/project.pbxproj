@@ -63,6 +63,10 @@
 		C8B0A60E2CA64C8F009C0D92 /* BluetoothManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B0A60D2CA64C8F009C0D92 /* BluetoothManagerView.swift */; };
 		C8D38EF52BD35D9E00F0D2BA /* StudentSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D38EF42BD35D9E00F0D2BA /* StudentSettingsView.swift */; };
 		C8D38EF72BD3881700F0D2BA /* TeacherSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D38EF62BD3881700F0D2BA /* TeacherSettingsView.swift */; };
+		D70BD60F2CB9A06500558E4E /* RegisterSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70BD60E2CB9A06500558E4E /* RegisterSetting.swift */; };
+		D7879A6C2CBE2D5300F11CA2 /*  AddClassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7879A6B2CBE2D5300F11CA2 /*  AddClassView.swift */; };
+		D7A3254C2CBCC482009A921D /* ClassRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A3254B2CBCC482009A921D /* ClassRegistrationView.swift */; };
+		D7F4DF3D2CBE42EB00135B28 /* StudentClassInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F4DF3C2CBE42EB00135B28 /* StudentClassInputView.swift */; };
 		ED2B5A8E2C9A12EE008AC0AA /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2B5A8D2C9A12EE008AC0AA /* AuthManager.swift */; };
 		ED8FB51A2C910F7B00DFB478 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED8FB5192C910F7B00DFB478 /* GoogleService-Info.plist */; };
 		ED8FB51B2C910F7B00DFB478 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED8FB5192C910F7B00DFB478 /* GoogleService-Info.plist */; };
@@ -148,6 +152,10 @@
 		C8B0A60D2CA64C8F009C0D92 /* BluetoothManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothManagerView.swift; sourceTree = "<group>"; };
 		C8D38EF42BD35D9E00F0D2BA /* StudentSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentSettingsView.swift; sourceTree = "<group>"; };
 		C8D38EF62BD3881700F0D2BA /* TeacherSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherSettingsView.swift; sourceTree = "<group>"; };
+		D70BD60E2CB9A06500558E4E /* RegisterSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterSetting.swift; sourceTree = "<group>"; };
+		D7879A6B2CBE2D5300F11CA2 /*  AddClassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " AddClassView.swift"; sourceTree = "<group>"; };
+		D7A3254B2CBCC482009A921D /* ClassRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassRegistrationView.swift; sourceTree = "<group>"; };
+		D7F4DF3C2CBE42EB00135B28 /* StudentClassInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentClassInputView.swift; sourceTree = "<group>"; };
 		ED2B5A8D2C9A12EE008AC0AA /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		ED8FB5192C910F7B00DFB478 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -205,6 +213,9 @@
 		3E8F6AE02BCBD5CC003C4160 /* Appause */ = {
 			isa = PBXGroup;
 			children = (
+				D70BD60E2CB9A06500558E4E /* RegisterSetting.swift */,
+				D7A3254B2CBCC482009A921D /* ClassRegistrationView.swift */,
+				D7879A6B2CBE2D5300F11CA2 /*  AddClassView.swift */,
 				3E1737612BD8A73300D0F290 /* RequestData.swift */,
 				3E09D9DA2BD8655F008324B7 /* ForgotPasswordView.swift */,
 				3E17375F2BD8A6F700D0F290 /* TeacherAllRequestsView.swift */,
@@ -458,7 +469,11 @@
 				ED2B5A8E2C9A12EE008AC0AA /* AuthManager.swift in Sources */,
 				3E17374C2BD8A37A00D0F290 /* StudentAppRequestView.swift in Sources */,
 				3E1737542BD8A4A300D0F290 /* TeacherManageUsers.swift in Sources */,
+<<<<<<< HEAD
+				D70BD60F2CB9A06500558E4E /* RegisterSetting.swift in Sources */,
+=======
 				3EB48DF72CBE81AF00B41BAD /* TeacherMenuView.swift in Sources */,
+>>>>>>> origin/main
 				3E1737482BD8A34500D0F290 /* StudentRegisterView.swift in Sources */,
 				3E1737422BD8A29A00D0F290 /* PWCodeVerificationView.swift in Sources */,
 				3E17375C2BD8A69600D0F290 /* TeacherAppDescription.swift in Sources */,
@@ -466,11 +481,16 @@
 				3E17374A2BD8A36000D0F290 /* StudentChooseAdminView.swift in Sources */,
 				3EA44B292BCF440F00732432 /* TeacherMainView.swift in Sources */,
 				3E1737502BD8A47A00D0F290 /* TeacherUserRequestView.swift in Sources */,
+<<<<<<< HEAD
+				D7879A6C2CBE2D5300F11CA2 /*  AddClassView.swift in Sources */,
+=======
 				9B20E1F22CBF6448001F2491 /* enrolledClassView.swift in Sources */,
+>>>>>>> origin/main
 				3EA44B232BCF43A000732432 /* TwoFactorAuthView.swift in Sources */,
 				3E17375E2BD8A6C200D0F290 /* TimerViewModel.swift in Sources */,
 				3EA44B212BCF437C00732432 /* LoginView.swift in Sources */,
 				3E0956D92BD1E79A0037B462 /* StudentConnectCodeView.swift in Sources */,
+				D7F4DF3D2CBE42EB00135B28 /* StudentClassInputView.swift in Sources */,
 				3E1737622BD8A73300D0F290 /* RequestData.swift in Sources */,
 				C804F9E42CB8C59600E6B5B7 /* ClassIDGenerationView.swift in Sources */,
 				C81713DB2C9BD75D00362C37 /* AdminRequestsView.swift in Sources */,
@@ -479,6 +499,7 @@
 				001AC1812C9A1CA000BC8266 /* TeacherScheduleView.swift in Sources */,
 				3EB48DF62CBE81AF00B41BAD /* TeacherScheduleCView.swift in Sources */,
 				3E1737562BD8A4BC00D0F290 /* TeacherDeleteStudentView.swift in Sources */,
+				D7A3254C2CBCC482009A921D /* ClassRegistrationView.swift in Sources */,
 				3E1737442BD8A2B200D0F290 /* ResetPasswordView.swift in Sources */,
 				3EB48DF82CBE81AF00B41BAD /* TeacherScheduleEView.swift in Sources */,
 				3E1737602BD8A6F700D0F290 /* TeacherAllRequestsView.swift in Sources */,
