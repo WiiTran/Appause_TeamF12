@@ -57,7 +57,6 @@
 		9B20E1F22CBF6448001F2491 /* enrolledClassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B20E1F12CBF6448001F2491 /* enrolledClassView.swift */; };
 		9B20E1F42CBF647B001F2491 /* classModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B20E1F32CBF647B001F2491 /* classModel.swift */; };
 		9B20E1F82CBF6502001F2491 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B20E1F72CBF6501001F2491 /* FirestoreManager.swift */; };
-
 		C804F9E42CB8C59600E6B5B7 /* ClassIDGenerationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C804F9E32CB8C59600E6B5B7 /* ClassIDGenerationView.swift */; };
 		C81713DB2C9BD75D00362C37 /* AdminRequestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81713DA2C9BD75D00362C37 /* AdminRequestsView.swift */; };
 		C8B0A60E2CA64C8F009C0D92 /* BluetoothManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B0A60D2CA64C8F009C0D92 /* BluetoothManagerView.swift */; };
@@ -139,7 +138,6 @@
 		3EB48E142CBE907A00B41BAD /* AppauseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppauseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EB48E162CBE907A00B41BAD /* AppauseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppauseUITests.swift; sourceTree = "<group>"; };
 		3EB48E182CBE907A00B41BAD /* AppauseUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppauseUITestsLaunchTests.swift; sourceTree = "<group>"; };
-
 		9B20E1F12CBF6448001F2491 /* enrolledClassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = enrolledClassView.swift; sourceTree = "<group>"; };
 		9B20E1F32CBF647B001F2491 /* classModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = classModel.swift; sourceTree = "<group>"; };
 		9B20E1F72CBF6501001F2491 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
@@ -246,7 +244,6 @@
 				C81713DA2C9BD75D00362C37 /* AdminRequestsView.swift */,
 				C8B0A60D2CA64C8F009C0D92 /* BluetoothManagerView.swift */,
 				C804F9E32CB8C59600E6B5B7 /* ClassIDGenerationView.swift */,
-
 				9B20E1F12CBF6448001F2491 /* enrolledClassView.swift */,
 				9B20E1F72CBF6501001F2491 /* FirestoreManager.swift */,
 				3E35C4E72CBF69940012357A /* TeacherAddScheduleView.swift */,
@@ -649,29 +646,32 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CREATE_INFOPLIST_SECTION_IN_BINARY = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Appause/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 53NSY6KM9Q;
+				DEVELOPMENT_TEAM = 9UY79QFFH9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "We need Face ID for authentication purposes";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = csus.TmF12.Appause;
+				PRODUCT_BUNDLE_IDENTIFIER = csus.F12.Appause;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = AppausePL;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -683,29 +683,32 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CREATE_INFOPLIST_SECTION_IN_BINARY = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Appause/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 53NSY6KM9Q;
+				DEVELOPMENT_TEAM = 9UY79QFFH9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "We need Face ID for authentication purposes";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = csus.TmF12.Appause;
+				PRODUCT_BUNDLE_IDENTIFIER = csus.F12.Appause;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = AppausePL;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
