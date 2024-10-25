@@ -19,6 +19,12 @@ struct ClassIDGenerationView: View {
     @State private var alertMessage = ""
     @State private var showAlert = false
     @State private var isDaysSelectionVisible = false
+
+    // Validation state for error messages
+    @State private var classNameError = false
+    @State private var teacherIDError = false
+    @State private var daysError = false
+
     private let daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     private let db = Firestore.firestore()
     
@@ -33,11 +39,20 @@ struct ClassIDGenerationView: View {
                 .multilineTextAlignment(.center)
             
             // Class Name Input
-            TextField("Enter Class Name", text: $className)
-                .padding()
-                .background(Color.gray.opacity(0.2))
-                .cornerRadius(8)
-                .padding(.horizontal)
+            VStack(alignment: .leading, spacing: 5) {
+                TextField("Enter Class Name", text: $className)
+                    .padding()
+                    .background(Color.gray.opacity(0.2))
+                    .cornerRadius(8)
+                    .padding(.horizontal)
+
+                // Display error message if classNameError is true
+                if classNameError {
+                    Text("Class Name is required")
+                        .foregroundColor(.red)
+                        .padding(.leading)
+                }
+            }
             
             // Class Start Time Picker
             DatePicker("Select Start Time", selection: $classStartTime, displayedComponents: .hourAndMinute)
@@ -53,8 +68,8 @@ struct ClassIDGenerationView: View {
                 .cornerRadius(8)
                 .padding(.horizontal)
             
-            // Dropdown for Days of the Week Selection
-            VStack(alignment: .leading) {
+            // Days of the Week Selection
+            VStack(alignment: .leading, spacing: 5) {
                 Text("Select Days of the Week")
                     .font(.headline)
                     .padding(.leading)
@@ -78,9 +93,16 @@ struct ClassIDGenerationView: View {
                     .cornerRadius(8)
                     .padding(.horizontal)
                 }
+
+                // Display error message if daysError is true
+                if daysError {
+                    Text("Please select at least one day")
+                        .foregroundColor(.red)
+                        .padding(.leading)
+                }
             }
-            
-            // Pop-up with multi-select for days of the week
+
+            // Days of the Week Pop-up
             if isDaysSelectionVisible {
                 VStack {
                     ForEach(daysOfWeek, id: \.self) { day in
@@ -104,21 +126,23 @@ struct ClassIDGenerationView: View {
             }
             
             // Teacher ID Input
-            TextField("Enter Teacher ID", text: $teacherID)
-                .padding()
-                .background(Color.gray.opacity(0.2))
-                .cornerRadius(8)
-                .padding(.horizontal)
+            VStack(alignment: .leading, spacing: 5) {
+                TextField("Enter Teacher ID", text: $teacherID)
+                    .padding()
+                    .background(Color.gray.opacity(0.2))
+                    .cornerRadius(8)
+                    .padding(.horizontal)
+
+                // Display error message if teacherIDError is true
+                if teacherIDError {
+                    Text("Teacher ID is required")
+                        .foregroundColor(.red)
+                        .padding(.leading)
+                }
+            }
             
             // Generate Class ID Button
-            Button(action: {
-                if className.isEmpty || teacherID.isEmpty || selectedDays.isEmpty {
-                    alertMessage = "Please enter Class Name, Teacher ID, and select at least one day."
-                    showAlert = true
-                } else {
-                    generateClassID()
-                }
-            }) {
+            Button(action: validateAndGenerateClassID) {
                 Text(isGenerating ? "Generating..." : "Create Class")
                     .padding()
                     .foregroundColor(.white)
@@ -126,10 +150,7 @@ struct ClassIDGenerationView: View {
                     .cornerRadius(10)
             }
             .disabled(isGenerating)
-            .alert(isPresented: $showAlert) {
-                Alert(title: Text("Error"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
-            }
-            
+
             // Display Generated Class Information
             if let classID = generatedClassID {
                 VStack(alignment: .leading, spacing: 10) {
@@ -153,7 +174,7 @@ struct ClassIDGenerationView: View {
         .padding()
     }
     
-    // Toggle day selection when the button is tapped
+    // Toggle day selection
     private func toggleDaySelection(_ day: String) {
         if let index = selectedDays.firstIndex(of: day) {
             selectedDays.remove(at: index)
@@ -161,33 +182,42 @@ struct ClassIDGenerationView: View {
             selectedDays.append(day)
         }
     }
-    
-    // Backend Logic to Generate Unique Class ID
+
+    // Validate fields and generate class ID
+    private func validateAndGenerateClassID() {
+        // Reset error states
+        classNameError = className.isEmpty
+        teacherIDError = teacherID.isEmpty
+        daysError = selectedDays.isEmpty
+
+        // Check if all fields are valid
+        if !classNameError && !teacherIDError && !daysError {
+            generateClassID()
+        }
+    }
+
+    // Generate a unique class ID
     private func generateClassID() {
         isGenerating = true
-        
-        // Generate a random Class ID
         let newClassID = UUID().uuidString.prefix(8).uppercased()
         
-        // Check if Class ID already exists in Firestore
         db.collection("classes").whereField("classID", isEqualTo: newClassID).getDocuments { (querySnapshot, error) in
             if let error = error {
-                self.alertMessage = "Error checking existing classes: \(error.localizedDescription)"
-                self.showAlert = true
-                self.isGenerating = false
+                alertMessage = "Error checking existing classes: \(error.localizedDescription)"
+                showAlert = true
+                isGenerating = false
                 return
             }
             
             if querySnapshot?.documents.isEmpty == true {
-                // Save the new class
-                self.saveClassToFirestore(classID: String(newClassID))
+                saveClassToFirestore(classID: String(newClassID))
             } else {
-                self.generateClassID()
+                generateClassID()
             }
         }
     }
-    
-    // Save New Class to Firestore
+
+    // Save class to Firestore
     private func saveClassToFirestore(classID: String) {
         let classData: [String: Any] = [
             "classID": classID,
@@ -199,17 +229,17 @@ struct ClassIDGenerationView: View {
         ]
         
         db.collection("classes").addDocument(data: classData) { error in
-            self.isGenerating = false
+            isGenerating = false
             if let error = error {
-                self.alertMessage = "Error saving class: \(error.localizedDescription)"
-                self.showAlert = true
+                alertMessage = "Error saving class: \(error.localizedDescription)"
+                showAlert = true
             } else {
-                self.generatedClassID = classID
+                generatedClassID = classID
             }
         }
     }
-    
-    // Helper function to format time
+
+    // Format time
     private func formattedTime(_ time: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "hh:mm a"
