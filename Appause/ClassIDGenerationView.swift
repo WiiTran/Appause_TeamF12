@@ -2,7 +2,7 @@
 //  ClassIDGenerationView.swift
 //  Appause
 //
-//  Created by Dash on 10/08/24
+//  Created by Dash on 10/08/24.
 //
 
 import SwiftUI
@@ -10,7 +10,8 @@ import FirebaseFirestore
 
 struct ClassIDGenerationView: View {
     @State private var className = ""
-    @State private var classTime = Date()
+    @State private var classStartTime = Date()
+    @State private var classEndTime = Date()
     @State private var selectedDays: [String] = []
     @State private var teacherID = ""
     @State private var generatedClassID: String? = nil
@@ -38,8 +39,15 @@ struct ClassIDGenerationView: View {
                 .cornerRadius(8)
                 .padding(.horizontal)
             
-            // Class Time Picker
-            DatePicker("Select Class Time", selection: $classTime, displayedComponents: .hourAndMinute)
+            // Class Start Time Picker
+            DatePicker("Select Start Time", selection: $classStartTime, displayedComponents: .hourAndMinute)
+                .padding()
+                .background(Color.gray.opacity(0.2))
+                .cornerRadius(8)
+                .padding(.horizontal)
+            
+            // Class End Time Picker
+            DatePicker("Select End Time", selection: $classEndTime, displayedComponents: .hourAndMinute)
                 .padding()
                 .background(Color.gray.opacity(0.2))
                 .cornerRadius(8)
@@ -131,7 +139,7 @@ struct ClassIDGenerationView: View {
                     
                     Text("Class Name: \(className)")
                     Text("Class Days: \(selectedDays.joined(separator: ", "))")
-                    Text("Class Time: \(formattedClassTime())")
+                    Text("Class Period: \(formattedTime(classStartTime)) - \(formattedTime(classEndTime))")
                     Text("Teacher ID: \(teacherID)")
                     Text("Generated Class ID: \(classID)")
                         .font(.headline)
@@ -145,7 +153,7 @@ struct ClassIDGenerationView: View {
         .padding()
     }
     
-    // Toggle day selection when a button is tapped
+    // Toggle day selection when the button is tapped
     private func toggleDaySelection(_ day: String) {
         if let index = selectedDays.firstIndex(of: day) {
             selectedDays.remove(at: index)
@@ -171,31 +179,26 @@ struct ClassIDGenerationView: View {
             }
             
             if querySnapshot?.documents.isEmpty == true {
-                // Class ID is unique, save the new class
-                self.saveClassToFirestore(classID: String(newClassID), className: self.className, days: self.selectedDays, time: self.classTime, teacherID: self.teacherID)
+                // Save the new class
+                self.saveClassToFirestore(classID: String(newClassID))
             } else {
-                // Retry with a new class ID
                 self.generateClassID()
             }
         }
     }
     
     // Save New Class to Firestore
-    private func saveClassToFirestore(classID: String, className: String, days: [String], time: Date, teacherID: String) {
-        // Get only the time in "HH:mm a" format without the date
-        let timeFormatter = DateFormatter()
-        timeFormatter.dateFormat = "hh:mm a"
-        let formattedTime = timeFormatter.string(from: time) // Only the time will be saved
-        
-        let newClass = [
+    private func saveClassToFirestore(classID: String) {
+        let classData: [String: Any] = [
             "classID": classID,
             "className": className,
-            "days": days,
-            "time": formattedTime,
+            "days": selectedDays,
+            "startTime": formattedTime(classStartTime),
+            "endTime": formattedTime(classEndTime),
             "teacherID": teacherID
-        ] as [String : Any]
+        ]
         
-        db.collection("classes").addDocument(data: newClass) { error in
+        db.collection("classes").addDocument(data: classData) { error in
             self.isGenerating = false
             if let error = error {
                 self.alertMessage = "Error saving class: \(error.localizedDescription)"
@@ -206,11 +209,11 @@ struct ClassIDGenerationView: View {
         }
     }
     
-    // Helper function to format the class time for display
-    private func formattedClassTime() -> String {
+    // Helper function to format time
+    private func formattedTime(_ time: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "hh:mm a"
-        return formatter.string(from: classTime)
+        return formatter.string(from: time)
     }
 }
 
