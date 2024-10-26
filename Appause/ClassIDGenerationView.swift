@@ -20,25 +20,24 @@ struct ClassIDGenerationView: View {
     @State private var showAlert = false
     @State private var isDaysSelectionVisible = false
 
-    // Validation state for error messages
     @State private var classNameError = false
     @State private var teacherIDError = false
     @State private var daysError = false
+    @State private var overlapError = false
 
     private let daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     private let db = Firestore.firestore()
-    
+
     var body: some View {
         VStack(spacing: 16) {
             Spacer().frame(height: 75)
-            
+
             Text("Create a New Class")
                 .font(.largeTitle)
                 .fontWeight(.bold)
                 .frame(maxWidth: .infinity)
                 .multilineTextAlignment(.center)
-            
-            // Class Name Input
+
             VStack(alignment: .leading, spacing: 5) {
                 TextField("Enter Class Name", text: $className)
                     .padding()
@@ -46,44 +45,38 @@ struct ClassIDGenerationView: View {
                     .cornerRadius(8)
                     .padding(.horizontal)
 
-                // Display error message if classNameError is true
                 if classNameError {
                     Text("Class Name is required")
                         .foregroundColor(.red)
                         .padding(.leading)
                 }
             }
-            
-            // Class Start Time Picker
+
             DatePicker("Select Start Time", selection: $classStartTime, displayedComponents: .hourAndMinute)
                 .padding()
                 .background(Color.gray.opacity(0.2))
                 .cornerRadius(8)
                 .padding(.horizontal)
-            
-            // Class End Time Picker
+
             DatePicker("Select End Time", selection: $classEndTime, displayedComponents: .hourAndMinute)
                 .padding()
                 .background(Color.gray.opacity(0.2))
                 .cornerRadius(8)
                 .padding(.horizontal)
-            
-            // Days of the Week Selection
+
             VStack(alignment: .leading, spacing: 5) {
                 Text("Select Days of the Week")
                     .font(.headline)
                     .padding(.leading)
-                
-                Button(action: {
-                    isDaysSelectionVisible.toggle()
-                }) {
+
+                Button(action: { isDaysSelectionVisible.toggle() }) {
                     HStack {
                         Text(selectedDays.isEmpty ? "Choose Days" : selectedDays.joined(separator: ", "))
                             .foregroundColor(selectedDays.isEmpty ? .gray : .blue)
                             .padding(.leading)
-                        
+
                         Spacer()
-                        
+
                         Image(systemName: "chevron.down")
                             .rotationEffect(.degrees(isDaysSelectionVisible ? 180 : 0))
                             .padding(.trailing)
@@ -94,7 +87,6 @@ struct ClassIDGenerationView: View {
                     .padding(.horizontal)
                 }
 
-                // Display error message if daysError is true
                 if daysError {
                     Text("Please select at least one day")
                         .foregroundColor(.red)
@@ -102,16 +94,13 @@ struct ClassIDGenerationView: View {
                 }
             }
 
-            // Days of the Week Pop-up
             if isDaysSelectionVisible {
                 VStack {
                     ForEach(daysOfWeek, id: \.self) { day in
                         HStack {
                             Text(day)
                             Spacer()
-                            Button(action: {
-                                toggleDaySelection(day)
-                            }) {
+                            Button(action: { toggleDaySelection(day) }) {
                                 Image(systemName: selectedDays.contains(day) ? "checkmark.square" : "square")
                                     .foregroundColor(selectedDays.contains(day) ? .blue : .gray)
                             }
@@ -124,8 +113,7 @@ struct ClassIDGenerationView: View {
                 .shadow(radius: 10)
                 .padding(.horizontal)
             }
-            
-            // Teacher ID Input
+
             VStack(alignment: .leading, spacing: 5) {
                 TextField("Enter Teacher ID", text: $teacherID)
                     .padding()
@@ -133,15 +121,19 @@ struct ClassIDGenerationView: View {
                     .cornerRadius(8)
                     .padding(.horizontal)
 
-                // Display error message if teacherIDError is true
                 if teacherIDError {
                     Text("Teacher ID is required")
                         .foregroundColor(.red)
                         .padding(.leading)
                 }
             }
-            
-            // Generate Class ID Button
+
+            if overlapError {
+                Text("Time conflict detected with an existing class.")
+                    .foregroundColor(.red)
+                    .padding()
+            }
+
             Button(action: validateAndGenerateClassID) {
                 Text(isGenerating ? "Generating..." : "Create Class")
                     .padding()
@@ -151,13 +143,12 @@ struct ClassIDGenerationView: View {
             }
             .disabled(isGenerating)
 
-            // Display Generated Class Information
             if let classID = generatedClassID {
                 VStack(alignment: .leading, spacing: 10) {
                     Text("Class Created Successfully!")
                         .font(.headline)
                         .padding(.top, 20)
-                    
+
                     Text("Class Name: \(className)")
                     Text("Class Days: \(selectedDays.joined(separator: ", "))")
                     Text("Class Period: \(formattedTime(classStartTime)) - \(formattedTime(classEndTime))")
@@ -168,13 +159,12 @@ struct ClassIDGenerationView: View {
                 }
                 .padding(.top, 20)
             }
-            
+
             Spacer()
         }
         .padding()
     }
-    
-    // Toggle day selection
+
     private func toggleDaySelection(_ day: String) {
         if let index = selectedDays.firstIndex(of: day) {
             selectedDays.remove(at: index)
@@ -183,41 +173,91 @@ struct ClassIDGenerationView: View {
         }
     }
 
-    // Validate fields and generate class ID
     private func validateAndGenerateClassID() {
-        // Reset error states
         classNameError = className.isEmpty
         teacherIDError = teacherID.isEmpty
         daysError = selectedDays.isEmpty
 
-        // Check if all fields are valid
         if !classNameError && !teacherIDError && !daysError {
-            generateClassID()
+            checkForOverlappingClass()
         }
     }
 
-    // Generate a unique class ID
-    private func generateClassID() {
+    private func checkForOverlappingClass() {
         isGenerating = true
+
+        db.collection("classes")
+            .whereField("teacherID", isEqualTo: teacherID)
+            .whereField("days", arrayContainsAny: selectedDays)
+            .getDocuments { (querySnapshot, error) in
+                if let error = error {
+                    alertMessage = "Error fetching classes: \(error.localizedDescription)"
+                    showAlert = true
+                    isGenerating = false
+                    return
+                }
+
+                let conflictExists = querySnapshot?.documents.contains { document in
+                    let existingStartTime = document["startTime"] as? String ?? ""
+                    let existingEndTime = document["endTime"] as? String ?? ""
+
+                    return self.timesOverlap(existingStartTime: existingStartTime, existingEndTime: existingEndTime)
+                } ?? false
+
+                if conflictExists {
+                    overlapError = true
+                    isGenerating = false
+                } else {
+                    overlapError = false
+                    generateClassID()
+                }
+            }
+    }
+
+    private func timesOverlap(existingStartTime: String, existingEndTime: String) -> Bool {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+
+        guard let existingStart = formatter.date(from: existingStartTime),
+              let existingEnd = formatter.date(from: existingEndTime),
+              let newStart = formatter.date(from: formattedTime(classStartTime)),
+              let newEnd = formatter.date(from: formattedTime(classEndTime)) else {
+            return false
+        }
+
+        return (newStart < existingEnd) && (newEnd > existingStart)
+    }
+
+    private func generateClassID() {
         let newClassID = UUID().uuidString.prefix(8).uppercased()
         
-        db.collection("classes").whereField("classID", isEqualTo: newClassID).getDocuments { (querySnapshot, error) in
-            if let error = error {
-                alertMessage = "Error checking existing classes: \(error.localizedDescription)"
-                showAlert = true
-                isGenerating = false
-                return
-            }
-            
-            if querySnapshot?.documents.isEmpty == true {
-                saveClassToFirestore(classID: String(newClassID))
+        checkIfClassIDExists(classID: String(newClassID)) { exists in
+            if exists {
+                generateClassID()  // Retry with a new ID if the ID exists
             } else {
-                generateClassID()
+                saveClassToFirestore(classID: String(newClassID))  // Save if ID is unique
             }
         }
     }
 
-    // Save class to Firestore
+    private func checkIfClassIDExists(classID: String, completion: @escaping (Bool) -> Void) {
+        db.collection("classes")
+            .whereField("classID", isEqualTo: classID)
+            .getDocuments { querySnapshot, error in
+                if let error = error {
+                    print("Error checking Class ID: \(error.localizedDescription)")
+                    completion(true)  // Assume ID exists to prevent using it
+                    return
+                }
+
+                if let documents = querySnapshot?.documents, !documents.isEmpty {
+                    completion(true)  // ID exists
+                } else {
+                    completion(false)  // ID is unique
+                }
+            }
+    }
+
     private func saveClassToFirestore(classID: String) {
         let classData: [String: Any] = [
             "classID": classID,
@@ -227,7 +267,7 @@ struct ClassIDGenerationView: View {
             "endTime": formattedTime(classEndTime),
             "teacherID": teacherID
         ]
-        
+
         db.collection("classes").addDocument(data: classData) { error in
             isGenerating = false
             if let error = error {
@@ -239,10 +279,9 @@ struct ClassIDGenerationView: View {
         }
     }
 
-    // Format time
     private func formattedTime(_ time: Date) -> String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "hh:mm a"
+        formatter.dateFormat = "HH:mm"
         return formatter.string(from: time)
     }
 }
