@@ -164,6 +164,13 @@ struct ClassIDGenerationView: View {
             Spacer()
         }
         .padding()
+        .alert(isPresented: $showAlert) {
+            Alert(
+                title: Text("Error"),
+                message: Text(alertMessage),
+                dismissButton: .default(Text("OK"))
+            )
+        }
     }
 
     private func toggleDaySelection(_ day: String) {
