@@ -149,6 +149,7 @@ struct ClassIDGenerationView: View {
                         .font(.headline)
                         .padding(.top, 20)
 
+                    // Show details about the created class
                     Text("Class Name: \(className)")
                     Text("Class Days: \(selectedDays.joined(separator: ", "))")
                     Text("Class Period: \(formattedTime(classStartTime)) - \(formattedTime(classEndTime))")
@@ -275,8 +276,34 @@ struct ClassIDGenerationView: View {
                 showAlert = true
             } else {
                 generatedClassID = classID
+                updateTeacherClasses(classID: classID)  // Add class ID to teacher's record
             }
         }
+    }
+
+    private func updateTeacherClasses(classID: String) {
+        db.collection("Teachers")
+            .whereField("teacherID", isEqualTo: teacherID)  // Query the teacher document by the teacherID field
+            .getDocuments { (querySnapshot, error) in
+                if let error = error {
+                    print("Error finding teacher: \(error.localizedDescription)")
+                    return
+                }
+
+                guard let document = querySnapshot?.documents.first else {
+                    print("No teacher found with the provided teacherID.")
+                    return
+                }
+
+                let teacherRef = document.reference
+                teacherRef.updateData([
+                    "classesTaught": FieldValue.arrayUnion([classID])
+                ]) { updateError in
+                    if let updateError = updateError {
+                        print("Error updating teacher's classes: \(updateError.localizedDescription)")
+                    }
+                }
+            }
     }
 
     private func formattedTime(_ time: Date) -> String {
