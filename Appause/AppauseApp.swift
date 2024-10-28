@@ -19,10 +19,11 @@ class ViewSwitcher: ObservableObject{
 struct AppauseApp: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    
+    private let viewSwitcher = ViewSwitcher() // Initialize ViewSwitcher here
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(viewSwitcher) // Provide as environment object
         }
     }
 }

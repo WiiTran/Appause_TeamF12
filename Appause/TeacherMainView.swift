@@ -15,6 +15,9 @@ struct TeacherMainView: View {
     @Binding var showNextView: DisplayState
     @StateObject var studentList = StudentList()
     
+    // added Track dark mode preference with AppStorage
+    @AppStorage("isDarkMode") private var isDarkMode: Bool = false
+    
     // States for Master Control
     @State private var status: String = "Normal"
     @State private var currentSchedule: String = "Normal Schedule" // Track the active schedule
@@ -55,7 +58,6 @@ struct TeacherMainView: View {
 
                 // Lock/Unlock buttons
                 HStack {
-                    // Disable buttons based on the current schedule
                     if isOverrideActive {
                         VStack {
                             Button(action: {
@@ -81,14 +83,11 @@ struct TeacherMainView: View {
                             Text("Unlock")
                         }
                     } else {
-                        // Show a single button based on the status from the schedule
                         if let currentPeriod = activePeriods.first(where: { $0.startTime <= Date() && $0.endTime >= Date() }) {
-                            // If within current period, show locked status
                             Text("Status: Locked")
                                 .font(.title)
                                 .foregroundColor(.red)
                         } else {
-                            // If not within any period, show unlocked status
                             Text("Status: Unlocked")
                                 .font(.title)
                                 .foregroundColor(.green)
@@ -132,11 +131,15 @@ struct TeacherMainView: View {
                             status = "Normal" // Reset to normal when override is turned off
                         }
                     }
+                
+                // Added Dark Mode Toggle
+                Toggle("Dark Mode", isOn: $isDarkMode)
+                    .padding()
             }
             .onAppear {
                 loadActiveSchedule()
             }
-            .preferredColorScheme(btnStyle.getTeacherScheme() == 0 ? .light : .dark)
+            .preferredColorScheme(isDarkMode ? .dark : .light)
             .tabItem {
                 Image(systemName: "house")
                 Text("Home")
