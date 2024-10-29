@@ -7,6 +7,7 @@
 
 import SwiftUI
 import MultipeerConnectivity
+import FirebaseAuth
 
 struct DiscoveredPeer: Identifiable {
     let id = UUID()
@@ -163,7 +164,7 @@ class BluetoothManager: NSObject, ObservableObject, MCSessionDelegate, MCNearbyS
     
     override init() {
         super.init()
-        peerID = MCPeerID(displayName: UIDevice.current.name)
+        peerID = MCPeerID(displayName: Auth.auth().currentUser?.email ?? "nil")
         mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
         mcSession.delegate = self
         
