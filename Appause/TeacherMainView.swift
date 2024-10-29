@@ -1,33 +1,38 @@
 //
 //  TeacherMainView.swift
-//  Appause
+//  Appause_TeamF12_HTr
 //
 //  Created by Huy Tran on 4/16/24.
 //  Revised by Rayanne Ohara on 09/12/2024
 //  Revised by Rayanne Ohara on 10/01/2024
-//  Revised by Rayanne Ohara on 10/14/2024
 //
+
 import SwiftUI
-import FirebaseFirestore
 
 struct TeacherMainView: View {
-    // Binding state for transitions from view to view
+    // Add this binding state for transitions from view to view
     @Binding var showNextView: DisplayState
     @StateObject var studentList = StudentList()
-    
+    @State var studentName = ""
     // States for Master Control
     @State private var status: String = "Normal"
-    @State private var currentSchedule: String = "Normal Schedule" // Track the active schedule
-    @State private var activePeriods: [(classID: String, startTime: Date, endTime: Date)] = [] // Active periods from the selected schedule
-    @State private var isOverrideActive: Bool = false // Track whether the manual override is active
-
+    
+    // States for Connect Code Generation
+    @State private var generatedCode: String = ""
+    // Array used to generate a random character string
+    @State private var charList = ["1","2","3","4","5","6","7","8","9","0",
+                    "a","b","c","d","e","f","g","h","i","j",
+                    "k","l","m","n","o","p","q","r","s","t",
+                    "u","v","w","x","y","z"]
+    
     var body: some View {
+        
         // Main tab
         TabView {
             VStack {
                 Button(action: {
                     withAnimation {
-                        // Transition to the next view
+                        // Make button show nextView .whateverViewYouWantToShow defined in ContentView Enum
                         showNextView = .mainTeacher
                     }
                 }) {
@@ -44,7 +49,7 @@ struct TeacherMainView: View {
                 .padding(.top)
                 Spacer()
                 
-                // Text displaying the current status of the app
+                // Text displaying the current status of our app with normal meaning unlocked
                 Text("Status: " + status)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .font(.title)
@@ -52,54 +57,69 @@ struct TeacherMainView: View {
                     .padding(.top, 10)
                     .padding(.bottom, 10)
                     .padding(.leading, 105)
-
-                // Lock/Unlock buttons
+                    
+                // Had to use HStack to align buttons horizontally
                 HStack {
-                    // Disable buttons based on the current schedule
-                    if isOverrideActive {
-                        VStack {
-                            Button(action: {
-                                status = "Locked"
-                            }, label: {
-                                Image(systemName: "lock")
-                                    .padding(.trailing)
-                                    .font(.system(size: 100))
-                                    .foregroundColor(.red)
-                            })
-                            Text("Lock")
+                    VStack {
+                        // Clicking on this button locks all apps from a student's phone
+                        Button(action: {
+                            status = "Locked"
+                        }, label: {
+                            Image(systemName: "lock")
                                 .padding(.trailing)
-                        }
-                        VStack {
-                            Button(action: {
-                                status = "Unlocked"
-                            }, label: {
-                                Image(systemName: "lock.open")
-                                    .padding(.leading)
-                                    .font(.system(size: 100))
-                                    .foregroundColor(.green)
-                            })
-                            Text("Unlock")
-                        }
-                    } else {
-                        // Show a single button based on the status from the schedule
-                        if let currentPeriod = activePeriods.first(where: { $0.startTime <= Date() && $0.endTime >= Date() }) {
-                            // If within current period, show locked status
-                            Text("Status: Locked")
-                                .font(.title)
+                                .font(.system(size: 100))
                                 .foregroundColor(.red)
-                        } else {
-                            // If not within any period, show unlocked status
-                            Text("Status: Unlocked")
-                                .font(.title)
+                        })
+                        Text("Lock")
+                            .padding(.trailing)
+                    }
+                    VStack {
+                        // Clicking on this button unlocks all apps from a student's phone
+                        Button(action: {
+                            status = "Unlocked"
+                        }, label: {
+                            Image(systemName: "lock.open")
+                                .padding(.leading)
+                                .font(.system(size: 100))
                                 .foregroundColor(.green)
-                        }
+                        })
+                        Text("Unlock")
                     }
                 }
                 Spacer().frame(height: 25)
-
-                // Display connected users
+                
+                Text("Connect Code")
+                    .font(.title)
+                    .padding(1)
+                TextField("Press the button to generate a code", text: $generatedCode)
+                    .background(Color.white.opacity(0.25))
+                    .foregroundColor(Color("BlackWhite"))
+                    .multilineTextAlignment(.center)
+                    .overlay(RoundedRectangle(cornerRadius: 5)
+                        .stroke(lineWidth: 1))
+                    .textFieldStyle(.roundedBorder)
+                    .disabled(true)
+                    .padding(5)
+                // Generates a random string of 6 characters using characters from the charList array
+                Button(action: {
+                    generatedCode = ""
+                    for _ in 0..<6 {
+                        let randomNum = Int.random(in: 0..<36)
+                        generatedCode += charList[randomNum]
+                    }
+                }) {
+                    Text("Generate New Code")
+                        .padding()
+                        .fontWeight(btnStyle.getFont())
+                        .background(btnStyle.getPathColor())
+                        .foregroundColor(btnStyle.getPathFontColor())
+                        .cornerRadius(100)
+                }
+                .padding(.bottom, 25)
+                
+                // UserList
                 VStack {
-                    Text("Connected Users")
+                    Text("Users")
                         .font(.title)
                         .padding(.bottom, 10)
                     
@@ -120,21 +140,6 @@ struct TeacherMainView: View {
                         }
                     }
                 }
-
-                Spacer()
-
-                // Switch for overriding lock/unlock status
-                Toggle("Manual Override", isOn: $isOverrideActive)
-                    .padding()
-                    .onChange(of: isOverrideActive) { value in
-                        // Reset the status when toggle is switched
-                        if !value {
-                            status = "Normal" // Reset to normal when override is turned off
-                        }
-                    }
-            }
-            .onAppear {
-                loadActiveSchedule()
             }
             .preferredColorScheme(btnStyle.getTeacherScheme() == 0 ? .light : .dark)
             .tabItem {
@@ -142,8 +147,8 @@ struct TeacherMainView: View {
                 Text("Home")
             }
             
-            // Other views
-            TeacherAllRequestsView(studentList: studentList)
+            // TeacherAllRequestsView
+            TeacherAllRequestsView()
                 .tabItem {
                     Image(systemName: "hand.raised")
                     Text("Requests")
@@ -171,37 +176,9 @@ struct TeacherMainView: View {
                 }
         }
     }
-
-    // Load the active schedule's periods
-    func loadActiveSchedule() {
-        let db = Firestore.firestore()
-        db.collection("schedules").document(currentSchedule).getDocument { document, error in
-            if let document = document, document.exists {
-                let data = document.data()
-                if let periodsData = data?["periods"] as? [[String: Any]] {
-                    activePeriods = periodsData.compactMap { periodDict in
-                        guard let classID = periodDict["classID"] as? String,
-                              let startTime = periodDict["startTime"] as? Timestamp,
-                              let endTime = periodDict["endTime"] as? Timestamp else { return nil }
-                        return (classID, startTime.dateValue(), endTime.dateValue())
-                    }
-                }
-            } else {
-                print("Error loading active schedule: \(error?.localizedDescription ?? "Unknown error")")
-                // Optionally handle error or set default active periods
-            }
-        }
-    }
-
-    // Date formatter for displaying time
-    func formattedTime(_ date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "h:mm a" // Format time as "hh:mm AM/PM"
-        return formatter.string(from: date)
-    }
 }
 
-struct TeacherMainView_Previews: PreviewProvider {
+struct MainTeacherView_Previews: PreviewProvider {
     @State static private var showNextView: DisplayState = .mainTeacher
     
     static var previews: some View {
