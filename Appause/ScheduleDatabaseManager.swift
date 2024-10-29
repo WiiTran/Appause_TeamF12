@@ -4,55 +4,50 @@
 //
 //  Created by Rayanne Ohara on 10/24/24.
 //
-
-import Foundation
 import FirebaseFirestore
 
 class ScheduleDatabaseManager {
     static let shared = ScheduleDatabaseManager()
-    private let db = Firestore.firestore()
 
-    private init() {}
-
-    func loadPermanentSchedule(_ scheduleName: String) -> [Period] {
-        return PermanentSchedules.getSchedule(scheduleName) ?? []
+    // Loads a predefined permanent schedule based on its name (e.g., Regular, Thursday)
+    func loadPermanentSchedule(_ scheduleName: String) -> [SchedulePeriod]? {
+        switch scheduleName {
+        case "Regular":
+            return PermanentSchedules.regular
+        case "Thursday":
+            return PermanentSchedules.thursday
+        case "Minimum Day":
+            return PermanentSchedules.minimumDay
+        case "Rally":
+            return PermanentSchedules.rally
+        case "Finals":
+            return PermanentSchedules.finals
+        default:
+            return nil
+        }
     }
 
-    func loadCustomSchedule(_ scheduleName: String, completion: @escaping ([Period]?) -> Void) {
+    // Loads a custom schedule from Firestore by name
+    func loadCustomSchedule(_ scheduleName: String, completion: @escaping ([SchedulePeriod]?) -> Void) {
+        let db = Firestore.firestore()
         db.collection("schedules").document(scheduleName).getDocument { document, error in
-            if let document = document, document.exists, let data = document.data(),
-               let periodsData = data["periods"] as? [[String: Any]] {
-                let periods = periodsData.compactMap { periodDict -> Period? in
-                    guard let id = periodDict["id"] as? Int,
-                          let name = periodDict["classID"] as? String,
-                          let startTime = periodDict["startTime"] as? Timestamp,
-                          let endTime = periodDict["endTime"] as? Timestamp else { return nil }
-                    return Period(id: id, name: name, startTime: startTime.dateValue().description, endTime: endTime.dateValue().description)
+            if let document = document, document.exists, let periodsData = document.data()?["periods"] as? [[String: String]] {
+                let loadedPeriods: [SchedulePeriod] = periodsData.compactMap { data in
+                    guard let name = data["name"], let startTime = data["startTime"], let endTime = data["endTime"] else { return nil }
+                    return SchedulePeriod(name: name, startTime: startTime, endTime: endTime)
                 }
-                completion(periods)
+                completion(loadedPeriods)
             } else {
-                print("Error loading schedule: \(error?.localizedDescription ?? "Unknown error")")
                 completion(nil)
             }
         }
     }
 
-    func saveSchedule(_ scheduleName: String, periods: [Period], isPermanent: Bool) {
-        guard !isPermanent else { return }
-        
-        let periodData: [[String: Any]] = periods.map { period in
-            [
-                "id": period.id,
-                "classID": period.name,
-                "startTime": Timestamp(date: DateFormatter.localizedString(from: period.startTime, dateStyle: .none, timeStyle: .short)),
-                "endTime": Timestamp(date: DateFormatter.localizedString(from: period.endTime, dateStyle: .none, timeStyle: .short))
-            ]
-        }
-
-        db.collection("schedules").document(scheduleName).setData([
-            "periods": periodData,
-            "name": scheduleName
-        ]) { error in
+    // Saves a custom schedule to Firestore under the given name
+    func saveCustomSchedule(_ scheduleName: String, periods: [SchedulePeriod]) {
+        let db = Firestore.firestore()
+        let periodData = periods.map { ["name": $0.name, "startTime": $0.startTime, "endTime": $0.endTime] }
+        db.collection("schedules").document(scheduleName).setData(["periods": periodData]) { error in
             if let error = error {
                 print("Error saving schedule: \(error.localizedDescription)")
             } else {
