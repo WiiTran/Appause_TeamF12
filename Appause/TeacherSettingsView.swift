@@ -5,6 +5,7 @@
 //  Created by Dash on 4/19/24.
 //
 import SwiftUI
+import FirebaseAuth
 
 struct TeacherSettingsView: View {
     @Binding var showNextView: DisplayState
@@ -101,6 +102,10 @@ struct TeacherSettingsView: View {
             Spacer()
             
             Button(action: {
+                Task {
+                    try AuthManager.sharedAuth.signoutUser()
+                    print("Logged in: " + (Auth.auth().currentUser?.email ?? "nil"))
+                }
                 withAnimation {
                     //show nextView .whateverViewYouWantToShow defined in ContentView Enum
                     showNextView = .logout}

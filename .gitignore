@@ -1,8 +1,6 @@
-# macOS-Specific Files: .DS_Store is a metadata file created by macOS. It’s safe to ignore.
-.DS_Store
+# Xcode User-specific Files
+*.xcuserstate
 
-# Xcode-specific files: Ignoring files like *.xcworkspac helps avoid syncing user-specific and generated files that Xcode creates for each build.
-*.xcworkspace
-*.xccheckout
-*.xcscmblueprint
+# macOS-specific Files: .DS_Store is a metadata file created by macOS. It’s safe to ignore.
+.DS_Store
 
