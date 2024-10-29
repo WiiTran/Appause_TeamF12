@@ -169,6 +169,11 @@ struct TeacherMainView: View {
                     Image(systemName: "gear")
                     Text("Settings")
                 }
+            BluetoothManagerView()
+                .tabItem {
+                    Image(systemName: "app.connected.to.app.below.fill")
+                    Text("Connectivity Manager")
+                }
         }
     }
 
