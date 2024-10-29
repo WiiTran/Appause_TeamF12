@@ -22,6 +22,7 @@ struct StudentMainView: View {
     @State var thirdButtonName = "Connect Code"
     @State var fourthButtonName = "Settings"
     @State var fifthButtonName = "Submiting Request"
+    @State var sixthButtonName = "Register ClassID"
     var body: some View {
         NavigationView {
             VStack {
@@ -113,6 +114,22 @@ struct StudentMainView: View {
                 .border(btnStyle.getBorderColor(), width: btnStyle.getBorderWidth())
                 .cornerRadius(btnStyle.getBtnRadius())
                 .padding(.bottom, 10)
+                
+                NavigationLink(destination:registerClassView(showNextView: $showNextView)
+                    .navigationBarHidden(true)){
+                        Text(sixthButtonName)
+                            .padding(.leading, 25)
+                            .foregroundColor(btnStyle.getBtnFontColor())
+                            .frame(width:btnStyle.getWidth() + 35,
+                                   height:btnStyle.getHeight(),
+                                   alignment:btnStyle.getAlignment())
+                            .fontWeight(btnStyle.getFont())
+                    }
+                    .padding()
+                    .background(btnStyle.getBtnColor())
+                    .border(btnStyle.getBorderColor(), width: btnStyle.getBorderWidth())
+                    .cornerRadius(btnStyle.getBtnRadius())
+                    .padding(.bottom, 10)
                 //.padding(.bottom, 335)
                 Spacer()
                 // When pressed, will take the student back to the main login page
