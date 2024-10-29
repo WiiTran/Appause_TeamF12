@@ -60,8 +60,8 @@ struct StudentAppRequestView: View {
                 //user selects one to add a new request to appList
                 //currently just adds to appList to demonstrate UI functionality
                 let newAppName = "App " + String(appList.requests.count)
-                appList.requests.append(RequestData(appName: newAppName, approved: ApproveStatus.unprocessed))
-            }) {
+                                appList.requests.append(RequestData(documentID: "testID\(appList.requests.count + 1)", appName: newAppName, approved: ApproveStatus.unprocessed))
+                            }) {
                 Text("+ New")
                     .padding()
                     .fontWeight(btnStyle.getFont())

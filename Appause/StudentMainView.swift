@@ -7,7 +7,6 @@
 
 
 import SwiftUI
-import FirebaseAuth
 
 struct StudentMainView: View {
     //Add this binding state for transitions from view to view
@@ -118,10 +117,6 @@ struct StudentMainView: View {
                 Spacer()
                 // When pressed, will take the student back to the main login page
                 Button(action: {
-                    Task {
-                        try AuthManager.sharedAuth.signoutUser()
-                        print("Logged in: " + (Auth.auth().currentUser?.email ?? "nil"))
-                    }
                     withAnimation {
                         //show nextView .whateverViewYouWantToShow defined in ContentView Enum
                         showNextView = .logout}
