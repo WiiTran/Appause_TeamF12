@@ -158,6 +158,12 @@ struct LoginView: View {
                     Button(action: {
                         self.showCodeField = false
                         self.showTextFields.toggle()
+                        
+                        // Prefill teacher credentials
+                           self.usernameText = keychain.get("teacherUserKey") ?? "h.t@sanjuan.edu"
+                           self.passwordText = keychain.get("teacherPassKey") ?? "Portland0321."
+                        
+                        
                         self.buttonColorTop = self.showTextFields ? buttonColorTopActive: buttonColorTopIdle
                         self.buttonColorBottom = self.showCodeField ? buttonColorTopActive : buttonColorTopIdle
                         if(buttonColorTop == buttonColorTopIdle){
@@ -184,6 +190,11 @@ struct LoginView: View {
                     Button(action: {
                         self.showTextFields = false
                         self.showCodeField.toggle()
+                        
+                        // Prefill student credentials
+                           self.studentUsernameText = keychain.get("studentUserKey") ?? "223344@student.sanjuan.edu"
+                           self.studentPasswordText = keychain.get("studentPassKey") ?? "Password123."
+                        
                         self.buttonColorTop = self.showTextFields ? buttonColorBottomActive: buttonColorBottomIdle
                         self.buttonColorBottom = self.showCodeField ? buttonColorBottomActive : buttonColorBottomIdle
                         if(buttonColorBottom == buttonColorBottomIdle){

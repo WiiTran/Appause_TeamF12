@@ -148,7 +148,7 @@ struct TeacherMainView: View {
             }
             
             // TeacherAllRequestsView
-            TeacherAllRequestsView(studentList: studentList)
+            TeacherAllRequestsView()
                 .tabItem {
                     Image(systemName: "hand.raised")
                     Text("Requests")
@@ -173,6 +173,11 @@ struct TeacherMainView: View {
                 .tabItem {
                     Image(systemName: "gear")
                     Text("Settings")
+                }
+            BluetoothManagerView()
+                .tabItem {
+                    Image(systemName: "app.connected.to.app.below.fill")
+                    Text("Connectivity Manager")
                 }
         }
     }

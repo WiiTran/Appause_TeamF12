@@ -51,4 +51,13 @@ final class AuthManager {
         let authDataResult = try await Auth.auth().signIn(withEmail: email, password: password)
         return AuthDataResult(user: authDataResult.user)
     }
+    
+    func signoutUser() throws {
+        do {
+            try Auth.auth().signOut()
+            print("success")
+        } catch let SignOutError {
+            print("Error signing out user: \(SignOutError.localizedDescription)")
+        }
+    }
 }
