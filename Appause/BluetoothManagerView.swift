@@ -7,6 +7,7 @@
 
 import SwiftUI
 import MultipeerConnectivity
+import FirebaseAuth
 
 struct DiscoveredPeer: Identifiable {
     let id = UUID()
@@ -152,22 +153,27 @@ struct BluetoothManagerView: View {
 }
 
 // BluetoothManager class
-class BluetoothManager: NSObject, ObservableObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate {
+class BluetoothManager: NSObject, ObservableObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate {
     @Published var discoveredPeers: [DiscoveredPeer] = []
     @Published var connectedPeers: [MCPeerID] = []
     private var peerID: MCPeerID!
     private var mcSession: MCSession!
     private var mcBrowser: MCNearbyServiceBrowser!
+    private var mcAdvertiser: MCNearbyServiceAdvertiser!
     private let serviceType = "admin-control"
     
     override init() {
         super.init()
-        peerID = MCPeerID(displayName: UIDevice.current.name)
+        peerID = MCPeerID(displayName: Auth.auth().currentUser?.email ?? "nil")
         mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
         mcSession.delegate = self
         
         mcBrowser = MCNearbyServiceBrowser(peer: peerID, serviceType: serviceType)
         mcBrowser.delegate = self
+        
+        mcAdvertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: serviceType)
+        mcAdvertiser.delegate = self
+        mcAdvertiser.startAdvertisingPeer()
     }
     
     // Start browsing for peers
@@ -230,6 +236,10 @@ class BluetoothManager: NSObject, ObservableObject, MCSessionDelegate, MCNearbyS
             self.discoveredPeers.removeAll { $0.peerID == peerID }
         }
     }
+    
+    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
+            invitationHandler(true, mcSession)
+        }
     
     // Empty implementations for other delegate methods
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {}

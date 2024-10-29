@@ -32,6 +32,9 @@
 		3E1737622BD8A73300D0F290 /* RequestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1737612BD8A73300D0F290 /* RequestData.swift */; };
 		3E1737642BD8AA2C00D0F290 /* TeacherRegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1737632BD8AA2C00D0F290 /* TeacherRegisterView.swift */; };
 		3E35C4E82CBF69940012357A /* TeacherAddScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E35C4E72CBF69940012357A /* TeacherAddScheduleView.swift */; };
+		3E4FD4D32CD07C5100174942 /* UnblockRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4FD4D22CD07C5100174942 /* UnblockRequestView.swift */; };
+		3E4FD4D52CD07C8B00174942 /* studentRequestUnlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4FD4D42CD07C8B00174942 /* studentRequestUnlockView.swift */; };
+		3E4FD4D92CD07ED100174942 /* unlockRequestList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4FD4D82CD07ED100174942 /* unlockRequestList.swift */; };
 		3E8964832C9A907200C75B38 /* TeacherBlacklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8964822C9A907200C75B38 /* TeacherBlacklist.swift */; };
 		3E8AE2962C90213B00ABDA6E /* AppauseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8AE2952C90213B00ABDA6E /* AppauseApp.swift */; };
 		3E8F6AE42BCBD5CC003C4160 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F6AE32BCBD5CC003C4160 /* ContentView.swift */; };
@@ -49,14 +52,22 @@
 		3EA9F4162CBE922E008903AD /* TeacherSignUpUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA9F4152CBE922E008903AD /* TeacherSignUpUITests.swift */; };
 		3EA9F4182CBE9256008903AD /* StudentSignInUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA9F4172CBE9256008903AD /* StudentSignInUITests.swift */; };
 		3EA9F41A2CBE9280008903AD /* TeacherSignInUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA9F4192CBE9280008903AD /* TeacherSignInUITests.swift */; };
-		3EB48DF62CBE81AF00B41BAD /* TeacherScheduleCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB48DF32CBE81AF00B41BAD /* TeacherScheduleCView.swift */; };
 		3EB48DF72CBE81AF00B41BAD /* TeacherMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB48DF42CBE81AF00B41BAD /* TeacherMenuView.swift */; };
-		3EB48DF82CBE81AF00B41BAD /* TeacherScheduleEView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB48DF52CBE81AF00B41BAD /* TeacherScheduleEView.swift */; };
 		3EB48E172CBE907A00B41BAD /* AppauseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB48E162CBE907A00B41BAD /* AppauseUITests.swift */; };
 		3EB48E192CBE907A00B41BAD /* AppauseUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB48E182CBE907A00B41BAD /* AppauseUITestsLaunchTests.swift */; };
+		89968FA82CD0685500E7BC50 /* PermanentSchedules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89968FA72CD0685500E7BC50 /* PermanentSchedules.swift */; };
+		89968FAA2CD0697A00E7BC50 /* ScheduleDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89968FA92CD0697A00E7BC50 /* ScheduleDatabaseManager.swift */; };
 		9B20E1F22CBF6448001F2491 /* enrolledClassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B20E1F12CBF6448001F2491 /* enrolledClassView.swift */; };
 		9B20E1F42CBF647B001F2491 /* classModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B20E1F32CBF647B001F2491 /* classModel.swift */; };
 		9B20E1F82CBF6502001F2491 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B20E1F72CBF6501001F2491 /* FirestoreManager.swift */; };
+
+		9B20E1FA2CBF90CA001F2491 /* studentRequestUnlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B20E1F92CBF90C9001F2491 /* studentRequestUnlockView.swift */; };
+		9B53910C2CCB0029006B254F /* unlockRequestList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B53910B2CCB0029006B254F /* unlockRequestList.swift */; };
+		9B53910E2CCB1469006B254F /* UnblockRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B53910D2CCB1469006B254F /* UnblockRequestView.swift */; };
+
+		9B5391102CD0053A006B254F /* registerClassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B53910F2CD0053A006B254F /* registerClassView.swift */; };
+
+
 
 		C804F9E42CB8C59600E6B5B7 /* ClassIDGenerationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C804F9E32CB8C59600E6B5B7 /* ClassIDGenerationView.swift */; };
 		C81713DB2C9BD75D00362C37 /* AdminRequestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81713DA2C9BD75D00362C37 /* AdminRequestsView.swift */; };
@@ -115,6 +126,9 @@
 		3E1737612BD8A73300D0F290 /* RequestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestData.swift; sourceTree = "<group>"; };
 		3E1737632BD8AA2C00D0F290 /* TeacherRegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherRegisterView.swift; sourceTree = "<group>"; };
 		3E35C4E72CBF69940012357A /* TeacherAddScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherAddScheduleView.swift; sourceTree = "<group>"; };
+		3E4FD4D22CD07C5100174942 /* UnblockRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnblockRequestView.swift; sourceTree = "<group>"; };
+		3E4FD4D42CD07C8B00174942 /* studentRequestUnlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = studentRequestUnlockView.swift; sourceTree = "<group>"; };
+		3E4FD4D82CD07ED100174942 /* unlockRequestList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = unlockRequestList.swift; sourceTree = "<group>"; };
 		3E8964822C9A907200C75B38 /* TeacherBlacklist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherBlacklist.swift; sourceTree = "<group>"; };
 		3E8AE2952C90213B00ABDA6E /* AppauseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppauseApp.swift; sourceTree = "<group>"; };
 		3E8F6ADE2BCBD5CC003C4160 /* Appause.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Appause.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -133,16 +147,21 @@
 		3EA9F4152CBE922E008903AD /* TeacherSignUpUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherSignUpUITests.swift; sourceTree = "<group>"; };
 		3EA9F4172CBE9256008903AD /* StudentSignInUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentSignInUITests.swift; sourceTree = "<group>"; };
 		3EA9F4192CBE9280008903AD /* TeacherSignInUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherSignInUITests.swift; sourceTree = "<group>"; };
-		3EB48DF32CBE81AF00B41BAD /* TeacherScheduleCView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherScheduleCView.swift; sourceTree = "<group>"; };
 		3EB48DF42CBE81AF00B41BAD /* TeacherMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherMenuView.swift; sourceTree = "<group>"; };
-		3EB48DF52CBE81AF00B41BAD /* TeacherScheduleEView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherScheduleEView.swift; sourceTree = "<group>"; };
 		3EB48E142CBE907A00B41BAD /* AppauseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppauseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EB48E162CBE907A00B41BAD /* AppauseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppauseUITests.swift; sourceTree = "<group>"; };
 		3EB48E182CBE907A00B41BAD /* AppauseUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppauseUITestsLaunchTests.swift; sourceTree = "<group>"; };
 
+		89968FA72CD0685500E7BC50 /* PermanentSchedules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermanentSchedules.swift; sourceTree = "<group>"; };
+		89968FA92CD0697A00E7BC50 /* ScheduleDatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDatabaseManager.swift; sourceTree = "<group>"; };
+
 		9B20E1F12CBF6448001F2491 /* enrolledClassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = enrolledClassView.swift; sourceTree = "<group>"; };
 		9B20E1F32CBF647B001F2491 /* classModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = classModel.swift; sourceTree = "<group>"; };
 		9B20E1F72CBF6501001F2491 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
+		9B20E1F92CBF90C9001F2491 /* studentRequestUnlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = studentRequestUnlockView.swift; sourceTree = "<group>"; };
+		9B53910B2CCB0029006B254F /* unlockRequestList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = unlockRequestList.swift; sourceTree = "<group>"; };
+		9B53910D2CCB1469006B254F /* UnblockRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnblockRequestView.swift; sourceTree = "<group>"; };
+		9B53910F2CD0053A006B254F /* registerClassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = registerClassView.swift; sourceTree = "<group>"; };
 		C804F9E32CB8C59600E6B5B7 /* ClassIDGenerationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassIDGenerationView.swift; sourceTree = "<group>"; };
 		C81713DA2C9BD75D00362C37 /* AdminRequestsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminRequestsView.swift; sourceTree = "<group>"; };
 		C8B0A60D2CA64C8F009C0D92 /* BluetoothManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothManagerView.swift; sourceTree = "<group>"; };
@@ -211,6 +230,7 @@
 				3E1737492BD8A36000D0F290 /* StudentChooseAdminView.swift */,
 				3E1737412BD8A29A00D0F290 /* PWCodeVerificationView.swift */,
 				3E8F6AE32BCBD5CC003C4160 /* ContentView.swift */,
+				9B20E1F92CBF90C9001F2491 /* studentRequestUnlockView.swift */,
 				3E8F6AE52BCBD5CE003C4160 /* Assets.xcassets */,
 				3E8F6AE72BCBD5CE003C4160 /* Preview Content */,
 				3E8F6B162BCBD8EE003C4160 /* EULAView.swift */,
@@ -218,20 +238,27 @@
 				3EA44B222BCF43A000732432 /* TwoFactorAuthView.swift */,
 				3EA44B242BCF43DF00732432 /* SelectRegistrationView.swift */,
 				3EA44B262BCF43F100732432 /* StudentMainView.swift */,
+				9B53910D2CCB1469006B254F /* UnblockRequestView.swift */,
+				9B53910F2CD0053A006B254F /* registerClassView.swift */,
 				3EA44B282BCF440F00732432 /* TeacherMainView.swift */,
 				001AC1802C9A1CA000BC8266 /* TeacherScheduleView.swift */,
+				89968FA72CD0685500E7BC50 /* PermanentSchedules.swift */,
 				3E1737632BD8AA2C00D0F290 /* TeacherRegisterView.swift */,
 				3E0956D62BD1D0C10037B462 /* GlobalStyleVar.swift */,
 				3E0956D82BD1E79A0037B462 /* StudentConnectCodeView.swift */,
 				C8D38EF42BD35D9E00F0D2BA /* StudentSettingsView.swift */,
 				C8D38EF62BD3881700F0D2BA /* TeacherSettingsView.swift */,
+				9B53910B2CCB0029006B254F /* unlockRequestList.swift */,
 				3E1737432BD8A2B200D0F290 /* ResetPasswordView.swift */,
 				3E1737472BD8A34500D0F290 /* StudentRegisterView.swift */,
 				ED8FB51D2C910F8C00DFB478 /* Firebase */,
 				3E17374B2BD8A37A00D0F290 /* StudentAppRequestView.swift */,
 				3EB48DF42CBE81AF00B41BAD /* TeacherMenuView.swift */,
+
 				3EB48DF32CBE81AF00B41BAD /* TeacherScheduleCView.swift */,
 				3EB48DF52CBE81AF00B41BAD /* TeacherScheduleEView.swift */,
+				3E4FD4D42CD07C8B00174942 /* studentRequestUnlockView.swift */,
+
 				3E17374D2BD8A39400D0F290 /* StudentDeleteAdminView.swift */,
 				3E17374F2BD8A47A00D0F290 /* TeacherUserRequestView.swift */,
 				3E1737512BD8A48F00D0F290 /* TeacherWhitelist.swift */,
@@ -246,10 +273,15 @@
 				C81713DA2C9BD75D00362C37 /* AdminRequestsView.swift */,
 				C8B0A60D2CA64C8F009C0D92 /* BluetoothManagerView.swift */,
 				C804F9E32CB8C59600E6B5B7 /* ClassIDGenerationView.swift */,
-
 				9B20E1F12CBF6448001F2491 /* enrolledClassView.swift */,
 				9B20E1F72CBF6501001F2491 /* FirestoreManager.swift */,
 				3E35C4E72CBF69940012357A /* TeacherAddScheduleView.swift */,
+
+				89968FA92CD0697A00E7BC50 /* ScheduleDatabaseManager.swift */,
+
+				3E4FD4D22CD07C5100174942 /* UnblockRequestView.swift */,
+				3E4FD4D82CD07ED100174942 /* unlockRequestList.swift */,
+
 			);
 			path = Appause;
 			sourceTree = "<group>";
@@ -448,8 +480,11 @@
 				3EA44B252BCF43DF00732432 /* SelectRegistrationView.swift in Sources */,
 				3E1737522BD8A48F00D0F290 /* TeacherWhitelist.swift in Sources */,
 				3E8964832C9A907200C75B38 /* TeacherBlacklist.swift in Sources */,
+				9B53910E2CCB1469006B254F /* UnblockRequestView.swift in Sources */,
+				9B5391102CD0053A006B254F /* registerClassView.swift in Sources */,
 				3E17374E2BD8A39400D0F290 /* StudentDeleteAdminView.swift in Sources */,
 				C8D38EF52BD35D9E00F0D2BA /* StudentSettingsView.swift in Sources */,
+				9B20E1FA2CBF90CA001F2491 /* studentRequestUnlockView.swift in Sources */,
 				C8B0A60E2CA64C8F009C0D92 /* BluetoothManagerView.swift in Sources */,
 				3E8F6AE42BCBD5CC003C4160 /* ContentView.swift in Sources */,
 				3E1737582BD8A4CA00D0F290 /* TeacherConnectCodeView.swift in Sources */,
@@ -461,26 +496,30 @@
 				3EB48DF72CBE81AF00B41BAD /* TeacherMenuView.swift in Sources */,
 				3E1737482BD8A34500D0F290 /* StudentRegisterView.swift in Sources */,
 				3E1737422BD8A29A00D0F290 /* PWCodeVerificationView.swift in Sources */,
+				9B53910C2CCB0029006B254F /* unlockRequestList.swift in Sources */,
 				3E17375C2BD8A69600D0F290 /* TeacherAppDescription.swift in Sources */,
 				3E17375A2BD8A5B400D0F290 /* TeacherMasterControlView.swift in Sources */,
 				3E17374A2BD8A36000D0F290 /* StudentChooseAdminView.swift in Sources */,
+				3E4FD4D92CD07ED100174942 /* unlockRequestList.swift in Sources */,
 				3EA44B292BCF440F00732432 /* TeacherMainView.swift in Sources */,
 				3E1737502BD8A47A00D0F290 /* TeacherUserRequestView.swift in Sources */,
 				9B20E1F22CBF6448001F2491 /* enrolledClassView.swift in Sources */,
 				3EA44B232BCF43A000732432 /* TwoFactorAuthView.swift in Sources */,
 				3E17375E2BD8A6C200D0F290 /* TimerViewModel.swift in Sources */,
+				89968FAA2CD0697A00E7BC50 /* ScheduleDatabaseManager.swift in Sources */,
 				3EA44B212BCF437C00732432 /* LoginView.swift in Sources */,
 				3E0956D92BD1E79A0037B462 /* StudentConnectCodeView.swift in Sources */,
 				3E1737622BD8A73300D0F290 /* RequestData.swift in Sources */,
+				3E4FD4D32CD07C5100174942 /* UnblockRequestView.swift in Sources */,
 				C804F9E42CB8C59600E6B5B7 /* ClassIDGenerationView.swift in Sources */,
+				3E4FD4D52CD07C8B00174942 /* studentRequestUnlockView.swift in Sources */,
 				C81713DB2C9BD75D00362C37 /* AdminRequestsView.swift in Sources */,
+				89968FA82CD0685500E7BC50 /* PermanentSchedules.swift in Sources */,
 				3E09D9DB2BD8655F008324B7 /* ForgotPasswordView.swift in Sources */,
 				C8D38EF72BD3881700F0D2BA /* TeacherSettingsView.swift in Sources */,
 				001AC1812C9A1CA000BC8266 /* TeacherScheduleView.swift in Sources */,
-				3EB48DF62CBE81AF00B41BAD /* TeacherScheduleCView.swift in Sources */,
 				3E1737562BD8A4BC00D0F290 /* TeacherDeleteStudentView.swift in Sources */,
 				3E1737442BD8A2B200D0F290 /* ResetPasswordView.swift in Sources */,
-				3EB48DF82CBE81AF00B41BAD /* TeacherScheduleEView.swift in Sources */,
 				3E1737602BD8A6F700D0F290 /* TeacherAllRequestsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -649,29 +688,32 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CREATE_INFOPLIST_SECTION_IN_BINARY = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Appause/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 53NSY6KM9Q;
+				DEVELOPMENT_TEAM = 9UY79QFFH9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "We need Face ID for authentication purposes";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = csus.TmF12.Appause;
+				PRODUCT_BUNDLE_IDENTIFIER = csus.F12.Appause;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = AppausePL;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -683,29 +725,32 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CREATE_INFOPLIST_SECTION_IN_BINARY = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Appause/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 53NSY6KM9Q;
+				DEVELOPMENT_TEAM = 9UY79QFFH9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "We need Face ID for authentication purposes";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = csus.TmF12.Appause;
+				PRODUCT_BUNDLE_IDENTIFIER = csus.F12.Appause;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = AppausePL;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

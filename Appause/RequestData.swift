@@ -17,17 +17,41 @@ enum ApproveStatus {
 
 class RequestData: Hashable, Identifiable, ObservableObject {
     let id = UUID()
+    var documentID: String  // Added documentID to store Firestore document ID
     var appName: String
     var appDescription: String
     @Published var approved: ApproveStatus
     @Published var approvedDuration: Float
     
-    init(appName:String, approved:ApproveStatus) {
+    init(documentID: String, appName: String, approved: ApproveStatus) {
+        self.documentID = documentID  // Assigning Firestore document ID
         self.appName = appName
         self.approved = approved
         self.appDescription = "Generic App Description"
         self.approvedDuration = .infinity
     }
+    // New initializer to create RequestData from a Request object
+        init(from request: Request) {
+           
+            self.documentID = request.documentID  // Initialize documentID from the Request object
+            self.appName = request.appName
+            self.appDescription = "Generic App Description"
+            self.approvedDuration = .infinity
+
+            // Map the status string to the ApproveStatus enum
+            switch request.status {
+                case "approved":
+                    self.approved = .approved
+                case "approvedTemporary":
+                    self.approved = .approvedTemporary
+                case "denied":
+                    self.approved = .denied
+                default:
+                    self.approved = .unprocessed
+            }
+        }
+    
+
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(appName)
@@ -92,12 +116,12 @@ extension RequestList: Equatable {
 }
 
 func defaultRequestArr() -> RequestList {
-    return RequestList(requests:[ //Used for convenience.
-        RequestData(appName: "Unprocessed Request", approved: ApproveStatus.unprocessed),
-        RequestData(appName: "Approved App", approved: ApproveStatus.approved),
-        RequestData(appName: "Temporarily Approved App", approved: ApproveStatus.approvedTemporary),
-        RequestData(appName: "Denied App", approved: ApproveStatus.denied)]
-    )
+    return RequestList(requests: [ // Used for convenience.
+        RequestData(documentID: "testID1", appName: "Unprocessed Request", approved: ApproveStatus.unprocessed),
+        RequestData(documentID: "testID2", appName: "Approved App", approved: ApproveStatus.approved),
+        RequestData(documentID: "testID3", appName: "Temporarily Approved App", approved: ApproveStatus.approvedTemporary),
+        RequestData(documentID: "testID4", appName: "Denied App", approved: ApproveStatus.denied)
+    ])
 }
 
 struct AppThumb: View {

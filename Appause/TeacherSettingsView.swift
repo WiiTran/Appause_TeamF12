@@ -5,6 +5,7 @@
 //  Created by Dash on 4/19/24.
 //
 import SwiftUI
+import FirebaseAuth
 
 struct TeacherSettingsView: View {
     @Binding var showNextView: DisplayState
@@ -94,6 +95,7 @@ struct TeacherSettingsView: View {
             Spacer()
             
             Button(action: {
+                // Handle logout
                 withAnimation { showNextView = .logout }
             }) {
                 Text("Logout")
@@ -114,3 +116,4 @@ struct TeacherSettingsView_Previews: PreviewProvider {
         TeacherSettingsView(showNextView: $showNextView)
     }
 }
+

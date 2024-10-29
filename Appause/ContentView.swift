@@ -8,8 +8,9 @@
 import SwiftUI
 
 enum DisplayState {
-    case eula, login, emailCode, mainTeacher, mainStudent, teacherMasterControl, logout, studentConnectCode, studentSettings, teacherSettings, studentDeleteAdmin, enrolledClass, studentRegister, teacherRegister, selectRegistration, resetPassword, teacherManageUsers, teacherBlacklist, teacherWhitelist, twoFactorAuth, pwCodeVerification
+    case eula, login, emailCode, mainTeacher, mainStudent, teacherMasterControl, logout, studentConnectCode, studentSettings, teacherSettings, UnblockRequest, studentDeleteAdmin, enrolledClass, studentChooseAdmin, studentRegister, teacherRegister, selectRegistration, resetPassword, teacherManageUsers, teacherBlacklist, teacherWhitelist, twoFactorAuth, pwCodeVerification, registerClass
 }
+
 
 struct ContentView: View {
     @State private var displayState: DisplayState = .eula
@@ -42,8 +43,12 @@ struct ContentView: View {
                 LoginView(showNextView: $displayState)
             case .studentSettings:
                 StudentSettingsView(showNextView: $displayState)
+            case .UnblockRequest:
+                UnblockRequestView(showNextView: $displayState)
             case .teacherSettings:
                 TeacherSettingsView(showNextView: $displayState)
+            case .studentChooseAdmin:
+                StudentChooseAdminView(showNextView: $displayState)
             case .studentDeleteAdmin:
                 StudentDeleteAdminView()
             case .enrolledClass:
@@ -58,6 +63,8 @@ struct ContentView: View {
                 TeacherManageUsers()
             case .studentRegister:
                 StudentRegisterView(showNextView: $displayState)
+            case .registerClass:
+                registerClassView(showNextView: $displayState)
             case .teacherRegister:
                 TeacherRegisterView(showNextView: $displayState)
             case .selectRegistration:
