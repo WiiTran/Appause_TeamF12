@@ -10,12 +10,17 @@
 	<string>225060133490</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
+    <key>CFBundleName</key>
+    <string>Appause</string>
 	<key>BUNDLE_ID</key>
 	<string>csus.TmF12.Appause</string>
 	<key>PROJECT_ID</key>
 	<string>f012-b90ff</string>
 	<key>STORAGE_BUCKET</key>
 	<string>f012-b90ff.appspot.com</string>
+    <key>NSFaceIDUsageDescription</key>
+    <string>We need Face ID for authentication purposes</string>
+    
 	<key>IS_ADS_ENABLED</key>
 	<false/>
 	<key>IS_ANALYTICS_ENABLED</key>

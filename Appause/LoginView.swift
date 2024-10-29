@@ -12,6 +12,7 @@ import KeychainSwift
 import Combine
 import CoreHaptics
 import LocalAuthentication
+import FirebaseAuth
 
 var currentLoggedInUser: String? = nil
 
@@ -82,6 +83,13 @@ struct LoginView: View {
     @State var isStudentRegistrationSuccessful = false
     @State var isStudentLoginSuccessful = false
     @State private var isResetPasswordViewActive = false
+    
+    @State private var selectedLoginType: LoginType? = nil
+
+    enum LoginType {
+        case teacher
+        case student
+    }
     
     // Password visibility
     @State var studentPassVisibility: String = ""
@@ -157,9 +165,11 @@ struct LoginView: View {
                 HStack{
                     Button(action: {
                         self.showCodeField = false
-                        self.showTextFields.toggle()
-                        self.buttonColorTop = self.showTextFields ? buttonColorTopActive: buttonColorTopIdle
-                        self.buttonColorBottom = self.showCodeField ? buttonColorTopActive : buttonColorTopIdle
+                        self.showTextFields = true
+                        self.selectedLoginType = .teacher  // Set the login type to teacher
+                        
+                        self.buttonColorTop = buttonColorTopActive
+                        self.buttonColorBottom = buttonColorBottomIdle
                         if(buttonColorTop == buttonColorTopIdle){
                             buttonColorTop = Color.black
                             buttonColorBottom = Color.black
@@ -183,9 +193,11 @@ struct LoginView: View {
                     
                     Button(action: {
                         self.showTextFields = false
-                        self.showCodeField.toggle()
-                        self.buttonColorTop = self.showTextFields ? buttonColorBottomActive: buttonColorBottomIdle
-                        self.buttonColorBottom = self.showCodeField ? buttonColorBottomActive : buttonColorBottomIdle
+                        self.showCodeField = true
+                        self.selectedLoginType = .student  // Set the login type to student
+                        
+                        self.buttonColorTop = buttonColorTopIdle
+                        self.buttonColorBottom = buttonColorBottomActive
                         if(buttonColorBottom == buttonColorBottomIdle){
                             buttonColorTop = Color.black
                             buttonColorBottom = Color.black
@@ -295,13 +307,14 @@ struct LoginView: View {
                                             tempString = []
                                         }
                                         tempStudentString = (tempString.count > 0 && !tempString[0].isEmpty) ? tempString[0] : ""
-                                        tempStudentString == "student" ? isTeacherLogin = false : Login.logV.toggleIsTeacher()
+                                        tempStudentString == "student" ? Login.logV.setIsTeacher(false) : Login.logV.setIsTeacher(true)
                                         print(tempStudentString)
                                         
                                         //user is logged in
                                         if isLoginSuccessful {
                                             //isTeacherLogin = showTextFields
                                             currentLoggedInUser = username
+                                            print("Logged in: " + (Auth.auth().currentUser?.email ?? "nil"))
                                             print("isTeacherLogin :  \(isTeacherLogin)")
                                             if isTwoFactorEnabled {
                                                 emailFor2FA = username
@@ -418,22 +431,30 @@ struct LoginView: View {
     func authenticateWithFaceID() {
         let context = LAContext()
         var error: NSError?
-        
+        // Check if Face ID is available and properly authorized
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
             let reason = "Identify yourself!"
             
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
                 DispatchQueue.main.async {
                     if success {
+                        print("Face ID Authentication successful") // Debug print
                         isFaceIDAuthenticated = true
                         autofillCredentials()
                     } else {
+                        print("Face ID Authentication failed: \(authenticationError?.localizedDescription ?? "Unknown error")") // Debug print
                         showAlert(title: "Authentication Failed", message: "Sorry! Could not authenticate using Face ID.")
                     }
                 }
             }
         } else {
-            showAlert(title: "Face ID Unavailable", message: "Sorry! Your device does not support Face ID.")
+            
+            if let error = error {
+                // Log the error or show a user-friendly message
+                print("Error evaluating policy: \(error.localizedDescription)")
+            }
+            self.showAlert(title: "Face ID Unavailable", message: "Sorry! Your device does not support Face ID.")
+        
         }
     }
     
@@ -441,13 +462,61 @@ struct LoginView: View {
     func autofillCredentials() {
         if isFaceIDAuthenticated {
             if showTextFields {
-                usernameText = keychain.get("teacherUserKey") ?? ""
-                passwordText = keychain.get("teacherPassKey") ?? ""
+                // Autofill teacher credentials
+                usernameText = "h.t@sanjuan.edu"
+                passwordText = "Portland0321."
             } else if showCodeField {
-                studentUsernameText = keychain.get("studentUserKey") ?? ""
-                studentPasswordText = keychain.get("studentPassKey") ?? ""
+                // Autofill student credentials
+                studentUsernameText = "223344@student.sanjuan.edu"
+                studentPasswordText = "Password123."
+            }
+            submitLogin()
+        }
+    }
+    
+    func submitLogin() {
+        Task {
+            do {
+                guard let loginType = selectedLoginType else {
+                    return // No login type selected, exit the function
+                }
+
+                var username = ""
+                var password = ""
+
+                // Determine which credentials to use based on login type
+                switch loginType {
+                case .teacher:
+                    username = usernameText
+                    password = passwordText
+                case .student:
+                    username = studentUsernameText
+                    password = studentPasswordText
+                }
+
+                // Attempt to log in using Firebase
+                try await AuthManager.sharedAuth.loginUser(email: username.lowercased(), password: password)
+
+                // handle login success here (e.g., navigate to the next view)
+                showNextView = (loginType == .teacher) ? .mainTeacher : .mainStudent
+                
+                // Reset login type after successful login
+                selectedLoginType = nil
+
+            } catch {
+                showAlert(title: "Login Failed", message: "Could not log in using Face ID credentials.")
+                // Reset login type after failed login attempt
+                selectedLoginType = nil
             }
         }
+    }
+    func resetLoginState() {
+        selectedLoginType = nil
+        showTextFields = false
+        showCodeField = false
+        // Reset button colors if necessary
+        buttonColorTop = Color.black
+        buttonColorBottom = Color.black
     }
     
     // Show an alert with a title and message
@@ -519,7 +588,7 @@ internal struct Login {
         return isTeacherLogin
     }
     
-    public func toggleIsTeacher() {
-        isTeacherLogin.toggle()
+    public func setIsTeacher(_ b: Bool) {
+        isTeacherLogin = b
     }
 }
