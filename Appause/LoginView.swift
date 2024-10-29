@@ -91,7 +91,9 @@ struct LoginView: View {
     //written by Luke Simoni
     @State var tempStudentString: String = ""
     @State var tempString: [String] = []
-    
+    @AppStorage("isUserLoggedIn") var isUserLoggedIn: Bool = false // Track login status
+    @AppStorage("isDarkMode") private var isDarkMode: Bool = false // Track dark mode preference
+
     // Custom SwiftUI view to create a text field with an optional eye icon for password visibility
     struct TextFieldWithEyeIcon: View {
         // Placeholder text for the text field
@@ -111,9 +113,15 @@ struct LoginView: View {
                 if isSecure {
                     // SecureField is used for password input
                     SecureField(placeholder, text: $text)
+                        .disableAutocorrection(true)
+                        .autocapitalization(.none)
+                        .textInputAutocapitalization(.never) // Prevents suggestions
                 } else {
                     // TextField is used for non-password input
                     TextField(placeholder, text: $text)
+                        .disableAutocorrection(true)
+                        .autocapitalization(.none)
+                        .textInputAutocapitalization(.never)
                 }
                 
                 // Button for toggling password visibility
@@ -313,6 +321,8 @@ struct LoginView: View {
                                         if isLoginSuccessful {
                                             //isTeacherLogin = showTextFields
                                             currentLoggedInUser = username
+                                            isUserLoggedIn = true // added Track that the user is logged in
+
                                             print("isTeacherLogin :  \(isTeacherLogin)")
                                             if isTwoFactorEnabled {
                                                 emailFor2FA = username

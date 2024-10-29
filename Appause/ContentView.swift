@@ -7,24 +7,25 @@
 
 import SwiftUI
 
-// add aditional display states here for additional View transitions
 enum DisplayState {
-
-    case eula, login, emailCode, mainTeacher, mainStudent, teacherMasterControl, logout, studentConnectCode, studentSettings, teacherSettings, UnblockRequest, studentDeleteAdmin, enrolledClass, studentChooseAdmin, studentRegister, teacherRegister, selectRegistration, resetPassword, teacherManageUsers,teacherBlacklist, registerClass, teacherWhitelist, twoFactorAuth, pwCodeVerification
-
+    case eula, login, emailCode, mainTeacher, mainStudent, teacherMasterControl, logout, studentConnectCode, studentSettings, teacherSettings, UnblockRequest, studentDeleteAdmin, enrolledClass, studentChooseAdmin, studentRegister, teacherRegister, selectRegistration, resetPassword, teacherManageUsers, teacherBlacklist, teacherWhitelist, twoFactorAuth, pwCodeVerification, registerClass
 }
+
 
 struct ContentView: View {
     @State private var displayState: DisplayState = .eula
     @State private var email: String = "test@example.com"
-    @State private var show2FAInput: Bool = true // Add this line
+    @State private var show2FAInput: Bool = true
     
-    //initializes the environment variable that comes from the Project190App file
+    // Track login status and dark mode preference
+    @AppStorage("isUserLoggedIn") var isUserLoggedIn: Bool = false
+    @AppStorage("isDarkMode") var isDarkMode: Bool = false
+
     @StateObject var viewSwitcher = ViewSwitcher()
     
     var body: some View {
         VStack {
-            //add DisplayState transitions here
+            // DisplayState transitions
             switch displayState {
             case .eula:
                 EULAView(showNextView: $displayState)
@@ -38,7 +39,7 @@ struct ContentView: View {
                 StudentConnectCodeView()
             case .teacherMasterControl:
                 TeacherMasterControlView(showNextView: $displayState)
-            case .logout :
+            case .logout:
                 LoginView(showNextView: $displayState)
             case .studentSettings:
                 StudentSettingsView(showNextView: $displayState)
@@ -55,7 +56,7 @@ struct ContentView: View {
             case .teacherWhitelist:
                 TeacherWhitelist()
             case .teacherBlacklist:
-                    TeacherWhitelist()
+                TeacherWhitelist()
             case .resetPassword:
                 ResetPasswordView(showNextView: $displayState)
             case .teacherManageUsers:
@@ -73,22 +74,24 @@ struct ContentView: View {
             case .pwCodeVerification:
                 PWCodeVerificationView(showNextView: $displayState)
             case .twoFactorAuth:
-                TwoFactorAuthView(showNextView: $displayState, email: email, onVerificationSuccess: {
-                    // You can add actions here that should be performed on successful verification
-                    print("Verification successful!")}, show2FAInput: $show2FAInput)
-
+                TwoFactorAuthView(
+                    showNextView: $displayState,
+                    email: email,
+                    onVerificationSuccess: {
+                        print("Verification successful!")
+                    },
+                    show2FAInput: $show2FAInput
+                )
             }
         }
-        //adds viewSwitcher to the views so that all views can access the values of viewSwitcher
+        .preferredColorScheme(isUserLoggedIn ? (isDarkMode ? .dark : .light) : .none)
         .environmentObject(viewSwitcher)
     }
 }
 
-
 struct ContentView_Previews: PreviewProvider {
-    //shows the first state
     @State static private var showNextView: DisplayState = .eula
-    
+
     static var previews: some View {
         ContentView()
     }

@@ -9,8 +9,12 @@
 import SwiftUI
 
 struct StudentMainView: View {
-    //Add this binding state for transitions from view to view
+    // Binding state for transitions from view to view
     @Binding var showNextView: DisplayState
+    @AppStorage("isUserLoggedIn") var isUserLoggedIn: Bool = false
+
+    // Track dark mode preference with AppStorage
+    @AppStorage("isDarkMode") private var isDarkMode: Bool = false
     
     @State var mainButtonColor = Color.black
     @State private var btnColor: Color = Color.gray.opacity(0.25)
@@ -37,17 +41,18 @@ struct StudentMainView: View {
                 .padding()
                 .background(btnStyle.getPathColor())
                 .cornerRadius(btnStyle.getPathRadius())
+                
                 Spacer()
-                // When pressed, will allow students to view and manage all of their classes
-                Button(action:{withAnimation
-                    {showNextView = .enrolledClass}
-                }){
+                
+                Button(action: {
+                    withAnimation { showNextView = .enrolledClass }
+                }) {
                     Text(secondButtonName)
                         .padding(.leading, 25)
                         .foregroundColor(btnStyle.getBtnFontColor())
-                        .frame(width:btnStyle.getWidth(),
-                               height:btnStyle.getHeight(),
-                               alignment:btnStyle.getAlignment())
+                        .frame(width: btnStyle.getWidth(),
+                               height: btnStyle.getHeight(),
+                               alignment: btnStyle.getAlignment())
                         .fontWeight(btnStyle.getFont())
                     Image(systemName: "hand.raised")
                         .fontWeight(btnStyle.getFont())
@@ -60,15 +65,14 @@ struct StudentMainView: View {
                 .cornerRadius(btnStyle.getBtnRadius())
                 .padding(.bottom, 10)
                 
-                
-                NavigationLink(destination:StudentConnectCodeView()
-                    .navigationBarHidden(true)){
+                NavigationLink(destination: StudentConnectCodeView()
+                    .navigationBarHidden(true)) {
                         Text(thirdButtonName)
                             .padding(.leading, 25)
                             .foregroundColor(btnStyle.getBtnFontColor())
-                            .frame(width:btnStyle.getWidth() + 35,
-                                   height:btnStyle.getHeight(),
-                                   alignment:btnStyle.getAlignment())
+                            .frame(width: btnStyle.getWidth() + 35,
+                                   height: btnStyle.getHeight(),
+                                   alignment: btnStyle.getAlignment())
                             .fontWeight(btnStyle.getFont())
                     }
                     .padding()
@@ -77,13 +81,15 @@ struct StudentMainView: View {
                     .cornerRadius(btnStyle.getBtnRadius())
                     .padding(.bottom, 10)
                 
-                Button(action: {withAnimation {showNextView = .studentSettings}}){
+                Button(action: {
+                    withAnimation { showNextView = .studentSettings }
+                }) {
                     Text(fourthButtonName)
                         .padding(.leading, 25)
                         .foregroundColor(btnStyle.getBtnFontColor())
-                        .frame(width:btnStyle.getWidth(),
-                               height:btnStyle.getHeight(),
-                               alignment:btnStyle.getAlignment())
+                        .frame(width: btnStyle.getWidth(),
+                               height: btnStyle.getHeight(),
+                               alignment: btnStyle.getAlignment())
                         .fontWeight(btnStyle.getFont())
                     Image(systemName: "gear")
                         .imageScale(.large)
@@ -132,12 +138,19 @@ struct StudentMainView: View {
                     .padding(.bottom, 10)
                 //.padding(.bottom, 335)
                 Spacer()
-                // When pressed, will take the student back to the main login page
+                
+                // Dark Mode Toggle
+                Toggle("Dark Mode", isOn: $isDarkMode)
+                    .padding()
+                
+                Spacer()
+                
                 Button(action: {
                     withAnimation {
-                        //show nextView .whateverViewYouWantToShow defined in ContentView Enum
-                        showNextView = .logout}
-                }){
+                        isUserLoggedIn = false
+                        showNextView = .logout
+                    }
+                }) {
                     Text("Logout")
                         .foregroundColor(.black)
                         .fontWeight(.bold)
@@ -147,8 +160,8 @@ struct StudentMainView: View {
                 .cornerRadius(200)
             }
             .padding()
-            .preferredColorScheme(btnStyle.getStudentScheme() == 0 ? .light : .dark)
-        }
+            .preferredColorScheme(isDarkMode ? .dark : .light)
+        } // updated
     }
 }
 

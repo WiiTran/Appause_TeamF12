@@ -15,8 +15,10 @@ struct TeacherSettingsView: View {
     @State var fourthButton = "Disable Bluetooth"
     @State var fifthButton = "Dark Mode"
     
-    //environment variable used in navigation when the back button is pressed during the password reset process
     @EnvironmentObject var viewSwitcher: ViewSwitcher
+    
+    // Track the dark mode setting with @AppStorage to persist across views
+    @AppStorage("isDarkMode") private var isDarkMode: Bool = false
     
     // Fetch the 2FA setting for the current logged-in user
     @State var isTwoFactorEnabled: Bool = {
@@ -25,8 +27,6 @@ struct TeacherSettingsView: View {
         }
         return false
     }()
-    
-    @State private var colorScheme = btnStyle.getTeacherScheme()
     
     var body: some View {
         VStack {
@@ -42,12 +42,10 @@ struct TeacherSettingsView: View {
             .background(btnStyle.getPathColor())
             .cornerRadius(btnStyle.getPathRadius())
             .padding(.top)
+            
             Spacer()
             
             Button(action: {
-                /* sets the last page that the user was at before entering the password reset process to
-                   the teacher settings page so that if the user presses the back button it brings the user
-                   back to the teacher settings page. */
                 viewSwitcher.lastView = "teacherSettings"
                 withAnimation { showNextView = .emailCode }
             }) {
@@ -76,16 +74,11 @@ struct TeacherSettingsView: View {
             .accessibilityIdentifier("Enable 2-Factor Authentication Toggle")
             .padding()
             
-
-            
+            // Dark Mode Toggle
             Button(action: {
-                btnStyle.setTeacherScheme()
-                colorScheme = btnStyle.getTeacherScheme()
-                if colorScheme == 0 {
-                    fifthButton = "Dark Mode"
-                } else {
-                    fifthButton = "Light Mode"
-                }
+                // Toggle the dark mode value
+                isDarkMode.toggle()
+                fifthButton = isDarkMode ? "Light Mode" : "Dark Mode"
             }) {
                 Text(fifthButton)
                     .fontWeight(btnStyle.getFont())
@@ -98,18 +91,13 @@ struct TeacherSettingsView: View {
             .background(btnStyle.getBtnColor())
             .border(btnStyle.getBorderColor(), width: btnStyle.getBorderWidth())
             .cornerRadius(btnStyle.getBtnRadius())
-            //.padding(.bottom, 300)
+            
             Spacer()
             
             Button(action: {
-                Task {
-                    try AuthManager.sharedAuth.signoutUser()
-                    print("Logged in: " + (Auth.auth().currentUser?.email ?? "nil"))
-                }
-                withAnimation {
-                    //show nextView .whateverViewYouWantToShow defined in ContentView Enum
-                    showNextView = .logout}
-            }){
+                // Handle logout
+                withAnimation { showNextView = .logout }
+            }) {
                 Text("Logout")
                     .foregroundColor(.black)
                     .fontWeight(.bold)
@@ -117,9 +105,8 @@ struct TeacherSettingsView: View {
             .padding()
             .background(Color.red)
             .cornerRadius(200)
-            
         }
-        .preferredColorScheme(colorScheme == 0 ? .light : .dark)
+        .preferredColorScheme(isDarkMode ? .dark : .light)
     }
 }
 
@@ -129,3 +116,4 @@ struct TeacherSettingsView_Previews: PreviewProvider {
         TeacherSettingsView(showNextView: $showNextView)
     }
 }
+

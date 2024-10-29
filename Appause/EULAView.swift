@@ -44,8 +44,8 @@ struct EULAView: View {
             
             Text("EULA")
                 .padding(.top, 15)
-                .background(Color.white)
-                .foregroundColor(.black)
+                .background(Color("Background"))// updatte Color.White
+                .foregroundColor(.primary)// updated .black
                 .bold()
                 
             
@@ -74,8 +74,8 @@ struct EULAView: View {
                     
                                             .padding(.top, 30)
                                             .padding(.horizontal, 50)
-                                                .background(Color.white)
-                                                .foregroundColor(.black)
+                                                .background(Color("Background"))//updated
+                                                .foregroundColor(.primary)// updated .balck
                                                 .lineLimit(nil)
                                                 .frame(
                                                     minWidth: 100,
@@ -93,7 +93,7 @@ struct EULAView: View {
                                 }) {
                                     Text("Accept")
                                         .padding()
-                                        .background(Color.black)
+                                        .background(Color ("ButtonBackground"))// updated from .bllack
                                         .foregroundColor(.white)
                                         .cornerRadius(5)
                                 }

@@ -10,29 +10,25 @@
 import SwiftUI
 
 struct TeacherMainView: View {
-    // Add this binding state for transitions from view to view
     @Binding var showNextView: DisplayState
     @StateObject var studentList = StudentList()
-    @State var studentName = ""
-    // States for Master Control
+    @AppStorage("isDarkMode") private var isDarkMode: Bool = false
+    @State private var isOverrideActive = false
     @State private var status: String = "Normal"
-    
-    // States for Connect Code Generation
     @State private var generatedCode: String = ""
+    
     // Array used to generate a random character string
     @State private var charList = ["1","2","3","4","5","6","7","8","9","0",
-                    "a","b","c","d","e","f","g","h","i","j",
-                    "k","l","m","n","o","p","q","r","s","t",
-                    "u","v","w","x","y","z"]
+                                   "a","b","c","d","e","f","g","h","i","j",
+                                   "k","l","m","n","o","p","q","r","s","t",
+                                   "u","v","w","x","y","z"]
     
     var body: some View {
-        
         // Main tab
         TabView {
             VStack {
                 Button(action: {
                     withAnimation {
-                        // Make button show nextView .whateverViewYouWantToShow defined in ContentView Enum
                         showNextView = .mainTeacher
                     }
                 }) {
@@ -47,9 +43,9 @@ struct TeacherMainView: View {
                 .background(btnStyle.getPathColor())
                 .cornerRadius(btnStyle.getPathRadius())
                 .padding(.top)
+                
                 Spacer()
                 
-                // Text displaying the current status of our app with normal meaning unlocked
                 Text("Status: " + status)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .font(.title)
@@ -57,35 +53,59 @@ struct TeacherMainView: View {
                     .padding(.top, 10)
                     .padding(.bottom, 10)
                     .padding(.leading, 105)
-                    
-                // Had to use HStack to align buttons horizontally
+                
                 HStack {
-                    VStack {
-                        // Clicking on this button locks all apps from a student's phone
-                        Button(action: {
-                            status = "Locked"
-                        }, label: {
-                            Image(systemName: "lock")
+                    if isOverrideActive {
+                        VStack {
+                            Button(action: {
+                                status = "Locked"
+                            }) {
+                                Image(systemName: "lock")
+                                    .padding(.trailing)
+                                    .font(.system(size: 100))
+                                    .foregroundColor(.red)
+                            }
+                            Text("Lock")
                                 .padding(.trailing)
-                                .font(.system(size: 100))
-                                .foregroundColor(.red)
-                        })
-                        Text("Lock")
-                            .padding(.trailing)
-                    }
-                    VStack {
-                        // Clicking on this button unlocks all apps from a student's phone
-                        Button(action: {
-                            status = "Unlocked"
-                        }, label: {
-                            Image(systemName: "lock.open")
-                                .padding(.leading)
-                                .font(.system(size: 100))
-                                .foregroundColor(.green)
-                        })
-                        Text("Unlock")
+                        }
+                        VStack {
+                            Button(action: {
+                                status = "Unlocked"
+                            }) {
+                                Image(systemName: "lock.open")
+                                    .padding(.leading)
+                                    .font(.system(size: 100))
+                                    .foregroundColor(.green)
+                            }
+                            Text("Unlock")
+                        }
+                    } else {
+                        VStack {
+                            Button(action: {
+                                status = "Locked"
+                            }) {
+                                Image(systemName: "lock")
+                                    .padding(.trailing)
+                                    .font(.system(size: 100))
+                                    .foregroundColor(.red)
+                            }
+                            Text("Lock")
+                                .padding(.trailing)
+                        }
+                        VStack {
+                            Button(action: {
+                                status = "Unlocked"
+                            }) {
+                                Image(systemName: "lock.open")
+                                    .padding(.leading)
+                                    .font(.system(size: 100))
+                                    .foregroundColor(.green)
+                            }
+                            Text("Unlock")
+                        }
                     }
                 }
+                
                 Spacer().frame(height: 25)
                 
                 Text("Connect Code")
@@ -100,7 +120,7 @@ struct TeacherMainView: View {
                     .textFieldStyle(.roundedBorder)
                     .disabled(true)
                     .padding(5)
-                // Generates a random string of 6 characters using characters from the charList array
+                
                 Button(action: {
                     generatedCode = ""
                     for _ in 0..<6 {
@@ -117,7 +137,6 @@ struct TeacherMainView: View {
                 }
                 .padding(.bottom, 25)
                 
-                // UserList
                 VStack {
                     Text("Users")
                         .font(.title)
@@ -140,40 +159,59 @@ struct TeacherMainView: View {
                         }
                     }
                 }
+                
+                Spacer()
+                
+                Toggle("Manual Override", isOn: $isOverrideActive)
+                    .padding()
+                    .onChange(of: isOverrideActive) { value in
+                        if !value { status = "Normal" }
+                    }
+                
+                Toggle("Dark Mode", isOn: $isDarkMode)
+                    .padding()
             }
-            .preferredColorScheme(btnStyle.getTeacherScheme() == 0 ? .light : .dark)
+            .onAppear {
+                loadActiveSchedule()
+            }
+            .preferredColorScheme(isDarkMode ? .dark : .light)
             .tabItem {
                 Image(systemName: "house")
                 Text("Home")
             }
             
-            // TeacherAllRequestsView
-            TeacherAllRequestsView()
+            // Pass studentList as a parameter to TeacherAllRequestsView
+            TeacherAllRequestsView(studentList: studentList)
                 .tabItem {
                     Image(systemName: "hand.raised")
                     Text("Requests")
                 }
+            
             TeacherWhitelist()
                 .tabItem {
                     Image(systemName: "bookmark.slash")
                     Text("WhiteList")
                 }
+            
             TeacherManageUsers()
                 .tabItem {
                     Image(systemName: "person.2")
                     Text("Students")
                 }
                 .environmentObject(studentList)
+            
             TeacherScheduleView()
                 .tabItem {
                     Image(systemName: "bell")
                     Text("Schedule")
                 }
+            
             TeacherSettingsView(showNextView: $showNextView)
                 .tabItem {
                     Image(systemName: "gear")
                     Text("Settings")
                 }
+            
             BluetoothManagerView()
                 .tabItem {
                     Image(systemName: "app.connected.to.app.below.fill")
@@ -181,12 +219,17 @@ struct TeacherMainView: View {
                 }
         }
     }
+    
+    func loadActiveSchedule() {
+        // Add code to load schedule if required
+    }
 }
 
-struct MainTeacherView_Previews: PreviewProvider {
+struct TeacherMainView_Previews: PreviewProvider {
     @State static private var showNextView: DisplayState = .mainTeacher
     
     static var previews: some View {
         TeacherMainView(showNextView: $showNextView)
     }
 }
+
