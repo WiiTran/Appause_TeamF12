@@ -17,6 +17,14 @@ struct TeacherMainView: View {
     @State private var status: String = "Normal"
     @State private var generatedCode: String = ""
     
+    @State var studentName = ""
+    
+//    // States for Master Control
+//    @State private var status: String = "Normal"
+//    
+//    // States for Connect Code Generation
+//    @State private var generatedCode: String = ""
+    
     // Array used to generate a random character string
     @State private var charList = ["1","2","3","4","5","6","7","8","9","0",
                                    "a","b","c","d","e","f","g","h","i","j",
@@ -181,36 +189,31 @@ struct TeacherMainView: View {
             }
             
             // Pass studentList as a parameter to TeacherAllRequestsView
-            TeacherAllRequestsView(studentList: studentList)
+            TeacherAllRequestsView()
                 .tabItem {
                     Image(systemName: "hand.raised")
                     Text("Requests")
                 }
-            
             TeacherWhitelist()
                 .tabItem {
                     Image(systemName: "bookmark.slash")
                     Text("WhiteList")
                 }
-            
             TeacherManageUsers()
                 .tabItem {
                     Image(systemName: "person.2")
                     Text("Students")
                 }
                 .environmentObject(studentList)
-            
             TeacherScheduleView()
                 .tabItem {
                     Image(systemName: "bell")
                     Text("Schedule")
                 }
-            
             TeacherSettingsView(showNextView: $showNextView)
                 .tabItem {
                     Image(systemName: "gear")
-                    Text("Settings")
-                }
+                    Text("Settings")                }
             
             BluetoothManagerView()
                 .tabItem {
@@ -219,12 +222,11 @@ struct TeacherMainView: View {
                 }
         }
     }
-    
-    func loadActiveSchedule() {
-        // Add code to load schedule if required
-    }
 }
 
+func loadActiveSchedule() {
+    // Add code to load schedule if required
+}
 struct TeacherMainView_Previews: PreviewProvider {
     @State static private var showNextView: DisplayState = .mainTeacher
     
