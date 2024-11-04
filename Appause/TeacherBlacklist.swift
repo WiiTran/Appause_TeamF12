@@ -3,9 +3,6 @@
 //  Appause
 //
 //  Created by Huy Tran on 4/23/24.
-//
-
-
 import SwiftUI
 
 
@@ -14,7 +11,7 @@ struct TeacherBlacklistApp: View {
     @State var studentName: String
    
     var body: some View {
-            ZStack {
+            HStack {
                 Image(systemName:"newspaper")
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(.green)
@@ -27,7 +24,7 @@ struct TeacherBlacklistApp: View {
                     
                 HStack {
                     Button(action: { // Approve
-                        request = RequestData(documentID: "testID", appName: request.appName, approved: ApproveStatus.approved)
+                        request = RequestData(documentID: "testID", appName: request.appName, studentID: "student123", approved: ApproveStatus.approved)
                     }) {
                         if request.approved == ApproveStatus.approved {
                             Image(systemName: "hand.thumbsup.fill")
@@ -38,9 +35,9 @@ struct TeacherBlacklistApp: View {
                         }
                     }
                     .buttonStyle(BorderlessButtonStyle())
-                    
+
                     Button(action: { // Deny
-                        request = RequestData(documentID: "testID", appName: request.appName, approved: ApproveStatus.denied)
+                        request = RequestData(documentID: "testID", appName: request.appName, studentID: "student123", approved: ApproveStatus.denied)
                     }) {
                         if request.approved == ApproveStatus.denied {
                             Image(systemName: "hand.thumbsdown.fill")
@@ -65,12 +62,12 @@ struct TeacherBlacklist: View {
     var userName = "User"
     
     @State var appList: [RequestData] = [
-        RequestData(documentID: "testID1", appName: "Facebook", approved: ApproveStatus.approved),
-        RequestData(documentID: "testID2", appName: "TikTok", approved: ApproveStatus.denied),
-        RequestData(documentID: "testID3", appName: "Snapchat", approved: ApproveStatus.denied),
-        RequestData(documentID: "testID4", appName: "Instagram", approved: ApproveStatus.approved),
-        RequestData(documentID: "testID5", appName: "Twitter", approved: ApproveStatus.unprocessed),
-        RequestData(documentID: "testID6", appName: "Reddit", approved: ApproveStatus.unprocessed)
+        RequestData(documentID: "testID1", appName: "Facebook", studentID: "223344", approved: ApproveStatus.approved),
+           RequestData(documentID: "testID2", appName: "TikTok", studentID: "223344", approved: ApproveStatus.denied),
+           RequestData(documentID: "testID3", appName: "Snapchat", studentID: "223344", approved: ApproveStatus.denied),
+           RequestData(documentID: "testID4", appName: "Instagram", studentID: "223344", approved: ApproveStatus.approved),
+           RequestData(documentID: "testID5", appName: "Twitter", studentID: "223344", approved: ApproveStatus.unprocessed),
+           RequestData(documentID: "testID6", appName: "Reddit", studentID: "223344", approved: ApproveStatus.unprocessed)
     ]
     
     
@@ -117,9 +114,9 @@ struct TeacherBlacklist: View {
                        maxHeight: UIScreen.main.bounds.size.height*0.7)
                 
                 Button(action: {
-                                   let newAppName = "App " + String(appList.count + 1)
-                                   appList.append(RequestData(documentID: "testID\(appList.count + 1)", appName: newAppName, approved: ApproveStatus.unprocessed))
-                               }) {
+                    let newAppName = "App " + String(appList.count + 1)
+                    appList.append(RequestData(documentID: "testID\(appList.count + 1)", appName: newAppName, studentID: "studentNew", approved: ApproveStatus.unprocessed))
+                }) {
                     Text("+ New")
                         .padding()
                         .fontWeight(btnStyle.getFont())
@@ -135,7 +132,7 @@ struct TeacherBlacklist: View {
 
 struct TeacherBlacklist_Previews: PreviewProvider {
     static var previews: some View {
-        TeacherWhitelist()
+        TeacherBlacklist()
     }
 }
 
