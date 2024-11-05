@@ -1,12 +1,14 @@
 //
 //  TeacherAppDescription.swift
-//  Appause_TeamF12_HTr
+//  Appause_TeamF12_
 //
 //  Created by Huy Tran on 4/23/24.
-//
+// Revisited by Huy Tran on 10/28/24
 
 
 import SwiftUI
+import Firebase
+import FirebaseFirestore
 
 struct TeacherAppDescription: View {
     @Environment(\.dismiss) private var dismiss
@@ -101,27 +103,31 @@ struct TeacherAppDescription: View {
             Spacer()
             
             if chosenApprove != ApproveStatus.unprocessed {
-                Button(action: {
-                    switch chosenApprove {
-                    case ApproveStatus.approved:
-                        appData.approvedDuration = .infinity
-                    case ApproveStatus.approvedTemporary:
-                        if((hours == 0 && minutes == 0) ||
-                            (hours < 0 || minutes < 0)) {
-                            showAlert = true
-                            return
-                        }
-                        else {
-                            appData.approvedDuration = Float(hours*60 + minutes)
-                        }
-                    case ApproveStatus.denied:
-                        appData.approvedDuration = 0
-                        dismiss()
-                    case ApproveStatus.unprocessed: //Should never occur
-                        return
-                    }
-                    appData.approved = chosenApprove
-                    dismiss()
+                            // Updated button action to save decision to Firestore
+                            Button(action: {
+                                switch chosenApprove {
+                                case ApproveStatus.approved:
+                                    appData.approvedDuration = .infinity
+                                    // Call to update Firestore
+                                    updateRequestStatusInFirestore(status: "approved")
+                                case ApproveStatus.approvedTemporary:
+                                    if ((hours == 0 && minutes == 0) || (hours < 0 || minutes < 0)) {
+                                        showAlert = true
+                                        return
+                                    } else {
+                                        appData.approvedDuration = Float(hours * 60 + minutes)
+                                        // Call to update Firestore
+                                        updateRequestStatusInFirestore(status: "approvedTemporary")
+                                    }
+                                case ApproveStatus.denied:
+                                    appData.approvedDuration = 0
+                                    // Call to update Firestore
+                                    updateRequestStatusInFirestore(status: "denied")
+                                case ApproveStatus.unprocessed:
+                                    return
+                                }
+                                appData.approved = chosenApprove
+                                dismiss()
                 }) {
                     Text("Confirm")
                     Image(systemName: "checkmark")
@@ -135,8 +141,23 @@ struct TeacherAppDescription: View {
         }
         .preferredColorScheme(btnStyle.getTeacherScheme() == 0 ? .light : .dark)
     }
-    
+    // New Function to Update Firestore
+    func updateRequestStatusInFirestore(status: String) {
+            let db = Firestore.firestore()
+            db.collection("unblockRequests").document(appData.documentID).updateData([
+                "status": status,
+                "approvedDuration": (chosenApprove == .approvedTemporary) ? hours * 60 + minutes : nil // Save duration only if temporary approval
+            ]) { error in
+                if let error = error {
+                    print("Error updating document: \(error)")
+                } else {
+                    print("Document successfully updated.")
+                }
+           }
+       }
 }
+
+
 
 struct RadioThumb : View {
     @Binding var inputStatus: ApproveStatus
@@ -169,10 +190,8 @@ extension View {
 }
 
 struct TeacherAppApproval_Previews: PreviewProvider {
-    //@State private var appData: RequestData = RequestData(appName:"App", approved: ApproveStatus.unprocessed)
-    
     static var previews: some View {
-        let appData = RequestData(appName:"App", approved: ApproveStatus.unprocessed)
+        let appData = RequestData(documentID: "testDocumentID", appName: "App", approved: ApproveStatus.unprocessed)
         TeacherAppDescription(appData: appData)
     }
 }

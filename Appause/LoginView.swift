@@ -91,7 +91,9 @@ struct LoginView: View {
     //written by Luke Simoni
     @State var tempStudentString: String = ""
     @State var tempString: [String] = []
-    
+    @AppStorage("isUserLoggedIn") var isUserLoggedIn: Bool = false // Track login status
+    @AppStorage("isDarkMode") private var isDarkMode: Bool = false // Track dark mode preference
+
     // Custom SwiftUI view to create a text field with an optional eye icon for password visibility
     struct TextFieldWithEyeIcon: View {
         // Placeholder text for the text field
@@ -111,9 +113,15 @@ struct LoginView: View {
                 if isSecure {
                     // SecureField is used for password input
                     SecureField(placeholder, text: $text)
+                        .disableAutocorrection(true)
+                        .autocapitalization(.none)
+                        .textInputAutocapitalization(.never) // Prevents suggestions
                 } else {
                     // TextField is used for non-password input
                     TextField(placeholder, text: $text)
+                        .disableAutocorrection(true)
+                        .autocapitalization(.none)
+                        .textInputAutocapitalization(.never)
                 }
                 
                 // Button for toggling password visibility
@@ -158,6 +166,12 @@ struct LoginView: View {
                     Button(action: {
                         self.showCodeField = false
                         self.showTextFields.toggle()
+                        
+                        // Prefill teacher credentials
+                           self.usernameText = keychain.get("teacherUserKey") ?? "h.t@sanjuan.edu"
+                           self.passwordText = keychain.get("teacherPassKey") ?? "Portland0321."
+                        
+                        
                         self.buttonColorTop = self.showTextFields ? buttonColorTopActive: buttonColorTopIdle
                         self.buttonColorBottom = self.showCodeField ? buttonColorTopActive : buttonColorTopIdle
                         if(buttonColorTop == buttonColorTopIdle){
@@ -184,6 +198,11 @@ struct LoginView: View {
                     Button(action: {
                         self.showTextFields = false
                         self.showCodeField.toggle()
+                        
+                        // Prefill student credentials
+                           self.studentUsernameText = keychain.get("studentUserKey") ?? "223344@student.sanjuan.edu"
+                           self.studentPasswordText = keychain.get("studentPassKey") ?? "Password123."
+                        
                         self.buttonColorTop = self.showTextFields ? buttonColorBottomActive: buttonColorBottomIdle
                         self.buttonColorBottom = self.showCodeField ? buttonColorBottomActive : buttonColorBottomIdle
                         if(buttonColorBottom == buttonColorBottomIdle){
@@ -302,6 +321,8 @@ struct LoginView: View {
                                         if isLoginSuccessful {
                                             //isTeacherLogin = showTextFields
                                             currentLoggedInUser = username
+                                            isUserLoggedIn = true // added Track that the user is logged in
+
                                             print("isTeacherLogin :  \(isTeacherLogin)")
                                             if isTwoFactorEnabled {
                                                 emailFor2FA = username

@@ -14,49 +14,46 @@ struct TeacherBlacklistApp: View {
     @State var studentName: String
    
     var body: some View {
-        ZStack {
-            Image(systemName:"newspaper")
-                .frame(maxWidth:.infinity, alignment:.leading)
-                .foregroundColor(.green)
-            
-            NavigationLink(destination: TeacherAppDescription(appData: request)
-                .navigationBarHidden(true)) {
-                Text(request.appName)
-                    .frame(maxWidth:.infinity, alignment:.center)
-            }
+            ZStack {
+                Image(systemName:"newspaper")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundColor(.green)
                 
-            //Text(request.appName)
-                //.frame(maxWidth:.infinity, alignment:.center)
-            HStack {
-                Button(action:{ //Approve
-                    request = RequestData(appName: request.appName, approved: ApproveStatus.approved)
-                }) {
-                    if(request.approved == ApproveStatus.approved) {
-                        Image(systemName: "hand.thumbsup.fill")
-                            .foregroundColor(.green)
-                    }
-                    else {
-                        Image(systemName: "hand.thumbsup")
-                            .foregroundColor(.green)
-                    }
+                NavigationLink(destination: TeacherAppDescription(appData: request)
+                    .navigationBarHidden(true)) {
+                    Text(request.appName)
+                        .frame(maxWidth: .infinity, alignment: .center)
                 }
-                .buttonStyle(BorderlessButtonStyle())
-                Button(action:{ //Deny
-                    request = RequestData(appName: request.appName, approved: ApproveStatus.denied)
-                }) {
-                    if(request.approved == ApproveStatus.denied) {
-                        Image(systemName: "hand.thumbsdown.fill")
-                            .foregroundColor(.red)
+                    
+                HStack {
+                    Button(action: { // Approve
+                        request = RequestData(documentID: "testID", appName: request.appName, approved: ApproveStatus.approved)
+                    }) {
+                        if request.approved == ApproveStatus.approved {
+                            Image(systemName: "hand.thumbsup.fill")
+                                .foregroundColor(.green)
+                        } else {
+                            Image(systemName: "hand.thumbsup")
+                                .foregroundColor(.green)
+                        }
                     }
-                    else {
-                        Image(systemName: "hand.thumbsdown")
-                            .foregroundColor(.red)
+                    .buttonStyle(BorderlessButtonStyle())
+                    
+                    Button(action: { // Deny
+                        request = RequestData(documentID: "testID", appName: request.appName, approved: ApproveStatus.denied)
+                    }) {
+                        if request.approved == ApproveStatus.denied {
+                            Image(systemName: "hand.thumbsdown.fill")
+                                .foregroundColor(.red)
+                        } else {
+                            Image(systemName: "hand.thumbsdown")
+                                .foregroundColor(.red)
+                        }
                     }
+                    .buttonStyle(BorderlessButtonStyle())
                 }
-                .buttonStyle(BorderlessButtonStyle())
+                .frame(maxWidth: .infinity, alignment: .trailing)
             }
-            .frame(maxWidth:.infinity, alignment:.trailing)
-        }
     }
 }
 
@@ -64,19 +61,16 @@ struct TeacherBlacklistApp: View {
 
 struct TeacherBlacklist: View {
     @Environment(\.dismiss) private var dismiss
-    
     @State private var searchAppName: String = ""
     var userName = "User"
     
-    @State var appList:[RequestData] = [
-        RequestData(appName: "Facebook", approved: ApproveStatus.approved),
-        RequestData(appName: "TikTok", approved: ApproveStatus.denied),
-              RequestData(appName: "Snapchat", approved: ApproveStatus.denied),
-              RequestData(appName: "Instagram", approved: ApproveStatus.approved),
-              RequestData(appName: "Twitter", approved: ApproveStatus.unprocessed),
-              RequestData(appName: "Reddit", approved: ApproveStatus.unprocessed)
-        
-          
+    @State var appList: [RequestData] = [
+        RequestData(documentID: "testID1", appName: "Facebook", approved: ApproveStatus.approved),
+        RequestData(documentID: "testID2", appName: "TikTok", approved: ApproveStatus.denied),
+        RequestData(documentID: "testID3", appName: "Snapchat", approved: ApproveStatus.denied),
+        RequestData(documentID: "testID4", appName: "Instagram", approved: ApproveStatus.approved),
+        RequestData(documentID: "testID5", appName: "Twitter", approved: ApproveStatus.unprocessed),
+        RequestData(documentID: "testID6", appName: "Reddit", approved: ApproveStatus.unprocessed)
     ]
     
     
@@ -123,10 +117,9 @@ struct TeacherBlacklist: View {
                        maxHeight: UIScreen.main.bounds.size.height*0.7)
                 
                 Button(action: {
-                  
-                    let newAppName = "App " + String(appList.count)
-                    appList.append(RequestData(appName: newAppName, approved: ApproveStatus.unprocessed))
-                }) {
+                                   let newAppName = "App " + String(appList.count + 1)
+                                   appList.append(RequestData(documentID: "testID\(appList.count + 1)", appName: newAppName, approved: ApproveStatus.unprocessed))
+                               }) {
                     Text("+ New")
                         .padding()
                         .fontWeight(btnStyle.getFont())
