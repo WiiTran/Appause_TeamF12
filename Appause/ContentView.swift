@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  Appause_TeamF12_HTr
+//  Appause
 //
 //  Created by Huy Tran on 4/14/24.
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum DisplayState {
-    case eula, login, /*emailCode,*/ mainTeacher, mainStudent, /*teacherMasterControl,*/ logout, /*studentConnectCode,*/ studentSettings, teacherSettings, UnblockRequest, studentDeleteAdmin, enrolledClass, /*studentChooseAdmin,*/ studentRegister, teacherRegister, selectRegistration,/* resetPassword,*/ teacherManageUsers, teacherBlacklist, teacherWhitelist, twoFactorAuth, /*pwCodeVerification,*/ registerClass
+    case eula, login, /*emailCode,*/ mainTeacher, mainStudent, /*teacherMasterControl,*/ logout, /*studentConnectCode,*/ studentSettings, teacherSettings, UnblockRequest, /*studentDeleteAdmin,*/ enrolledClass, /*studentChooseAdmin,*/ studentRegister, teacherRegister, selectRegistration,/* resetPassword,*/ teacherManageUsers, teacherBlacklist, teacherWhitelist, /*twoFactorAuth,*/ /*pwCodeVerification,*/ registerClass
 }
 
 
@@ -49,8 +49,8 @@ struct ContentView: View {
                 TeacherSettingsView(showNextView: $displayState)
 //            case .studentChooseAdmin:
 //                StudentChooseAdminView(showNextView: $displayState)
-            case .studentDeleteAdmin:
-                StudentDeleteAdminView()
+//            case .studentDeleteAdmin:
+//                StudentDeleteAdminView()
             case .enrolledClass:
                 enrolledClassView(showNextView: $displayState, StudentID: "sampleStudentId")
             case .teacherWhitelist:
@@ -73,15 +73,15 @@ struct ContentView: View {
 //                ForgotPasswordView(showNextView: $displayState)
 //            case .pwCodeVerification:
 //                PWCodeVerificationView(showNextView: $displayState)
-            case .twoFactorAuth:
-                TwoFactorAuthView(
-                    showNextView: $displayState,
-                    email: email,
-                    onVerificationSuccess: {
-                        print("Verification successful!")
-                    },
-                    show2FAInput: $show2FAInput
-                )
+//            case .twoFactorAuth:
+//                TwoFactorAuthView(
+//                    showNextView: $displayState,
+//                    email: email,
+//                    onVerificationSuccess: {
+//                        print("Verification successful!")
+//                    },
+//                    show2FAInput: $show2FAInput
+//                )
             }
         }
         .preferredColorScheme(isUserLoggedIn ? (isDarkMode ? .dark : .light) : .none)

@@ -1,6 +1,6 @@
 //
 //  LoginView.swift
-//  Appause_TeamF12_HTr
+//  Appause
 //
 //  Created by Huy Tran on 4/16/24.
 //
@@ -168,8 +168,8 @@ struct LoginView: View {
                         self.showTextFields.toggle()
                         
                         // Prefill teacher credentials
-                           self.usernameText = keychain.get("teacherUserKey") ?? "h.t@sanjuan.edu"
-                           self.passwordText = keychain.get("teacherPassKey") ?? "Portland0321."
+                        self.usernameText = keychain.get("teacherUserKey") ?? "h.t@sanjuan.edu"
+                        self.passwordText = keychain.get("teacherPassKey") ?? "Portland0321."
                         
                         
                         self.buttonColorTop = self.showTextFields ? buttonColorTopActive: buttonColorTopIdle
@@ -200,8 +200,8 @@ struct LoginView: View {
                         self.showCodeField.toggle()
                         
                         // Prefill student credentials
-                           self.studentUsernameText = keychain.get("studentUserKey") ?? "223344@student.sanjuan.edu"
-                           self.studentPasswordText = keychain.get("studentPassKey") ?? "Password123."
+                        self.studentUsernameText = keychain.get("studentUserKey") ?? "223344@student.sanjuan.edu"
+                        self.studentPasswordText = keychain.get("studentPassKey") ?? "Password123."
                         
                         self.buttonColorTop = self.showTextFields ? buttonColorBottomActive: buttonColorBottomIdle
                         self.buttonColorBottom = self.showCodeField ? buttonColorBottomActive : buttonColorBottomIdle
@@ -267,22 +267,22 @@ struct LoginView: View {
                         }
                         
                         // "Forgot password?" button aligned to the right
-//                        HStack {
-//                            Button(action: {
-//                                /* sets the last page that the user was at before entering the password reset process to
-//                                   the login page so that if the user presses the back button it brings the user
-//                                   back to the login page. */
-//                                viewSwitcher.lastView = "login"
-//                                withAnimation {
-//                                    showNextView = .emailCode
-//                                }
-//                            }) {
-//                                
-//                            }
-//                            .padding(.vertical, 10.0)
-//                            .padding(.leading, 235.0)
-//                        }
-//                        
+                        //                        HStack {
+                        //                            Button(action: {
+                        //                                /* sets the last page that the user was at before entering the password reset process to
+                        //                                   the login page so that if the user presses the back button it brings the user
+                        //                                   back to the login page. */
+                        //                                viewSwitcher.lastView = "login"
+                        //                                withAnimation {
+                        //                                    showNextView = .emailCode
+                        //                                }
+                        //                            }) {
+                        //                                
+                        //                            }
+                        //                            .padding(.vertical, 10.0)
+                        //                            .padding(.leading, 235.0)
+                        //                        }
+                        //                        
                         HStack {
                             if showErrorMessages && errorMessages == "registration" {
                                 Text("Incorrect Username/Password. Try again.")
@@ -293,8 +293,8 @@ struct LoginView: View {
                             Spacer()
                             
                             Button(action: {
-//                                let registeredUsername = showTextFields ? keychain.get("teacherUserKey") : keychain.get("studentUserKey")
-//                                let registeredPassword = showTextFields ? keychain.get("teacherPassKey") : keychain.get("studentPassKey")
+                                //                                let registeredUsername = showTextFields ? keychain.get("teacherUserKey") : keychain.get("studentUserKey")
+                                //                                let registeredPassword = showTextFields ? keychain.get("teacherPassKey") : keychain.get("studentPassKey")
                                 let username = (showTextFields ? usernameText : studentUsernameText).lowercased()
                                 let password = (showTextFields ? passwordText : studentPasswordText)
                                 
@@ -303,8 +303,8 @@ struct LoginView: View {
                                     do {
                                         // Attempt to login the user
                                         _ = try await AuthManager.sharedAuth.loginUser(email: username, password: password)
-                                                isLoginSuccessful = true
-                                                print("trying to log in")
+                                        isLoginSuccessful = true
+                                        print("trying to log in")
                                         
                                         // filter whether the user is a teacher or student
                                         tempString = username.components(separatedBy: "@")
@@ -322,7 +322,7 @@ struct LoginView: View {
                                             //isTeacherLogin = showTextFields
                                             currentLoggedInUser = username
                                             isUserLoggedIn = true // added Track that the user is logged in
-
+                                            
                                             print("isTeacherLogin :  \(isTeacherLogin)")
                                             if isTwoFactorEnabled {
                                                 emailFor2FA = username
@@ -350,13 +350,13 @@ struct LoginView: View {
                                         withAnimation(.easeInOut(duration: 0.05).repeatCount(4, autoreverses: true)) {
                                             shakeOffset = 6
                                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                                                    shakeOffset = 0
+                                                shakeOffset = 0
                                             }
                                         }
                                         performShakeAnimation()
                                         showErrorMessages = true
-                                        }
                                     }
+                                }
                                 
                                 print(isLoginSuccessful)
                                 
@@ -399,7 +399,7 @@ struct LoginView: View {
                         HStack {
                             Spacer()
                             Text("Don't have an account?")
-                                //.padding(.leading, 15)
+                            //.padding(.leading, 15)
                             
                             Button(action: {
                                 withAnimation {
@@ -415,15 +415,15 @@ struct LoginView: View {
                         .padding(.top, 10)
                     }
                 }
-                
-            } else {
-                if show2FAInput {
-                    TwoFactorAuthView(showNextView: $showNextView, email: emailFor2FA, onVerificationSuccess: {
-                        show2FAInput = false
-                        showNextView = isTeacherLogin ? .mainTeacher : .mainStudent
-                    }, show2FAInput: $show2FAInput)
-                }
             }
+//            } else {
+//                if show2FAInput {
+//                    TwoFactorAuthView(showNextView: $showNextView, email: emailFor2FA, onVerificationSuccess: {
+//                        show2FAInput = false
+//                        showNextView = isTeacherLogin ? .mainTeacher : .mainStudent
+//                    }, show2FAInput: $show2FAInput)
+//                }
+//            }
             Spacer()
 //            
 //            Image("")

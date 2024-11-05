@@ -1,6 +1,6 @@
 //
 //  StudentSettingsView.swift
-//  Appause_TeamF12_HTr
+//  Appause
 //
 //  Created by Dash on 4/19/24.
 //

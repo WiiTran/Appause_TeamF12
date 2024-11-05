@@ -1,6 +1,6 @@
 //
 //  EULAView.swift
-//  Appause_TeamF12_HTr
+//  Appause
 //
 //  Created by Huy Tran on 4/14/24.
 //
