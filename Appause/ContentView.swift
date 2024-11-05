@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum DisplayState {
-    case eula, login, emailCode, mainTeacher, mainStudent, teacherMasterControl, logout, studentConnectCode, studentSettings, teacherSettings, UnblockRequest, studentDeleteAdmin, enrolledClass, studentChooseAdmin, studentRegister, teacherRegister, selectRegistration, resetPassword, teacherManageUsers, teacherBlacklist, teacherWhitelist, twoFactorAuth, pwCodeVerification, registerClass
+    case eula, login, /*emailCode,*/ mainTeacher, mainStudent, /*teacherMasterControl,*/ logout, /*studentConnectCode,*/ studentSettings, teacherSettings, UnblockRequest, studentDeleteAdmin, enrolledClass, /*studentChooseAdmin,*/ studentRegister, teacherRegister, selectRegistration,/* resetPassword,*/ teacherManageUsers, teacherBlacklist, teacherWhitelist, twoFactorAuth, /*pwCodeVerification,*/ registerClass
 }
 
 
@@ -35,10 +35,10 @@ struct ContentView: View {
                 StudentMainView(showNextView: $displayState)
             case .mainTeacher:
                 TeacherMainView(showNextView: $displayState)
-            case .studentConnectCode:
-                StudentConnectCodeView()
-            case .teacherMasterControl:
-                TeacherMasterControlView(showNextView: $displayState)
+//            case .studentConnectCode:
+//                StudentConnectCodeView()
+//            case .teacherMasterControl:
+//                TeacherMasterControlView(showNextView: $displayState)
             case .logout:
                 LoginView(showNextView: $displayState)
             case .studentSettings:
@@ -47,8 +47,8 @@ struct ContentView: View {
                 UnblockRequestView(showNextView: $displayState)
             case .teacherSettings:
                 TeacherSettingsView(showNextView: $displayState)
-            case .studentChooseAdmin:
-                StudentChooseAdminView(showNextView: $displayState)
+//            case .studentChooseAdmin:
+//                StudentChooseAdminView(showNextView: $displayState)
             case .studentDeleteAdmin:
                 StudentDeleteAdminView()
             case .enrolledClass:
@@ -57,8 +57,8 @@ struct ContentView: View {
                 TeacherWhitelist()
             case .teacherBlacklist:
                 TeacherWhitelist()
-            case .resetPassword:
-                ResetPasswordView(showNextView: $displayState)
+//            case .resetPassword:
+//                ResetPasswordView(showNextView: $displayState)
             case .teacherManageUsers:
                 TeacherManageUsers()
             case .studentRegister:
@@ -69,10 +69,10 @@ struct ContentView: View {
                 TeacherRegisterView(showNextView: $displayState)
             case .selectRegistration:
                 SelectRegistrationView(showNextView: $displayState)
-            case .emailCode:
-                ForgotPasswordView(showNextView: $displayState)
-            case .pwCodeVerification:
-                PWCodeVerificationView(showNextView: $displayState)
+//            case .emailCode:
+//                ForgotPasswordView(showNextView: $displayState)
+//            case .pwCodeVerification:
+//                PWCodeVerificationView(showNextView: $displayState)
             case .twoFactorAuth:
                 TwoFactorAuthView(
                     showNextView: $displayState,

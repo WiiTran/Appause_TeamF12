@@ -11,7 +11,7 @@ struct TeacherSettingsView: View {
     @Binding var showNextView: DisplayState
     
     @State var firstButton = "MAIN / SETTINGS"
-    @State var secondButton = "Change Password"
+//    @State var secondButton = "Change Password"
     @State var fourthButton = "Disable Bluetooth"
     @State var fifthButton = "Dark Mode"
     
@@ -20,13 +20,13 @@ struct TeacherSettingsView: View {
     // Track the dark mode setting with @AppStorage to persist across views
     @AppStorage("isDarkMode") private var isDarkMode: Bool = false
     
-    // Fetch the 2FA setting for the current logged-in user
-    @State var isTwoFactorEnabled: Bool = {
-        if let user = currentLoggedInUser {
-            return UserDefaults.standard.bool(forKey: "\(user)_teacherIsTwoFactorEnabled")
-        }
-        return false
-    }()
+//    // Fetch the 2FA setting for the current logged-in user
+//    @State var isTwoFactorEnabled: Bool = {
+//        if let user = currentLoggedInUser {
+//            return UserDefaults.standard.bool(forKey: "\(user)_teacherIsTwoFactorEnabled")
+//        }
+//        return false
+//    }()
     
     var body: some View {
         VStack {
@@ -45,35 +45,35 @@ struct TeacherSettingsView: View {
             
             Spacer()
             
-            Button(action: {
-                viewSwitcher.lastView = "teacherSettings"
-                withAnimation { showNextView = .emailCode }
-            }) {
-                Text(secondButton)
-                    .fontWeight(btnStyle.getFont())
-                    .foregroundColor(btnStyle.getBtnFontColor())
-                    .frame(width: btnStyle.getWidth(),
-                           height: btnStyle.getHeight(),
-                           alignment: btnStyle.getAlignment())
-            }
-            .padding()
-            .background(btnStyle.getBtnColor())
-            .border(btnStyle.getBorderColor(), width: btnStyle.getBorderWidth())
-            .cornerRadius(btnStyle.getBtnRadius())
-            .padding(.bottom, 10)
-            
-            Toggle(isOn: $isTwoFactorEnabled) {
-                Text("Enable 2-Factor Authentication")
-            }
-            .onChange(of: isTwoFactorEnabled) { newValue in
-                if let user = currentLoggedInUser {
-                    UserDefaults.standard.set(newValue, forKey: "\(user)_teacherIsTwoFactorEnabled")
-                }
-            }
-            .accessibilityLabel("Enable 2-Factor Authentication")
-            .accessibilityIdentifier("Enable 2-Factor Authentication Toggle")
-            .padding()
-            
+//            Button(action: {
+//                viewSwitcher.lastView = "teacherSettings"
+//                withAnimation { showNextView = .emailCode }
+//            }) {
+//                Text(secondButton)
+//                    .fontWeight(btnStyle.getFont())
+//                    .foregroundColor(btnStyle.getBtnFontColor())
+//                    .frame(width: btnStyle.getWidth(),
+//                           height: btnStyle.getHeight(),
+//                           alignment: btnStyle.getAlignment())
+//            }
+//            .padding()
+//            .background(btnStyle.getBtnColor())
+//            .border(btnStyle.getBorderColor(), width: btnStyle.getBorderWidth())
+//            .cornerRadius(btnStyle.getBtnRadius())
+//            .padding(.bottom, 10)
+//            
+//            Toggle(isOn: $isTwoFactorEnabled) {
+//                Text("Enable 2-Factor Authentication")
+//            }
+//            .onChange(of: isTwoFactorEnabled) { newValue in
+//                if let user = currentLoggedInUser {
+//                    UserDefaults.standard.set(newValue, forKey: "\(user)_teacherIsTwoFactorEnabled")
+//                }
+//            }
+//            .accessibilityLabel("Enable 2-Factor Authentication")
+//            .accessibilityIdentifier("Enable 2-Factor Authentication Toggle")
+//            .padding()
+//            
             // Dark Mode Toggle
             Button(action: {
                 // Toggle the dark mode value

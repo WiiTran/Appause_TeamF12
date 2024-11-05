@@ -155,7 +155,7 @@ struct TeacherAppDescription: View {
         // Update the original request status in the `unblockRequests` collection
         db.collection("unblockRequests").document(appData.documentID).updateData([
             "status": status,
-            "approvedDuration": (chosenApprove == .approvedTemporary) ? hours * 60 + minutes : nil // Save duration only if temporary approval
+            "approvedDuration": (chosenApprove == .approvedTemporary) ? (hours * 60 + minutes) : 0 // Save duration only if temporary approval
         ]) { error in
             if let error = error {
                 print("Error updating document in unblockRequests: \(error)")
@@ -168,7 +168,7 @@ struct TeacherAppDescription: View {
                     "appName": appData.appName,
                     "approvalStatus": status,
                     "approvedTimestamp": FieldValue.serverTimestamp(),
-                    "approvedDuration": (chosenApprove == .approvedTemporary) ? hours * 60 + minutes : nil // Save duration only if temporary approval
+                    "approvedDuration": (chosenApprove == .approvedTemporary) ? (hours * 60 + minutes) : 0// Save duration only if temporary approval
                 ]
                 
                 if status == "denied" {

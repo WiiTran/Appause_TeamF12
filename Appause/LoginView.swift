@@ -267,22 +267,22 @@ struct LoginView: View {
                         }
                         
                         // "Forgot password?" button aligned to the right
-                        HStack {
-                            Button(action: {
-                                /* sets the last page that the user was at before entering the password reset process to
-                                   the login page so that if the user presses the back button it brings the user
-                                   back to the login page. */
-                                viewSwitcher.lastView = "login"
-                                withAnimation {
-                                    showNextView = .emailCode
-                                }
-                            }) {
-                                
-                            }
-                            .padding(.vertical, 10.0)
-                            .padding(.leading, 235.0)
-                        }
-                        
+//                        HStack {
+//                            Button(action: {
+//                                /* sets the last page that the user was at before entering the password reset process to
+//                                   the login page so that if the user presses the back button it brings the user
+//                                   back to the login page. */
+//                                viewSwitcher.lastView = "login"
+//                                withAnimation {
+//                                    showNextView = .emailCode
+//                                }
+//                            }) {
+//                                
+//                            }
+//                            .padding(.vertical, 10.0)
+//                            .padding(.leading, 235.0)
+//                        }
+//                        
                         HStack {
                             if showErrorMessages && errorMessages == "registration" {
                                 Text("Incorrect Username/Password. Try again.")
@@ -293,18 +293,18 @@ struct LoginView: View {
                             Spacer()
                             
                             Button(action: {
-                                let registeredUsername = showTextFields ? keychain.get("teacherUserKey") : keychain.get("studentUserKey")
-                                let registeredPassword = showTextFields ? keychain.get("teacherPassKey") : keychain.get("studentPassKey")
+//                                let registeredUsername = showTextFields ? keychain.get("teacherUserKey") : keychain.get("studentUserKey")
+//                                let registeredPassword = showTextFields ? keychain.get("teacherPassKey") : keychain.get("studentPassKey")
                                 let username = (showTextFields ? usernameText : studentUsernameText).lowercased()
                                 let password = (showTextFields ? passwordText : studentPasswordText)
                                 
                                 print(username + " " + password)
                                 Task {
                                     do {
-                                        //login user
-                                        try await AuthManager.sharedAuth.loginUser(email: username, password: password)
-                                        isLoginSuccessful = true
-                                        print("trying to log in")
+                                        // Attempt to login the user
+                                        _ = try await AuthManager.sharedAuth.loginUser(email: username, password: password)
+                                                isLoginSuccessful = true
+                                                print("trying to log in")
                                         
                                         // filter whether the user is a teacher or student
                                         tempString = username.components(separatedBy: "@")
@@ -425,13 +425,13 @@ struct LoginView: View {
                 }
             }
             Spacer()
-            
-            Image("")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 150, height: 150)
-            
-            Spacer()
+//            
+//            Image("")
+//                .resizable()
+//                .scaledToFit()
+//                .frame(width: 150, height: 150)
+//            
+//            Spacer()
         }
     }
     

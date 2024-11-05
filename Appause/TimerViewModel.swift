@@ -17,7 +17,7 @@ class TimerViewModel: ObservableObject {
                 self.timeRemaining -= 1
                 self.timeString = self.timeFormatted(self.timeRemaining)
             } else {
-                self.invalidateCode()
+//                self.invalidateCode()
                 self.stopTimer()
             }
         }
@@ -34,8 +34,8 @@ class TimerViewModel: ObservableObject {
         return String(format: "%d:%02d", minutes, seconds)
     }
 
-    func invalidateCode() {
-        // Invalidate the code here
-        ForgotPassword.shared.codeIn = ""
-    }
+//    func invalidateCode() {
+//        // Invalidate the code here
+//        ForgotPassword.shared.codeIn = ""
+//    }
 }
