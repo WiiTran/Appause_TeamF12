@@ -210,6 +210,11 @@ struct TeacherMainView: View {
                     Image(systemName: "bell")
                     Text("Schedule")
                 }
+            ClassIDGenerationView()
+                    .tabItem {
+                        Image(systemName: "plus.square")
+                        Text("Create New Class")
+                    }
             TeacherSettingsView(showNextView: $showNextView)
                 .tabItem {
                     Image(systemName: "gear")
