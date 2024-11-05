@@ -30,155 +30,155 @@ struct ClassIDGenerationView: View {
     private let db = Firestore.firestore()
 
     var body: some View {
-        VStack(spacing: 16) {
-            Spacer().frame(height: 75)
+        ScrollView {  // Added ScrollView to prevent content overflow
+            VStack(spacing: 16) {
+                Text("Create a New Class")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .frame(maxWidth: .infinity)
+                    .multilineTextAlignment(.center)
+                    .padding(.top, 20)
 
-            Text("Create a New Class")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .frame(maxWidth: .infinity)
-                .multilineTextAlignment(.center)
+                VStack(alignment: .leading, spacing: 5) {
+                    TextField("Enter Class Name", text: $className)
+                        .padding()
+                        .background(Color.gray.opacity(0.2))
+                        .cornerRadius(8)
+                        .padding(.horizontal)
 
-            VStack(alignment: .leading, spacing: 5) {
-                TextField("Enter Class Name", text: $className)
-                    .padding()
-                    .background(Color.gray.opacity(0.2))
-                    .cornerRadius(8)
-                    .padding(.horizontal)
-
-                if classNameError {
-                    Text("Class Name is required")
-                        .foregroundColor(.red)
-                        .padding(.leading)
-                }
-            }
-            
-            VStack(alignment: .leading, spacing: 5) {
-                            Text("Enter Period")
-                                .font(.headline)
-                                .padding(.leading)
-                            
-                            TextField("Enter Period (e.g., 1, 2, 3)", text: $period)
-                                .keyboardType(.numberPad)
-                                .padding()
-                                .background(Color.gray.opacity(0.2))
-                                .cornerRadius(8)
-                                .padding(.horizontal)
-            }
-
-            DatePicker("Select Start Time", selection: $classStartTime, displayedComponents: .hourAndMinute)
-                .padding()
-                .background(Color.gray.opacity(0.2))
-                .cornerRadius(8)
-                .padding(.horizontal)
-
-            DatePicker("Select End Time", selection: $classEndTime, displayedComponents: .hourAndMinute)
-                .padding()
-                .background(Color.gray.opacity(0.2))
-                .cornerRadius(8)
-                .padding(.horizontal)
-
-            VStack(alignment: .leading, spacing: 5) {
-                Text("Select Days of the Week")
-                    .font(.headline)
-                    .padding(.leading)
-
-                Button(action: { isDaysSelectionVisible.toggle() }) {
-                    HStack {
-                        Text(selectedDays.isEmpty ? "Choose Days" : selectedDays.joined(separator: ", "))
-                            .foregroundColor(selectedDays.isEmpty ? .gray : .blue)
+                    if classNameError {
+                        Text("Class Name is required")
+                            .foregroundColor(.red)
                             .padding(.leading)
-
-                        Spacer()
-
-                        Image(systemName: "chevron.down")
-                            .rotationEffect(.degrees(isDaysSelectionVisible ? 180 : 0))
-                            .padding(.trailing)
                     }
+                }
+
+                DatePicker("Select Start Time", selection: $classStartTime, displayedComponents: .hourAndMinute)
                     .padding()
                     .background(Color.gray.opacity(0.2))
                     .cornerRadius(8)
                     .padding(.horizontal)
-                }
 
-                if daysError {
-                    Text("Please select at least one day")
-                        .foregroundColor(.red)
+                DatePicker("Select End Time", selection: $classEndTime, displayedComponents: .hourAndMinute)
+                    .padding()
+                    .background(Color.gray.opacity(0.2))
+                    .cornerRadius(8)
+                    .padding(.horizontal)
+
+                VStack(alignment: .leading, spacing: 5) {
+                    Text("Enter Period")
+                        .font(.headline)
                         .padding(.leading)
-                }
-            }
 
-            if isDaysSelectionVisible {
-                VStack {
-                    ForEach(daysOfWeek, id: \.self) { day in
+                    TextField("Enter Period (e.g., 1, 2, 3)", text: $period)
+                        .keyboardType(.numberPad)
+                        .padding()
+                        .background(Color.gray.opacity(0.2))
+                        .cornerRadius(8)
+                        .padding(.horizontal)
+                }
+
+                VStack(alignment: .leading, spacing: 5) {
+                    Text("Select Days of the Week")
+                        .font(.headline)
+                        .padding(.leading)
+
+                    Button(action: { isDaysSelectionVisible.toggle() }) {
                         HStack {
-                            Text(day)
+                            Text(selectedDays.isEmpty ? "Choose Days" : selectedDays.joined(separator: ", "))
+                                .foregroundColor(selectedDays.isEmpty ? .gray : .blue)
+                                .padding(.leading)
+
                             Spacer()
-                            Button(action: { toggleDaySelection(day) }) {
-                                Image(systemName: selectedDays.contains(day) ? "checkmark.square" : "square")
-                                    .foregroundColor(selectedDays.contains(day) ? .blue : .gray)
-                            }
+
+                            Image(systemName: "chevron.down")
+                                .rotationEffect(.degrees(isDaysSelectionVisible ? 180 : 0))
+                                .padding(.trailing)
                         }
+                        .padding()
+                        .background(Color.gray.opacity(0.2))
+                        .cornerRadius(8)
                         .padding(.horizontal)
                     }
-                }
-                .background(Color.white)
-                .cornerRadius(8)
-                .shadow(radius: 10)
-                .padding(.horizontal)
-            }
 
-            VStack(alignment: .leading, spacing: 5) {
-                TextField("Enter Teacher ID", text: $teacherID)
-                    .padding()
-                    .background(Color.gray.opacity(0.2))
+                    if daysError {
+                        Text("Please select at least one day")
+                            .foregroundColor(.red)
+                            .padding(.leading)
+                    }
+                }
+
+                if isDaysSelectionVisible {
+                    VStack {
+                        ForEach(daysOfWeek, id: \.self) { day in
+                            HStack {
+                                Text(day)
+                                Spacer()
+                                Button(action: { toggleDaySelection(day) }) {
+                                    Image(systemName: selectedDays.contains(day) ? "checkmark.square" : "square")
+                                        .foregroundColor(selectedDays.contains(day) ? .blue : .gray)
+                                }
+                            }
+                            .padding(.horizontal)
+                        }
+                    }
+                    .background(Color.white)
                     .cornerRadius(8)
+                    .shadow(radius: 10)
                     .padding(.horizontal)
+                }
 
-                if teacherIDError {
-                    Text("Teacher ID is required")
+                VStack(alignment: .leading, spacing: 5) {
+                    TextField("Enter Teacher ID", text: $teacherID)
+                        .padding()
+                        .background(Color.gray.opacity(0.2))
+                        .cornerRadius(8)
+                        .padding(.horizontal)
+
+                    if teacherIDError {
+                        Text("Teacher ID is required")
+                            .foregroundColor(.red)
+                            .padding(.leading)
+                    }
+                }
+
+                if overlapError {
+                    Text("Time conflict detected with an existing class.")
                         .foregroundColor(.red)
-                        .padding(.leading)
+                        .padding()
+                }
+
+                Button(action: validateAndGenerateClassID) {
+                    Text(isGenerating ? "Generating..." : "Create Class")
+                        .padding()
+                        .foregroundColor(.white)
+                        .background(isGenerating ? Color.gray : Color.blue)
+                        .cornerRadius(10)
+                        .padding(.horizontal)
+                }
+                .disabled(isGenerating)
+
+                if let classID = generatedClassID {
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text("Class Created Successfully!")
+                            .font(.headline)
+                            .padding(.top, 20)
+
+                        Text("Class Name: \(className)")
+                        Text("Class Days: \(selectedDays.joined(separator: ", "))")
+                        Text("Class Period: \(formattedTime(classStartTime)) - \(formattedTime(classEndTime))")
+                        Text("Teacher ID: \(teacherID)")
+                        Text("Period: \(period)")
+                        Text("Generated Class ID: \(classID)")
+                            .font(.headline)
+                            .foregroundColor(.green)
+                    }
+                    .padding(.top, 20)
                 }
             }
-
-            if overlapError {
-                Text("Time conflict detected with an existing class.")
-                    .foregroundColor(.red)
-                    .padding()
-            }
-
-            Button(action: validateAndGenerateClassID) {
-                Text(isGenerating ? "Generating..." : "Create Class")
-                    .padding()
-                    .foregroundColor(.white)
-                    .background(isGenerating ? Color.gray : Color.blue)
-                    .cornerRadius(10)
-            }
-            .disabled(isGenerating)
-
-            if let classID = generatedClassID {
-                VStack(alignment: .leading, spacing: 10) {
-                    Text("Class Created Successfully!")
-                        .font(.headline)
-                        .padding(.top, 20)
-
-                    // Show details about the created class
-                    Text("Class Name: \(className)")
-                    Text("Period: \(period)")
-                    Text("Class Days: \(selectedDays.joined(separator: ", "))")
-                    Text("Class Period: \(formattedTime(classStartTime)) - \(formattedTime(classEndTime))")
-                    Text("Teacher ID: \(teacherID)")
-                    Text("Generated Class ID: \(classID)")
-                        .font(.headline)
-                        .foregroundColor(.green)
-                }
-                .padding(.top, 20)
-            }
-
-            Spacer()
+            .padding(.bottom, 20)
         }
-        .padding()
+        .padding(.horizontal)
         .alert(isPresented: $showAlert) {
             Alert(
                 title: Text("Error"),
