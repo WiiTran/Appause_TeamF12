@@ -162,8 +162,8 @@ struct TeacherAppDescription: View {
             } else {
                 print("Document in unblockRequests successfully updated.")
                 
-                // Add the approval to the `Whitelists` collection
-                let whitelistData: [String: Any] = [
+                // Prepare the data to be moved to Whitelist or Blacklist
+                let listData: [String: Any] = [
                     "studentID": appData.studentID,
                     "appName": appData.appName,
                     "approvalStatus": status,
@@ -171,23 +171,45 @@ struct TeacherAppDescription: View {
                     "approvedDuration": (chosenApprove == .approvedTemporary) ? hours * 60 + minutes : nil // Save duration only if temporary approval
                 ]
                 
-                // Use Firestore transaction to ensure atomicity
-                db.runTransaction({ (transaction, errorPointer) -> Any? in
-                    let unblockRequestRef = db.collection("unblockRequests").document(appData.documentID)
-                    let whitelistRef = db.collection("Whitelists").document()
-                    
-                    // Add the approval to the `Whitelists` collection
-                    transaction.setData(whitelistData, forDocument: whitelistRef)
-                    
-                    // Delete the original request from `unblockRequests`
-                    transaction.deleteDocument(unblockRequestRef)
-                    
-                    return nil
-                }) { (object, error) in
-                    if let error = error {
-                        print("Error in transaction: \(error)")
-                    } else {
-                        print("Transaction successfully committed: Document added to Whitelists and deleted from unblockRequests.")
+                if status == "denied" {
+                    // If the request is denied, add it to the `Blacklists` collection
+                    db.runTransaction({ (transaction, errorPointer) -> Any? in
+                        let unblockRequestRef = db.collection("unblockRequests").document(appData.documentID)
+                        let blacklistRef = db.collection("Blacklists").document()
+                        
+                        // Add the denial to the `Blacklists` collection
+                        transaction.setData(listData, forDocument: blacklistRef)
+                        
+                        // Delete the original request from `unblockRequests`
+                        transaction.deleteDocument(unblockRequestRef)
+                        
+                        return nil
+                    }) { (object, error) in
+                        if let error = error {
+                            print("Error in transaction: \(error)")
+                        } else {
+                            print("Transaction successfully committed: Document added to Blacklists and deleted from unblockRequests.")
+                        }
+                    }
+                } else {
+                    // If the request is approved, add it to the `Whitelists` collection
+                    db.runTransaction({ (transaction, errorPointer) -> Any? in
+                        let unblockRequestRef = db.collection("unblockRequests").document(appData.documentID)
+                        let whitelistRef = db.collection("Whitelists").document()
+                        
+                        // Add the approval to the `Whitelists` collection
+                        transaction.setData(listData, forDocument: whitelistRef)
+                        
+                        // Delete the original request from `unblockRequests`
+                        transaction.deleteDocument(unblockRequestRef)
+                        
+                        return nil
+                    }) { (object, error) in
+                        if let error = error {
+                            print("Error in transaction: \(error)")
+                        } else {
+                            print("Transaction successfully committed: Document added to Whitelists and deleted from unblockRequests.")
+                        }
                     }
                 }
             }
