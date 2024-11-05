@@ -8,7 +8,7 @@ import SwiftUI
 import Foundation
 import FirebaseAuth
 import FirebaseFirestore
-import FirebaseFirestoreCombineSwift
+//import FirebaseFirestoreCombineSwift
 
 import SwiftUI
 import FirebaseFirestore
