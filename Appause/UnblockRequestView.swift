@@ -10,55 +10,68 @@ struct UnblockRequestView: View {
     @State private var requestStatus: String = "Pending"
     @State private var studentID: String = ""
     @State private var appName: String = ""
+    @State private var shouldNavigateToMainMenu = false
+    
     @Environment(\.dismiss) private var dismiss
     @Environment(\.presentationMode) var presentationMode
     var body: some View {
-        VStack {
-            Text("MAIN / Submitting Request")
-                .onTapGesture {withAnimation{self.presentationMode.wrappedValue.dismiss()}}
-                .fontWeight(btnStyle.getFont())
-                .foregroundColor(btnStyle.getPathFontColor())
-                .frame(width: btnStyle.getWidth(),
-                        height: btnStyle.getHeight(),
-                        alignment: btnStyle.getAlignment())
+        
+        NavigationView {
+            VStack {
+                // NavigationLink for navigating to StudentMainView
+                NavigationLink(destination: StudentMainView(showNextView: $showNextView), isActive: $shouldNavigateToMainMenu) {
+                    EmptyView()
+                }
+                Button(action: {
+                            withAnimation {
+                                shouldNavigateToMainMenu = true // Set this to true to trigger navigation to the main menu
+                            }
+                        }) {
+                            Text("MAIN / Submitting Request")
+                        .foregroundColor(btnStyle.getPathFontColor())
+                        .fontWeight(btnStyle.getFont())
+                        .frame(width: btnStyle.getWidth(),
+                               height: btnStyle.getHeight(),
+                               alignment: btnStyle.getAlignment())
+                    
+                }
+                .padding()
                 
-            
-            .padding()
-            .background(btnStyle.getPathColor())
-            .cornerRadius(btnStyle.getPathRadius())
-            .padding(.top)
-            Spacer()
-            
-            TextField("Student ID", text: $studentID)
+                .background(btnStyle.getPathColor())
+                .cornerRadius(btnStyle.getPathRadius())
+                .padding(.top)
+                Spacer()
+                
+                TextField("Student ID", text: $studentID)
+                    .padding()
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                
+                TextField("App Name", text: $appName)
+                    .padding()
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                
+                TextField("Reason for unblocking", text: $reason)
+                    .padding()
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                
+                Button("Submit Request") {
+                    submitRequest()
+                }
                 .padding()
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-            
-            TextField("App Name", text: $appName)
+                
+                Text("Current Status: \(requestStatus)")
+                    .padding()
+                
+                Button("Check Status") {
+                    checkRequestStatus()
+                }
                 .padding()
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-            
-            TextField("Reason for unblocking", text: $reason)
-                .padding()
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-
-            Button("Submit Request") {
-                submitRequest()
+                
+                Spacer()
             }
-            .padding()
-
-            Text("Current Status: \(requestStatus)")
-                .padding()
-            
-            Button("Check Status") {
-                checkRequestStatus()
-            }
-            .padding()
-            
-            Spacer()
-        }
-        .padding() // Add padding around the whole VStack
-        //.navigationTitle("Unblock Request") // Title for the view
-    }
+            .padding() // Add padding around the whole VStack
+            //.navigationTitle("Unblock Request") // Title for the view
+        }}
 
     func getCurrentStudentID() -> String? {
         return Auth.auth().currentUser?.uid

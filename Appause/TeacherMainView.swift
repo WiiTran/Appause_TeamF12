@@ -196,8 +196,8 @@ struct TeacherMainView: View {
                 }
             TeacherWhitelist()
                 .tabItem {
-                    Image(systemName: "bookmark.slash")
-                    Text("WhiteList")
+                    Image(systemName: "lock.open")
+                    Text("WhiteLists")
                 }
             TeacherManageUsers()
                 .tabItem {
@@ -210,16 +210,24 @@ struct TeacherMainView: View {
                     Image(systemName: "bell")
                     Text("Schedule")
                 }
-            TeacherSettingsView(showNextView: $showNextView)
-                .tabItem {
-                    Image(systemName: "gear")
-                    Text("Settings")                }
-            
+         
             BluetoothManagerView()
                 .tabItem {
                     Image(systemName: "app.connected.to.app.below.fill")
                     Text("Connectivity Manager")
                 }
+            TeacherBlacklist()
+                .tabItem {
+                    Image(systemName: "lock.fill")
+                    Text("BlackLists")
+                }
+            
+            
+            TeacherSettingsView(showNextView: $showNextView)
+                .tabItem {
+                    Image(systemName: "gear")
+                    Text("Settings")                }
+            
         }
     }
 }
