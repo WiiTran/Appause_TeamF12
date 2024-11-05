@@ -5,73 +5,75 @@ import FirebaseAuth
 
 struct UnblockRequestView: View {
     @Binding var showNextView: DisplayState
-    //@State var firstButton = "MAIN / Submitting Request"
     @State private var reason: String = ""
     @State private var requestStatus: String = "Pending"
     @State private var studentID: String = ""
     @State private var appName: String = ""
     @State private var shouldNavigateToMainMenu = false
-    
+
     @Environment(\.dismiss) private var dismiss
     @Environment(\.presentationMode) var presentationMode
+
     var body: some View {
-        
-        NavigationView {
+        NavigationStack {
             VStack {
-                // NavigationLink for navigating to StudentMainView
-                NavigationLink(destination: StudentMainView(showNextView: $showNextView), isActive: $shouldNavigateToMainMenu) {
+                // NavigationLink using a value-based navigation and NavigationStack
+                NavigationLink(value: shouldNavigateToMainMenu) {
                     EmptyView()
                 }
+                .navigationDestination(isPresented: $shouldNavigateToMainMenu) {
+                    StudentMainView(showNextView: $showNextView)
+                }
+
                 Button(action: {
-                            withAnimation {
-                                shouldNavigateToMainMenu = true // Set this to true to trigger navigation to the main menu
-                            }
-                        }) {
-                            Text("MAIN / Submitting Request")
+                    withAnimation {
+                        shouldNavigateToMainMenu = true // Trigger navigation to the main menu
+                    }
+                }) {
+                    Text("MAIN / Submitting Request")
                         .foregroundColor(btnStyle.getPathFontColor())
                         .fontWeight(btnStyle.getFont())
                         .frame(width: btnStyle.getWidth(),
                                height: btnStyle.getHeight(),
                                alignment: btnStyle.getAlignment())
-                    
                 }
                 .padding()
-                
                 .background(btnStyle.getPathColor())
                 .cornerRadius(btnStyle.getPathRadius())
                 .padding(.top)
-                Spacer()
                 
+                Spacer()
+
                 TextField("Student ID", text: $studentID)
                     .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                
+
                 TextField("App Name", text: $appName)
                     .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                
+
                 TextField("Reason for unblocking", text: $reason)
                     .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                
+
                 Button("Submit Request") {
                     submitRequest()
                 }
                 .padding()
-                
+
                 Text("Current Status: \(requestStatus)")
                     .padding()
-                
+
                 Button("Check Status") {
                     checkRequestStatus()
                 }
                 .padding()
-                
+
                 Spacer()
             }
             .padding() // Add padding around the whole VStack
-            //.navigationTitle("Unblock Request") // Title for the view
-        }}
+        }
+    }
 
     func getCurrentStudentID() -> String? {
         return Auth.auth().currentUser?.uid
@@ -83,9 +85,9 @@ struct UnblockRequestView: View {
             print("Please fill in all fields.")
             return
         }
-        
+
         let db = Firestore.firestore()
-        
+
         let requestData: [String: Any] = [
             "studentID": studentID,
             "appName": appName,
@@ -93,7 +95,7 @@ struct UnblockRequestView: View {
             "requestTimestamp": FieldValue.serverTimestamp(),
             "reason": reason
         ]
-        
+
         db.collection("unblockRequests").addDocument(data: requestData) { error in
             if let error = error {
                 print("Error adding document: \(error)")
@@ -107,7 +109,7 @@ struct UnblockRequestView: View {
     // Function to check the request status
     func checkRequestStatus() {
         let db = Firestore.firestore()
-        
+
         db.collection("unblockRequests")
             .whereField("studentID", isEqualTo: studentID)
             .whereField("appName", isEqualTo: appName)
@@ -116,7 +118,7 @@ struct UnblockRequestView: View {
                     print("Error fetching status: \(error)")
                     return
                 }
-                
+
                 if let documents = querySnapshot?.documents, !documents.isEmpty {
                     // Assuming you want the status of the latest request
                     if let latestRequest = documents.last {

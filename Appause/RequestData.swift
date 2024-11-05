@@ -1,6 +1,6 @@
 //
 //  RequestData.swift
-//  Appause_TeamF12_HTr
+//  Appause
 //
 //  Created by Huy Tran on 4/23/24.
 //

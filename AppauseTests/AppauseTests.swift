@@ -1,6 +1,6 @@
 //
-//  Appause_TeamF12_HTrTests.swift
-//  Appause_TeamF12_HTrTests
+//  AppauseTests.swift
+//  AppauseTests
 //
 //  Created by Huy Tran on 4/14/24.
 //
@@ -8,7 +8,7 @@
 import XCTest
 @testable import Appause
 
-final class Appause_TeamF12_HTrTests: XCTestCase {
+final class AppauseTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
