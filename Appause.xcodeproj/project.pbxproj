@@ -51,6 +51,8 @@
 		3EA9F41A2CBE9280008903AD /* TeacherSignInUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA9F4192CBE9280008903AD /* TeacherSignInUITests.swift */; };
 		3EB48E172CBE907A00B41BAD /* AppauseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB48E162CBE907A00B41BAD /* AppauseUITests.swift */; };
 		3EB48E192CBE907A00B41BAD /* AppauseUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB48E182CBE907A00B41BAD /* AppauseUITestsLaunchTests.swift */; };
+		3EE6213B2CDAD3C200F18F4A /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 3EE6213A2CDAD3C200F18F4A /* FirebaseAuth */; };
+		3EE6213D2CDAD3C200F18F4A /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 3EE6213C2CDAD3C200F18F4A /* FirebaseFirestore */; };
 		89968FA82CD0685500E7BC50 /* PermanentSchedules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89968FA72CD0685500E7BC50 /* PermanentSchedules.swift */; };
 		89968FAA2CD0697A00E7BC50 /* ScheduleDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89968FA92CD0697A00E7BC50 /* ScheduleDatabaseManager.swift */; };
 		9B20E1F22CBF6448001F2491 /* enrolledClassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B20E1F12CBF6448001F2491 /* enrolledClassView.swift */; };
@@ -67,10 +69,6 @@
 		ED2B5A8E2C9A12EE008AC0AA /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2B5A8D2C9A12EE008AC0AA /* AuthManager.swift */; };
 		ED8FB51A2C910F7B00DFB478 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED8FB5192C910F7B00DFB478 /* GoogleService-Info.plist */; };
 		ED8FB51B2C910F7B00DFB478 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED8FB5192C910F7B00DFB478 /* GoogleService-Info.plist */; };
-		ED8FB5202C9110E800DFB478 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = ED8FB51F2C9110E800DFB478 /* FirebaseAnalytics */; };
-		ED8FB5222C9110E800DFB478 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = ED8FB5212C9110E800DFB478 /* FirebaseAuth */; };
-		ED8FB5242C91132700DFB478 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = ED8FB5232C91132700DFB478 /* FirebaseFirestore */; };
-		ED8FB5262C91132700DFB478 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = ED8FB5252C91132700DFB478 /* FirebaseFirestoreCombine-Community */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -160,11 +158,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED8FB5202C9110E800DFB478 /* FirebaseAnalytics in Frameworks */,
-				ED8FB5242C91132700DFB478 /* FirebaseFirestore in Frameworks */,
-				ED8FB5222C9110E800DFB478 /* FirebaseAuth in Frameworks */,
-				ED8FB5262C91132700DFB478 /* FirebaseFirestoreCombine-Community in Frameworks */,
 				3E8F6B0D2BCBD77F003C4160 /* KeychainSwift in Frameworks */,
+				3EE6213B2CDAD3C200F18F4A /* FirebaseAuth in Frameworks */,
+				3EE6213D2CDAD3C200F18F4A /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,10 +315,8 @@
 			name = Appause;
 			packageProductDependencies = (
 				3E8F6B0C2BCBD77F003C4160 /* KeychainSwift */,
-				ED8FB51F2C9110E800DFB478 /* FirebaseAnalytics */,
-				ED8FB5212C9110E800DFB478 /* FirebaseAuth */,
-				ED8FB5232C91132700DFB478 /* FirebaseFirestore */,
-				ED8FB5252C91132700DFB478 /* FirebaseFirestoreCombine-Community */,
+				3EE6213A2CDAD3C200F18F4A /* FirebaseAuth */,
+				3EE6213C2CDAD3C200F18F4A /* FirebaseFirestore */,
 			);
 			productName = Appause_TeamF12_HTr;
 			productReference = 3E8F6ADE2BCBD5CC003C4160 /* Appause.app */;
@@ -398,7 +392,7 @@
 			mainGroup = 3E8F6AD52BCBD5CC003C4160;
 			packageReferences = (
 				3E8F6B0B2BCBD77F003C4160 /* XCRemoteSwiftPackageReference "keychain-swift" */,
-				ED8FB51E2C91101200DFB478 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				3EE621392CDAD3C200F18F4A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 3E8F6ADF2BCBD5CC003C4160 /* Products */;
 			projectDirPath = "";
@@ -863,12 +857,12 @@
 				minimumVersion = 22.0.0;
 			};
 		};
-		ED8FB51E2C91101200DFB478 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		3EE621392CDAD3C200F18F4A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 11.2.0;
+				minimumVersion = 11.4.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -879,25 +873,15 @@
 			package = 3E8F6B0B2BCBD77F003C4160 /* XCRemoteSwiftPackageReference "keychain-swift" */;
 			productName = KeychainSwift;
 		};
-		ED8FB51F2C9110E800DFB478 /* FirebaseAnalytics */ = {
+		3EE6213A2CDAD3C200F18F4A /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = ED8FB51E2C91101200DFB478 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalytics;
-		};
-		ED8FB5212C9110E800DFB478 /* FirebaseAuth */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = ED8FB51E2C91101200DFB478 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 3EE621392CDAD3C200F18F4A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
 		};
-		ED8FB5232C91132700DFB478 /* FirebaseFirestore */ = {
+		3EE6213C2CDAD3C200F18F4A /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = ED8FB51E2C91101200DFB478 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 3EE621392CDAD3C200F18F4A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
-		};
-		ED8FB5252C91132700DFB478 /* FirebaseFirestoreCombine-Community */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = ED8FB51E2C91101200DFB478 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = "FirebaseFirestoreCombine-Community";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
