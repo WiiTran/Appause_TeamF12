@@ -14,6 +14,7 @@ struct ClassIDGenerationView: View {
     @State private var classEndTime = Date()
     @State private var selectedDays: [String] = []
     @State private var teacherID = ""
+    @State private var period: String = ""
     @State private var generatedClassID: String? = nil
     @State private var isGenerating = false
     @State private var alertMessage = ""
@@ -50,6 +51,19 @@ struct ClassIDGenerationView: View {
                         .foregroundColor(.red)
                         .padding(.leading)
                 }
+            }
+            
+            VStack(alignment: .leading, spacing: 5) {
+                            Text("Enter Period")
+                                .font(.headline)
+                                .padding(.leading)
+                            
+                            TextField("Enter Period (e.g., 1, 2, 3)", text: $period)
+                                .keyboardType(.numberPad)
+                                .padding()
+                                .background(Color.gray.opacity(0.2))
+                                .cornerRadius(8)
+                                .padding(.horizontal)
             }
 
             DatePicker("Select Start Time", selection: $classStartTime, displayedComponents: .hourAndMinute)
@@ -151,6 +165,7 @@ struct ClassIDGenerationView: View {
 
                     // Show details about the created class
                     Text("Class Name: \(className)")
+                    Text("Period: \(period)")
                     Text("Class Days: \(selectedDays.joined(separator: ", "))")
                     Text("Class Period: \(formattedTime(classStartTime)) - \(formattedTime(classEndTime))")
                     Text("Teacher ID: \(teacherID)")
@@ -273,7 +288,8 @@ struct ClassIDGenerationView: View {
             "days": selectedDays,
             "startTime": formattedTime(classStartTime),
             "endTime": formattedTime(classEndTime),
-            "teacherID": teacherID
+            "teacherID": teacherID,
+            "period": Int(period) ?? 0
         ]
 
         db.collection("classes").addDocument(data: classData) { error in
