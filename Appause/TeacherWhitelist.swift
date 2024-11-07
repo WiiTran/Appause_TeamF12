@@ -163,7 +163,8 @@ struct TeacherWhitelist: View {
                  }
              }
              .onAppear {
-                 fetchWhitelistData()
+                 deleteExpiredWhitelistRequests() // Delete expired whitelist entries when the view appears
+                                fetchWhitelistData() // Load whitelisted apps after deleting expired ones
              }
          }
          .preferredColorScheme(btnStyle.getTeacherScheme() == 0 ? .light : .dark)
@@ -173,10 +174,15 @@ struct TeacherWhitelist: View {
     func addAppToWhitelist(_ requestData: RequestData) {
         let db = Firestore.firestore()
 //        let newDocumentID = UUID().uuidString
+        let expiryDate = Calendar.current.date(byAdding: .hour, value: 1, to: Date()) ?? Date()
+        let expiryTimestamp = Timestamp(date: expiryDate)
+        print("Setting expiryTimestamp: \(expiryTimestamp)")
+
         
         let whitelistData: [String: Any] = [
             "appName": requestData.appName,
-            "approvalStatus": requestData.approved.rawValue // Set approvalStatus to approved
+            "approvalStatus": requestData.approved.rawValue, // Set approvalStatus to approved
+            "expiryTimestamp": expiryTimestamp // Set expiry timestamp for deletion
         ]
         
         db.collection("Whitelists").document(requestData.documentID).setData(whitelistData) { error in
@@ -216,6 +222,40 @@ struct TeacherWhitelist: View {
               }
           }
       }
+
+func deleteExpiredWhitelistRequests() {
+    let db = Firestore.firestore()
+    let now = Timestamp(date: Date())
+    print("Deleting expired whitelist entries before: \(now)")
+
+
+    db.collection("Whitelists")
+        .whereField("expiryTimestamp", isLessThanOrEqualTo: now)
+        .getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error fetching expired whitelist requests: \(error)")
+                return
+            }
+
+            guard let documents = querySnapshot?.documents else {
+                print("No expired whitelist documents found.")
+                return
+            }
+
+            print("Found \(documents.count) expired whitelist documents.")
+            for document in documents {
+                print("Attempting to delete document with ID: \(document.documentID)")
+                document.reference.delete { error in
+                    if let error = error {
+                        print("Error deleting whitelist document: \(error)")
+                    } else {
+                        print("Expired whitelist request deleted successfully: \(document.documentID)")
+                    }
+                }
+            }
+        }
+}
+
 struct TeacherWhitelist_Previews: PreviewProvider {
     static var previews: some View {
         TeacherWhitelist()

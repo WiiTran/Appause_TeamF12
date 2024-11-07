@@ -163,13 +163,19 @@ struct TeacherAppDescription: View {
                 print("Document in unblockRequests successfully updated.")
                 
                 // Prepare the data to be moved to Whitelist or Blacklist
-                let listData: [String: Any] = [
+                var listData: [String: Any] = [
                     "studentID": appData.studentID,
                     "appName": appData.appName,
                     "approvalStatus": status,
                     "approvedTimestamp": FieldValue.serverTimestamp(),
                     "approvedDuration": (chosenApprove == .approvedTemporary) ? (hours * 60 + minutes) : 0// Save duration only if temporary approval
                 ]
+                // Set expiry timestamp if approved temporarily
+                           if status == "approvedTemporary" {
+                               let expiryDate = Calendar.current.date(byAdding: .minute, value: hours * 60 + minutes, to: Date()) ?? Date()
+                               let expiryTimestamp = Timestamp(date: expiryDate)
+                               listData["expiryTimestamp"] = expiryTimestamp // Add expiry timestamp to the listData
+                           }
                 
                 if status == "denied" {
                     // If the request is denied, add it to the `Blacklists` collection
