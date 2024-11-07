@@ -5,25 +5,23 @@
 //  Created by Huy Tran on 4/16/24.
 //  Revised by Rayanne Ohara on 09/12/2024
 //  Revised by Rayanne Ohara on 10/01/2024
-//
+//  Revised by Rayanne Ohara on 10/14/2024
 
 import SwiftUI
+import FirebaseFirestore
 
 struct TeacherMainView: View {
     @Binding var showNextView: DisplayState
     @StateObject var studentList = StudentList()
     @AppStorage("isDarkMode") private var isDarkMode: Bool = false
-    @State private var isOverrideActive = false
     @State private var status: String = "Normal"
     @State private var generatedCode: String = ""
     
     @State var studentName = ""
     
-//    // States for Master Control
-//    @State private var status: String = "Normal"
-//    
-//    // States for Connect Code Generation
-//    @State private var generatedCode: String = ""
+    @State private var currentSchedule: String = "Normal Schedule" // Track the active schedule
+    @State private var activePeriods: [(classID: String, startTime: Date, endTime: Date)] = [] // Active periods from the selected schedule
+    @State private var isOverrideActive: Bool = false // Track whether the manual override is active
     
     // Array used to generate a random character string
     @State private var charList = ["1","2","3","4","5","6","7","8","9","0",
@@ -53,7 +51,8 @@ struct TeacherMainView: View {
                 .padding(.top)
                 
                 Spacer()
-                
+
+                // Text displaying the current status of the app
                 Text("Status: " + status)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .font(.title)
@@ -61,7 +60,8 @@ struct TeacherMainView: View {
                     .padding(.top, 10)
                     .padding(.bottom, 10)
                     .padding(.leading, 105)
-                
+
+                // Lock/Unlock buttons
                 HStack {
                     if isOverrideActive {
                         VStack {
@@ -88,28 +88,14 @@ struct TeacherMainView: View {
                             Text("Unlock")
                         }
                     } else {
-                        VStack {
-                            Button(action: {
-                                status = "Locked"
-                            }) {
-                                Image(systemName: "lock")
-                                    .padding(.trailing)
-                                    .font(.system(size: 100))
-                                    .foregroundColor(.red)
-                            }
-                            Text("Lock")
-                                .padding(.trailing)
-                        }
-                        VStack {
-                            Button(action: {
-                                status = "Unlocked"
-                            }) {
-                                Image(systemName: "lock.open")
-                                    .padding(.leading)
-                                    .font(.system(size: 100))
-                                    .foregroundColor(.green)
-                            }
-                            Text("Unlock")
+                        if activePeriods.first(where: { $0.startTime <= Date() && $0.endTime >= Date() }) != nil {
+                            Text("Status: Locked")
+                                .font(.title)
+                                .foregroundColor(.red)
+                        } else {
+                            Text("Status: Unlocked")
+                                .font(.title)
+                                .foregroundColor(.green)
                         }
                     }
                 }
@@ -169,7 +155,7 @@ struct TeacherMainView: View {
                 }
                 
                 Spacer()
-                
+
                 Toggle("Manual Override", isOn: $isOverrideActive)
                     .padding()
                     .onChange(of: isOverrideActive) { value in
@@ -188,7 +174,6 @@ struct TeacherMainView: View {
                 Text("Home")
             }
             
-            // Pass studentList as a parameter to TeacherAllRequestsView
             TeacherAllRequestsView()
                 .tabItem {
                     Image(systemName: "hand.raised")
@@ -222,19 +207,42 @@ struct TeacherMainView: View {
                     Text("BlackLists")
                 }
             
-            
             TeacherSettingsView(showNextView: $showNextView)
                 .tabItem {
                     Image(systemName: "gear")
-                    Text("Settings")                }
-            
+                    Text("Settings")
+                }
         }
+    }
+
+    // Load the active schedule's periods
+    func loadActiveSchedule() {
+        let db = Firestore.firestore()
+        db.collection("schedules").document(currentSchedule).getDocument { document, error in
+            if let document = document, document.exists {
+                let data = document.data()
+                if let periodsData = data?["periods"] as? [[String: Any]] {
+                    activePeriods = periodsData.compactMap { periodDict in
+                        guard let classID = periodDict["classID"] as? String,
+                              let startTime = periodDict["startTime"] as? Timestamp,
+                              let endTime = periodDict["endTime"] as? Timestamp else { return nil }
+                        return (classID, startTime.dateValue(), endTime.dateValue())
+                    }
+                }
+            } else {
+                print("Error loading active schedule: \(error?.localizedDescription ?? "Unknown error")")
+            }
+        }
+    }
+    
+    // Date formatter for displaying time
+    func formattedTime(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "h:mm a" // Format time as "hh:mm AM/PM"
+        return formatter.string(from: date)
     }
 }
 
-func loadActiveSchedule() {
-    // Add code to load schedule if required
-}
 struct TeacherMainView_Previews: PreviewProvider {
     @State static private var showNextView: DisplayState = .mainTeacher
     
@@ -242,4 +250,3 @@ struct TeacherMainView_Previews: PreviewProvider {
         TeacherMainView(showNextView: $showNextView)
     }
 }
-

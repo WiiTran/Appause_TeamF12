@@ -319,12 +319,12 @@ struct LoginView: View {
             }
             Spacer()
             
-            Image("")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 150, height: 150)
-            
-            Spacer()
+//            Image("")
+//                .resizable()
+//                .scaledToFit()
+//                .frame(width: 150, height: 150)
+//            
+//            Spacer()
         }
     }
     
