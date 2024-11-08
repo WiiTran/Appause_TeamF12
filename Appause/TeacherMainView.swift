@@ -5,6 +5,8 @@
 //  Created by Huy Tran on 4/16/24.
 //  Revised by Rayanne Ohara on 09/12/2024
 //  Revised by Rayanne Ohara on 10/01/2024
+//  Modified by Dakshina EW on 11/04/2024
+//
 //  Revised by Rayanne Ohara on 10/14/2024
 
 import SwiftUI
@@ -195,7 +197,20 @@ struct TeacherMainView: View {
                     Image(systemName: "bell")
                     Text("Schedule")
                 }
-         
+            ClassIDGenerationView()
+                .tabItem {
+                    Image(systemName: "plus.square")
+                    Text("Create New Class")
+                }
+            TeacherClassListView()
+                .tabItem {
+                    Image(systemName: "list.bullet")
+                    Text("My Classes")
+                }
+            TeacherSettingsView(showNextView: $showNextView)
+                .tabItem {
+                    Image(systemName: "gear")
+                    Text("Settings")                }
             BluetoothManagerView()
                 .tabItem {
                     Image(systemName: "app.connected.to.app.below.fill")

@@ -61,8 +61,10 @@
 		9B20E1F82CBF6502001F2491 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B20E1F72CBF6501001F2491 /* FirestoreManager.swift */; };
 		9B20E1FA2CBF90CA001F2491 /* studentRequestUnlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B20E1F92CBF90C9001F2491 /* studentRequestUnlockView.swift */; };
 		9B53910C2CCB0029006B254F /* unlockRequestList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B53910B2CCB0029006B254F /* unlockRequestList.swift */; };
+		9B53910E2CCB1469006B254F /* UnblockRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B53910D2CCB1469006B254F /* UnblockRequestView.swift */; };
 		9B5391102CD0053A006B254F /* registerClassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B53910F2CD0053A006B254F /* registerClassView.swift */; };
 		C804F9E42CB8C59600E6B5B7 /* ClassIDGenerationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C804F9E32CB8C59600E6B5B7 /* ClassIDGenerationView.swift */; };
+		C80DE10F2CDB3CFF0036E722 /* TeacherClassListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80DE10E2CDB3CFF0036E722 /* TeacherClassListView.swift */; };
 		C81713DB2C9BD75D00362C37 /* AdminRequestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81713DA2C9BD75D00362C37 /* AdminRequestsView.swift */; };
 		C8B0A60E2CA64C8F009C0D92 /* BluetoothManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B0A60D2CA64C8F009C0D92 /* BluetoothManagerView.swift */; };
 		C8D38EF52BD35D9E00F0D2BA /* StudentSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D38EF42BD35D9E00F0D2BA /* StudentSettingsView.swift */; };
@@ -147,6 +149,7 @@
 		9B53910B2CCB0029006B254F /* unlockRequestList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = unlockRequestList.swift; sourceTree = "<group>"; };
 		9B53910F2CD0053A006B254F /* registerClassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = registerClassView.swift; sourceTree = "<group>"; };
 		C804F9E32CB8C59600E6B5B7 /* ClassIDGenerationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassIDGenerationView.swift; sourceTree = "<group>"; };
+		C80DE10E2CDB3CFF0036E722 /* TeacherClassListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherClassListView.swift; sourceTree = "<group>"; };
 		C81713DA2C9BD75D00362C37 /* AdminRequestsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminRequestsView.swift; sourceTree = "<group>"; };
 		C8B0A60D2CA64C8F009C0D92 /* BluetoothManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothManagerView.swift; sourceTree = "<group>"; };
 		C8D38EF42BD35D9E00F0D2BA /* StudentSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentSettingsView.swift; sourceTree = "<group>"; };
@@ -226,6 +229,8 @@
 				3E8F6AE52BCBD5CE003C4160 /* Assets.xcassets */,
 				3E8F6AE72BCBD5CE003C4160 /* Preview Content */,
 				3E17374B2BD8A37A00D0F290 /* StudentAppRequestView.swift */,
+				3EB48DF42CBE81AF00B41BAD /* TeacherMenuView.swift */,
+				3E4FD4D42CD07C8B00174942 /* studentRequestUnlockView.swift */,
 				9B20E1F92CBF90C9001F2491 /* studentRequestUnlockView.swift */,
 				3EE621402CDADB2200F18F4A /* FeedbackFormView.swift */,
 				3EA44B262BCF43F100732432 /* StudentMainView.swift */,
@@ -254,6 +259,10 @@
 				3E1737592BD8A5B400D0F290 /* TeacherMasterControlView.swift */,
 				3E17375B2BD8A69600D0F290 /* TeacherAppDescription.swift */,
 				3E35C4E72CBF69940012357A /* TeacherAddScheduleView.swift */,
+				89968FA92CD0697A00E7BC50 /* ScheduleDatabaseManager.swift */,
+				3E4FD4D22CD07C5100174942 /* UnblockRequestView.swift */,
+				3E4FD4D82CD07ED100174942 /* unlockRequestList.swift */,
+				C80DE10E2CDB3CFF0036E722 /* TeacherClassListView.swift */,
 			);
 			path = Appause;
 			sourceTree = "<group>";
@@ -456,6 +465,7 @@
 				C8D38EF52BD35D9E00F0D2BA /* StudentSettingsView.swift in Sources */,
 				9B20E1FA2CBF90CA001F2491 /* studentRequestUnlockView.swift in Sources */,
 				C8B0A60E2CA64C8F009C0D92 /* BluetoothManagerView.swift in Sources */,
+				C80DE10F2CDB3CFF0036E722 /* TeacherClassListView.swift in Sources */,
 				3E8F6AE42BCBD5CC003C4160 /* ContentView.swift in Sources */,
 				3E1737582BD8A4CA00D0F290 /* TeacherConnectCodeView.swift in Sources */,
 				3E35C4E82CBF69940012357A /* TeacherAddScheduleView.swift in Sources */,
