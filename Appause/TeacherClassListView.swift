@@ -12,9 +12,11 @@ import FirebaseAuth
 struct TeacherClassListView: View {
     @State private var classes: [TeacherClass] = []
     @State private var errorMessage: String? = nil
+    @State private var teacherID: String? = nil
 
     private let db = Firestore.firestore()
-    private let teacherEmail: String? = Auth.auth().currentUser?.email  // Get the logged-in teacher's email
+    private let teacherEmail: String? = Auth.auth().currentUser?.email
+    private let calendar = Calendar.current
 
     var body: some View {
         VStack {
@@ -22,6 +24,13 @@ struct TeacherClassListView: View {
                 .font(.largeTitle)
                 .fontWeight(.bold)
                 .padding(.top)
+            
+            if let teacherID = teacherID {
+                Text("Teacher ID: \(teacherID)")
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                    .padding(.bottom, 10)
+            }
 
             if let errorMessage = errorMessage {
                 Text(errorMessage)
@@ -34,6 +43,14 @@ struct TeacherClassListView: View {
             } else {
                 List(classes.sorted { ($0.period ?? Int.max) < ($1.period ?? Int.max) }) { classItem in
                     VStack(alignment: .leading, spacing: 10) {
+                        // Display "Current Class" label if this is the current class
+                        if isCurrentClass(classItem: classItem) {
+                            Text("Current Class")
+                                .font(.title2)
+                                .foregroundColor(.green)
+                                .padding(.bottom, 4)
+                        }
+
                         Text("Class ID: \(classItem.classID)")
                             .font(.headline)
                         Text("Class Name: \(classItem.className)")
@@ -44,17 +61,23 @@ struct TeacherClassListView: View {
                         Text("Time: \(classItem.startTime) - \(classItem.endTime)")
                     }
                     .padding()
-                    .background(Color.gray.opacity(0.1))
+                    // .background(Color.gray.opacity(0.1))
                     .cornerRadius(8)
-                    .padding(.vertical, 4)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(isCurrentClass(classItem: classItem) ? Color.green : Color.clear, lineWidth: 2)
+                    )
                 }
+                .listStyle(PlainListStyle())
+                .padding(.horizontal, -10)
             }
         }
-        .onAppear(perform: loadTeacherClasses)
+        .onAppear(perform: loadTeacherData)
         .padding()
     }
 
-    private func loadTeacherClasses() {
+    private func loadTeacherData() {
         guard let email = teacherEmail else {
             errorMessage = "Teacher email not available"
             return
@@ -71,6 +94,7 @@ struct TeacherClassListView: View {
                 return
             }
 
+            self.teacherID = teacherDoc["teacherID"] as? String ?? "Unknown"
             let classesTaught = teacherDoc["classesTaught"] as? [String] ?? []
 
             fetchClasses(for: classesTaught)
@@ -114,6 +138,27 @@ struct TeacherClassListView: View {
         dispatchGroup.notify(queue: .main) {
             self.classes = fetchedClasses
         }
+    }
+
+    // Function to check if a class is currently in session
+    private func isCurrentClass(classItem: TeacherClass) -> Bool {
+        let currentDate = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+
+        guard
+            let startTime = formatter.date(from: classItem.startTime),
+            let endTime = formatter.date(from: classItem.endTime)
+        else {
+            return false
+        }
+
+        let currentTime = formatter.string(from: currentDate)
+        let currentTimeDate = formatter.date(from: currentTime) ?? Date()
+
+        let today = calendar.weekdaySymbols[calendar.component(.weekday, from: currentDate) - 1]
+
+        return currentTimeDate >= startTime && currentTimeDate <= endTime && classItem.days.contains(today)
     }
 }
 
