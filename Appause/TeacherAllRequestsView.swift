@@ -53,8 +53,12 @@ struct TeacherAllRequestsView: View {
                        maxHeight: UIScreen.main.bounds.size.height * 0.7)
             }
         }
-        .onAppear(perform: fetchRequests) // Load requests on appear
-        .preferredColorScheme(btnStyle.getTeacherScheme() == 0 ? .light : .dark)
+        
+        .onAppear {
+                    deleteExpiredRequests() // Delete expired requests when the view appears
+                    fetchRequests() // Load requests after deleting expired requests
+                }
+                .preferredColorScheme(btnStyle.getTeacherScheme() == 0 ? .light : .dark)
     }
     
     // Computed property to filter requests based on searchAppName
@@ -83,6 +87,42 @@ struct TeacherAllRequestsView: View {
                 }
             }
     }
+}
+
+
+// Function to delete expired requests from Firebase Firestore
+func deleteExpiredRequests() {
+    let db = Firestore.firestore()
+    let now = Timestamp(date: Date())
+    print("Deleting expired request app entries before: \(now)")
+
+    db.collection("unblockRequests")
+        .whereField("expiryTimestamp", isLessThanOrEqualTo: now)
+        .whereField("status", isEqualTo: "pending")
+        .getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error fetching expired requests: \(error)")
+                return
+            }
+
+            guard let documents = querySnapshot?.documents else {
+                print("No expired requests found.")
+                return
+            }
+
+            print("Found \(documents.count) expired requests to delete.")
+
+            for document in documents {
+                let documentID = document.documentID
+                document.reference.delete { error in
+                    if let error = error {
+                        print("Error deleting document with ID \(documentID): \(error)")
+                    } else {
+                        print("Expired request deleted successfully: Document ID \(documentID)")
+                    }
+                }
+            }
+        }
 }
 
 struct unprocessedRequest: View {

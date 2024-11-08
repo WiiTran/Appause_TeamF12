@@ -87,12 +87,15 @@ struct UnblockRequestView: View {
         }
 
         let db = Firestore.firestore()
+        let expiryDate = Calendar.current.date(byAdding: .hour, value: 72, to: Date()) ?? Date()
+           let expiryTimestamp = Timestamp(date: expiryDate)
 
         let requestData: [String: Any] = [
             "studentID": studentID,
             "appName": appName,
             "status": "pending",
             "requestTimestamp": FieldValue.serverTimestamp(),
+            "expiryTimestamp": expiryTimestamp,
             "reason": reason
         ]
 
@@ -106,6 +109,36 @@ struct UnblockRequestView: View {
         }
     }
 
+    func deleteExpiredRequests() {
+        let db = Firestore.firestore()
+        let now = Timestamp(date: Date())
+        db.collection("unblockRequests")
+               .whereField("expiryTimestamp", isLessThanOrEqualTo: now)
+               .whereField("status", isEqualTo: "pending")
+               .getDocuments { (querySnapshot, error) in
+                   if let error = error {
+                       print("Error fetching expired requests: \(error)")
+                       return
+                   }
+
+                   guard let documents = querySnapshot?.documents else {
+                       print("No expired documents found.")
+                       return
+                   }
+
+                   for document in documents {
+                       print("Deleting document with ID: \(document.documentID)")
+                       document.reference.delete { error in
+                           if let error = error {
+                               print("Error deleting document: \(error)")
+                           } else {
+                               print("Expired request deleted successfully: \(document.documentID)")
+                           }
+                    }
+                }
+            }
+    }
+    
     // Function to check the request status
     func checkRequestStatus() {
         let db = Firestore.firestore()
