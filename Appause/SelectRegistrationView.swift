@@ -106,12 +106,16 @@ struct SelectRegistrationView: View
                 .font(.largeTitle)
                 .fontWeight(.semibold)
                 .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
                 .padding([.top, .bottom], 15)
             
             Text(registerError)
                 .fontWeight(.bold)
                 .foregroundColor(.red)
                 .padding(.bottom, 20)
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+
             
             HStack
             {
@@ -174,7 +178,7 @@ struct SelectRegistrationView: View
                 .background(buttonColorBottom)
                 .cornerRadius(10)
             }
-            //.padding(.bottom, 50)
+//            .padding(.bottom, 100)
             
             if showTeacherRegistrationFields
             {
@@ -306,10 +310,10 @@ struct SelectRegistrationView: View
                                             ])
                                             
                                             _ = try await db.collection("Teachers")
-                                                   .document(ref.documentID)
-                                                   .collection("ClassesTaught")
-                                                   .addDocument(data: [
-                                                       "Placeholder": "."
+                                                .document(ref.documentID)
+                                                .collection("ClassesTaught")
+                                                .addDocument(data: [
+                                                    "Placeholder": "."
                                                 ])
                                             
                                             print("Document added with ID: \(ref.documentID)")
@@ -342,7 +346,7 @@ struct SelectRegistrationView: View
                     HStack {
                         Spacer()
                         Text("Already have an account?")
-                            //.padding(.leading, 15)
+                        //.padding(.leading, 15)
                         
                         Button(action: {
                             withAnimation {
@@ -354,7 +358,8 @@ struct SelectRegistrationView: View
                                 .padding(.leading, -4.0)
                         }
                         Spacer()
-                    }                }
+                    }
+                }
             }
             
             if showStudentRegistrationFields
