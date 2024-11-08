@@ -1,7 +1,7 @@
 
 //
 //  StudentConnectCodeView.swift
-//  Appause_TeamF12_HTr
+//  Appause
 //
 //  Created by Huy Tran on 4/18/24.
 //  Modified by Dakshina EW on 11/05/2024.

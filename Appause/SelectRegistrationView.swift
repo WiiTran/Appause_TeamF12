@@ -1,6 +1,6 @@
 //
 //  SelectRegistrationView.swift
-//  Appause_TeamF12_HTr
+//  Appause
 //
 //  Created by Huy Tran on 4/16/24.
 //  Modified by Dakshina EW on 10/28/2024.
@@ -117,9 +117,9 @@ struct SelectRegistrationView: View
             {
                 Button(action:
                         {
-                    let registeredUsername = keychain.get("teacherUserKey")
-                    let registeredPassword = keychain.get("teacherPassKey")
-                    
+//                    let registeredUsername = keychain.get("teacherUserKey")
+//                    let registeredPassword = keychain.get("teacherPassKey")
+//                    
                     withAnimation
                     {
                         showTeacherRegistrationFields.toggle()
@@ -147,9 +147,9 @@ struct SelectRegistrationView: View
                 
                 Button(action:
                         {
-                    let registeredUsername = keychain.get("studentUserKey")
-                    let registeredPassword = keychain.get("studentPassKey")
-                    
+//                    let registeredUsername = keychain.get("studentUserKey")
+//                    let registeredPassword = keychain.get("studentPassKey")
+//                    
                     withAnimation
                     {
                         //showNextView = .login
@@ -305,11 +305,11 @@ struct SelectRegistrationView: View
                                                 "Date Created": Timestamp(date: Date())
                                             ])
                                             
-                                            let subref = try await db.collection("Teachers")
-                                                .document(ref.documentID)
-                                                .collection("ClassesTaught")
-                                                .addDocument(data: [
-                                                    "Placeholder": "."
+                                            _ = try await db.collection("Teachers")
+                                                   .document(ref.documentID)
+                                                   .collection("ClassesTaught")
+                                                   .addDocument(data: [
+                                                       "Placeholder": "."
                                                 ])
                                             
                                             print("Document added with ID: \(ref.documentID)")
@@ -494,9 +494,7 @@ struct SelectRegistrationView: View
                                 showNextView = .login
                             }
                         }
-                    })
-                    //.padding(.bottom)
-                    {
+                    }){
                         Text("Register")
                             .padding()
                             .frame(width: 370)

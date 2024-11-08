@@ -1,6 +1,6 @@
 //
 //  TeacherMainView.swift
-//  Appause_TeamF12_HTr
+//  Appause
 //
 //  Created by Huy Tran on 4/16/24.
 //  Revised by Rayanne Ohara on 09/12/2024
@@ -197,8 +197,8 @@ struct TeacherMainView: View {
                 }
             TeacherWhitelist()
                 .tabItem {
-                    Image(systemName: "bookmark.slash")
-                    Text("WhiteList")
+                    Image(systemName: "lock.open")
+                    Text("WhiteLists")
                 }
             TeacherManageUsers()
                 .tabItem {
@@ -225,12 +225,23 @@ struct TeacherMainView: View {
                 .tabItem {
                     Image(systemName: "gear")
                     Text("Settings")                }
-            
             BluetoothManagerView()
                 .tabItem {
                     Image(systemName: "app.connected.to.app.below.fill")
                     Text("Connectivity Manager")
                 }
+            TeacherBlacklist()
+                .tabItem {
+                    Image(systemName: "lock.fill")
+                    Text("BlackLists")
+                }
+            
+            
+            TeacherSettingsView(showNextView: $showNextView)
+                .tabItem {
+                    Image(systemName: "gear")
+                    Text("Settings")                }
+            
         }
     }
 }

@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  Appause_TeamF12_HTr
+//  Appause
 //
 //  Created by Huy Tran on 4/14/24.
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum DisplayState {
-    case eula, login, emailCode, mainTeacher, mainStudent, teacherMasterControl, logout, studentConnectCode, studentSettings, teacherSettings, UnblockRequest, studentDeleteAdmin, enrolledClass, studentChooseAdmin, studentRegister, teacherRegister, selectRegistration, resetPassword, teacherManageUsers, teacherBlacklist, teacherWhitelist, twoFactorAuth, pwCodeVerification, registerClass
+    case eula, login, /*emailCode,*/ mainTeacher, mainStudent, /*teacherMasterControl,*/ logout, /*studentConnectCode,*/ studentSettings, teacherSettings, UnblockRequest, /*studentDeleteAdmin,*/ enrolledClass, /*studentChooseAdmin,*/ studentRegister, teacherRegister, selectRegistration,/* resetPassword,*/ teacherManageUsers, teacherBlacklist, teacherWhitelist, /*twoFactorAuth,*/ /*pwCodeVerification,*/ registerClass
 }
 
 
@@ -35,10 +35,10 @@ struct ContentView: View {
                 StudentMainView(showNextView: $displayState)
             case .mainTeacher:
                 TeacherMainView(showNextView: $displayState)
-            case .studentConnectCode:
-                StudentConnectCodeView()
-            case .teacherMasterControl:
-                TeacherMasterControlView(showNextView: $displayState)
+//            case .studentConnectCode:
+//                StudentConnectCodeView()
+//            case .teacherMasterControl:
+//                TeacherMasterControlView(showNextView: $displayState)
             case .logout:
                 LoginView(showNextView: $displayState)
             case .studentSettings:
@@ -47,18 +47,18 @@ struct ContentView: View {
                 UnblockRequestView(showNextView: $displayState)
             case .teacherSettings:
                 TeacherSettingsView(showNextView: $displayState)
-            case .studentChooseAdmin:
-                StudentChooseAdminView(showNextView: $displayState)
-            case .studentDeleteAdmin:
-                StudentDeleteAdminView()
+//            case .studentChooseAdmin:
+//                StudentChooseAdminView(showNextView: $displayState)
+//            case .studentDeleteAdmin:
+//                StudentDeleteAdminView()
             case .enrolledClass:
                 enrolledClassView(showNextView: $displayState, StudentID: "sampleStudentId")
             case .teacherWhitelist:
                 TeacherWhitelist()
             case .teacherBlacklist:
                 TeacherWhitelist()
-            case .resetPassword:
-                ResetPasswordView(showNextView: $displayState)
+//            case .resetPassword:
+//                ResetPasswordView(showNextView: $displayState)
             case .teacherManageUsers:
                 TeacherManageUsers()
             case .studentRegister:
@@ -69,19 +69,19 @@ struct ContentView: View {
                 TeacherRegisterView(showNextView: $displayState)
             case .selectRegistration:
                 SelectRegistrationView(showNextView: $displayState)
-            case .emailCode:
-                ForgotPasswordView(showNextView: $displayState)
-            case .pwCodeVerification:
-                PWCodeVerificationView(showNextView: $displayState)
-            case .twoFactorAuth:
-                TwoFactorAuthView(
-                    showNextView: $displayState,
-                    email: email,
-                    onVerificationSuccess: {
-                        print("Verification successful!")
-                    },
-                    show2FAInput: $show2FAInput
-                )
+//            case .emailCode:
+//                ForgotPasswordView(showNextView: $displayState)
+//            case .pwCodeVerification:
+//                PWCodeVerificationView(showNextView: $displayState)
+//            case .twoFactorAuth:
+//                TwoFactorAuthView(
+//                    showNextView: $displayState,
+//                    email: email,
+//                    onVerificationSuccess: {
+//                        print("Verification successful!")
+//                    },
+//                    show2FAInput: $show2FAInput
+//                )
             }
         }
         .preferredColorScheme(isUserLoggedIn ? (isDarkMode ? .dark : .light) : .none)
