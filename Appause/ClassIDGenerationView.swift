@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseFirestore
+import FirebaseAuth
 
 struct ClassIDGenerationView: View {
     @State private var className = ""
@@ -14,7 +15,8 @@ struct ClassIDGenerationView: View {
     @State private var classEndTime = Date()
     @State private var selectedDays: [String] = []
     @State private var teacherID = ""
-    @State private var period: String = ""
+    //@State private var period: String = ""
+    @State private var period = 1
     @State private var generatedClassID: String? = nil
     @State private var isGenerating = false
     @State private var alertMessage = ""
@@ -69,78 +71,87 @@ struct ClassIDGenerationView: View {
                     Text("Enter Period")
                         .font(.headline)
                         .padding(.leading)
-
-                    TextField("Enter Period (e.g., 1, 2, 3)", text: $period)
-                        .keyboardType(.numberPad)
-                        .padding()
-                        .background(Color.gray.opacity(0.2))
-                        .cornerRadius(8)
-                        .padding(.horizontal)
-                }
-
-                VStack(alignment: .leading, spacing: 5) {
-                    Text("Select Days of the Week")
-                        .font(.headline)
-                        .padding(.leading)
-
-                    Button(action: { isDaysSelectionVisible.toggle() }) {
-                        HStack {
-                            Text(selectedDays.isEmpty ? "Choose Days" : selectedDays.joined(separator: ", "))
-                                .foregroundColor(selectedDays.isEmpty ? .gray : .blue)
-                                .padding(.leading)
-
-                            Spacer()
-
-                            Image(systemName: "chevron.down")
-                                .rotationEffect(.degrees(isDaysSelectionVisible ? 180 : 0))
-                                .padding(.trailing)
-                        }
-                        .padding()
-                        .background(Color.gray.opacity(0.2))
-                        .cornerRadius(8)
-                        .padding(.horizontal)
-                    }
-
-                    if daysError {
-                        Text("Please select at least one day")
-                            .foregroundColor(.red)
-                            .padding(.leading)
-                    }
-                }
-
-                if isDaysSelectionVisible {
-                    VStack {
-                        ForEach(daysOfWeek, id: \.self) { day in
-                            HStack {
-                                Text(day)
-                                Spacer()
-                                Button(action: { toggleDaySelection(day) }) {
-                                    Image(systemName: selectedDays.contains(day) ? "checkmark.square" : "square")
-                                        .foregroundColor(selectedDays.contains(day) ? .blue : .gray)
-                                }
-                            }
-                            .padding(.horizontal)
+                    
+                    Picker("Period", selection: $period) {
+                        ForEach(1...8, id: \.self) { number in
+                            Text("\(number)").tag(number)
                         }
                     }
-                    .background(Color.white)
-                    .cornerRadius(8)
-                    .shadow(radius: 10)
-                    .padding(.horizontal)
+                    .pickerStyle(WheelPickerStyle())
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 120)
+
+//                    TextField("Enter Period (e.g., 1, 2, 3)", text: $period)
+//                        .keyboardType(.numberPad)
+//                        .padding()
+//                        .background(Color.gray.opacity(0.2))
+//                        .cornerRadius(8)
+//                        .padding(.horizontal)
                 }
 
-                VStack(alignment: .leading, spacing: 5) {
-                    TextField("Enter Teacher ID", text: $teacherID)
-                        .padding()
-                        .background(Color.gray.opacity(0.2))
-                        .cornerRadius(8)
-                        .padding(.horizontal)
-
-                    if teacherIDError {
-                        Text("Teacher ID is required")
-                            .foregroundColor(.red)
-                            .padding(.leading)
-                    }
-                }
+//                VStack(alignment: .leading, spacing: 5) {
+//                    Text("Select Days of the Week")
+//                        .font(.headline)
+//                        .padding(.leading)
+//
+//                    Button(action: { isDaysSelectionVisible.toggle() }) {
+//                        HStack {
+//                            Text(selectedDays.isEmpty ? "Choose Days" : selectedDays.joined(separator: ", "))
+//                                .foregroundColor(selectedDays.isEmpty ? .gray : .blue)
+//                                .padding(.leading)
+//
+//                            Spacer()
+//
+//                            Image(systemName: "chevron.down")
+//                                .rotationEffect(.degrees(isDaysSelectionVisible ? 180 : 0))
+//                                .padding(.trailing)
+//                        }
+//                        .padding()
+//                        .background(Color.gray.opacity(0.2))
+//                        .cornerRadius(8)
+//                        .padding(.horizontal)
+//                    }
+//
+//                    if daysError {
+//                        Text("Please select at least one day")
+//                            .foregroundColor(.red)
+//                            .padding(.leading)
+//                    }
+//                }
+//
+//                if isDaysSelectionVisible {
+//                    VStack {
+//                        ForEach(daysOfWeek, id: \.self) { day in
+//                            HStack {
+//                                Text(day)
+//                                Spacer()
+//                                Button(action: { toggleDaySelection(day) }) {
+//                                    Image(systemName: selectedDays.contains(day) ? "checkmark.square" : "square")
+//                                        .foregroundColor(selectedDays.contains(day) ? .blue : .gray)
+//                                }
+//                            }
+//                            .padding(.horizontal)
+//                        }
+//                    }
+//                    .background(Color.white)
+//                    .cornerRadius(8)
+//                    .shadow(radius: 10)
+//                    .padding(.horizontal)
+//                }
+//
+//                VStack(alignment: .leading, spacing: 5) {
+//                    TextField("Enter Teacher ID", text: $teacherID)
+//                        .padding()
+//                        .background(Color.gray.opacity(0.2))
+//                        .cornerRadius(8)
+//                        .padding(.horizontal)
+//
+//                    if teacherIDError {
+//                        Text("Teacher ID is required")
+//                            .foregroundColor(.red)
+//                            .padding(.leading)
+//                    }
+//                }
 
                 if overlapError {
                     Text("Time conflict detected with an existing class.")
@@ -285,7 +296,7 @@ struct ClassIDGenerationView: View {
         let classData: [String: Any] = [
             "classID": classID,
             "className": className,
-            "days": selectedDays,
+//            "days": selectedDays,
             "startTime": formattedTime(classStartTime),
             "endTime": formattedTime(classEndTime),
             "teacherID": teacherID,
@@ -333,6 +344,31 @@ struct ClassIDGenerationView: View {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
         return formatter.string(from: time)
+    }
+    
+    private func fetchTeacherID() -> Int {
+        guard let userID = Auth.auth().currentUser?.uid else {
+            print("User not logged in")
+            return -1
+        }
+        
+        let userDocRef = db.collection("Teachers").document(userID)
+        
+        userDocRef.getDocument { document, error in
+            if let error = error {
+                print("Error fetching document: \(error.localizedDescription)")
+            } else if let document = document, document.exists {
+                if let teacherID = document.data()?["teacherID"] as? Int {
+                    return teacherID
+                } else {
+                    print("TeacherID not found.")
+                    return -1
+                }
+            } else {
+                print("Document does not exist.")
+                return -1
+            }
+        }
     }
 }
 

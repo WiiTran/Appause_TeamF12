@@ -210,11 +210,6 @@ struct TeacherMainView: View {
                     Text("My Classes")
                 }
             
-            TeacherSettingsView(showNextView: $showNextView)
-                .tabItem {
-                    Image(systemName: "gear")
-                    Text("Settings")                }
-            
             BluetoothManagerView()
                 .tabItem {
                     Image(systemName: "app.connected.to.app.below.fill")
