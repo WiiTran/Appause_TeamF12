@@ -104,7 +104,16 @@ struct StudentMainView: View {
                 .cornerRadius(btnStyle.getBtnRadius())
 
                 // Submitting Request Button
-                Button(action: { withAnimation { showNextView = .UnblockRequest } }) {
+                Button(action: {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                        withAnimation {
+                            showNextView = .UnblockRequest
+                            print("Navigating to: \(showNextView)")
+                        }
+                    }
+                }
+                )
+                {
                     HStack {
                         Text(fifthButtonName)
                             .padding(.leading, 25)
