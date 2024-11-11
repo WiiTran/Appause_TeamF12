@@ -63,26 +63,6 @@ struct StudentMainView: View {
                 .cornerRadius(btnStyle.getBtnRadius())
                 .padding(.bottom, 10)
 
-                // Connect Code Button
-                NavigationLink(destination: StudentConnectCodeView().navigationBarHidden(true)) {
-                    HStack {
-                        Text(thirdButtonName)
-                            .padding(.leading, 25)
-                            .foregroundColor(btnStyle.getBtnFontColor())
-                            .frame(width: btnStyle.getWidth(), height: btnStyle.getHeight(), alignment: btnStyle.getAlignment())
-                            .fontWeight(btnStyle.getFont())
-                        Image(systemName: "barcode")
-                            .fontWeight(btnStyle.getFont())
-                            .imageScale(.large)
-                            .foregroundColor(btnStyle.getBtnFontColor())
-                    }
-                }
-                .padding()
-                .background(btnStyle.getBtnColor())
-                .border(btnStyle.getBorderColor(), width: btnStyle.getBorderWidth())
-                .cornerRadius(btnStyle.getBtnRadius())
-                .padding(.bottom, 10)
-                
                 // Settings Button
                 Button(action: {
                     withAnimation { showNextView = .studentSettings }
@@ -102,7 +82,8 @@ struct StudentMainView: View {
                 .background(btnStyle.getBtnColor())
                 .border(btnStyle.getBorderColor(), width: btnStyle.getBorderWidth())
                 .cornerRadius(btnStyle.getBtnRadius())
-
+                .padding(.bottom, 10)
+                
                 // Submitting Request Button
                 Button(action: { withAnimation { showNextView = .UnblockRequest } }) {
                     HStack {
