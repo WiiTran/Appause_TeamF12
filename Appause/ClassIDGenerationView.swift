@@ -22,12 +22,12 @@ struct ClassIDGenerationView: View {
     @State private var alertMessage = ""
     @State private var showAlert = false
     @State private var isDaysSelectionVisible = false
-
+    
     @State private var classNameError = false
     @State private var teacherIDError = false
     @State private var daysError = false
     @State private var overlapError = false
-
+    
     private let daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     private let db = Firestore.firestore()
     
@@ -41,6 +41,9 @@ struct ClassIDGenerationView: View {
             }
         }
     }
+    
+    @EnvironmentObject var scheduleState: ScheduleState
+    @State private var currentSchedule = "Regular"
 
     var body: some View {
         ScrollView {  // Added ScrollView to prevent content overflow
@@ -187,7 +190,7 @@ struct ClassIDGenerationView: View {
                             .padding(.top, 20)
 
                         Text("Class Name: \(className)")
-                        Text("Class Days: \(selectedDays.joined(separator: ", "))")
+//                        Text("Class Days: \(selectedDays.joined(separator: ", "))")
                         Text("Class Period: \(formattedTime(classStartTime)) - \(formattedTime(classEndTime))")
                         Text("Teacher ID: \(teacherID)")
                         Text("Period: \(period)")
@@ -210,16 +213,18 @@ struct ClassIDGenerationView: View {
         }
         .onAppear() {
             fetchTeacherID()
+            currentSchedule = scheduleState.currentSchedule
+            print(currentSchedule)
         }
     }
 
-    private func toggleDaySelection(_ day: String) {
-        if let index = selectedDays.firstIndex(of: day) {
-            selectedDays.remove(at: index)
-        } else {
-            selectedDays.append(day)
-        }
-    }
+//    private func toggleDaySelection(_ day: String) {
+//        if let index = selectedDays.firstIndex(of: day) {
+//            selectedDays.remove(at: index)
+//        } else {
+//            selectedDays.append(day)
+//        }
+//    }
 
     private func validateAndGenerateClassID() {
         classNameError = className.isEmpty
@@ -313,19 +318,19 @@ struct ClassIDGenerationView: View {
 //            }
 //    }
 
-    private func timesOverlap(existingStartTime: String, existingEndTime: String) -> Bool {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm"
-
-        guard let existingStart = formatter.date(from: existingStartTime),
-              let existingEnd = formatter.date(from: existingEndTime),
-              let newStart = formatter.date(from: formattedTime(classStartTime)),
-              let newEnd = formatter.date(from: formattedTime(classEndTime)) else {
-            return false
-        }
-
-        return (newStart < existingEnd) && (newEnd > existingStart)
-    }
+//    private func timesOverlap(existingStartTime: String, existingEndTime: String) -> Bool {
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "HH:mm"
+//
+//        guard let existingStart = formatter.date(from: existingStartTime),
+//              let existingEnd = formatter.date(from: existingEndTime),
+//              let newStart = formatter.date(from: formattedTime(classStartTime)),
+//              let newEnd = formatter.date(from: formattedTime(classEndTime)) else {
+//            return false
+//        }
+//
+//        return (newStart < existingEnd) && (newEnd > existingStart)
+//    }
 
     private func generateClassID() {
         let newClassID = UUID().uuidString.prefix(8).uppercased()
