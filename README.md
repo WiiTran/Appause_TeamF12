@@ -25,15 +25,14 @@
 
 <h2>Key Features</h2>
   <ul>
-    <li>Time-Based Lockdown</li>
-    <li>Default Permission Status</li>
-    <li>Signup Authentication Emails, Password Reset, Password requirement</li>
-    <li>Individuallized Permission</li>
-    <li>Bluetooth Connectivity</li>
-    <li>Restriction Limitations </li>
-    <li>Missing/Unconnected Students List</li>
-    <li>Store Teacher and Students Information</li>
-    <li>Trusted Student Status</li>
+    <li>Teacher Navigational-settings</li>
+<img src="https://github.com/WiiTran/Appause_TeamF12/blob/dfe382b527ea63257195262f4f695dd1d47b6179/Appause/Assets.xcassets/navigational%20settings.png">
+    <li>Save Class Interface</li>
+<img src="https://github.com/WiiTran/Appause_TeamF12/blob/dfe382b527ea63257195262f4f695dd1d47b6179/Appause/Assets.xcassets/save%20classes.png">
+    <li>Submit request Interface</li>
+<img src="https://github.com/WiiTran/Appause_TeamF12/blob/dfe382b527ea63257195262f4f695dd1d47b6179/Appause/Assets.xcassets/submit%20request.png">
+    <li>Teacher Class interface with Current class functionality</li>
+<img src="https://github.com/WiiTran/Appause_TeamF12/blob/dfe382b527ea63257195262f4f695dd1d47b6179/Appause/Assets.xcassets/current%20class.png">
   </ul>
 
 <h2>Testing</h2>
