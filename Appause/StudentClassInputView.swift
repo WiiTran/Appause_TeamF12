@@ -1,3 +1,9 @@
+//  StudentClassInputView.swift
+//  Appause
+//
+//  Created by Abdurraziq on 10/14/24.
+//
+
 import SwiftUI
 import FirebaseFirestore
 
@@ -18,7 +24,7 @@ struct StudentClassInputView: View {
                     Section(header: Text("Enter Class ID")) {
                         TextField("Class ID", text: $classID)
                             .keyboardType(.numberPad)
-                            .autocapitalization(.allCharacters) // Enforce uppercase to match Firestore data
+                            .autocapitalization(.none)
                             .disableAutocorrection(true)
                         
                         Button("Fetch Class Details") {
@@ -81,26 +87,21 @@ struct StudentClassInputView: View {
         isLoading = true
         availableClasses.removeAll() // Clear previous results
         
-        print("Searching for classID: \(classID)") // Debugging line
-
         let db = Firestore.firestore()
-        db.collection("classes")
+        db.collection("Classes")
             .whereField("classID", isEqualTo: classID)
             .getDocuments { (snapshot, error) in
-                self.isLoading = false
+                isLoading = false
                 
                 if let error = error {
-                    self.alertMessage = "Error fetching classes: \(error.localizedDescription)"
-                    self.showAlert = true
-                    print("Firestore error: \(error.localizedDescription)") // Debugging line
+                    alertMessage = "Error fetching classes: \(error.localizedDescription)"
+                    showAlert = true
                     return
                 }
                 
                 if let documents = snapshot?.documents {
-                    print("Documents found: \(documents.count)") // Debugging line
                     availableClasses = documents.compactMap { doc in
                         let data = doc.data()
-                        print("Document data: \(data)") // Debugging line
                         return ClassInfo(
                             teacherID: data["teacherID"] as? String ?? "N/A",
                             classID: data["classID"] as? String ?? "N/A",
@@ -114,7 +115,6 @@ struct StudentClassInputView: View {
                     if availableClasses.isEmpty {
                         alertMessage = "No classes found for the entered ID."
                         showAlert = true
-                        print("No matching classes found for classID \(classID)") // Debugging line
                     }
                 }
             }
@@ -146,11 +146,9 @@ struct StudentClassInputView: View {
             if let error = error {
                 alertMessage = "Error registering for class: \(error.localizedDescription)"
                 showAlert = true
-                print("Registration error: \(error.localizedDescription)") // Debugging line
             } else {
                 alertMessage = "Successfully registered for \(classInfo.className)!"
                 showAlert = true
-                print("Registered for class: \(classInfo.className) with studentEmail: \(studentEmail)") // Debugging line
             }
         }
     }
@@ -163,7 +161,7 @@ struct ClassInfo: Identifiable {
     var className: String
     var startTime: String
     var endTime: String
-    var days: [String] // Added 'days' as an array of strings
+    var days: [String] // Array to hold the class days
 }
 
 struct StudentClassInputView_Previews: PreviewProvider {
@@ -171,4 +169,3 @@ struct StudentClassInputView_Previews: PreviewProvider {
         StudentClassInputView()
     }
 }
-
