@@ -11,7 +11,22 @@
 //  using faster editing with Firebase Firestore
 //
 import SwiftUI
+import Combine
 import FirebaseFirestore
+
+final class ScheduleState: ObservableObject{
+    static let scheduleState = ScheduleState()
+    @Published var currentSchedule: String = "Regular"
+    init() {}
+    
+    func setCurrentSchedule( scheduleType : String) {
+        currentSchedule = scheduleType
+    }
+    
+    func getCurrentSchedule() -> String {
+        return currentSchedule
+    }
+}
 
 struct TeacherScheduleView: View {
     @State private var scheduleName = "Regular" // Default selected schedule name
@@ -22,7 +37,12 @@ struct TeacherScheduleView: View {
     @State private var newStartTime = Date() // Start time for adding/editing periods
     @State private var newEndTime = Date() // End time for adding/editing periods
     @State private var selectedPeriodIndex: Int? // Selected period index for editing
+//    static let shared = scheduleName
 
+//    class ScheduleState: ObservedObject{
+//        @Published var currentSchedule: String = "Regular"
+//    }
+        
     var body: some View {
         NavigationView {
             VStack {
@@ -41,6 +61,8 @@ struct TeacherScheduleView: View {
                 .padding()
                 .onChange(of: scheduleName) { newSchedule in
                     loadSchedule(newSchedule)
+                    ScheduleState.scheduleState.setCurrentSchedule(scheduleType: scheduleName)
+                    print(ScheduleState.scheduleState.getCurrentSchedule())
                 }
 
                 // List displaying periods in the selected schedule
@@ -71,6 +93,7 @@ struct TeacherScheduleView: View {
             }
             .navigationTitle("Teacher Schedule")
             .onAppear {
+                scheduleName = ScheduleState.scheduleState.getCurrentSchedule()
                 loadSchedule(scheduleName) // Load the initial schedule when the view appears
             }
         }
