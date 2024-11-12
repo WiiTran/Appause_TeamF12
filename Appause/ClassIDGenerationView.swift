@@ -37,7 +37,6 @@ struct ClassIDGenerationView: View {
                 print("Failed to fetch TeacherID: \(error)")
             } else if let teacherID = teacherID {
                 self.teacherID = teacherID
-                print("yay")
                 print(teacherID)
             }
         }
@@ -225,43 +224,94 @@ struct ClassIDGenerationView: View {
     private func validateAndGenerateClassID() {
         classNameError = className.isEmpty
         teacherIDError = (teacherID?.isEmpty == true)
-        daysError = selectedDays.isEmpty
+//        daysError = selectedDays.isEmpty
 
-        if !classNameError && !teacherIDError && !daysError {
-            checkForOverlappingClass()
-        }
-    }
-
-    private func checkForOverlappingClass() {
-        isGenerating = true
-
-        db.collection("classes")
-            .whereField("teacherID", isEqualTo: teacherID)
-            .whereField("days", arrayContainsAny: selectedDays)
-            .getDocuments { (querySnapshot, error) in
+        if !classNameError && !teacherIDError {
+            checkForOverlappingClass(teacherID: teacherID!) { hasOverlap, error in
                 if let error = error {
-                    alertMessage = "Error fetching classes: \(error.localizedDescription)"
-                    showAlert = true
-                    isGenerating = false
-                    return
-                }
-
-                let conflictExists = querySnapshot?.documents.contains { document in
-                    let existingStartTime = document["startTime"] as? String ?? ""
-                    let existingEndTime = document["endTime"] as? String ?? ""
-
-                    return self.timesOverlap(existingStartTime: existingStartTime, existingEndTime: existingEndTime)
-                } ?? false
-
-                if conflictExists {
-                    overlapError = true
-                    isGenerating = false
-                } else {
-                    overlapError = false
+                    print("Error checking for overlapping classes: \(error)")
+                } else if hasOverlap {
+                    print("Duplicate period found for this teacher")
+                    print(period)
+                }else {
+                    print("no overlap")
                     generateClassID()
                 }
             }
+        } else {
+            print("error", classNameError, " ", teacherIDError)
+        }
+            
     }
+    
+    private func checkForOverlappingClass(teacherID: String, completion: @escaping (Bool, Error?) -> Void) {
+        isGenerating = true
+        
+        db.collection("classes").whereField("teacherID", isEqualTo: teacherID).getDocuments { (querySnapshot, error) in
+            defer{ isGenerating = false }
+            
+            if let error = error {
+                completion(false, error)
+                return
+            }
+            
+            guard let documents = querySnapshot?.documents else {
+                completion(false, nil)
+                return
+            }
+            
+            var periodSet = Set<Int>()
+            for document in documents {
+                if let period = document.data()["period"] as? Int {
+                    if periodSet.contains(period){
+                        completion(true, nil)
+                        return
+                    } else {
+                        periodSet.insert(period)
+                    }
+                }
+            }
+            
+            if periodSet.contains(self.period) {
+                completion(true, nil)
+            } else {
+                periodSet.insert(self.period)
+                completion(false, nil)
+            }
+        }
+    }
+    
+
+//    private func checkForOverlappingClass() {
+//        isGenerating = true
+//
+//        db.collection("classes")
+//            .whereField("teacherID", isEqualTo: teacherID)
+////            .whereField("days", arrayContainsAny: selectedDays)
+//            .getDocuments { (querySnapshot, error) in
+//                if let error = error {
+//                    alertMessage = "Error fetching classes: \(error.localizedDescription)"
+//                    showAlert = true
+//                    isGenerating = false
+//                    return
+//                }
+//
+//                let conflictExists = querySnapshot?.documents.contains { document in
+//                    let existingStartTime = document["startTime"] as? String ?? ""
+//                    let existingEndTime = document["endTime"] as? String ?? ""
+//
+//                    return self.timesOverlap(existingStartTime: existingStartTime, existingEndTime: existingEndTime)
+//                } ?? false
+//
+//                if conflictExists {
+//                    overlapError = true
+//                    isGenerating = false
+//                } else {
+//                    overlapError = false
+//                    generateClassID()
+//                }
+//            }
+//    }
 
     private func timesOverlap(existingStartTime: String, existingEndTime: String) -> Bool {
         let formatter = DateFormatter()
@@ -284,7 +334,9 @@ struct ClassIDGenerationView: View {
             if exists {
                 generateClassID()  // Retry with a new ID if the ID exists
             } else {
-                saveClassToFirestore(classID: String(newClassID))  // Save if ID is unique
+                saveClassToFirestore(classID: String(newClassID)) 
+                // Save if ID is unique
+                print("woo")
             }
         }
     }
@@ -351,6 +403,7 @@ struct ClassIDGenerationView: View {
                     if let updateError = updateError {
                         print("Error updating teacher's classes: \(updateError.localizedDescription)")
                     }
+                print("success")
                 }
             }
     }
