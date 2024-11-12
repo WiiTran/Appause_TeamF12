@@ -14,7 +14,7 @@ struct ClassIDGenerationView: View {
     @State private var classStartTime = Date()
     @State private var classEndTime = Date()
     @State private var selectedDays: [String] = []
-    @State private var teacherID = ""
+    @State private var teacherID: String?
     //@State private var period: String = ""
     @State private var period = 1
     @State private var generatedClassID: String? = nil
@@ -30,6 +30,18 @@ struct ClassIDGenerationView: View {
 
     private let daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     private let db = Firestore.firestore()
+    
+    func fetchTeacherID() {
+        fetchTeacherID { teacherID, error in
+            if let error = error {
+                print("Failed to fetch TeacherID: \(error)")
+            } else if let teacherID = teacherID {
+                self.teacherID = teacherID
+                print("yay")
+                print(teacherID)
+            }
+        }
+    }
 
     var body: some View {
         ScrollView {  // Added ScrollView to prevent content overflow
@@ -197,6 +209,9 @@ struct ClassIDGenerationView: View {
                 dismissButton: .default(Text("OK"))
             )
         }
+        .onAppear() {
+            fetchTeacherID()
+        }
     }
 
     private func toggleDaySelection(_ day: String) {
@@ -209,7 +224,7 @@ struct ClassIDGenerationView: View {
 
     private func validateAndGenerateClassID() {
         classNameError = className.isEmpty
-        teacherIDError = teacherID.isEmpty
+        teacherIDError = (teacherID?.isEmpty == true)
         daysError = selectedDays.isEmpty
 
         if !classNameError && !teacherIDError && !daysError {
@@ -300,7 +315,7 @@ struct ClassIDGenerationView: View {
             "startTime": formattedTime(classStartTime),
             "endTime": formattedTime(classEndTime),
             "teacherID": teacherID,
-            "period": Int(period) ?? 0
+            "period": period
         ]
 
         db.collection("classes").addDocument(data: classData) { error in
@@ -346,27 +361,32 @@ struct ClassIDGenerationView: View {
         return formatter.string(from: time)
     }
     
-    private func fetchTeacherID() -> Int {
-        guard let userID = Auth.auth().currentUser?.uid else {
+    private func fetchTeacherID(completion: @escaping (String?, String?) -> Void){
+        
+        guard let userID = Auth.auth().currentUser?.email else {
             print("User not logged in")
-            return -1
+            completion(nil, "User not logged in")
+            return
         }
+       
+        print(userID)
         
-        let userDocRef = db.collection("Teachers").document(userID)
-        
-        userDocRef.getDocument { document, error in
+        db.collection("Teachers").whereField("Email", isEqualTo: userID).getDocuments() { querySnapshot, error in
             if let error = error {
-                print("Error fetching document: \(error.localizedDescription)")
-            } else if let document = document, document.exists {
-                if let teacherID = document.data()?["teacherID"] as? Int {
-                    return teacherID
+                completion(nil, "Error fetching document: \(error.localizedDescription)")
+            } else if let document = querySnapshot?.documents.first, document.exists {
+                if let teacherID = document.data()["teacherID"] as? String {
+                    completion(teacherID, nil)
+                    return
                 } else {
                     print("TeacherID not found.")
-                    return -1
+                    completion(nil, "TeacherID not found")
+                    return
                 }
             } else {
                 print("Document does not exist.")
-                return -1
+                completion(nil, "Document does not exist")
+                return
             }
         }
     }
