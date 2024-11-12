@@ -37,14 +37,17 @@ struct UnblockRequestView: View {
 
                 // Form fields for unblock request
                 TextField("Student ID", text: $studentID)
+                    .accessibilityIdentifier("studentIDTextField")
                     .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
 
                 TextField("App Name", text: $appName)
+                    .accessibilityIdentifier("appNameTextField")
                     .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
 
                 TextField("Reason for unblocking", text: $reason)
+                    .accessibilityIdentifier("reasonTextField")
                     .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
 
