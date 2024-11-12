@@ -1,12 +1,8 @@
-
+//  RegisterSettingView.swift
+//  Appause
+//
 //  Created by Abdurraziq on 9/30/24.
-//
-// RegisterSettingView.swift
-// Appause
-//
-// updated by Abdurraziq on 10/11/24.
-// RegisterSettingView.swift
-// Appause
+//  Updated by Abdurraziq on 10/11/24.
 
 import SwiftUI
 import FirebaseFirestore
@@ -45,7 +41,7 @@ struct RegisterSettingView: View {
                 Button("Save Settings") {
                     saveSettings()
                 }
-                .foregroundColor(.blue) // Change text color to look more interactive
+                .foregroundColor(.blue)
             }
             .navigationTitle("App Settings")
             .alert(isPresented: $showingAlert) {

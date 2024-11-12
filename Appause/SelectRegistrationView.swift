@@ -1,8 +1,9 @@
 //
 //  SelectRegistrationView.swift
-//  Appause_TeamF12_HTr
+//  Appause
 //
 //  Created by Huy Tran on 4/16/24.
+//  Modified by Dakshina EW on 10/28/2024.
 //
 
 import SwiftUI
@@ -116,9 +117,9 @@ struct SelectRegistrationView: View
             {
                 Button(action:
                         {
-                    let registeredUsername = keychain.get("teacherUserKey")
-                    let registeredPassword = keychain.get("teacherPassKey")
-                    
+//                    let registeredUsername = keychain.get("teacherUserKey")
+//                    let registeredPassword = keychain.get("teacherPassKey")
+//                    
                     withAnimation
                     {
                         showTeacherRegistrationFields.toggle()
@@ -146,9 +147,9 @@ struct SelectRegistrationView: View
                 
                 Button(action:
                         {
-                    let registeredUsername = keychain.get("studentUserKey")
-                    let registeredPassword = keychain.get("studentPassKey")
-                    
+//                    let registeredUsername = keychain.get("studentUserKey")
+//                    let registeredPassword = keychain.get("studentPassKey")
+//                    
                     withAnimation
                     {
                         //showNextView = .login
@@ -230,7 +231,7 @@ struct SelectRegistrationView: View
                         TextFieldWithEyeIcon(placeholder: "Confirm Password", text: $teacherPassConfirm, isSecure: true, visibility: $confirmStatus)
                     }
                     Button(action:
-                    {
+                            {
                         tempString = teacherEmail.components(separatedBy: ".")
                         
                         if(tempString.count > 1 && !tempString[1].isEmpty) {
@@ -271,50 +272,59 @@ struct SelectRegistrationView: View
                             keychain.set(teacherFirstName, forKey: "teacherFirstNameKey")
                             keychain.set(teacherLastName, forKey: "teacherLastNameKey")
                             
-                            Task {
-                                do {
-                                    userInfo = try await AuthManager.sharedAuth.createUser(
+                            // Generate a unique teacher ID and proceed with registration
+                            generateUniqueTeacherID { uniqueID in
+                                guard let teacherID = uniqueID else {
+                                    registerError = "Error generating Teacher ID. Please try again."
+                                    return
+                                }
+                                
+                                Task {
+                                    do {
+                                        userInfo = try await AuthManager.sharedAuth.createUser(
                                             email: teacherEmail,
                                             password: teacherPassword,
                                             fname: teacherFirstName,
-                                            lname: teacherLastName)
-                                    print(userInfo.email! + userInfo.fname! + userInfo.lname!)
-                                    
-                                    guard let email = userInfo.email,
-                                          let fname = userInfo.fname,
-                                          let lname = userInfo.lname,
-                                          !email.isEmpty,
-                                          !fname.isEmpty,
-                                          !lname.isEmpty
-                                    else {
-                                        return
-                                    }
-                                    
-                                    do {
-                                        let ref = try await db.collection("Teachers").addDocument(data: [
-                                            "Name": userInfo.fname! + " " + userInfo.lname!,
-                                            "Email": userInfo.email!,
-                                            "Date Created": Timestamp(date: Date())
-                                        ])
+                                            lname: teacherLastName
+                                        )
                                         
-                                        let subref = try await db.collection("Teachers").document(ref.documentID).collection("ClassesTaught").addDocument(data: [
-                                            "Placeholder" : "."
-                                        ])
+                                        print(userInfo.email! + userInfo.fname! + userInfo.lname!)
                                         
-                                        print("Document added with ID: \(ref.documentID)")
-                                    } catch let dbError{
-                                        print("Error adding document: \(dbError.localizedDescription)")
+                                        guard let email = userInfo.email,
+                                              let fname = userInfo.fname,
+                                              let lname = userInfo.lname,
+                                              !email.isEmpty, !fname.isEmpty, !lname.isEmpty else {
+                                            return
+                                        }
+                                        
+                                        do {
+                                            let ref = try await db.collection("Teachers").addDocument(data: [
+                                                "Name": "\(fname) \(lname)",
+                                                "Email": email,
+                                                "teacherID": teacherID,
+                                                "Date Created": Timestamp(date: Date())
+                                            ])
+                                            
+                                            _ = try await db.collection("Teachers")
+                                                   .document(ref.documentID)
+                                                   .collection("ClassesTaught")
+                                                   .addDocument(data: [
+                                                       "Placeholder": "."
+                                                ])
+                                            
+                                            print("Document added with ID: \(ref.documentID)")
+                                        } catch let dbError {
+                                            print("Error adding document: \(dbError.localizedDescription)")
+                                        }
+                                        
+                                    } catch let createUserError {
+                                        registerError = "Registration of user failed. \(createUserError.localizedDescription)"
                                     }
-                                    
-                                } catch let createUserError {
-                                    registerError = "Registration of user failed.  \(createUserError.localizedDescription)"
                                 }
-                            }
-                            
-                            
-                            withAnimation
-                            {
-                                showNextView = .login
+                                
+                                withAnimation {
+                                    showNextView = .login
+                                }
                             }
                         }
                     })
@@ -327,7 +337,6 @@ struct SelectRegistrationView: View
                             .foregroundColor(.white)
                             .cornerRadius(10)
                             .padding(.bottom, 25)
-                            .frame(minWidth: 2000)
                     }
                     
                     HStack {
@@ -485,9 +494,7 @@ struct SelectRegistrationView: View
                                 showNextView = .login
                             }
                         }
-                    })
-                    //.padding(.bottom)
-                    {
+                    }){
                         Text("Register")
                             .padding()
                             .frame(width: 370)
@@ -518,6 +525,34 @@ struct SelectRegistrationView: View
                 }
             }
         }
+    }
+    
+    // Helper function to generate and ensure a unique 6-digit teacher ID
+    private func generateUniqueTeacherID(completion: @escaping (String?) -> Void) {
+        let newTeacherID = String(format: "%06d", Int.random(in: 0...999999))
+
+        checkIfTeacherIDExists(teacherID: newTeacherID) { exists in
+            if exists {
+                generateUniqueTeacherID(completion: completion)
+            } else {
+                completion(newTeacherID)
+            }
+        }
+    }
+
+    // Helper function to check if the teacher ID exists in Firestore
+    private func checkIfTeacherIDExists(teacherID: String, completion: @escaping (Bool) -> Void) {
+        db.collection("Teachers")
+            .whereField("teacherID", isEqualTo: teacherID)
+            .getDocuments { querySnapshot, error in
+                if let error = error {
+                    print("Error checking Teacher ID: \(error.localizedDescription)")
+                    completion(true)  // Assume it exists
+                    return
+                }
+                let exists = !(querySnapshot?.documents.isEmpty ?? true)
+                completion(exists)
+            }
     }
     
     // Function to update button colors based on selection

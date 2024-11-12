@@ -9,6 +9,8 @@ import FirebaseFirestore
 import FirebaseAuth
 
 struct FeedbackFormView: View {
+    @Environment(\.presentationMode) var presentationMode
+
     @State private var userName: String = ""
     @State private var feedbackTitle: String = ""
     @State private var feedbackDetails: String = ""
@@ -20,40 +22,57 @@ struct FeedbackFormView: View {
     let categories = ["Bug Report", "Improvement Suggestion"]
 
     var body: some View {
-        Form {
-            Section(header: Text("User Name")) {
-                TextField("Enter your username", text: $userName)
-            }
-            Section(header: Text("Feedback Title")) {
-                TextField("Enter a title", text: $feedbackTitle)
-            }
-            Section(header: Text("Details")) {
-                TextEditor(text: $feedbackDetails)
-                    .frame(height: 150)
-                    .keyboardType(.default) // Ensure default keyboard type
-            }
-            Section(header: Text("Category")) {
-                Picker("Select a category", selection: $category) {
-                    ForEach(categories, id: \.self) {
-                        Text($0)
+        VStack {
+            // Add Back to Main button
+            Text("MAIN / FEEDBACK")
+                .onTapGesture {
+                    withAnimation {
+                        self.presentationMode.wrappedValue.dismiss()
                     }
                 }
-                .pickerStyle(SegmentedPickerStyle())
+                .fontWeight(btnStyle.getFont())
+                .foregroundColor(btnStyle.getPathFontColor())
+                .frame(width: btnStyle.getWidth(), height: btnStyle.getHeight(), alignment: btnStyle.getAlignment())
+                .padding()
+                .background(btnStyle.getPathColor())
+                .cornerRadius(btnStyle.getPathRadius())
+                .padding(.top)
+            
+            Form {
+                Section(header: Text("User Name")) {
+                    TextField("Enter your username", text: $userName)
+                }
+                Section(header: Text("Feedback Title")) {
+                    TextField("Enter a title", text: $feedbackTitle)
+                }
+                Section(header: Text("Details")) {
+                    TextEditor(text: $feedbackDetails)
+                        .frame(height: 150)
+                        .keyboardType(.default) // Ensure default keyboard type
+                }
+                Section(header: Text("Category")) {
+                    Picker("Select a category", selection: $category) {
+                        ForEach(categories, id: \.self) {
+                            Text($0)
+                        }
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                }
+                Button(action: submitFeedback) {
+                    Text("Submit")
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                .alert(isPresented: $showingAlert) {
+                    Alert(title: Text("Feedback Submission"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+                }
             }
-            Button(action: submitFeedback) {
-                Text("Submit")
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
+            .onAppear {
+                signInAnonymously() // Ensure the user is authenticated when the view appears
             }
-            .alert(isPresented: $showingAlert) {
-                Alert(title: Text("Feedback Submission"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
-            }
-        }
-        .onAppear {
-            signInAnonymously() // Ensure the user is authenticated when the view appears
         }
         .navigationTitle("Submit Feedback")
     }
@@ -110,4 +129,3 @@ struct FeedbackFormView_Previews: PreviewProvider {
         FeedbackFormView()
     }
 }
-

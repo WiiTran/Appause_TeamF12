@@ -1,6 +1,6 @@
 //
 //  EULAView.swift
-//  Appause_TeamF12_HTr
+//  Appause
 //
 //  Created by Huy Tran on 4/14/24.
 //
@@ -44,9 +44,10 @@ struct EULAView: View {
             
             Text("EULA")
                 .padding(.top, 15)
-                .background(Color("Background"))// updatte Color.White
-                .foregroundColor(.primary)// updated .black
+                .background(Color.white)
+                .foregroundColor(.black)
                 .bold()
+                
                 
             
             
@@ -72,17 +73,17 @@ struct EULAView: View {
                          \nBy installing and using the Appause, you acknowledge that you have read this EULA, understand it, and agree to be bound by its terms and conditions. If you do not agree to the terms and conditions of this EULA, do not install or use Appause. F12 reserves the right to change any sections of this EULA at their discretion and without prior notification to the end user.
 """)
                     
-                                            .padding(.top, 30)
-                                            .padding(.horizontal, 50)
-                                                .background(Color("Background"))//updated
-                                                .foregroundColor(.primary)// updated .balck
-                                                .lineLimit(nil)
-                                                .frame(
-                                                    minWidth: 100,
-                                                    maxWidth: geometry.size.width,
-                                                    minHeight: geometry.size.height,
-                                                    maxHeight: .infinity,
-                                                    alignment: .topLeading)
+                    .padding(.top, 30)
+                    .padding(.horizontal, 50)
+                        .background(Color.white)
+                        .foregroundColor(.black)
+                        .lineLimit(nil)
+                        .frame(
+                            minWidth: 100,
+                            maxWidth: geometry.size.width,
+                            minHeight: geometry.size.height,
+                            maxHeight: .infinity,
+                            alignment: .topLeading)
                                     }
                                 }
                                 
@@ -93,7 +94,7 @@ struct EULAView: View {
                                 }) {
                                     Text("Accept")
                                         .padding()
-                                        .background(Color ("ButtonBackground"))// updated from .bllack
+                                        .background(Color.black)
                                         .foregroundColor(.white)
                                         .cornerRadius(5)
                                 }

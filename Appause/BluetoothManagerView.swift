@@ -7,6 +7,7 @@
 
 import SwiftUI
 import MultipeerConnectivity
+import FirebaseAuth
 
 struct DiscoveredPeer: Identifiable {
     let id = UUID()
@@ -20,10 +21,8 @@ struct BluetoothManagerView: View {
     @State private var selectedPeer: DiscoveredPeer?
     
     var body: some View {
-        ZStack(alignment: .topLeading) {
+        ZStack {
             VStack(spacing: 16) {
-                Spacer().frame(height: 75)
-                
                 Text("Nearby Devices")
                     .font(.largeTitle)
                     .fontWeight(.bold)
@@ -42,7 +41,7 @@ struct BluetoothManagerView: View {
                     Text(isBrowsing ? "Stop Searching" : "Search")
                         .padding()
                         .foregroundColor(.white)
-                        .background(Color.black)
+                        .background(isBrowsing ? Color.red : Color.green)
                         .cornerRadius(10)
                 }
                 
@@ -87,87 +86,83 @@ struct BluetoothManagerView: View {
             
             // Disconnect Confirmation Popup
             if showDisconnectPopup {
-                VStack(spacing: 20) {
-                    Text("Disconnect Device")
-                        .font(.title)
-                        .padding()
+                ZStack {
+                    Color.white.opacity(0.6)
+                        .edgesIgnoringSafeArea(.all)
                     
-                    Text("Are you sure you want to disconnect from \(selectedPeer?.peerID.displayName ?? "this device")?")
-                    
-                    HStack {
-                        Button("Disconnect") {
-                            if let peer = selectedPeer?.peerID {
-                                bluetoothManager.disconnectPeer(peer)
-                            }
-                            withAnimation {
-                                showDisconnectPopup = false
+                    GeometryReader { geometry in
+                        VStack(spacing: 15) {
+                            Text("Disconnect Device")
+                                .font(.title)
+                                .padding()
+                            
+                            Text("Are you sure you want to disconnect from \(selectedPeer?.peerID.displayName ?? "this device")?")
+                                .multilineTextAlignment(.center)
+                                .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                            
+                            HStack {
+                                Button("Disconnect") {
+                                    if let peer = selectedPeer?.peerID {
+                                        bluetoothManager.disconnectPeer(peer)
+                                    }
+                                    withAnimation {
+                                        showDisconnectPopup = false
+                                    }
+                                }
+                                .padding()
+                                .background(Color.red)
+                                .foregroundColor(.white)
+                                .cornerRadius(8)
+                                
+                                Button("Cancel") {
+                                    withAnimation {
+                                        showDisconnectPopup = false
+                                    }
+                                }
+                                .padding()
+                                .background(Color.gray)
+                                .foregroundColor(.white)
+                                .cornerRadius(8)
                             }
                         }
-                        .padding()
-                        .background(Color.red)
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
-                        
-                        Button("Cancel") {
-                            withAnimation {
-                                showDisconnectPopup = false
-                            }
-                        }
-                        .padding()
-                        .background(Color.gray)
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
+                        .frame(width: 300, height: 200)
+                        .background(Color.white)
+                        .opacity(1)
+                        .cornerRadius(20)
+                        .shadow(radius: 10)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .transition(.move(edge: .bottom))
+                        .offset(y: showDisconnectPopup ? 0 : UIScreen.main.bounds.height)
+                        .animation(.easeInOut(duration: 0.5), value: showDisconnectPopup)
                     }
                 }
-                .frame(width: 300, height: 200)
-                .background(Color.white)
-                .cornerRadius(20)
-                .shadow(radius: 10)
-                .transition(.move(edge: .bottom))
-                .offset(y: showDisconnectPopup ? 0 : UIScreen.main.bounds.height)
-                .animation(.easeInOut(duration: 0.5), value: showDisconnectPopup)
             }
-            
-            // "Menu" Button
-            Button(action: {
-                // Menu action
-            }) {
-                Text("Menu")
-                    .font(.headline)
-                    .padding(16)
-                    .foregroundColor(.black)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 20)
-                            .stroke(Color.black, lineWidth: 2)
-                    )
-            }
-            .background(Color.clear)
-            .cornerRadius(20)
-            .padding([.leading, .top], 16)
-        }
-        .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("DeviceDisconnected"))) { _ in
-            print("A device has been disconnected.")
         }
     }
 }
 
 // BluetoothManager class
-class BluetoothManager: NSObject, ObservableObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate {
+class BluetoothManager: NSObject, ObservableObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate {
     @Published var discoveredPeers: [DiscoveredPeer] = []
     @Published var connectedPeers: [MCPeerID] = []
     private var peerID: MCPeerID!
     private var mcSession: MCSession!
     private var mcBrowser: MCNearbyServiceBrowser!
+    private var mcAdvertiser: MCNearbyServiceAdvertiser!
     private let serviceType = "admin-control"
     
     override init() {
         super.init()
-        peerID = MCPeerID(displayName: UIDevice.current.name)
+        peerID = MCPeerID(displayName: Auth.auth().currentUser?.email ?? "nil")
         mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
         mcSession.delegate = self
         
         mcBrowser = MCNearbyServiceBrowser(peer: peerID, serviceType: serviceType)
         mcBrowser.delegate = self
+        
+        mcAdvertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: serviceType)
+        mcAdvertiser.delegate = self
+        mcAdvertiser.startAdvertisingPeer()
     }
     
     // Start browsing for peers
@@ -230,6 +225,10 @@ class BluetoothManager: NSObject, ObservableObject, MCSessionDelegate, MCNearbyS
             self.discoveredPeers.removeAll { $0.peerID == peerID }
         }
     }
+    
+    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
+            invitationHandler(true, mcSession)
+        }
     
     // Empty implementations for other delegate methods
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {}

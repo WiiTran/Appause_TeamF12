@@ -1,46 +1,29 @@
-//
 //  LoginView.swift
-//  Appause_TeamF12_HTr
-//
+//  Appause
 //  Created by Huy Tran on 4/16/24.
-//
 
 import SwiftUI
-
 import MessageUI
 import KeychainSwift
 import Combine
 import CoreHaptics
 import LocalAuthentication
+import FirebaseAuth
 
 var currentLoggedInUser: String? = nil
-
 private var isTeacherLogin = false
 
 struct LoginView: View {
     public var keychain = KeychainSwift()
     
-    //environment variable used for switching from the forgot password screen back to the login screen
+    // Environment variable for switching views
     @EnvironmentObject var viewSwitcher: ViewSwitcher
-    
-    // MARK: - State Variables
-    @State private var show2FAInput = false
-    
-    // Check if two-factor authentication is enabled
-    var isTwoFactorEnabled: Bool {
-        if let user = currentLoggedInUser {
-            let accountType = isTeacherLogin ? "teacher" : "student"
-            return UserDefaults.standard.bool(forKey: "\(user)_\(accountType)IsTwoFactorEnabled")
-        }
-        return false
-    }
     
     @State private var isFaceIDAuthenticated = false
     @State private var showAlert = false
     @State private var alertTitle = ""
     @State private var alertMessage = ""
     
-    @State var emailFor2FA: String = ""
     @State private var showErrorMessages = false
     @State private var errorMessages = ""
     @State private var shakeOffset: CGFloat = 0.0
@@ -48,19 +31,14 @@ struct LoginView: View {
     // Binding to control the view state
     @Binding var showNextView: DisplayState
     
-    // Teacher login button properties
+    // Button properties
     @State var buttonNameTop = "Teacher"
     @State var buttonColorTopIdle = Color.gray
     @State var buttonColorTopActive = Color.black
-    
-    // Login button properties
     @State var buttonColorLogin = Color.black
-    
-    // Student login button properties
     @State var buttonNameBottom = "Student"
     @State var buttonColorBottomIdle = Color.gray
     @State var buttonColorBottomActive = Color.black
-    
     @State var buttonColorTopSucess = Color.green
     @State var textFieldOpacity = Color.gray.opacity(0.2)
     @State var buttonColorTop = Color.black
@@ -82,13 +60,18 @@ struct LoginView: View {
     @State var isStudentRegistrationSuccessful = false
     @State var isStudentLoginSuccessful = false
     @State private var isResetPasswordViewActive = false
+    @State private var selectedLoginType: LoginType? = nil
     
+    enum LoginType {
+        case teacher
+        case student
+    }
+
     // Password visibility
     @State var studentPassVisibility: String = ""
     @State var teacherPassVisibility: String = ""
     
-    //helper strings to parse username and correctly sort account type
-    //written by Luke Simoni
+    // Helper strings to parse username and correctly sort account type
     @State var tempStudentString: String = ""
     @State var tempString: [String] = []
     @AppStorage("isUserLoggedIn") var isUserLoggedIn: Bool = false // Track login status
@@ -96,40 +79,22 @@ struct LoginView: View {
 
     // Custom SwiftUI view to create a text field with an optional eye icon for password visibility
     struct TextFieldWithEyeIcon: View {
-        // Placeholder text for the text field
         var placeholder: String
-        
-        // Binding to a text property, so changes to this text will be reflected externally
         @Binding var text: String
-        
-        // A flag indicating whether this text field should display as a secure (password) field
         var isSecure: Bool
-        
-        // Binding to the visibility state of the password (visible or hidden)
         @Binding var visibility: String
         
         var body: some View {
             HStack {
                 if isSecure {
-                    // SecureField is used for password input
                     SecureField(placeholder, text: $text)
-                        .disableAutocorrection(true)
-                        .autocapitalization(.none)
-                        .textInputAutocapitalization(.never) // Prevents suggestions
                 } else {
-                    // TextField is used for non-password input
                     TextField(placeholder, text: $text)
-                        .disableAutocorrection(true)
-                        .autocapitalization(.none)
-                        .textInputAutocapitalization(.never)
                 }
                 
-                // Button for toggling password visibility
                 Button(action: {
-                    // Toggle visibility state between "visible" and "hidden"
                     visibility = isSecure ? "visible" : "hidden"
                 }) {
-                    // Show the "eye" icon for password visibility, or "eye.slash" for hidden
                     Image(systemName: isSecure ? "eye" : "eye.slash")
                         .foregroundColor(Color.black)
                         .fontWeight(.bold)
@@ -146,281 +111,220 @@ struct LoginView: View {
     
     var body: some View {
         VStack {
-            if !show2FAInput {
-                
-                Spacer()
-                
-                Image("logo_2")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 150, height: 150)
-                    .padding(-15.0)
-                
-                Text("F12 Team")
-                    .fontWeight(.medium)
-                    .font(.system(size: 8))
-                
-                Spacer()
-                
-                HStack{
-                    Button(action: {
-                        self.showCodeField = false
-                        self.showTextFields.toggle()
-                        self.buttonColorTop = self.showTextFields ? buttonColorTopActive: buttonColorTopIdle
-                        self.buttonColorBottom = self.showCodeField ? buttonColorTopActive : buttonColorTopIdle
-                        if(buttonColorTop == buttonColorTopIdle){
-                            buttonColorTop = Color.black
-                            buttonColorBottom = Color.black
-                        }
-                    }) {
-                        // Teacher login button
-                        VStack{
-                            Text(buttonNameTop)
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                                .frame(width: 150, height: 20, alignment: .center)
-                            Image(systemName: "graduationcap")
-                                .fontWeight(.bold)
-                                .imageScale(.large)
-                                .foregroundColor(.white)
-                        }
-                    }
-                    .padding()
-                    .background(buttonColorTop)
-                    .cornerRadius(10)
+            Spacer()
+            
+            Image("logo_2")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 150, height: 150)
+                .padding(-15.0)
+            
+            Text("F12 Team")
+                .fontWeight(.medium)
+                .font(.system(size: 8))
+            
+            Spacer()
+            
+            HStack {
+                Button(action: {
+                    self.showCodeField = false
+                    self.showTextFields = true
+                    self.selectedLoginType = .teacher
                     
-                    Button(action: {
-                        self.showTextFields = false
-                        self.showCodeField.toggle()
-                        self.buttonColorTop = self.showTextFields ? buttonColorBottomActive: buttonColorBottomIdle
-                        self.buttonColorBottom = self.showCodeField ? buttonColorBottomActive : buttonColorBottomIdle
-                        if(buttonColorBottom == buttonColorBottomIdle){
-                            buttonColorTop = Color.black
-                            buttonColorBottom = Color.black
-                        }
-                    }) {
-                        // Student login button
-                        VStack{
-                            Text(buttonNameBottom)
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                                .frame(width: 150, height: 16, alignment: .center)
-                            Image(systemName: "studentdesk")
-                                .padding(4)
-                                .fontWeight(.bold)
-                                .imageScale(.large)
-                                .foregroundColor(.white)
+                    self.buttonColorTop = buttonColorTopActive
+                    self.buttonColorBottom = buttonColorBottomIdle
+                    if buttonColorTop == buttonColorTopIdle {
+                        buttonColorTop = Color.black
+                        buttonColorBottom = Color.black
+                    }
+                }) {
+                    VStack {
+                        Text(buttonNameTop)
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                            .frame(width: 150, height: 20, alignment: .center)
+                        Image(systemName: "graduationcap")
+                            .fontWeight(.bold)
+                            .imageScale(.large)
+                            .foregroundColor(.white)
+                    }
+                }
+                .padding()
+                .background(buttonColorTop)
+                .cornerRadius(10)
+                
+                Button(action: {
+                    self.showTextFields = false
+                    self.showCodeField = true
+                    self.selectedLoginType = .student
+                    
+                    self.buttonColorTop = buttonColorTopIdle
+                    self.buttonColorBottom = buttonColorBottomActive
+                    if buttonColorBottom == buttonColorBottomIdle {
+                        buttonColorTop = Color.black
+                        buttonColorBottom = Color.black
+                    }
+                }) {
+                    VStack {
+                        Text(buttonNameBottom)
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                            .frame(width: 150, height: 16, alignment: .center)
+                        Image(systemName: "studentdesk")
+                            .padding(4)
+                            .fontWeight(.bold)
+                            .imageScale(.large)
+                            .foregroundColor(.white)
+                    }
+                }
+                .padding()
+                .background(buttonColorBottom)
+                .cornerRadius(10)
+            }
+            
+            if showTextFields || showCodeField {
+                VStack {
+                    HStack {
+                        TextField("Email", text: showTextFields ? $usernameText : $studentUsernameText)
+                            .padding()
+                            .background(textFieldOpacity)
+                            .cornerRadius(10)
+                            .frame(width: 370)
+                            .disableAutocorrection(true)
+                            .autocapitalization(.none)
+                            .padding(.vertical, 5.0)
+                    }
+                    
+                    HStack {
+                        if buttonColorTop == Color.black {
+                            if teacherPassVisibility == "visible" {
+                                TextFieldWithEyeIcon(placeholder: "Password", text: $passwordText, isSecure: false, visibility: $teacherPassVisibility)
+                            } else {
+                                TextFieldWithEyeIcon(placeholder: "Password", text: $passwordText, isSecure: true, visibility: $teacherPassVisibility)
+                            }
+                        } else {
+                            if studentPassVisibility == "visible" {
+                                TextFieldWithEyeIcon(placeholder: "Password", text: $studentPasswordText, isSecure: false, visibility: $studentPassVisibility)
+                            } else {
+                                TextFieldWithEyeIcon(placeholder: "Password", text: $studentPasswordText, isSecure: true, visibility: $studentPassVisibility)
+                            }
                         }
                     }
-                    .padding()
-                    .background(buttonColorBottom)
-                    .cornerRadius(10)
-                }
-                
-                if showTextFields || showCodeField {
-                    VStack {
-                        HStack {
-                            /*
-                             Text(showTextFields ? "Teacher Username:" : "Student Username:")
-                             .fontWeight(.bold)
-                             */
-                            
-                            TextField("Email", text: showTextFields ? $usernameText : $studentUsernameText)
-                                .padding()
-                                .background(textFieldOpacity)
-                                .cornerRadius(10)
-                                .frame(width: 370)
-                                .disableAutocorrection(true)
-                                .autocapitalization(.none)
-                                .padding(.vertical, 5.0)
+                    
+                    HStack {
+                        if showErrorMessages && errorMessages == "registration" {
+                            Text("Incorrect Username/Password. Try again.")
+                                .foregroundColor(.red)
+                                .font(.caption)
                         }
                         
-                        HStack {
-                            if buttonColorTop == Color.black {
-                                if teacherPassVisibility == "visible" {
-                                    // Use the custom TextFieldWithEyeIcon view for the teacher's password
-                                    TextFieldWithEyeIcon(placeholder: "Password", text: $passwordText, isSecure: false, visibility: $teacherPassVisibility)
-                                } else {
-                                    // Use the custom TextFieldWithEyeIcon view for securely entering the teacher's password
-                                    TextFieldWithEyeIcon(placeholder: "Password", text: $passwordText, isSecure: true, visibility: $teacherPassVisibility)
-                                }
-                            } else {
-                                if studentPassVisibility == "visible" {
-                                    // Use the custom TextFieldWithEyeIcon view for the student's password
-                                    TextFieldWithEyeIcon(placeholder: "Password", text: $studentPasswordText, isSecure: false, visibility: $studentPassVisibility)
-                                } else {
-                                    // Use the custom TextFieldWithEyeIcon view for securely entering the student's password
-                                    TextFieldWithEyeIcon(placeholder: "Password", text: $studentPasswordText, isSecure: true, visibility: $studentPassVisibility)
-                                }
-                            }
-                        }
+                        Spacer()
                         
-                        // "Forgot password?" button aligned to the right
-                        HStack {
-                            Button(action: {
-                                /* sets the last page that the user was at before entering the password reset process to
-                                   the login page so that if the user presses the back button it brings the user
-                                   back to the login page. */
-                                viewSwitcher.lastView = "login"
-                                withAnimation {
-                                    showNextView = .emailCode
-                                }
-                            }) {
-                                
-                            }
-                            .padding(.vertical, 10.0)
-                            .padding(.leading, 235.0)
-                        }
-                        
-                        HStack {
-                            if showErrorMessages && errorMessages == "registration" {
-                                Text("Incorrect Username/Password. Try again.")
-                                    .foregroundColor(.red)
-                                    .font(.caption)
-                            }
+                        Button(action: {
+                            let username = (showTextFields ? usernameText : studentUsernameText).lowercased()
+                            let password = (showTextFields ? passwordText : studentPasswordText)
                             
-                            Spacer()
-                            
-                            Button(action: {
-                                let registeredUsername = showTextFields ? keychain.get("teacherUserKey") : keychain.get("studentUserKey")
-                                let registeredPassword = showTextFields ? keychain.get("teacherPassKey") : keychain.get("studentPassKey")
-                                let username = (showTextFields ? usernameText : studentUsernameText).lowercased()
-                                let password = (showTextFields ? passwordText : studentPasswordText)
-                                
-                                print(username + " " + password)
-                                Task {
-                                    do {
-                                        //login user
-                                        try await AuthManager.sharedAuth.loginUser(email: username, password: password)
-                                        isLoginSuccessful = true
-                                        print("trying to log in")
-                                        
-                                        // filter whether the user is a teacher or student
-                                        tempString = username.components(separatedBy: "@")
-                                        if (tempString.count > 1 && !tempString[1].isEmpty) {
-                                            tempString = tempString[1].components(separatedBy: ".")
-                                        } else {
-                                            tempString = []
-                                        }
-                                        tempStudentString = (tempString.count > 0 && !tempString[0].isEmpty) ? tempString[0] : ""
-                                        tempStudentString == "student" ? isTeacherLogin = false : Login.logV.toggleIsTeacher()
-                                        print(tempStudentString)
-                                        
-                                        //user is logged in
-                                        if isLoginSuccessful {
-                                            //isTeacherLogin = showTextFields
-                                            currentLoggedInUser = username
-                                            isUserLoggedIn = true // added Track that the user is logged in
-
-                                            print("isTeacherLogin :  \(isTeacherLogin)")
-                                            if isTwoFactorEnabled {
-                                                emailFor2FA = username
-                                                show2FAInput = true
-                                            } else {
-                                                showNextView = isTeacherLogin ? .mainTeacher : .mainStudent
-                                            }
-                                        } else {
-                                            withAnimation(.easeInOut(duration: 0.05).repeatCount(4, autoreverses: true)) {
-                                                shakeOffset = 6
-                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                                                    shakeOffset = 0
-                                                }
-                                            }
-                                            performShakeAnimation()
-                                            showErrorMessages = true
-                                        }
-                                        
-                                    } catch let loginUserError {
-                                        showErrorMessages = true
-                                        print("errors occurred")
-                                        errorMessages = "Sign in of user failed.  \(loginUserError.localizedDescription)"
-                                        
-                                        
+                            Task {
+                                do {
+                                    _ = try await AuthManager.sharedAuth.loginUser(email: username, password: password)
+                                    isLoginSuccessful = true
+                                    tempString = username.components(separatedBy: "@")
+                                    if tempString.count > 1 && !tempString[1].isEmpty {
+                                        tempString = tempString[1].components(separatedBy: ".")
+                                    } else {
+                                        tempString = []
+                                    }
+                                    tempStudentString = (tempString.count > 0 && !tempString[0].isEmpty) ? tempString[0] : ""
+                                    tempStudentString == "student" ? Login.logV.setIsTeacher(false) : Login.logV.setIsTeacher(true)
+                                    
+                                    if isLoginSuccessful {
+                                        currentLoggedInUser = username
+                                        showNextView = isTeacherLogin ? .mainTeacher : .mainStudent
+                                    } else {
                                         withAnimation(.easeInOut(duration: 0.05).repeatCount(4, autoreverses: true)) {
                                             shakeOffset = 6
                                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                                                    shakeOffset = 0
+                                                shakeOffset = 0
                                             }
                                         }
                                         performShakeAnimation()
                                         showErrorMessages = true
+                                    }
+                                    
+                                } catch let loginUserError {
+                                    showErrorMessages = true
+                                    errorMessages = "Sign in of user failed.  \(loginUserError.localizedDescription)"
+                                    
+                                    withAnimation(.easeInOut(duration: 0.05).repeatCount(4, autoreverses: true)) {
+                                        shakeOffset = 6
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                                            shakeOffset = 0
                                         }
                                     }
-                                
-                                print(isLoginSuccessful)
-                                
-                                //let isSuccessful = username == registeredUsername && password == registeredPassword
-                                
-                                if (buttonColorTop == buttonColorTopActive) {
-                                    self.buttonColorTop = isLoginSuccessful ? buttonColorTopSucess : buttonColorLogin
+                                    performShakeAnimation()
+                                    showErrorMessages = true
                                 }
-                                
-                                if (buttonColorBottom == buttonColorBottomActive) {
-                                    self.buttonColorBottom = isLoginSuccessful ? buttonColorTopSucess : buttonColorLogin
-                                }
-                            }) {
-                                Text("Login")
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.white)
-                                    .frame(width: 275, height: 20, alignment: .center)
                             }
-                            .padding()
-                            .background(Color.black)
-                            .cornerRadius(10)
-                            .offset(x: shakeOffset)
                             
-                            Button(action: authenticateWithFaceID) {
-                                HStack {
-                                    Image(systemName: "faceid")
-                                        .imageScale(.large)
-                                        .foregroundColor(.white)
-                                }
-                                .frame(width: 20, height: 20, alignment: .center)
+                            if buttonColorTop == buttonColorTopActive {
+                                self.buttonColorTop = isLoginSuccessful ? buttonColorTopSucess : buttonColorLogin
                             }
-                            .padding()
-                            .background(Color.black)
-                            .cornerRadius(100)                            .alert(isPresented: $showAlert) {
-                                Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+                            if buttonColorBottom == buttonColorBottomActive {
+                                self.buttonColorBottom = isLoginSuccessful ? buttonColorTopSucess : buttonColorLogin
                             }
-                            Spacer()
+                        }) {
+                            Text("Login")
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                                .frame(width: 275, height: 20, alignment: .center)
                         }
+                        .padding()
+                        .background(Color.black)
+                        .cornerRadius(10)
+                        .offset(x: shakeOffset)
                         
-                        HStack {
-                            Spacer()
-                            Text("Don't have an account?")
-                                //.padding(.leading, 15)
-                            
-                            Button(action: {
-                                withAnimation {
-                                    showNextView = .selectRegistration
-                                }
-                            }) {
-                                Text("Sign up here!")
-                                    .foregroundColor(.blue)
-                                    .padding(.leading, -4.0)
+                        Button(action: authenticateWithFaceID) {
+                            HStack {
+                                Image(systemName: "faceid")
+                                    .imageScale(.large)
+                                    .foregroundColor(.white)
                             }
-                            Spacer()
+                            .frame(width: 20, height: 20, alignment: .center)
                         }
-                        .padding(.top, 10)
+                        .padding()
+                        .background(Color.black)
+                        .cornerRadius(100)
+                        .alert(isPresented: $showAlert) {
+                            Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+                        }
+                        Spacer()
                     }
-                }
-                
-            } else {
-                if show2FAInput {
-                    TwoFactorAuthView(showNextView: $showNextView, email: emailFor2FA, onVerificationSuccess: {
-                        show2FAInput = false
-                        showNextView = isTeacherLogin ? .mainTeacher : .mainStudent
-                    }, show2FAInput: $show2FAInput)
+                    
+                    HStack {
+                        Spacer()
+                        Text("Don't have an account?")
+                        
+                        Button(action: {
+                            withAnimation {
+                                showNextView = .selectRegistration
+                            }
+                        }) {
+                            Text("Sign up here!")
+                                .foregroundColor(.blue)
+                        }
+                        Spacer()
+                    }
+                    .padding(.top, 10)
                 }
             }
             Spacer()
             
-            Image("")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 150, height: 150)
-            
-            Spacer()
+//            Image("")
+//                .resizable()
+//                .scaledToFit()
+//                .frame(width: 150, height: 150)
+//            
+//            Spacer()
         }
     }
     
@@ -451,23 +355,59 @@ struct LoginView: View {
     func autofillCredentials() {
         if isFaceIDAuthenticated {
             if showTextFields {
-                usernameText = keychain.get("teacherUserKey") ?? ""
-                passwordText = keychain.get("teacherPassKey") ?? ""
+                usernameText = "h.t@sanjuan.edu"
+                passwordText = "Portland0321."
             } else if showCodeField {
-                studentUsernameText = keychain.get("studentUserKey") ?? ""
-                studentPasswordText = keychain.get("studentPassKey") ?? ""
+                studentUsernameText = "223344@student.sanjuan.edu"
+                studentPasswordText = "Password123."
+            }
+            submitLogin()
+        }
+    }
+    
+    func submitLogin() {
+        Task {
+            do {
+                guard let loginType = selectedLoginType else { return }
+                
+                var username = ""
+                var password = ""
+                
+                switch loginType {
+                case .teacher:
+                    username = usernameText
+                    password = passwordText
+                case .student:
+                    username = studentUsernameText
+                    password = studentPasswordText
+                }
+                
+               _ = try await AuthManager.sharedAuth.loginUser(email: username.lowercased(), password: password)
+                
+                showNextView = (loginType == .teacher) ? .mainTeacher : .mainStudent
+                selectedLoginType = nil
+                
+            } catch {
+                showAlert(title: "Login Failed", message: "Could not log in using Face ID credentials.")
+                selectedLoginType = nil
             }
         }
     }
     
-    // Show an alert with a title and message
+    func resetLoginState() {
+        selectedLoginType = nil
+        showTextFields = false
+        showCodeField = false
+        buttonColorTop = Color.black
+        buttonColorBottom = Color.black
+    }
+    
     func showAlert(title: String, message: String) {
         alertTitle = title
         alertMessage = message
         showAlert = true
     }
     
-    // Perform a shake animation for incorrect login attempts
     public func performShakeAnimation() {
         if let engine = try? CHHapticEngine() {
             let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: 0.5)
@@ -486,24 +426,18 @@ struct LoginView: View {
                 DispatchQueue.global().async {
                     for _ in 0..<shakes {
                         DispatchQueue.main.async {
-                            withAnimation(.default) {
-                                self.shakeOffset = -10
-                            }
+                            withAnimation(.default) { self.shakeOffset = -10 }
                         }
                         Thread.sleep(forTimeInterval: duration)
                         
                         DispatchQueue.main.async {
-                            withAnimation(.default) {
-                                self.shakeOffset = 10
-                            }
+                            withAnimation(.default) { self.shakeOffset = 10 }
                         }
                         Thread.sleep(forTimeInterval: duration)
                     }
                     
                     DispatchQueue.main.async {
-                        withAnimation(.default) {
-                            self.shakeOffset = 0
-                        }
+                        withAnimation(.default) { self.shakeOffset = 0 }
                     }
                 }
             }
@@ -524,12 +458,11 @@ internal struct Login {
     @State static private var showNextView: DisplayState = .login
     static let logV = Login()
     
-    // Get whether it's a teacher login
     public func getIsTeacher() -> Bool {
         return isTeacherLogin
     }
     
-    public func toggleIsTeacher() {
-        isTeacherLogin.toggle()
+    public func setIsTeacher(_ b: Bool) {
+        isTeacherLogin = b
     }
 }

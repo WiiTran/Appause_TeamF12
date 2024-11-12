@@ -2,7 +2,7 @@
 //  ClassIDGenerationView.swift
 //  Appause
 //
-//  Created by Dash on 10/08/24
+//  Created by Dash on 10/08/24.
 //
 
 import SwiftUI
@@ -10,142 +10,184 @@ import FirebaseFirestore
 
 struct ClassIDGenerationView: View {
     @State private var className = ""
-    @State private var classTime = Date()
+    @State private var classStartTime = Date()
+    @State private var classEndTime = Date()
     @State private var selectedDays: [String] = []
     @State private var teacherID = ""
+    @State private var period: String = ""
     @State private var generatedClassID: String? = nil
     @State private var isGenerating = false
     @State private var alertMessage = ""
     @State private var showAlert = false
     @State private var isDaysSelectionVisible = false
+
+    @State private var classNameError = false
+    @State private var teacherIDError = false
+    @State private var daysError = false
+    @State private var overlapError = false
+
     private let daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     private let db = Firestore.firestore()
-    
+
     var body: some View {
-        VStack(spacing: 16) {
-            Spacer().frame(height: 75)
-            
-            Text("Create a New Class")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .frame(maxWidth: .infinity)
-                .multilineTextAlignment(.center)
-            
-            // Class Name Input
-            TextField("Enter Class Name", text: $className)
-                .padding()
-                .background(Color.gray.opacity(0.2))
-                .cornerRadius(8)
-                .padding(.horizontal)
-            
-            // Class Time Picker
-            DatePicker("Select Class Time", selection: $classTime, displayedComponents: .hourAndMinute)
-                .padding()
-                .background(Color.gray.opacity(0.2))
-                .cornerRadius(8)
-                .padding(.horizontal)
-            
-            // Dropdown for Days of the Week Selection
-            VStack(alignment: .leading) {
-                Text("Select Days of the Week")
-                    .font(.headline)
-                    .padding(.leading)
-                
-                Button(action: {
-                    isDaysSelectionVisible.toggle()
-                }) {
-                    HStack {
-                        Text(selectedDays.isEmpty ? "Choose Days" : selectedDays.joined(separator: ", "))
-                            .foregroundColor(selectedDays.isEmpty ? .gray : .blue)
+        ScrollView {  // Added ScrollView to prevent content overflow
+            VStack(spacing: 16) {
+                Text("Create a New Class")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .frame(maxWidth: .infinity)
+                    .multilineTextAlignment(.center)
+                    .padding(.top, 20)
+
+                VStack(alignment: .leading, spacing: 5) {
+                    TextField("Enter Class Name", text: $className)
+                        .padding()
+                        .background(Color.gray.opacity(0.2))
+                        .cornerRadius(8)
+                        .padding(.horizontal)
+
+                    if classNameError {
+                        Text("Class Name is required")
+                            .foregroundColor(.red)
                             .padding(.leading)
-                        
-                        Spacer()
-                        
-                        Image(systemName: "chevron.down")
-                            .rotationEffect(.degrees(isDaysSelectionVisible ? 180 : 0))
-                            .padding(.trailing)
                     }
+                }
+
+                DatePicker("Select Start Time", selection: $classStartTime, displayedComponents: .hourAndMinute)
                     .padding()
                     .background(Color.gray.opacity(0.2))
                     .cornerRadius(8)
                     .padding(.horizontal)
+
+                DatePicker("Select End Time", selection: $classEndTime, displayedComponents: .hourAndMinute)
+                    .padding()
+                    .background(Color.gray.opacity(0.2))
+                    .cornerRadius(8)
+                    .padding(.horizontal)
+
+                VStack(alignment: .leading, spacing: 5) {
+                    Text("Enter Period")
+                        .font(.headline)
+                        .padding(.leading)
+
+                    TextField("Enter Period (e.g., 1, 2, 3)", text: $period)
+                        .keyboardType(.numberPad)
+                        .padding()
+                        .background(Color.gray.opacity(0.2))
+                        .cornerRadius(8)
+                        .padding(.horizontal)
                 }
-            }
-            
-            // Pop-up with multi-select for days of the week
-            if isDaysSelectionVisible {
-                VStack {
-                    ForEach(daysOfWeek, id: \.self) { day in
+
+                VStack(alignment: .leading, spacing: 5) {
+                    Text("Select Days of the Week")
+                        .font(.headline)
+                        .padding(.leading)
+
+                    Button(action: { isDaysSelectionVisible.toggle() }) {
                         HStack {
-                            Text(day)
+                            Text(selectedDays.isEmpty ? "Choose Days" : selectedDays.joined(separator: ", "))
+                                .foregroundColor(selectedDays.isEmpty ? .gray : .blue)
+                                .padding(.leading)
+
                             Spacer()
-                            Button(action: {
-                                toggleDaySelection(day)
-                            }) {
-                                Image(systemName: selectedDays.contains(day) ? "checkmark.square" : "square")
-                                    .foregroundColor(selectedDays.contains(day) ? .blue : .gray)
-                            }
+
+                            Image(systemName: "chevron.down")
+                                .rotationEffect(.degrees(isDaysSelectionVisible ? 180 : 0))
+                                .padding(.trailing)
                         }
+                        .padding()
+                        .background(Color.gray.opacity(0.2))
+                        .cornerRadius(8)
                         .padding(.horizontal)
                     }
+
+                    if daysError {
+                        Text("Please select at least one day")
+                            .foregroundColor(.red)
+                            .padding(.leading)
+                    }
                 }
-                .background(Color.white)
-                .cornerRadius(8)
-                .shadow(radius: 10)
-                .padding(.horizontal)
-            }
-            
-            // Teacher ID Input
-            TextField("Enter Teacher ID", text: $teacherID)
-                .padding()
-                .background(Color.gray.opacity(0.2))
-                .cornerRadius(8)
-                .padding(.horizontal)
-            
-            // Generate Class ID Button
-            Button(action: {
-                if className.isEmpty || teacherID.isEmpty || selectedDays.isEmpty {
-                    alertMessage = "Please enter Class Name, Teacher ID, and select at least one day."
-                    showAlert = true
-                } else {
-                    generateClassID()
+
+                if isDaysSelectionVisible {
+                    VStack {
+                        ForEach(daysOfWeek, id: \.self) { day in
+                            HStack {
+                                Text(day)
+                                Spacer()
+                                Button(action: { toggleDaySelection(day) }) {
+                                    Image(systemName: selectedDays.contains(day) ? "checkmark.square" : "square")
+                                        .foregroundColor(selectedDays.contains(day) ? .blue : .gray)
+                                }
+                            }
+                            .padding(.horizontal)
+                        }
+                    }
+                    .background(Color.white)
+                    .cornerRadius(8)
+                    .shadow(radius: 10)
+                    .padding(.horizontal)
                 }
-            }) {
-                Text(isGenerating ? "Generating..." : "Create Class")
-                    .padding()
-                    .foregroundColor(.white)
-                    .background(isGenerating ? Color.gray : Color.blue)
-                    .cornerRadius(10)
-            }
-            .disabled(isGenerating)
-            .alert(isPresented: $showAlert) {
-                Alert(title: Text("Error"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
-            }
-            
-            // Display Generated Class Information
-            if let classID = generatedClassID {
-                VStack(alignment: .leading, spacing: 10) {
-                    Text("Class Created Successfully!")
-                        .font(.headline)
-                        .padding(.top, 20)
-                    
-                    Text("Class Name: \(className)")
-                    Text("Class Days: \(selectedDays.joined(separator: ", "))")
-                    Text("Class Time: \(formattedClassTime())")
-                    Text("Teacher ID: \(teacherID)")
-                    Text("Generated Class ID: \(classID)")
-                        .font(.headline)
-                        .foregroundColor(.green)
+
+                VStack(alignment: .leading, spacing: 5) {
+                    TextField("Enter Teacher ID", text: $teacherID)
+                        .padding()
+                        .background(Color.gray.opacity(0.2))
+                        .cornerRadius(8)
+                        .padding(.horizontal)
+
+                    if teacherIDError {
+                        Text("Teacher ID is required")
+                            .foregroundColor(.red)
+                            .padding(.leading)
+                    }
                 }
-                .padding(.top, 20)
+
+                if overlapError {
+                    Text("Time conflict detected with an existing class.")
+                        .foregroundColor(.red)
+                        .padding()
+                }
+
+                Button(action: validateAndGenerateClassID) {
+                    Text(isGenerating ? "Generating..." : "Create Class")
+                        .padding()
+                        .foregroundColor(.white)
+                        .background(isGenerating ? Color.gray : Color.blue)
+                        .cornerRadius(10)
+                        .padding(.horizontal)
+                }
+                .disabled(isGenerating)
+
+                if let classID = generatedClassID {
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text("Class Created Successfully!")
+                            .font(.headline)
+                            .padding(.top, 20)
+
+                        Text("Class Name: \(className)")
+                        Text("Class Days: \(selectedDays.joined(separator: ", "))")
+                        Text("Class Period: \(formattedTime(classStartTime)) - \(formattedTime(classEndTime))")
+                        Text("Teacher ID: \(teacherID)")
+                        Text("Period: \(period)")
+                        Text("Generated Class ID: \(classID)")
+                            .font(.headline)
+                            .foregroundColor(.green)
+                    }
+                    .padding(.top, 20)
+                }
             }
-            
-            Spacer()
+            .padding(.bottom, 20)
         }
-        .padding()
+        .padding(.horizontal)
+        .alert(isPresented: $showAlert) {
+            Alert(
+                title: Text("Error"),
+                message: Text(alertMessage),
+                dismissButton: .default(Text("OK"))
+            )
+        }
     }
-    
-    // Toggle day selection when a button is tapped
+
     private func toggleDaySelection(_ day: String) {
         if let index = selectedDays.firstIndex(of: day) {
             selectedDays.remove(at: index)
@@ -153,64 +195,144 @@ struct ClassIDGenerationView: View {
             selectedDays.append(day)
         }
     }
-    
-    // Backend Logic to Generate Unique Class ID
-    private func generateClassID() {
+
+    private func validateAndGenerateClassID() {
+        classNameError = className.isEmpty
+        teacherIDError = teacherID.isEmpty
+        daysError = selectedDays.isEmpty
+
+        if !classNameError && !teacherIDError && !daysError {
+            checkForOverlappingClass()
+        }
+    }
+
+    private func checkForOverlappingClass() {
         isGenerating = true
-        
-        // Generate a random Class ID
+
+        db.collection("classes")
+            .whereField("teacherID", isEqualTo: teacherID)
+            .whereField("days", arrayContainsAny: selectedDays)
+            .getDocuments { (querySnapshot, error) in
+                if let error = error {
+                    alertMessage = "Error fetching classes: \(error.localizedDescription)"
+                    showAlert = true
+                    isGenerating = false
+                    return
+                }
+
+                let conflictExists = querySnapshot?.documents.contains { document in
+                    let existingStartTime = document["startTime"] as? String ?? ""
+                    let existingEndTime = document["endTime"] as? String ?? ""
+
+                    return self.timesOverlap(existingStartTime: existingStartTime, existingEndTime: existingEndTime)
+                } ?? false
+
+                if conflictExists {
+                    overlapError = true
+                    isGenerating = false
+                } else {
+                    overlapError = false
+                    generateClassID()
+                }
+            }
+    }
+
+    private func timesOverlap(existingStartTime: String, existingEndTime: String) -> Bool {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+
+        guard let existingStart = formatter.date(from: existingStartTime),
+              let existingEnd = formatter.date(from: existingEndTime),
+              let newStart = formatter.date(from: formattedTime(classStartTime)),
+              let newEnd = formatter.date(from: formattedTime(classEndTime)) else {
+            return false
+        }
+
+        return (newStart < existingEnd) && (newEnd > existingStart)
+    }
+
+    private func generateClassID() {
         let newClassID = UUID().uuidString.prefix(8).uppercased()
         
-        // Check if Class ID already exists in Firestore
-        db.collection("classes").whereField("classID", isEqualTo: newClassID).getDocuments { (querySnapshot, error) in
-            if let error = error {
-                self.alertMessage = "Error checking existing classes: \(error.localizedDescription)"
-                self.showAlert = true
-                self.isGenerating = false
-                return
-            }
-            
-            if querySnapshot?.documents.isEmpty == true {
-                // Class ID is unique, save the new class
-                self.saveClassToFirestore(classID: String(newClassID), className: self.className, days: self.selectedDays, time: self.classTime, teacherID: self.teacherID)
+        checkIfClassIDExists(classID: String(newClassID)) { exists in
+            if exists {
+                generateClassID()  // Retry with a new ID if the ID exists
             } else {
-                // Retry with a new class ID
-                self.generateClassID()
+                saveClassToFirestore(classID: String(newClassID))  // Save if ID is unique
             }
         }
     }
-    
-    // Save New Class to Firestore
-    private func saveClassToFirestore(classID: String, className: String, days: [String], time: Date, teacherID: String) {
-        // Get only the time in "HH:mm a" format without the date
-        let timeFormatter = DateFormatter()
-        timeFormatter.dateFormat = "hh:mm a"
-        let formattedTime = timeFormatter.string(from: time) // Only the time will be saved
-        
-        let newClass = [
+
+    private func checkIfClassIDExists(classID: String, completion: @escaping (Bool) -> Void) {
+        db.collection("classes")
+            .whereField("classID", isEqualTo: classID)
+            .getDocuments { querySnapshot, error in
+                if let error = error {
+                    print("Error checking Class ID: \(error.localizedDescription)")
+                    completion(true)  // Assume ID exists to prevent using it
+                    return
+                }
+
+                if let documents = querySnapshot?.documents, !documents.isEmpty {
+                    completion(true)  // ID exists
+                } else {
+                    completion(false)  // ID is unique
+                }
+            }
+    }
+
+    private func saveClassToFirestore(classID: String) {
+        let classData: [String: Any] = [
             "classID": classID,
             "className": className,
-            "days": days,
-            "time": formattedTime,
-            "teacherID": teacherID
-        ] as [String : Any]
-        
-        db.collection("classes").addDocument(data: newClass) { error in
-            self.isGenerating = false
+            "days": selectedDays,
+            "startTime": formattedTime(classStartTime),
+            "endTime": formattedTime(classEndTime),
+            "teacherID": teacherID,
+            "period": Int(period) ?? 0
+        ]
+
+        db.collection("classes").addDocument(data: classData) { error in
+            isGenerating = false
             if let error = error {
-                self.alertMessage = "Error saving class: \(error.localizedDescription)"
-                self.showAlert = true
+                alertMessage = "Error saving class: \(error.localizedDescription)"
+                showAlert = true
             } else {
-                self.generatedClassID = classID
+                generatedClassID = classID
+                updateTeacherClasses(classID: classID)  // Add class ID to teacher's record
             }
         }
     }
-    
-    // Helper function to format the class time for display
-    private func formattedClassTime() -> String {
+
+    private func updateTeacherClasses(classID: String) {
+        db.collection("Teachers")
+            .whereField("teacherID", isEqualTo: teacherID)  // Query the teacher document by the teacherID field
+            .getDocuments { (querySnapshot, error) in
+                if let error = error {
+                    print("Error finding teacher: \(error.localizedDescription)")
+                    return
+                }
+
+                guard let document = querySnapshot?.documents.first else {
+                    print("No teacher found with the provided teacherID.")
+                    return
+                }
+
+                let teacherRef = document.reference
+                teacherRef.updateData([
+                    "classesTaught": FieldValue.arrayUnion([classID])
+                ]) { updateError in
+                    if let updateError = updateError {
+                        print("Error updating teacher's classes: \(updateError.localizedDescription)")
+                    }
+                }
+            }
+    }
+
+    private func formattedTime(_ time: Date) -> String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "hh:mm a"
-        return formatter.string(from: classTime)
+        formatter.dateFormat = "HH:mm"
+        return formatter.string(from: time)
     }
 }
 
