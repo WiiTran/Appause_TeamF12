@@ -6,6 +6,13 @@
 //
 
 import SwiftUI
+import FirebaseFirestore // Add any additional necessary imports
+
+// Type aliases for views
+typealias enrolledClassView = EnrolledClassView
+//typealias registerClassView = RegisterClassView
+// Add more aliases as needed for other views
+
 
 enum DisplayState {
     case eula, login, /*emailCode,*/ mainTeacher, mainStudent, /*teacherMasterControl,*/ logout, /*studentConnectCode,*/ studentSettings, teacherSettings, UnblockRequest, /*studentDeleteAdmin,*/ enrolledClass, /*studentChooseAdmin,*/ selectRegistration,/* resetPassword,*/ teacherManageUsers, teacherBlacklist, teacherWhitelist, /*twoFactorAuth,*/ /*pwCodeVerification,*/ registerClass
@@ -52,7 +59,7 @@ struct ContentView: View {
 //            case .studentDeleteAdmin:
 //                StudentDeleteAdminView()
             case .enrolledClass:
-                enrolledClassView(showNextView: $displayState, StudentID: "sampleStudentId")
+                EnrolledClassView(showNextView: $displayState, studentEmail: "sample@student.com")
             case .teacherWhitelist:
                 TeacherWhitelist()
             case .teacherBlacklist:

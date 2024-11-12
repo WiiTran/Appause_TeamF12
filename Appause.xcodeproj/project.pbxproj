@@ -230,6 +230,7 @@
 				3E1737432BD8A2B200D0F290 /* ResetPasswordView.swift */,
 				9B53910B2CCB0029006B254F /* unlockRequestList.swift */,
 				3E17374D2BD8A39400D0F290 /* StudentDeleteAdminView.swift */,
+				3E4FD4D22CD07C5100174942 /* UnblockRequestView.swift */,
 				3E4FD4D42CD07C8B00174942 /* studentRequestUnlockView.swift */,
 				ED8FB51D2C910F8C00DFB478 /* Firebase */,
 				3E17375F2BD8A6F700D0F290 /* TeacherAllRequestsView.swift */,

@@ -24,6 +24,7 @@ struct AppauseApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(viewSwitcher) // Provide as environment object
+                .environmentObject(ScheduleState.scheduleState)
         }
     }
 }
