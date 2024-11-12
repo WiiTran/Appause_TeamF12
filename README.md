@@ -3,10 +3,27 @@
 <h2>Product Name: Appause</h2>
 <h2>App Logo:</h2>
 <img src="https://github.com/WiiTran/Appause-F12Team/assets/157750304/8c5ee0bd-9deb-44d2-8be8-2c7513888988">
-<h2>Project Synopsis </h2>
-<p>Appause is an IOS application that can limit the students' access to their phone during the class to avoid distraction. Some students can use their phone when they are done with schoolwork. Teachers can set up the time, sign in to the app when they start to give lecture. The app also has a Bluetooth connection which does not affect absent students. Limitation on the phone access during the lecture time, but in case of emergency students or parents can contact each othereach other, through the Phone application. </p>
 
-<h2>Main Features</h2>
+<h2>Team Members and Contact:</h2> 
+<h3>Luke Simoni (<a href="https://github.com/Lsimoni1">GitHub</a>)</</h3>
+<h3>Huy Tran (<a href="https://github.com/WiiTran">GitHub</a>)</h3>
+<h3>Rhyu Andaya (<a href="https://github.com/RhyuAndaya">GitHub</a>)</h3>
+<h3>Tran Chi (<a href="https://github.com/Tracychi93">GitHub</a>)</h3>
+<h3>Rayanne Ohara  (<a href="https://github.com/TotoBroo">GitHub</a>)</</h3>
+<h3>Abdurraziq Paikar (<a href="https://github.com/Abdurraziqp">Github</a>)</h3>
+<h3>Dakshina Ethdath Waduge (<a href="https://github.com/Dash-007">GitHub</a>)</h3>
+<h3>Andy Pham (<a href="https://github.com/ap2024">GitHub</a>)</h3><br/><br/>
+
+<h2>Project Overview </h2>
+<p> This project focuses on assisting teachers in the educational setting. While the development faced issues with shut down ability and the connectivity between devices, the app contains most of the functionality apart from that. As this is a continued project, we are happy to express the further development to the application. </p>
+
+<h2>Project Purpose</h2>
+<p> As cell phones become a part of students life, educational teachers like Mr. Brimberry are trying to find a balance with its functionality within the classroom setting. This app developed with the purpose limiting the distractions in class and increase engagement within the classrooms. His experience with students accessing their phones during classes provided him a reason to seek out a way to direct the focus of students without disconnecting them from the usefulness of cell phones. </p>
+
+<h2>Project Description</h2>
+<p> This IOS mobile application was developed using Swift and Xcode. As this was a continued project, the code has been rewritten and expanded into a new functioning application. New features both requested by the client and brainstormed by the team were added in to bring more functionality to the teacher and student user interfaces. Firebase database has also been connected to expand the functionality of the key features such as teacher, student, and class information. </p>
+
+<h2>Key Features</h2>
   <ul>
     <li>Time-Based Lockdown</li>
     <li>Default Permission Status</li>
@@ -20,79 +37,20 @@
   </ul>
 
 <h2>Testing</h2>
-<!-- Next semester -->
+<p>The testing procedures for the application are docummented and included in the folder within the Xcode project under the folders: AppauseTests and AppauseUITests. These folders include unit testing and UI tests respectfully. Xcode on a Mac device must be used in order to run this project and these tests. Within these folders, testing can be performed when selecting the symbol to located to the testing function on the selected file. This will allow the execution of the test and provide feedback on whether that part of the application will pass and fail. </p>
 <h2>Deployment</h2>
-<!-- Next Semester-->
+<p>Due to the inability to create a lock-down function and connectivity that would support a school wide function, the deployment of the app will be delayed. Deployment of the app would follow the steps of creating an app store connect record, distributing the application using Xcode, and submitting the code for review. When the application is submitted for review, it can either be accepted by a review team and be uploaded immediately or on a scheduled time, or it can be declined and given feedback for resubmission. </p>
 <h2>Installation Instruction</h2>
-<!-- Next Semester -->
-<h2>TimeLine</h2>
- <ul> <strong> Sprint 1: </strong>
-      <li>Research Databases, API's, Tech Stack</li>
-      <li>Prototype</li>
-      <li>ERD</li>
-    </ul>
-     <ul> <strong> Sprint 2: </strong>
-      <li>Github Creation</li>
-      <li>Cost Estimate</li>
-    </ul>
-     <ul> <strong> Sprint 3: </strong>
-      <li>Database Creation/Organize Information</li>
-    </ul>
-     <ul> <strong> Sprint 4: </strong>
-      <li>Missing Student List</li>
-      <li>Menu Overlay Pop-up</li>
-      <li>App Settings</li>
-      <li>Requests Screen</li>
-      <li>Menu Overlay Pop-up</li>
-      <li>Time Based Restrictions</li>
-    </ul>
-    <ul> <strong> Sprint 5: </strong>
-      <li>Missing Student List</li>
-      <li>Menu Overlay Pop-up</li>
-      <li>App Settings</li>
-      <li>Requests Screen</li>
-      <li>Menu Overlay Pop-up</li>
-      <li>Time Based Restrictions</li>
-    </ul>
-     <ul> <strong> Sprint 6: </strong>
-      <li>Database Implementation</li>
-      <li>User Registration Writes New Student/Teacher Data</li>
-      <li>Login Authentication</li>
-      <li>Email Reset Password Functionality</li>
-      <li>Testing Database Use Cases</li>
-    </ul>
-     <ul> <strong> Sprint 7: </strong>
-      <li>App Restrictions</li>
-      <li>Apple Privacy and Permission Acknowledgement</li>
-      <li>Application Permission Request Flow</li>
-      <li>Testing Phone Restrictions</li>
-    </ul>
-    <ul> <strong> Sprint 8: </strong>
-      <li>Bluetooth Connection Implementation</li>
-      <li>Testing Bluetooth Connection</li>
-    </ul>
-    <ul> <strong> Sprint 9: </strong>
-      <li>Final Testing</li>
-      <li>Bug Fixes if Necessary</li>
-      <li>Deployment to App Store</li>
-    </ul>
+<p>Unfortunately due the inability to deploy the application, installation will not be available for this version of the project. However, installation in the future would be available in the apple store, where students and teachers will be able to download the app onto their personal cell phones.  </p>
+
+<h2>Future Development</h2>
+<p>Due to issues the team faced during the development process, the project is not complete. Future development with the next team should expand on the API connectivity for the connection between students and teachers as well as the lock-down ability. </p>
+ 
 <h2>Protype Image</h2>
   <img src="https://github.com/WiiTran/Appause_TeamF12/blob/main/Appause_Figma.png">
-  
-<h2>Screenshots</h2>
-
- <img src="https://github.com/WiiTran/Appause_TeamF12/assets/157750304/7a5f00ce-64aa-4b5b-9840-bcbe1b9a67cf" width="210" height="520">       <img src="https://github.com/WiiTran/Appause_TeamF12/assets/157750304/ee7f7d33-f396-4e32-ba52-3a0ebdced448" width="210" height="520">       <img src="https://github.com/WiiTran/Appause_TeamF12/assets/157750304/fb3ce7e1-a126-47ca-85ad-6f4271c0f347" width="210" height="520"> 
 
 <h2>Relevant Documents</h2>
   </p><a href="https://www.figma.com/file/58eXXgO5sQRfMzSKdFACq2/appause-figjam?type=whiteboard&node-id=0-1"> Click Here</a> to get better view of the Figma. </p>
    </p><a href="https://mysacstate-my.sharepoint.com/:w:/r/personal/lsimoni_csus_edu/_layouts/15/Doc.aspx?sourcedoc=%7B804A1DDF-1D1C-41D6-BB1C-7059EBC268EB%7D&file=Project%20Charter%20(Team%20F12).docx&action=default&mobileredirect=true"> Click Here</a>  for the product charter. </p>
 
-<h2>Team Members and Contact:</h2> 
-<h3>Luke Simoni (<a href="https://github.com/Lsimoni1">GitHub</a>)</</h3>
-<h3>Huy Tran (<a href="https://github.com/WiiTran">GitHub</a>)</h3>
-<h3>Rhyu Andaya (<a href="https://github.com/RhyuAndaya">GitHub</a>)</h3>
-<h3>Tran Chi (<a href="https://github.com/Tracychi93">GitHub</a>)</h3>
-<h3>Rayanne Ohara  (<a href="https://github.com/TotoBroo">GitHub</a>)</</h3>
-<h3>Abdurraziq Paikar (<a href="https://github.com/Abdurraziqp">Github</a>)</h3>
-<h3>Dakshina Ethdath Waduge (<a href="https://github.com/Dash-007">GitHub</a>)</h3>
-<h3>Andy Pham (<a href="https://github.com/ap2024">GitHub</a>)</h3><br/><br/>
+
