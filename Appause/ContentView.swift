@@ -15,7 +15,7 @@ typealias enrolledClassView = EnrolledClassView
 
 
 enum DisplayState {
-    case eula, login, /*emailCode,*/ mainTeacher, mainStudent, /*teacherMasterControl,*/ logout, /*studentConnectCode,*/ studentSettings, teacherSettings, UnblockRequest, /*studentDeleteAdmin,*/ enrolledClass, /*studentChooseAdmin,*/ studentRegister, teacherRegister, selectRegistration,/* resetPassword,*/ teacherManageUsers, teacherBlacklist, teacherWhitelist, /*twoFactorAuth,*/ /*pwCodeVerification,*/ registerClass
+    case eula, login, /*emailCode,*/ mainTeacher, mainStudent, /*teacherMasterControl,*/ logout, /*studentConnectCode,*/ studentSettings, teacherSettings, UnblockRequest, /*studentDeleteAdmin,*/ enrolledClass, /*studentChooseAdmin,*/ selectRegistration,/* resetPassword,*/ teacherManageUsers, teacherBlacklist, teacherWhitelist, /*twoFactorAuth,*/ /*pwCodeVerification,*/ registerClass
 }
 
 
@@ -33,7 +33,7 @@ struct ContentView: View {
     var body: some View {
         VStack {
             // DisplayState transitions
-            switch displayState {
+        switch displayState {
             case .eula:
                 EULAView(showNextView: $displayState)
             case .login:
@@ -68,28 +68,26 @@ struct ContentView: View {
 //                ResetPasswordView(showNextView: $displayState)
             case .teacherManageUsers:
                 TeacherManageUsers()
-            case .studentRegister:
-                StudentRegisterView(showNextView: $displayState)
             case .registerClass:
                 registerClassView(showNextView: $displayState)
-            case .teacherRegister:
-                TeacherRegisterView(showNextView: $displayState)
             case .selectRegistration:
                 SelectRegistrationView(showNextView: $displayState)
-//            case .emailCode:
-//                ForgotPasswordView(showNextView: $displayState)
-//            case .pwCodeVerification:
-//                PWCodeVerificationView(showNextView: $displayState)
-//            case .twoFactorAuth:
-//                TwoFactorAuthView(
-//                    showNextView: $displayState,
-//                    email: email,
-//                    onVerificationSuccess: {
-//                        print("Verification successful!")
-//                    },
-//                    show2FAInput: $show2FAInput
-//                )
-            }
+                /*
+            case .emailCode:
+                ForgotPasswordView(showNextView: $displayState)
+            case .pwCodeVerification:
+                PWCodeVerificationView(showNextView: $displayState)
+            case .twoFactorAuth:
+                TwoFactorAuthView(
+                    showNextView: $displayState,
+                    email: email,
+                    onVerificationSuccess: {
+                        print("Verification successful!")
+                    },
+                    show2FAInput: $show2FAInput
+              )
+                 */
+        }
         }
         .preferredColorScheme(isUserLoggedIn ? (isDarkMode ? .dark : .light) : .none)
         .environmentObject(viewSwitcher)
