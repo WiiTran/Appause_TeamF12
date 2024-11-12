@@ -42,8 +42,8 @@ struct ClassIDGenerationView: View {
         }
     }
     
-//    @EnvironmentObject var scheduleState: ScheduleState
-//    @State private var currentSchedule = "Regular"
+    @EnvironmentObject var scheduleState: ScheduleState
+    @State private var currentSchedule = "Regular"
 
     var body: some View {
         ScrollView {  // Added ScrollView to prevent content overflow
@@ -94,7 +94,7 @@ struct ClassIDGenerationView: View {
                     .pickerStyle(WheelPickerStyle())
                     .frame(maxWidth: .infinity)
                     .frame(height: 120)
-                    .onChange(of: period) { newPeriod in            setClassTimes("Regular", newPeriod)
+                    .onChange(of: period) { newPeriod in            setClassTimes(currentSchedule, newPeriod)
                     }
 
 //                    TextField("Enter Period (e.g., 1, 2, 3)", text: $period)
@@ -215,9 +215,9 @@ struct ClassIDGenerationView: View {
         }
         .onAppear() {
             fetchTeacherID()
-            setClassTimes("Regular", period)
-            //currentSchedule = scheduleState.currentSchedule
-            //print(currentSchedule)
+            currentSchedule = scheduleState.currentSchedule
+            setClassTimes(currentSchedule, period)
+            print(currentSchedule)
         }
     }
 
