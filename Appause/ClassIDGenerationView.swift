@@ -11,8 +11,8 @@ import FirebaseAuth
 
 struct ClassIDGenerationView: View {
     @State private var className = ""
-    @State private var classStartTime = Date()
-    @State private var classEndTime = Date()
+    @State private var classStartTime: String = ""
+    @State private var classEndTime: String = ""
     @State private var selectedDays: [String] = []
     @State private var teacherID: String?
     //@State private var period: String = ""
@@ -42,8 +42,8 @@ struct ClassIDGenerationView: View {
         }
     }
     
-    @EnvironmentObject var scheduleState: ScheduleState
-    @State private var currentSchedule = "Regular"
+//    @EnvironmentObject var scheduleState: ScheduleState
+//    @State private var currentSchedule = "Regular"
 
     var body: some View {
         ScrollView {  // Added ScrollView to prevent content overflow
@@ -69,17 +69,17 @@ struct ClassIDGenerationView: View {
                     }
                 }
 
-                DatePicker("Select Start Time", selection: $classStartTime, displayedComponents: .hourAndMinute)
-                    .padding()
-                    .background(Color.gray.opacity(0.2))
-                    .cornerRadius(8)
-                    .padding(.horizontal)
+//                DatePicker("Select Start Time", selection: $classStartTime, displayedComponents: .hourAndMinute)
+//                    .padding()
+//                    .background(Color.gray.opacity(0.2))
+//                    .cornerRadius(8)
+//                    .padding(.horizontal)
 
-                DatePicker("Select End Time", selection: $classEndTime, displayedComponents: .hourAndMinute)
-                    .padding()
-                    .background(Color.gray.opacity(0.2))
-                    .cornerRadius(8)
-                    .padding(.horizontal)
+//                DatePicker("Select End Time", selection: $classEndTime, displayedComponents: .hourAndMinute)
+//                    .padding()
+//                    .background(Color.gray.opacity(0.2))
+//                    .cornerRadius(8)
+//                    .padding(.horizontal)
 
                 VStack(alignment: .leading, spacing: 5) {
                     Text("Enter Period")
@@ -94,6 +94,8 @@ struct ClassIDGenerationView: View {
                     .pickerStyle(WheelPickerStyle())
                     .frame(maxWidth: .infinity)
                     .frame(height: 120)
+                    .onChange(of: period) { newPeriod in            setClassTimes("Regular", newPeriod)
+                    }
 
 //                    TextField("Enter Period (e.g., 1, 2, 3)", text: $period)
 //                        .keyboardType(.numberPad)
@@ -191,8 +193,8 @@ struct ClassIDGenerationView: View {
 
                         Text("Class Name: \(className)")
 //                        Text("Class Days: \(selectedDays.joined(separator: ", "))")
-                        Text("Class Period: \(formattedTime(classStartTime)) - \(formattedTime(classEndTime))")
-                        Text("Teacher ID: \(teacherID)")
+                        Text("Class Period: \(classStartTime) - \(classEndTime)")
+                        Text("Teacher ID: \(teacherID!)")
                         Text("Period: \(period)")
                         Text("Generated Class ID: \(classID)")
                             .font(.headline)
@@ -206,15 +208,16 @@ struct ClassIDGenerationView: View {
         .padding(.horizontal)
         .alert(isPresented: $showAlert) {
             Alert(
-                title: Text("Error"),
+                title: Text("Conflicting class period found for this teacher"),
                 message: Text(alertMessage),
                 dismissButton: .default(Text("OK"))
             )
         }
         .onAppear() {
             fetchTeacherID()
-            currentSchedule = scheduleState.currentSchedule
-            print(currentSchedule)
+            setClassTimes("Regular", period)
+            //currentSchedule = scheduleState.currentSchedule
+            //print(currentSchedule)
         }
     }
 
@@ -238,6 +241,7 @@ struct ClassIDGenerationView: View {
                 } else if hasOverlap {
                     print("Duplicate period found for this teacher")
                     print(period)
+                    showAlert = true
                 }else {
                     print("no overlap")
                     generateClassID()
@@ -369,9 +373,9 @@ struct ClassIDGenerationView: View {
             "classID": classID,
             "className": className,
 //            "days": selectedDays,
-            "startTime": formattedTime(classStartTime),
-            "endTime": formattedTime(classEndTime),
-            "teacherID": teacherID,
+            "startTime": classStartTime,
+            "endTime": classEndTime,
+            "teacherID": teacherID!,
             "period": period
         ]
 
@@ -389,7 +393,7 @@ struct ClassIDGenerationView: View {
 
     private func updateTeacherClasses(classID: String) {
         db.collection("Teachers")
-            .whereField("teacherID", isEqualTo: teacherID)  // Query the teacher document by the teacherID field
+            .whereField("teacherID", isEqualTo: teacherID!)  // Query the teacher document by the teacherID field
             .getDocuments { (querySnapshot, error) in
                 if let error = error {
                     print("Error finding teacher: \(error.localizedDescription)")
@@ -412,12 +416,28 @@ struct ClassIDGenerationView: View {
                 }
             }
     }
-
-    private func formattedTime(_ time: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm"
-        return formatter.string(from: time)
+    
+    private func setClassTimes(_ scheduleType: String, _ period: Int) {
+        let schedule = ScheduleDatabaseManager.shared.loadPermanentSchedule(scheduleType)
+        
+        guard let schedule = schedule else {
+            print("Schedule is nil")
+            return
+        }
+        
+        let periodNeeded = "Period \(period - 1)"
+        
+        let fetchSchedule = schedule.first {schedulePeriod in schedulePeriod.name == periodNeeded}
+        
+        classStartTime = fetchSchedule?.startTime ?? "unavailable"
+        classEndTime = fetchSchedule?.endTime ?? "unavailable"
     }
+
+//    private func formattedTime(_ time: Date) -> String {
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "HH:mm"
+//        return formatter.string(from: time)
+//    }
     
     private func fetchTeacherID(completion: @escaping (String?, String?) -> Void){
         
