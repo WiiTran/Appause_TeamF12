@@ -192,7 +192,7 @@ struct ClassIDGenerationView: View {
                         Text("Class Name: \(className)")
 //                        Text("Class Days: \(selectedDays.joined(separator: ", "))")
                         Text("Class Period: \(formattedTime(classStartTime)) - \(formattedTime(classEndTime))")
-                        Text("Teacher ID: \(teacherID)")
+                        Text("Teacher ID: \(String(describing: teacherID))")
                         Text("Period: \(period)")
                         Text("Generated Class ID: \(classID)")
                             .font(.headline)
@@ -371,7 +371,7 @@ struct ClassIDGenerationView: View {
 //            "days": selectedDays,
             "startTime": formattedTime(classStartTime),
             "endTime": formattedTime(classEndTime),
-            "teacherID": teacherID,
+            "teacherID": teacherID as Any,
             "period": period
         ]
 
@@ -389,7 +389,7 @@ struct ClassIDGenerationView: View {
 
     private func updateTeacherClasses(classID: String) {
         db.collection("Teachers")
-            .whereField("teacherID", isEqualTo: teacherID)  // Query the teacher document by the teacherID field
+            .whereField("teacherID", isEqualTo: teacherID as Any)  // Query the teacher document by the teacherID field
             .getDocuments { (querySnapshot, error) in
                 if let error = error {
                     print("Error finding teacher: \(error.localizedDescription)")
@@ -453,5 +453,6 @@ struct ClassIDGenerationView: View {
 struct ClassIDGenerationView_Previews: PreviewProvider {
     static var previews: some View {
         ClassIDGenerationView()
+            .environmentObject(ScheduleState())
     }
 }

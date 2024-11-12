@@ -38,11 +38,11 @@ struct registerClassView: View {
                 .padding()
                 .textFieldStyle(RoundedBorderTextFieldStyle())
 
-            DatePicker("Start Time", selection: $startTime, displayedComponents: .hourAndMinute)
-                .padding()
+            //DatePicker("Start Time", selection: $startTime, displayedComponents: .hourAndMinute)
+               // .padding()
 
-            DatePicker("End Time", selection: $endTime, displayedComponents: .hourAndMinute)
-                .padding()
+            //DatePicker("End Time", selection: $endTime, displayedComponents: .hourAndMinute)
+               // .padding()
 
             Spacer()
 
@@ -84,9 +84,9 @@ struct registerClassView: View {
         classTakenRef.setData([
             "classID": classID,
             "className": className,
-            "startTime": startTime,
-            "endTime": endTime,
-            "timestamp": FieldValue.serverTimestamp()
+            //"startTime": startTime,
+            //"endTime": endTime,
+            //"timestamp": FieldValue.serverTimestamp()
         ]) { error in
             if let error = error {
                 message = "Error: \(error.localizedDescription)"
