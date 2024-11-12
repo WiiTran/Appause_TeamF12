@@ -62,6 +62,8 @@
 		9B20E1FA2CBF90CA001F2491 /* studentRequestUnlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B20E1F92CBF90C9001F2491 /* studentRequestUnlockView.swift */; };
 		9B53910C2CCB0029006B254F /* unlockRequestList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B53910B2CCB0029006B254F /* unlockRequestList.swift */; };
 		9B5391102CD0053A006B254F /* registerClassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B53910F2CD0053A006B254F /* registerClassView.swift */; };
+		9BF346B92CE327EA00245B46 /* unblockRequestViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF346B82CE327EA00245B46 /* unblockRequestViewUITests.swift */; };
+		9BF346BB2CE3358C00245B46 /* StudentClassListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF346BA2CE3358C00245B46 /* StudentClassListView.swift */; };
 		C804F9E42CB8C59600E6B5B7 /* ClassIDGenerationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C804F9E32CB8C59600E6B5B7 /* ClassIDGenerationView.swift */; };
 		C80DE10F2CDB3CFF0036E722 /* TeacherClassListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80DE10E2CDB3CFF0036E722 /* TeacherClassListView.swift */; };
 		C81713DB2C9BD75D00362C37 /* AdminRequestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81713DA2C9BD75D00362C37 /* AdminRequestsView.swift */; };
@@ -147,6 +149,8 @@
 		9B20E1F92CBF90C9001F2491 /* studentRequestUnlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = studentRequestUnlockView.swift; sourceTree = "<group>"; };
 		9B53910B2CCB0029006B254F /* unlockRequestList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = unlockRequestList.swift; sourceTree = "<group>"; };
 		9B53910F2CD0053A006B254F /* registerClassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = registerClassView.swift; sourceTree = "<group>"; };
+		9BF346B82CE327EA00245B46 /* unblockRequestViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = unblockRequestViewUITests.swift; sourceTree = "<group>"; };
+		9BF346BA2CE3358C00245B46 /* StudentClassListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentClassListView.swift; sourceTree = "<group>"; };
 		C804F9E32CB8C59600E6B5B7 /* ClassIDGenerationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassIDGenerationView.swift; sourceTree = "<group>"; };
 		C80DE10E2CDB3CFF0036E722 /* TeacherClassListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherClassListView.swift; sourceTree = "<group>"; };
 		C81713DA2C9BD75D00362C37 /* AdminRequestsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminRequestsView.swift; sourceTree = "<group>"; };
@@ -224,6 +228,7 @@
 				3E0956D62BD1D0C10037B462 /* GlobalStyleVar.swift */,
 				C8B0A60D2CA64C8F009C0D92 /* BluetoothManagerView.swift */,
 				3EA44B242BCF43DF00732432 /* SelectRegistrationView.swift */,
+				9BF346BA2CE3358C00245B46 /* StudentClassListView.swift */,
 				3E8F6AE52BCBD5CE003C4160 /* Assets.xcassets */,
 				3E8F6AE72BCBD5CE003C4160 /* Preview Content */,
 				3E17374B2BD8A37A00D0F290 /* StudentAppRequestView.swift */,
@@ -288,6 +293,7 @@
 				3EA9F4132CBE91FF008903AD /* StudentSignUpUITests.swift */,
 				3EA9F4152CBE922E008903AD /* TeacherSignUpUITests.swift */,
 				3EA9F4172CBE9256008903AD /* StudentSignInUITests.swift */,
+				9BF346B82CE327EA00245B46 /* unblockRequestViewUITests.swift */,
 				3EA9F4192CBE9280008903AD /* TeacherSignInUITests.swift */,
 			);
 			path = AppauseUITests;
@@ -469,6 +475,7 @@
 				3EE621412CDADB2200F18F4A /* FeedbackFormView.swift in Sources */,
 				3E1737542BD8A4A300D0F290 /* TeacherManageUsers.swift in Sources */,
 				3E1737482BD8A34500D0F290 /* StudentRegisterView.swift in Sources */,
+				9BF346BB2CE3358C00245B46 /* StudentClassListView.swift in Sources */,
 				3E1737422BD8A29A00D0F290 /* PWCodeVerificationView.swift in Sources */,
 				9B53910C2CCB0029006B254F /* unlockRequestList.swift in Sources */,
 				3E17375C2BD8A69600D0F290 /* TeacherAppDescription.swift in Sources */,
@@ -513,6 +520,7 @@
 				3EA9F4162CBE922E008903AD /* TeacherSignUpUITests.swift in Sources */,
 				3EB48E192CBE907A00B41BAD /* AppauseUITestsLaunchTests.swift in Sources */,
 				3EA9F4182CBE9256008903AD /* StudentSignInUITests.swift in Sources */,
+				9BF346B92CE327EA00245B46 /* unblockRequestViewUITests.swift in Sources */,
 				3EB48E172CBE907A00B41BAD /* AppauseUITests.swift in Sources */,
 				3EA9F4142CBE91FF008903AD /* StudentSignUpUITests.swift in Sources */,
 			);
