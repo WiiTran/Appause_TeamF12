@@ -26,13 +26,13 @@
 <h2>Key Features</h2>
   <ul>
     <li>Teacher Navigational-settings</li>
-<img src="https://github.com/WiiTran/Appause_TeamF12/blob/dfe382b527ea63257195262f4f695dd1d47b6179/Appause/Assets.xcassets/navigational%20settings.png" width="300" height="420">
+<img src="https://github.com/WiiTran/Appause_TeamF12/blob/dfe382b527ea63257195262f4f695dd1d47b6179/Appause/Assets.xcassets/navigational%20settings.png" width="310" height="520">
     <li>Save Class Interface</li>
-<img src="https://github.com/WiiTran/Appause_TeamF12/blob/dfe382b527ea63257195262f4f695dd1d47b6179/Appause/Assets.xcassets/save%20classes.png" width="300" height="420">
+<img src="https://github.com/WiiTran/Appause_TeamF12/blob/dfe382b527ea63257195262f4f695dd1d47b6179/Appause/Assets.xcassets/save%20classes.png" width="310" height="520">
     <li>Submit request Interface</li>
-<img src="https://github.com/WiiTran/Appause_TeamF12/blob/dfe382b527ea63257195262f4f695dd1d47b6179/Appause/Assets.xcassets/submit%20request.png" width="300" height="420">
+<img src="https://github.com/WiiTran/Appause_TeamF12/blob/dfe382b527ea63257195262f4f695dd1d47b6179/Appause/Assets.xcassets/submit%20request.png" width="310" height="520">
     <li>Teacher Class interface with Current class functionality</li>
-<img src="https://github.com/WiiTran/Appause_TeamF12/blob/dfe382b527ea63257195262f4f695dd1d47b6179/Appause/Assets.xcassets/current%20class.png" width="300" height="420">
+<img src="https://github.com/WiiTran/Appause_TeamF12/blob/dfe382b527ea63257195262f4f695dd1d47b6179/Appause/Assets.xcassets/current%20class.png" width="420" height="420">
   </ul>
 
 <h2>Testing</h2>
