@@ -192,11 +192,13 @@ struct TeacherMainView: View {
                     Text("Students")
                 }
                 .environmentObject(studentList)
+            
             TeacherScheduleView()
                 .tabItem {
                     Image(systemName: "bell")
                     Text("Schedule")
                 }
+
             ClassIDGenerationView()
                 .tabItem {
                     Image(systemName: "plus.square")
@@ -207,10 +209,7 @@ struct TeacherMainView: View {
                     Image(systemName: "list.bullet")
                     Text("My Classes")
                 }
-            TeacherSettingsView(showNextView: $showNextView)
-                .tabItem {
-                    Image(systemName: "gear")
-                    Text("Settings")                }
+            
             BluetoothManagerView()
                 .tabItem {
                     Image(systemName: "app.connected.to.app.below.fill")

@@ -11,6 +11,10 @@ struct SchedulePeriod {
     let name: String       // Name of the period (e.g., "Period 1", "Lunch")
     let startTime: String  // Start time in "hh:mm a" format
     let endTime: String    // End time in "hh:mm a" format
+    
+    func getName() -> String{
+        return self.name
+    }
 }
 
 // Define PermanentSchedules with predefined schedules
