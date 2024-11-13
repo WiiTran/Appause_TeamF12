@@ -21,7 +21,7 @@ struct SchedulePeriod {
 struct PermanentSchedules {
     // Regular Schedule (every day except Thursday)
     static let regular: [SchedulePeriod] = [
-        SchedulePeriod(name: "Period 0", startTime: "7:33 AM", endTime: "8:25 AM"),
+        SchedulePeriod(name: "Period 0", startTime: "02:00 AM", endTime: "3:00 AM"),
         SchedulePeriod(name: "Period 1", startTime: "8:30 AM", endTime: "9:21 AM"),
         SchedulePeriod(name: "Period 2", startTime: "9:26 AM", endTime: "10:17 AM"),
         SchedulePeriod(name: "Period 3", startTime: "10:22 AM", endTime: "11:13 AM"),
@@ -63,7 +63,7 @@ struct PermanentSchedules {
 
     // Rally/Spartan Time Schedule
     static let rally: [SchedulePeriod] = [
-        SchedulePeriod(name: "Period 0", startTime: "7:33 AM", endTime: "8:25 AM"),
+        SchedulePeriod(name: "Period 0", startTime: "02:00 AM", endTime: "3:00 AM"),
         SchedulePeriod(name: "Period 1", startTime: "8:30 AM", endTime: "9:15 AM"),
         SchedulePeriod(name: "Period 2", startTime: "9:20 AM", endTime: "10:05 AM"),
         SchedulePeriod(name: "Period 3", startTime: "10:10 AM", endTime: "10:55 AM"),

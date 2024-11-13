@@ -143,23 +143,38 @@ struct TeacherClassListView: View {
     // Function to check if a class is currently in session
     private func isCurrentClass(classItem: TeacherClass) -> Bool {
         let currentDate = Date()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm"
-
+        
+        // Formatter to interpret the AM/PM format in startTime and endTime from the database
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = "h:mm a"
+        
+        // Formatter for converting times to 24-hour format for comparison
+        let comparisonFormatter = DateFormatter()
+        comparisonFormatter.dateFormat = "HH:mm"
+        
         guard
-            let startTime = formatter.date(from: classItem.startTime),
-            let endTime = formatter.date(from: classItem.endTime)
+            let startTimeDate = inputFormatter.date(from: classItem.startTime),
+            let endTimeDate = inputFormatter.date(from: classItem.endTime)
         else {
             return false
         }
-
-        let currentTime = formatter.string(from: currentDate)
-        let currentTimeDate = formatter.date(from: currentTime) ?? Date()
-
-        let today = calendar.weekdaySymbols[calendar.component(.weekday, from: currentDate) - 1]
-
-        return currentTimeDate >= startTime && currentTimeDate <= endTime && classItem.days.contains(today)
+        
+        let startTimeString = comparisonFormatter.string(from: startTimeDate)
+        let endTimeString = comparisonFormatter.string(from: endTimeDate)
+        
+        let currentTimeString = comparisonFormatter.string(from: currentDate)
+        
+        guard
+            let startTime = comparisonFormatter.date(from: startTimeString),
+            let endTime = comparisonFormatter.date(from: endTimeString),
+            let currentTime = comparisonFormatter.date(from: currentTimeString)
+        else {
+            return false
+        }
+        
+        return currentTime >= startTime && currentTime <= endTime
     }
+
 }
 
 // Model to represent class data
