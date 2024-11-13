@@ -317,17 +317,19 @@ struct SelectRegistrationView: View
                                                 ])
                                             
                                             print("Document added with ID: \(ref.documentID)")
+                                            
+                                            withAnimation {
+                                                showNextView = .login
+                                            }
+                                            
                                         } catch let dbError {
                                             print("Error adding document: \(dbError.localizedDescription)")
                                         }
                                         
                                     } catch let createUserError {
                                         registerError = "Registration of user failed. \(createUserError.localizedDescription)"
+                                        print("error creating user")
                                     }
-                                }
-                                
-                                withAnimation {
-                                    showNextView = .login
                                 }
                             }
                         }
@@ -484,6 +486,12 @@ struct SelectRegistrationView: View
                                         ])
                                         
                                         print("Document added with ID: \(ref.documentID)")
+                                        
+                                        withAnimation {
+                                            //show nextView .whateverViewYouWantToShow defined in ContentView Enum
+                                            showNextView = .login
+                                        }
+                                        
                                     } catch let dbError{
                                         print("Error adding document: \(dbError.localizedDescription)")
                                     }
@@ -491,12 +499,6 @@ struct SelectRegistrationView: View
                                 } catch let createUserError {
                                     registerError = "Registration of user failed.  \(createUserError.localizedDescription)"
                                 }
-                            }
-                            
-                            
-                            withAnimation {
-                                //show nextView .whateverViewYouWantToShow defined in ContentView Enum
-                                showNextView = .login
                             }
                         }
                     }){

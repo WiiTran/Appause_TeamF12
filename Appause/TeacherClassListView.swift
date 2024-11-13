@@ -57,7 +57,7 @@ struct TeacherClassListView: View {
                         if let period = classItem.period {
                             Text("Period: \(period)")
                         }
-                        Text("Days: \(classItem.days.joined(separator: ", "))")
+//                        Text("Days: \(classItem.days.joined(separator: ", "))")
                         Text("Time: \(classItem.startTime) - \(classItem.endTime)")
                     }
                     .padding()
@@ -126,7 +126,7 @@ struct TeacherClassListView: View {
                     classID: classData["classID"] as? String ?? "",
                     className: classData["className"] as? String ?? "Unknown",
                     period: classData["period"] as? Int,
-                    days: classData["days"] as? [String] ?? [],
+//                    days: classData["days"] as? [String] ?? [],
                     startTime: classData["startTime"] as? String ?? "",
                     endTime: classData["endTime"] as? String ?? ""
                 )
@@ -183,7 +183,7 @@ struct TeacherClass: Identifiable {
     var classID: String
     var className: String
     var period: Int?
-    var days: [String]
+//    var days: [String]
     var startTime: String
     var endTime: String
 }
