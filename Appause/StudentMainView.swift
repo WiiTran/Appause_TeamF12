@@ -90,24 +90,24 @@ struct StudentMainView: View {
                
                 
                 // Register ClassID Button
-                NavigationLink(destination: registerClassView(showNextView: $showNextView).navigationBarHidden(true)) {
-                    HStack {
-                        Text(sixthButtonName)
-                            .padding(.leading, 25)
-                            .foregroundColor(btnStyle.getBtnFontColor())
-                            .frame(width: btnStyle.getWidth(), height: btnStyle.getHeight(), alignment: btnStyle.getAlignment())
-                            .fontWeight(btnStyle.getFont())
-                        Image(systemName: "highlighter")
-                            .fontWeight(btnStyle.getFont())
-                            .imageScale(.large)
-                            .foregroundColor(btnStyle.getBtnFontColor())
-                    }
-                }
-                .padding()
-                .background(btnStyle.getBtnColor())
-                .border(btnStyle.getBorderColor(), width: btnStyle.getBorderWidth())
-                .cornerRadius(btnStyle.getBtnRadius())
-                .padding(.bottom, 10)
+//                NavigationLink(destination: registerClassView(showNextView: $showNextView).navigationBarHidden(true)) {
+//                    HStack {
+//                        Text(sixthButtonName)
+//                            .padding(.leading, 25)
+//                            .foregroundColor(btnStyle.getBtnFontColor())
+//                            .frame(width: btnStyle.getWidth(), height: btnStyle.getHeight(), alignment: btnStyle.getAlignment())
+//                            .fontWeight(btnStyle.getFont())
+//                        Image(systemName: "highlighter")
+//                            .fontWeight(btnStyle.getFont())
+//                            .imageScale(.large)
+//                            .foregroundColor(btnStyle.getBtnFontColor())
+//                    }
+//                }
+//                .padding()
+//                .background(btnStyle.getBtnColor())
+//                .border(btnStyle.getBorderColor(), width: btnStyle.getBorderWidth())
+//                .cornerRadius(btnStyle.getBtnRadius())
+//                .padding(.bottom, 10)
                 
                 // Submitting Request Button
                 Button(action: {
