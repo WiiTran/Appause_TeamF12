@@ -387,5 +387,6 @@ struct ClassIDGenerationView: View {
 struct ClassIDGenerationView_Previews: PreviewProvider {
     static var previews: some View {
         ClassIDGenerationView()
+            .environmentObject(ScheduleState())
     }
 }
