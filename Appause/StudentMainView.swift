@@ -22,7 +22,7 @@ struct StudentMainView: View {
     @State private var frameHeight: CGFloat = 20
     
     @State var secondButtonName = "Add Classes"
-    @State var thirdButtonName = "All Class"
+    @State var thirdButtonName = "All Classes"
     @State var fourthButtonName = "Settings"
     @State var fifthButtonName = "Submit Request"
     @State var sixthButtonName = "Register ClassID"
@@ -67,7 +67,7 @@ struct StudentMainView: View {
                 NavigationLink(destination: TeacherManageClasses().navigationBarHidden(true))
                 {
                     HStack {
-                        Text(secondButtonName)
+                        Text(thirdButtonName)
                             .padding(.leading, 25)
                             .foregroundColor(btnStyle.getBtnFontColor())
                             .frame(width: btnStyle.getWidth(), height: btnStyle.getHeight(), alignment: btnStyle.getAlignment())
