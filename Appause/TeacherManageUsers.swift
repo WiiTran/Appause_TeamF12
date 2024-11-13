@@ -1,7 +1,6 @@
 //
 //  TeacherManageUsers.swift
 //  Appause
-//
 //  Created by Huy Tran on 4/23/24.
 import SwiftUI
 
@@ -40,7 +39,7 @@ struct TeacherManageUsers: View {
                     .padding(.top, 30)
 
                 // List of Students
-                List($studentList.students) { $student in
+                List(studentList.students) { student in  // Removed `$`
                     if studentName.isEmpty || student.name.lowercased().contains(studentName.lowercased()) {
                         NavigationLink(value: student) {
                             Text(student.name)
@@ -68,9 +67,8 @@ struct TeacherManageUsers: View {
 }
 
 struct TeacherManageUsers_Previews: PreviewProvider {
-    @StateObject var studentList = StudentList()
     static var previews: some View {
         TeacherManageUsers()
-            .environmentObject(StudentList())
+            .environmentObject(StudentList())  // Inject StudentList as an environment object here
     }
 }

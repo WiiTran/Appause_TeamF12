@@ -5,7 +5,76 @@ import Combine
 class FirestoreManager: ObservableObject {
     private let db = Firestore.firestore()
     
+    @Published var Teachers: [ClassTeacher] = []  // List of teachers
+    @Published var classes: [StudentClass] = []  // List of classes
+    
     @Published var enrolledClass: [(StudentClass, ClassTeacher?)] = []
+    
+    func fetchTeachers() {
+            print("Fetching all teachers from Firestore...")
+            
+            db.collection("Teachers")
+                .getDocuments { (snapshot, error) in
+                    if let error = error {
+                        print("Error fetching teachers: \(error)")
+                        return
+                    }
+                    
+                    guard let documents = snapshot?.documents else {
+                        print("No teacher documents found.")
+                        return
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.Teachers = documents.compactMap { document -> ClassTeacher? in
+                            let data = document.data()
+                            let teacherName = data["Name"] as? String ?? "Unknown"
+                            let teacherID = document.documentID
+                            return ClassTeacher(Name: teacherName, teacherID: teacherID)
+                        }
+                        print("Total teachers fetched: \(self.Teachers.count)")
+                    }
+                }
+        }
+    
+    func fetchClasses() {
+            print("Fetching all classes from Firestore...")
+            
+            db.collection("classes")
+                .getDocuments { (snapshot, error) in
+                    if let error = error {
+                        print("Error fetching classes: \(error)")
+                        return
+                    }
+                    
+                    guard let documents = snapshot?.documents else {
+                        print("No class documents found.")
+                        return
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.classes = documents.compactMap { document -> StudentClass? in
+                            let data = document.data()
+                            let classID = document.documentID
+                            let className = data["className"] as? String ?? ""
+                            let teacherID = data["teacherID"] as? String ?? ""
+                            let teacherName = data["teacherName"] as? String ?? "Unknown"
+                            let classTime = (data["timestamp"] as? Timestamp)?.dateValue() ?? Date()
+                            let days = data["days"] as? [String] ?? []
+                            
+                            return StudentClass(
+                                classID: classID,
+                                className: className,
+                                teacherID: teacherID,
+                                Name: teacherName,
+                                classTime: classTime,
+                                days: days
+                            )
+                        }
+                        print("Total classes fetched: \(self.classes.count)")
+                    }
+                }
+        }
     
     func fetchEnrolledClass(for studentEmail: String) {
         print("Fetching enrolled classes for studentEmail: \(studentEmail)")

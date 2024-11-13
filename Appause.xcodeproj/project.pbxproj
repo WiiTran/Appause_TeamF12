@@ -29,6 +29,8 @@
 		3E1737602BD8A6F700D0F290 /* TeacherAllRequestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E17375F2BD8A6F700D0F290 /* TeacherAllRequestsView.swift */; };
 		3E1737622BD8A73300D0F290 /* RequestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1737612BD8A73300D0F290 /* RequestData.swift */; };
 		3E35C4E82CBF69940012357A /* TeacherAddScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E35C4E72CBF69940012357A /* TeacherAddScheduleView.swift */; };
+		3E79A6572CE40F0100A2A5B6 /* TeacherManageClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E79A6562CE40F0100A2A5B6 /* TeacherManageClasses.swift */; };
+		3E79A65B2CE43E9400A2A5B6 /* unblockRequestViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E79A65A2CE43E9400A2A5B6 /* unblockRequestViewUITests.swift */; };
 		3E8964832C9A907200C75B38 /* TeacherBlacklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8964822C9A907200C75B38 /* TeacherBlacklist.swift */; };
 		3E8AE2962C90213B00ABDA6E /* AppauseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8AE2952C90213B00ABDA6E /* AppauseApp.swift */; };
 		3E8F6AE42BCBD5CC003C4160 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F6AE32BCBD5CC003C4160 /* ContentView.swift */; };
@@ -112,6 +114,8 @@
 		3E35C4E72CBF69940012357A /* TeacherAddScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherAddScheduleView.swift; sourceTree = "<group>"; };
 		3E4FD4D22CD07C5100174942 /* UnblockRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnblockRequestView.swift; sourceTree = "<group>"; };
 		3E4FD4D42CD07C8B00174942 /* studentRequestUnlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = studentRequestUnlockView.swift; sourceTree = "<group>"; };
+		3E79A6562CE40F0100A2A5B6 /* TeacherManageClasses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherManageClasses.swift; sourceTree = "<group>"; };
+		3E79A65A2CE43E9400A2A5B6 /* unblockRequestViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = unblockRequestViewUITests.swift; sourceTree = "<group>"; };
 		3E8964822C9A907200C75B38 /* TeacherBlacklist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherBlacklist.swift; sourceTree = "<group>"; };
 		3E8AE2952C90213B00ABDA6E /* AppauseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppauseApp.swift; sourceTree = "<group>"; };
 		3E8F6ADE2BCBD5CC003C4160 /* Appause.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Appause.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -230,18 +234,18 @@
 				3E1737432BD8A2B200D0F290 /* ResetPasswordView.swift */,
 				9B53910B2CCB0029006B254F /* unlockRequestList.swift */,
 				3E17374D2BD8A39400D0F290 /* StudentDeleteAdminView.swift */,
-				3E4FD4D22CD07C5100174942 /* UnblockRequestView.swift */,
 				3E4FD4D42CD07C8B00174942 /* studentRequestUnlockView.swift */,
 				ED8FB51D2C910F8C00DFB478 /* Firebase */,
 				3E17375F2BD8A6F700D0F290 /* TeacherAllRequestsView.swift */,
 				3EA44B282BCF440F00732432 /* TeacherMainView.swift */,
 				C8D38EF62BD3881700F0D2BA /* TeacherSettingsView.swift */,
 				001AC1802C9A1CA000BC8266 /* TeacherScheduleView.swift */,
+				3E79A6562CE40F0100A2A5B6 /* TeacherManageClasses.swift */,
 				3E17374F2BD8A47A00D0F290 /* TeacherUserRequestView.swift */,
+				3E1737532BD8A4A300D0F290 /* TeacherManageUsers.swift */,
 				3E1737512BD8A48F00D0F290 /* TeacherWhitelist.swift */,
 				3E8964822C9A907200C75B38 /* TeacherBlacklist.swift */,
 				3E1737572BD8A4CA00D0F290 /* TeacherConnectCodeView.swift */,
-				3E1737532BD8A4A300D0F290 /* TeacherManageUsers.swift */,
 				3E1737552BD8A4BC00D0F290 /* TeacherDeleteStudentView.swift */,
 				3E1737592BD8A5B400D0F290 /* TeacherMasterControlView.swift */,
 				3E17375B2BD8A69600D0F290 /* TeacherAppDescription.swift */,
@@ -279,6 +283,7 @@
 				3EB48E182CBE907A00B41BAD /* AppauseUITestsLaunchTests.swift */,
 				3EA9F4132CBE91FF008903AD /* StudentSignUpUITests.swift */,
 				3EA9F4152CBE922E008903AD /* TeacherSignUpUITests.swift */,
+				3E79A65A2CE43E9400A2A5B6 /* unblockRequestViewUITests.swift */,
 				3EA9F4172CBE9256008903AD /* StudentSignInUITests.swift */,
 				3EA9F4192CBE9280008903AD /* TeacherSignInUITests.swift */,
 			);
@@ -462,6 +467,7 @@
 				3E1737422BD8A29A00D0F290 /* PWCodeVerificationView.swift in Sources */,
 				9B53910C2CCB0029006B254F /* unlockRequestList.swift in Sources */,
 				3E17375C2BD8A69600D0F290 /* TeacherAppDescription.swift in Sources */,
+				3E79A6572CE40F0100A2A5B6 /* TeacherManageClasses.swift in Sources */,
 				3E17375A2BD8A5B400D0F290 /* TeacherMasterControlView.swift in Sources */,
 				3EA44B292BCF440F00732432 /* TeacherMainView.swift in Sources */,
 				3E1737502BD8A47A00D0F290 /* TeacherUserRequestView.swift in Sources */,
@@ -502,6 +508,7 @@
 				3EA9F4162CBE922E008903AD /* TeacherSignUpUITests.swift in Sources */,
 				3EB48E192CBE907A00B41BAD /* AppauseUITestsLaunchTests.swift in Sources */,
 				3EA9F4182CBE9256008903AD /* StudentSignInUITests.swift in Sources */,
+				3E79A65B2CE43E9400A2A5B6 /* unblockRequestViewUITests.swift in Sources */,
 				3EB48E172CBE907A00B41BAD /* AppauseUITests.swift in Sources */,
 				3EA9F4142CBE91FF008903AD /* StudentSignUpUITests.swift in Sources */,
 			);
@@ -648,13 +655,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CREATE_INFOPLIST_SECTION_IN_BINARY = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Appause/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 53NSY6KM9Q;
+				DEVELOPMENT_TEAM = 9UY79QFFH9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
@@ -672,10 +677,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = csus.TmF12.Appause;
+				PRODUCT_BUNDLE_IDENTIFIER = csus.TF12.Appause;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = AppausePL;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -688,13 +692,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CREATE_INFOPLIST_SECTION_IN_BINARY = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Appause/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 53NSY6KM9Q;
+				DEVELOPMENT_TEAM = 9UY79QFFH9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
@@ -712,10 +714,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = csus.TmF12.Appause;
+				PRODUCT_BUNDLE_IDENTIFIER = csus.TF12.Appause;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = AppausePL;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
