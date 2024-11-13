@@ -9,25 +9,16 @@ struct UnblockRequestView: View {
     @State private var requestStatus: String = "Pending"
     @State private var studentID: String = ""
     @State private var appName: String = ""
-    @State private var shouldNavigateToMainMenu = false
 
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
         NavigationStack {
             VStack {
-                // NavigationLink using a value-based navigation and NavigationStack
-                NavigationLink(value: shouldNavigateToMainMenu) {
-                    EmptyView()
-                }
-                .navigationDestination(isPresented: $shouldNavigateToMainMenu) {
-                    StudentMainView(showNextView: $showNextView)
-                }
-
+                // Button to navigate back to the main student view
                 Button(action: {
                     withAnimation {
-                        shouldNavigateToMainMenu = true // Trigger navigation to the main menu
+                        showNextView = .mainStudent // Directly update showNextView to navigate back
                     }
                 }) {
                     Text("MAIN / Submitting Request")
@@ -44,26 +35,33 @@ struct UnblockRequestView: View {
                 
                 Spacer()
 
+                // Form fields for unblock request
                 TextField("Student ID", text: $studentID)
+                    .accessibilityIdentifier("studentIDTextField")
                     .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
 
                 TextField("App Name", text: $appName)
+                    .accessibilityIdentifier("appNameTextField")
                     .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
 
                 TextField("Reason for unblocking", text: $reason)
+                    .accessibilityIdentifier("reasonTextField")
                     .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
 
+                // Submit request button
                 Button("Submit Request") {
                     submitRequest()
                 }
                 .padding()
 
+                // Display current request status
                 Text("Current Status: \(requestStatus)")
                     .padding()
 
+                // Button to check request status
                 Button("Check Status") {
                     checkRequestStatus()
                 }
@@ -88,7 +86,7 @@ struct UnblockRequestView: View {
 
         let db = Firestore.firestore()
         let expiryDate = Calendar.current.date(byAdding: .hour, value: 72, to: Date()) ?? Date()
-           let expiryTimestamp = Timestamp(date: expiryDate)
+        let expiryTimestamp = Timestamp(date: expiryDate)
 
         let requestData: [String: Any] = [
             "studentID": studentID,
@@ -109,31 +107,32 @@ struct UnblockRequestView: View {
         }
     }
 
+    // Function to delete expired requests
     func deleteExpiredRequests() {
         let db = Firestore.firestore()
         let now = Timestamp(date: Date())
         db.collection("unblockRequests")
-               .whereField("expiryTimestamp", isLessThanOrEqualTo: now)
-               .whereField("status", isEqualTo: "pending")
-               .getDocuments { (querySnapshot, error) in
-                   if let error = error {
-                       print("Error fetching expired requests: \(error)")
-                       return
-                   }
+            .whereField("expiryTimestamp", isLessThanOrEqualTo: now)
+            .whereField("status", isEqualTo: "pending")
+            .getDocuments { (querySnapshot, error) in
+                if let error = error {
+                    print("Error fetching expired requests: \(error)")
+                    return
+                }
 
-                   guard let documents = querySnapshot?.documents else {
-                       print("No expired documents found.")
-                       return
-                   }
+                guard let documents = querySnapshot?.documents else {
+                    print("No expired documents found.")
+                    return
+                }
 
-                   for document in documents {
-                       print("Deleting document with ID: \(document.documentID)")
-                       document.reference.delete { error in
-                           if let error = error {
-                               print("Error deleting document: \(error)")
-                           } else {
-                               print("Expired request deleted successfully: \(document.documentID)")
-                           }
+                for document in documents {
+                    print("Deleting document with ID: \(document.documentID)")
+                    document.reference.delete { error in
+                        if let error = error {
+                            print("Error deleting document: \(error)")
+                        } else {
+                            print("Expired request deleted successfully: \(document.documentID)")
+                        }
                     }
                 }
             }

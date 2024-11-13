@@ -20,10 +20,16 @@ struct AppauseApp: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     private let viewSwitcher = ViewSwitcher() // Initialize ViewSwitcher here
+    @StateObject private var firestoreManager = FirestoreManager() //
+    @StateObject private var studentList = StudentList()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(viewSwitcher) // Provide as environment object
+                                .environmentObject(ScheduleState.scheduleState)
+                                .environmentObject(firestoreManager) // Add FirestoreManager
+                                .environmentObject(studentList)
         }
     }
 }
@@ -35,4 +41,3 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         return true
     }
 }
-

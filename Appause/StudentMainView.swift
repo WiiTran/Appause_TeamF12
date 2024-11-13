@@ -21,10 +21,10 @@ struct StudentMainView: View {
     @State private var frameWidth: CGFloat = 300
     @State private var frameHeight: CGFloat = 20
     
-    @State var secondButtonName = "Classes"
-    @State var thirdButtonName = "Connect Code"
+    @State var secondButtonName = "Add Classes"
+    @State var thirdButtonName = "All Class"
     @State var fourthButtonName = "Settings"
-    @State var fifthButtonName = "Submitting Request"
+    @State var fifthButtonName = "Submit Request"
     @State var sixthButtonName = "Register ClassID"
     @State var seventhButtonName = "Feedback"
     
@@ -63,15 +63,16 @@ struct StudentMainView: View {
                 .cornerRadius(btnStyle.getBtnRadius())
                 .padding(.bottom, 10)
 
-                // Connect Code Button
-                NavigationLink(destination: StudentConnectCodeView().navigationBarHidden(true)) {
+                // All Classes Button
+                NavigationLink(destination: TeacherManageClasses().navigationBarHidden(true))
+                {
                     HStack {
-                        Text(thirdButtonName)
+                        Text(secondButtonName)
                             .padding(.leading, 25)
                             .foregroundColor(btnStyle.getBtnFontColor())
                             .frame(width: btnStyle.getWidth(), height: btnStyle.getHeight(), alignment: btnStyle.getAlignment())
                             .fontWeight(btnStyle.getFont())
-                        Image(systemName: "barcode")
+                        Image(systemName: "list.number.hi")
                             .fontWeight(btnStyle.getFont())
                             .imageScale(.large)
                             .foregroundColor(btnStyle.getBtnFontColor())
@@ -82,46 +83,11 @@ struct StudentMainView: View {
                 .border(btnStyle.getBorderColor(), width: btnStyle.getBorderWidth())
                 .cornerRadius(btnStyle.getBtnRadius())
                 .padding(.bottom, 10)
-                
-                // Settings Button
-                Button(action: {
-                    withAnimation { showNextView = .studentSettings }
-                }) {
-                    HStack {
-                        Text(fourthButtonName)
-                            .padding(.leading, 25)
-                            .foregroundColor(btnStyle.getBtnFontColor())
-                            .frame(width: btnStyle.getWidth(), height: btnStyle.getHeight(), alignment: btnStyle.getAlignment())
-                            .fontWeight(btnStyle.getFont())
-                        Image(systemName: "gear")
-                            .imageScale(.large)
-                            .foregroundColor(btnStyle.getBtnFontColor())
-                    }
-                }
-                .padding()
-                .background(btnStyle.getBtnColor())
-                .border(btnStyle.getBorderColor(), width: btnStyle.getBorderWidth())
-                .cornerRadius(btnStyle.getBtnRadius())
 
-                // Submitting Request Button
-                Button(action: { withAnimation { showNextView = .UnblockRequest } }) {
-                    HStack {
-                        Text(fifthButtonName)
-                            .padding(.leading, 25)
-                            .foregroundColor(btnStyle.getBtnFontColor())
-                            .frame(width: btnStyle.getWidth(), height: btnStyle.getHeight(), alignment: btnStyle.getAlignment())
-                            .fontWeight(btnStyle.getFont())
-                        Image(systemName: "hand.raised")
-                            .fontWeight(btnStyle.getFont())
-                            .imageScale(.large)
-                            .foregroundColor(btnStyle.getBtnFontColor())
-                    }
-                }
-                .padding()
-                .background(btnStyle.getBtnColor())
-                .border(btnStyle.getBorderColor(), width: btnStyle.getBorderWidth())
-                .cornerRadius(btnStyle.getBtnRadius())
-                .padding(.bottom, 10)
+                
+                
+                
+               
                 
                 // Register ClassID Button
                 NavigationLink(destination: registerClassView(showNextView: $showNextView).navigationBarHidden(true)) {
@@ -132,6 +98,35 @@ struct StudentMainView: View {
                             .frame(width: btnStyle.getWidth(), height: btnStyle.getHeight(), alignment: btnStyle.getAlignment())
                             .fontWeight(btnStyle.getFont())
                         Image(systemName: "highlighter")
+                            .fontWeight(btnStyle.getFont())
+                            .imageScale(.large)
+                            .foregroundColor(btnStyle.getBtnFontColor())
+                    }
+                }
+                .padding()
+                .background(btnStyle.getBtnColor())
+                .border(btnStyle.getBorderColor(), width: btnStyle.getBorderWidth())
+                .cornerRadius(btnStyle.getBtnRadius())
+                .padding(.bottom, 10)
+                
+                // Submitting Request Button
+                Button(action: {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                        withAnimation {
+                            showNextView = .UnblockRequest
+                            print("Navigating to: \(showNextView)")
+                        }
+                    }
+                }
+                )
+                {
+                    HStack {
+                        Text(fifthButtonName)
+                            .padding(.leading, 25)
+                            .foregroundColor(btnStyle.getBtnFontColor())
+                            .frame(width: btnStyle.getWidth(), height: btnStyle.getHeight(), alignment: btnStyle.getAlignment())
+                            .fontWeight(btnStyle.getFont())
+                        Image(systemName: "hand.raised")
                             .fontWeight(btnStyle.getFont())
                             .imageScale(.large)
                             .foregroundColor(btnStyle.getBtnFontColor())
@@ -163,11 +158,31 @@ struct StudentMainView: View {
                 .cornerRadius(btnStyle.getBtnRadius())
                 .padding(.bottom, 10)
                 
-                Spacer()
+                
+                // Settings Button
+                Button(action: {
+                    withAnimation { showNextView = .studentSettings }
+                }) {
+                    HStack {
+                        Text(fourthButtonName)
+                            .padding(.leading, 25)
+                            .foregroundColor(btnStyle.getBtnFontColor())
+                            .frame(width: btnStyle.getWidth(), height: btnStyle.getHeight(), alignment: btnStyle.getAlignment())
+                            .fontWeight(btnStyle.getFont())
+                        Image(systemName: "gear")
+                            .imageScale(.large)
+                            .foregroundColor(btnStyle.getBtnFontColor())
+                    }
+                }
+                .padding()
+                .background(btnStyle.getBtnColor())
+                .border(btnStyle.getBorderColor(), width: btnStyle.getBorderWidth())
+                .cornerRadius(btnStyle.getBtnRadius())
+                .padding(.bottom, 10)
                 
                 // Dark Mode Toggle
-                Toggle("Dark Mode", isOn: $isDarkMode)
-                    .padding()
+//                Toggle("Dark Mode", isOn: $isDarkMode)
+//                    .padding()
                 
                 Spacer()
                 
