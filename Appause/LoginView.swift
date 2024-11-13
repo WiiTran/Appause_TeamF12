@@ -355,8 +355,8 @@ struct LoginView: View {
     func autofillCredentials() {
         if isFaceIDAuthenticated {
             if showTextFields {
-                usernameText = "h.t@sanjuan.edu"
-                passwordText = "Portland0321."
+                usernameText = "didit.work@sanjuan.edu"
+                passwordText = "Teach@12345Secure"
             } else if showCodeField {
                 studentUsernameText = "223344@student.sanjuan.edu"
                 studentPasswordText = "Password123."

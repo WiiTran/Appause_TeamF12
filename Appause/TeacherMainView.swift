@@ -14,6 +14,7 @@ import FirebaseFirestore
 
 struct TeacherMainView: View {
     @Binding var showNextView: DisplayState
+    @StateObject var firestoreManager = FirestoreManager()
     @StateObject var studentList = StudentList()
     @AppStorage("isDarkMode") private var isDarkMode: Bool = false
     @State private var status: String = "Normal"
@@ -53,7 +54,7 @@ struct TeacherMainView: View {
                 .padding(.top)
                 
                 Spacer()
-
+                
                 // Text displaying the current status of the app
                 Text("Status: " + status)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -62,7 +63,7 @@ struct TeacherMainView: View {
                     .padding(.top, 10)
                     .padding(.bottom, 10)
                     .padding(.leading, 105)
-
+                
                 // Lock/Unlock buttons
                 HStack {
                     if isOverrideActive {
@@ -104,45 +105,45 @@ struct TeacherMainView: View {
                 
                 Spacer().frame(height: 25)
                 
-                Text("Connect Code")
-                    .font(.title)
-                    .padding(1)
-                TextField("Press the button to generate a code", text: $generatedCode)
-                    .background(Color.white.opacity(0.25))
-                    .foregroundColor(Color("BlackWhite"))
-                    .multilineTextAlignment(.center)
-                    .overlay(RoundedRectangle(cornerRadius: 5)
-                        .stroke(lineWidth: 1))
-                    .textFieldStyle(.roundedBorder)
-                    .disabled(true)
-                    .padding(5)
-                
-                Button(action: {
-                    generatedCode = ""
-                    for _ in 0..<6 {
-                        let randomNum = Int.random(in: 0..<36)
-                        generatedCode += charList[randomNum]
-                    }
-                }) {
-                    Text("Generate New Code")
-                        .padding()
-                        .fontWeight(btnStyle.getFont())
-                        .background(btnStyle.getPathColor())
-                        .foregroundColor(btnStyle.getPathFontColor())
-                        .cornerRadius(100)
-                }
+//                Text("Connect Code")
+//                    .font(.title)
+//                    .padding(1)
+//                TextField("Press the button to generate a code", text: $generatedCode)
+//                    .background(Color.white.opacity(0.25))
+//                    .foregroundColor(Color("BlackWhite"))
+//                    .multilineTextAlignment(.center)
+//                    .overlay(RoundedRectangle(cornerRadius: 5)
+//                        .stroke(lineWidth: 1))
+//                    .textFieldStyle(.roundedBorder)
+//                    .disabled(true)
+//                    .padding(5)
+//                
+//                Button(action: {
+//                    generatedCode = ""
+//                    for _ in 0..<6 {
+//                        let randomNum = Int.random(in: 0..<36)
+//                        generatedCode += charList[randomNum]
+//                    }
+//                }) {
+//                    Text("Generate New Code")
+//                        .padding()
+//                        .fontWeight(btnStyle.getFont())
+//                        .background(btnStyle.getPathColor())
+//                        .foregroundColor(btnStyle.getPathFontColor())
+//                        .cornerRadius(100)
+//                }
                 .padding(.bottom, 25)
                 
                 VStack {
-                    Text("Users")
+                    Text("Teachers")
                         .font(.title)
                         .padding(.bottom, 10)
                     
                     ScrollView {
                         VStack {
-                            ForEach(studentList.students) { student in
+                            ForEach(firestoreManager.Teachers, id: \.teacherID) { teacher in
                                 HStack {
-                                    Text(student.name)
+                                    Text(teacher.Name)
                                         .font(.callout)
                                         .foregroundColor(btnStyle.getBtnFontColor())
                                     Spacer()
@@ -157,17 +158,18 @@ struct TeacherMainView: View {
                 }
                 
                 Spacer()
-
+                
                 Toggle("Manual Override", isOn: $isOverrideActive)
                     .padding()
                     .onChange(of: isOverrideActive) { value in
                         if !value { status = "Normal" }
                     }
                 
-                Toggle("Dark Mode", isOn: $isDarkMode)
-                    .padding()
+                //                Toggle("Dark Mode", isOn: $isDarkMode)
+                //                    .padding()
             }
             .onAppear {
+                firestoreManager.fetchTeachers()  // Fetch teachers when the view appears
                 loadActiveSchedule()
             }
             .preferredColorScheme(isDarkMode ? .dark : .light)
@@ -181,39 +183,44 @@ struct TeacherMainView: View {
                     Image(systemName: "hand.raised")
                     Text("Requests")
                 }
-            TeacherWhitelist()
-                .tabItem {
-                    Image(systemName: "lock.open")
-                    Text("WhiteLists")
-                }
-            TeacherManageUsers()
-                .tabItem {
-                    Image(systemName: "person.2")
-                    Text("Students")
-                }
-                .environmentObject(studentList)
-            
-            TeacherScheduleView()
-                .tabItem {
-                    Image(systemName: "bell")
-                    Text("Schedule")
-                }
-
-            ClassIDGenerationView()
-                .tabItem {
-                    Image(systemName: "plus.square")
-                    Text("Create New Class")
-                }
             TeacherClassListView()
                 .tabItem {
                     Image(systemName: "list.bullet")
                     Text("My Classes")
                 }
             
+           
+            TeacherScheduleView()
+                .tabItem {
+                    Image(systemName: "bell")
+                    Text("Schedule")
+                }
+            ClassIDGenerationView()
+                .tabItem {
+                    Image(systemName: "plus.square")
+                    Text("Create New Class")
+                }
+
+            TeacherManageUsers()
+                .tabItem {
+                    Image(systemName: "person.2")
+                    Text("Students")
+                }
+            TeacherManageClasses()
+                .tabItem {
+                    Image(systemName: "menucard.fill")
+                    Text("All Classes")
+                }
+                .environmentObject(studentList)
             BluetoothManagerView()
                 .tabItem {
                     Image(systemName: "app.connected.to.app.below.fill")
                     Text("Connectivity Manager")
+                }
+            TeacherWhitelist()
+                .tabItem {
+                    Image(systemName: "lock.open")
+                    Text("WhiteLists")
                 }
             TeacherBlacklist()
                 .tabItem {
@@ -228,7 +235,7 @@ struct TeacherMainView: View {
                 }
         }
     }
-
+    
     // Load the active schedule's periods
     func loadActiveSchedule() {
         let db = Firestore.firestore()
@@ -259,8 +266,11 @@ struct TeacherMainView: View {
 
 struct TeacherMainView_Previews: PreviewProvider {
     @State static private var showNextView: DisplayState = .mainTeacher
-    
-    static var previews: some View {
-        TeacherMainView(showNextView: $showNextView)
+        
+        static var previews: some View {
+            TeacherMainView(showNextView: $showNextView)
+                .environmentObject(ScheduleState())
+                .environmentObject(StudentList())
+                .environmentObject(FirestoreManager())
     }
 }
