@@ -69,18 +69,6 @@ struct ClassIDGenerationView: View {
                     }
                 }
 
-//                DatePicker("Select Start Time", selection: $classStartTime, displayedComponents: .hourAndMinute)
-//                    .padding()
-//                    .background(Color.gray.opacity(0.2))
-//                    .cornerRadius(8)
-//                    .padding(.horizontal)
-
-//                DatePicker("Select End Time", selection: $classEndTime, displayedComponents: .hourAndMinute)
-//                    .padding()
-//                    .background(Color.gray.opacity(0.2))
-//                    .cornerRadius(8)
-//                    .padding(.horizontal)
-
                 VStack(alignment: .leading, spacing: 5) {
                     Text("Enter Period")
                         .font(.headline)
@@ -96,79 +84,8 @@ struct ClassIDGenerationView: View {
                     .frame(height: 120)
                     .onChange(of: period) { newPeriod in            setClassTimes(currentSchedule, newPeriod)
                     }
-
-//                    TextField("Enter Period (e.g., 1, 2, 3)", text: $period)
-//                        .keyboardType(.numberPad)
-//                        .padding()
-//                        .background(Color.gray.opacity(0.2))
-//                        .cornerRadius(8)
-//                        .padding(.horizontal)
                 }
-
-//                VStack(alignment: .leading, spacing: 5) {
-//                    Text("Select Days of the Week")
-//                        .font(.headline)
-//                        .padding(.leading)
-//
-//                    Button(action: { isDaysSelectionVisible.toggle() }) {
-//                        HStack {
-//                            Text(selectedDays.isEmpty ? "Choose Days" : selectedDays.joined(separator: ", "))
-//                                .foregroundColor(selectedDays.isEmpty ? .gray : .blue)
-//                                .padding(.leading)
-//
-//                            Spacer()
-//
-//                            Image(systemName: "chevron.down")
-//                                .rotationEffect(.degrees(isDaysSelectionVisible ? 180 : 0))
-//                                .padding(.trailing)
-//                        }
-//                        .padding()
-//                        .background(Color.gray.opacity(0.2))
-//                        .cornerRadius(8)
-//                        .padding(.horizontal)
-//                    }
-//
-//                    if daysError {
-//                        Text("Please select at least one day")
-//                            .foregroundColor(.red)
-//                            .padding(.leading)
-//                    }
-//                }
-//
-//                if isDaysSelectionVisible {
-//                    VStack {
-//                        ForEach(daysOfWeek, id: \.self) { day in
-//                            HStack {
-//                                Text(day)
-//                                Spacer()
-//                                Button(action: { toggleDaySelection(day) }) {
-//                                    Image(systemName: selectedDays.contains(day) ? "checkmark.square" : "square")
-//                                        .foregroundColor(selectedDays.contains(day) ? .blue : .gray)
-//                                }
-//                            }
-//                            .padding(.horizontal)
-//                        }
-//                    }
-//                    .background(Color.white)
-//                    .cornerRadius(8)
-//                    .shadow(radius: 10)
-//                    .padding(.horizontal)
-//                }
-//
-//                VStack(alignment: .leading, spacing: 5) {
-//                    TextField("Enter Teacher ID", text: $teacherID)
-//                        .padding()
-//                        .background(Color.gray.opacity(0.2))
-//                        .cornerRadius(8)
-//                        .padding(.horizontal)
-//
-//                    if teacherIDError {
-//                        Text("Teacher ID is required")
-//                            .foregroundColor(.red)
-//                            .padding(.leading)
-//                    }
-//                }
-
+                              
                 if overlapError {
                     Text("Time conflict detected with an existing class.")
                         .foregroundColor(.red)
@@ -190,9 +107,7 @@ struct ClassIDGenerationView: View {
                         Text("Class Created Successfully!")
                             .font(.headline)
                             .padding(.top, 20)
-
                         Text("Class Name: \(className)")
-//                        Text("Class Days: \(selectedDays.joined(separator: ", "))")
                         Text("Class Period: \(classStartTime) - \(classEndTime)")
                         Text("Teacher ID: \(teacherID!)")
                         Text("Period: \(period)")
@@ -232,8 +147,7 @@ struct ClassIDGenerationView: View {
     private func validateAndGenerateClassID() {
         classNameError = className.isEmpty
         teacherIDError = (teacherID?.isEmpty == true)
-//        daysError = selectedDays.isEmpty
-
+        
         if !classNameError && !teacherIDError {
             checkForOverlappingClass(teacherID: teacherID!) { hasOverlap, error in
                 if let error = error {
