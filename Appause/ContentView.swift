@@ -15,7 +15,7 @@ typealias enrolledClassView = EnrolledClassView
 
 
 enum DisplayState {
-    case eula, login, /*emailCode,*/ mainTeacher, mainStudent, /*teacherMasterControl,*/ logout, /*studentConnectCode,*/ studentSettings, teacherSettings, UnblockRequest, /*studentDeleteAdmin,*/ enrolledClass, /*studentChooseAdmin,*/ selectRegistration,/* resetPassword,*/ teacherManageUsers, teacherBlacklist, teacherWhitelist, /*twoFactorAuth,*/ /*pwCodeVerification,*/ registerClass
+    case eula, login, /*emailCode,*/ mainTeacher, mainStudent, /*teacherMasterControl,*/ logout, /*studentConnectCode,*/ studentSettings, teacherSettings, UnblockRequest, /*studentDeleteAdmin,*/ enrolledClass, /*studentChooseAdmin,*/studentRegister,teacherRegister, selectRegistration,/* resetPassword,*/ teacherManageUsers, teacherBlacklist, teacherWhitelist, /*twoFactorAuth,*/ /*pwCodeVerification,*/ registerClass
 }
 
 
@@ -54,6 +54,10 @@ struct ContentView: View {
                 UnblockRequestView(showNextView: $displayState)
             case .teacherSettings:
                 TeacherSettingsView(showNextView: $displayState)
+            case .studentRegister:
+                StudentRegisterView(showNextView: $displayState)
+            case .teacherRegister:
+                TeacherRegisterView(showNextView: $displayState)
 //            case .studentChooseAdmin:
 //                StudentChooseAdminView(showNextView: $displayState)
 //            case .studentDeleteAdmin:

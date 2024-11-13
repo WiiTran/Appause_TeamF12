@@ -11,7 +11,7 @@ final class PasswordRequirementsTests: XCTestCase {
 
     func testPasswordRequirement() {
         // test passwords
-        let passwords = ["Ch3rry!", "123", "fgh2", "d3ltaF05ce", "jashdj!shdfk", "Whyi5thisaPass", "project!90", "etst7", "8ill0t"]
+        let passwords = ["Ch3rry!", "d3ltaF05ce", "jashdj!shdfk", "Whyi5thisaPass", "project!90", "etst7", "8ill0t","Password123.","SuperSecret1234567!"]
         let valid = Validate()
         
         // loop through passwords array

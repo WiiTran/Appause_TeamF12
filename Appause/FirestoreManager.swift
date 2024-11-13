@@ -7,7 +7,7 @@ class FirestoreManager: ObservableObject {
     
     @Published var Teachers: [ClassTeacher] = []  // List of teachers
     @Published var classes: [StudentClass] = []  // List of classes
-    
+    @Published var Students: [ClassStudent] = []  // List of Students
     @Published var enrolledClass: [(StudentClass, ClassTeacher?)] = []
     
     func fetchTeachers() {
@@ -36,6 +36,36 @@ class FirestoreManager: ObservableObject {
                     }
                 }
         }
+    
+    func fetchStudents() {
+        print("Fetching all Students from Firestore...")
+        
+        
+        db.collection("Users")
+            .getDocuments { (snapshot, error) in
+                if let error = error {
+                    print("Error fetching students: \(error)")
+                    return
+                }
+                
+                guard let documents = snapshot?.documents else {
+                    print("No student documents found.")
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                                self.Students = documents.compactMap { document -> ClassStudent? in
+                                    let data = document.data()
+                                    let studentName = data["Name"] as? String ?? "Unknown"
+                                    let studentId = document.documentID
+                                    let email = data["Email"] as? String ?? "unknown@example.com"
+
+                                    return ClassStudent(studentId: studentId, Name: studentName, email: email)
+                                }
+                                print("Total students fetched: \(self.Students.count)")
+                }
+            }
+    }
     
     func fetchClasses() {
             print("Fetching all classes from Firestore...")
@@ -181,6 +211,30 @@ class FirestoreManager: ObservableObject {
             completion(teacher)
         }
     }
+    
+    // Helper function to fetch student details by studentId
+    private func fetchStudent(for studentId: String, completion: @escaping (ClassStudent?) -> Void) {
+        db.collection("Users").document(studentId).getDocument { (document, error) in
+            if let error = error {
+                print("Error fetching student: \(error)")
+                completion(nil)
+                return
+            }
+
+            guard let data = document?.data() else {
+                completion(nil)
+                return
+            }
+
+            // Fetch student name and email
+            let studentName = data["Name"] as? String ?? "Unknown"
+            let email = data["email"] as? String ?? "unknown@example.com"
+
+            // Create a ClassStudent instance with the fetched data
+            let student = ClassStudent(studentId: studentId, Name: studentName, email: email)
+            completion(student)
+        }
+    }
 }
 
 // Define the models for `StudentClass` and `ClassTeacher`
@@ -197,4 +251,10 @@ struct ClassTeacher {
     var Name: String
     var teacherID: String
 }
+struct ClassStudent {
+    var studentId: String
+    var Name: String
+    var email: String
+}
+
 

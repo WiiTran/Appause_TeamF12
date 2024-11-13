@@ -1,27 +1,28 @@
 //
-//  EmailValidationTest.swift
+//  EmailValidationStudent.swift
 //  AppauseTests
 //
-//  Created by Huy Tran on 10/1/24.
+//  Created by Huy Tran on 11/13/24.
 //
 
 import XCTest
+
 @testable import Appause
 
-final class EmailValidationTest: XCTestCase
+final class EmailValidationTestStudent: XCTestCase
 {
     
     func testEmailValidation()
     {
         // test emails
-        let emails = ["test@example.com ", "22334@student.sanjuan.edu","aaaaaa@sanjuan.edu","222.222@sanjuan.edu","123456@sanjuan.edu","h.t@sanjuan.edu","h1.t2@sanjuan.edu","h1.t2@sanjuan.edu.ph","John.Cena@sanjuan.edu"]
+        let emails = ["test@example.com ", "user..name@example.com","223344@student.sanjuan.edu","22334@student.sanjuan.edu","aaaaaa@student.sanjuan.edu","222222@sanjuan.edu","123456@sanjuan.edu"]
         let valid = Validate()
         
         // loop through email array
         print("\n")
         for email in emails
         {
-            let check = valid.validateEmailTeacher(email)
+            let check = valid.validateEmailStudent(email)
             if (check == false)
             {
                 print(email + " is invalid email\n")
