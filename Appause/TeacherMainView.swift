@@ -19,6 +19,7 @@ struct TeacherMainView: View {
     @AppStorage("isDarkMode") private var isDarkMode: Bool = false
     @State private var status: String = "Normal"
     @State private var generatedCode: String = ""
+    @State private var selectedTab = 0
     
     @State var studentName = ""
     
@@ -33,209 +34,224 @@ struct TeacherMainView: View {
                                    "u","v","w","x","y","z"]
     
     var body: some View {
-        // Main tab
-        TabView {
-            VStack {
-                Button(action: {
-                    withAnimation {
-                        showNextView = .mainTeacher
-                    }
-                }) {
-                    Text("MAIN")
-                        .fontWeight(btnStyle.getFont())
-                        .foregroundColor(btnStyle.getPathFontColor())
-                        .frame(width: btnStyle.getWidth(),
-                               height: btnStyle.getHeight(),
-                               alignment: btnStyle.getAlignment())
-                }
-                .padding()
-                .background(btnStyle.getPathColor())
-                .cornerRadius(btnStyle.getPathRadius())
-                .padding(.top)
-                
-                Spacer()
-                
-                // Text displaying the current status of the app
-                Text("Status: " + status)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .font(.title)
-                    .foregroundColor(Color("BlackWhite"))
-                    .padding(.top, 10)
-                    .padding(.bottom, 10)
-                    .padding(.leading, 105)
-                
-                // Lock/Unlock buttons
-                HStack {
-                    if isOverrideActive {
-                        VStack {
-                            Button(action: {
-                                status = "Locked"
-                            }) {
-                                Image(systemName: "lock")
-                                    .padding(.trailing)
-                                    .font(.system(size: 100))
-                                    .foregroundColor(.red)
-                            }
-                            Text("Lock")
-                                .padding(.trailing)
+        NavigationView {
+            TabView (selection: $selectedTab) {
+                VStack {
+                    Button(action: {
+                        withAnimation {
+                            showNextView = .mainTeacher
                         }
-                        VStack {
-                            Button(action: {
-                                status = "Unlocked"
-                            }) {
-                                Image(systemName: "lock.open")
-                                    .padding(.leading)
-                                    .font(.system(size: 100))
+                    }) {
+                        Text("MAIN")
+                            .fontWeight(btnStyle.getFont())
+                            .foregroundColor(btnStyle.getPathFontColor())
+                            .frame(width: btnStyle.getWidth(),
+                                   height: btnStyle.getHeight(),
+                                   alignment: btnStyle.getAlignment())
+                    }
+                    .padding()
+                    .background(btnStyle.getPathColor())
+                    .cornerRadius(btnStyle.getPathRadius())
+                    .padding(.top)
+                    
+                    Spacer()
+                    
+                    // Text displaying the current status of the app
+                    Text("Status: " + status)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .font(.title)
+                        .foregroundColor(Color("BlackWhite"))
+                        .padding(.top, 10)
+                        .padding(.bottom, 10)
+                        .padding(.leading, 105)
+                    
+                    // Lock/Unlock buttons
+                    HStack {
+                        if isOverrideActive {
+                            VStack {
+                                Button(action: {
+                                    status = "Locked"
+                                }) {
+                                    Image(systemName: "lock")
+                                        .padding(.trailing)
+                                        .font(.system(size: 100))
+                                        .foregroundColor(.red)
+                                }
+                                Text("Lock")
+                                    .padding(.trailing)
+                            }
+                            VStack {
+                                Button(action: {
+                                    status = "Unlocked"
+                                }) {
+                                    Image(systemName: "lock.open")
+                                        .padding(.leading)
+                                        .font(.system(size: 100))
+                                        .foregroundColor(.green)
+                                }
+                                Text("Unlock")
+                            }
+                        } else {
+                            if activePeriods.first(where: { $0.startTime <= Date() && $0.endTime >= Date() }) != nil {
+                                Text("Status: Locked")
+                                    .font(.title)
+                                    .foregroundColor(.red)
+                            } else {
+                                Text("Status: Unlocked")
+                                    .font(.title)
                                     .foregroundColor(.green)
                             }
-                            Text("Unlock")
-                        }
-                    } else {
-                        if activePeriods.first(where: { $0.startTime <= Date() && $0.endTime >= Date() }) != nil {
-                            Text("Status: Locked")
-                                .font(.title)
-                                .foregroundColor(.red)
-                        } else {
-                            Text("Status: Unlocked")
-                                .font(.title)
-                                .foregroundColor(.green)
                         }
                     }
-                }
-                
-                Spacer().frame(height: 25)
-                
-//                Text("Connect Code")
-//                    .font(.title)
-//                    .padding(1)
-//                TextField("Press the button to generate a code", text: $generatedCode)
-//                    .background(Color.white.opacity(0.25))
-//                    .foregroundColor(Color("BlackWhite"))
-//                    .multilineTextAlignment(.center)
-//                    .overlay(RoundedRectangle(cornerRadius: 5)
-//                        .stroke(lineWidth: 1))
-//                    .textFieldStyle(.roundedBorder)
-//                    .disabled(true)
-//                    .padding(5)
-//                
-//                Button(action: {
-//                    generatedCode = ""
-//                    for _ in 0..<6 {
-//                        let randomNum = Int.random(in: 0..<36)
-//                        generatedCode += charList[randomNum]
-//                    }
-//                }) {
-//                    Text("Generate New Code")
-//                        .padding()
-//                        .fontWeight(btnStyle.getFont())
-//                        .background(btnStyle.getPathColor())
-//                        .foregroundColor(btnStyle.getPathFontColor())
-//                        .cornerRadius(100)
-//                }
-                .padding(.bottom, 25)
-                
-                VStack {
-                    Text("Teachers")
-                        .font(.title)
-                        .padding(.bottom, 10)
                     
-                    ScrollView {
-                        VStack {
-                            ForEach(firestoreManager.Teachers, id: \.teacherID) { teacher in
-                                HStack {
-                                    Text(teacher.Name)
-                                        .font(.callout)
-                                        .foregroundColor(btnStyle.getBtnFontColor())
-                                    Spacer()
+                    Spacer().frame(height: 25)
+                    
+                    //                Text("Connect Code")
+                    //                    .font(.title)
+                    //                    .padding(1)
+                    //                TextField("Press the button to generate a code", text: $generatedCode)
+                    //                    .background(Color.white.opacity(0.25))
+                    //                    .foregroundColor(Color("BlackWhite"))
+                    //                    .multilineTextAlignment(.center)
+                    //                    .overlay(RoundedRectangle(cornerRadius: 5)
+                    //                        .stroke(lineWidth: 1))
+                    //                    .textFieldStyle(.roundedBorder)
+                    //                    .disabled(true)
+                    //                    .padding(5)
+                    //
+                    //                Button(action: {
+                    //                    generatedCode = ""
+                    //                    for _ in 0..<6 {
+                    //                        let randomNum = Int.random(in: 0..<36)
+                    //                        generatedCode += charList[randomNum]
+                    //                    }
+                    //                }) {
+                    //                    Text("Generate New Code")
+                    //                        .padding()
+                    //                        .fontWeight(btnStyle.getFont())
+                    //                        .background(btnStyle.getPathColor())
+                    //                        .foregroundColor(btnStyle.getPathFontColor())
+                    //                        .cornerRadius(100)
+                    //                }
+                        .padding(.bottom, 25)
+                    
+                    VStack {
+                        Text("Teachers")
+                            .font(.title)
+                            .padding(.bottom, 10)
+                        
+                        ScrollView {
+                            VStack {
+                                ForEach(firestoreManager.Teachers, id: \.teacherID) { teacher in
+                                    HStack {
+                                        Text(teacher.Name)
+                                            .font(.callout)
+                                            .foregroundColor(btnStyle.getBtnFontColor())
+                                        Spacer()
+                                    }
+                                    .padding()
+                                    .background(Color.gray.opacity(0.1))
+                                    .cornerRadius(0)
+                                    .padding(.horizontal)
                                 }
-                                .padding()
-                                .background(Color.gray.opacity(0.1))
-                                .cornerRadius(0)
-                                .padding(.horizontal)
                             }
                         }
                     }
+                    
+                    Spacer()
+                    
+                    Toggle("Manual Override", isOn: $isOverrideActive)
+                        .padding()
+                        .onChange(of: isOverrideActive) { value in
+                            if !value { status = "Normal" }
+                        }
+                    
+                    //                Toggle("Dark Mode", isOn: $isDarkMode)
+                    //                    .padding()
                 }
+                .onAppear {
+                    firestoreManager.fetchTeachers()  // Fetch teachers when the view appears
+                    loadActiveSchedule()
+                }
+                .preferredColorScheme(isDarkMode ? .dark : .light)
+                .tabItem {
+                    Image(systemName: "house")
+                    Text("Home")
+                }
+                .tag(0) // Add a unique tag to track this tab
                 
-                Spacer()
-                
-                Toggle("Manual Override", isOn: $isOverrideActive)
-                    .padding()
-                    .onChange(of: isOverrideActive) { value in
-                        if !value { status = "Normal" }
+                TeacherAllRequestsView()
+                    .tabItem {
+                        Image(systemName: "hand.raised")
+                        Text("Requests")
                     }
-                
-                //                Toggle("Dark Mode", isOn: $isDarkMode)
-                //                    .padding()
+                    .tag(1) // Unique tag for this tab
+                TeacherClassListView()
+                            .tabItem {
+                                Image(systemName: "list.bullet")
+                                Text("My Classes")
+                            }
+                            .tag(2) // Unique tag for this tab
+                        
+                        TeacherScheduleView()
+                            .tabItem {
+                                Image(systemName: "bell")
+                                Text("Schedule")
+                            }
+                            .tag(3) // Unique tag for this tab
+                        
+                        ClassIDGenerationView()
+                            .tabItem {
+                                Image(systemName: "plus.square")
+                                Text("Create New Class")
+                            }
+                            .tag(4) // Unique tag for this tab
+                        
+                        TeacherManageUsers()
+                            .tabItem {
+                                Image(systemName: "person.2")
+                                Text("Students")
+                            }
+                            .tag(5) // Unique tag for this tab
+                        
+                        TeacherManageClasses()
+                            .tabItem {
+                                Image(systemName: "menucard.fill")
+                                Text("All Classes")
+                            }
+                            .tag(6) // Unique tag for this tab
+                            .environmentObject(studentList)
+                        
+                        BluetoothManagerView()
+                            .tabItem {
+                                Image(systemName: "app.connected.to.app.below.fill")
+                                Text("Connectivity Manager")
+                            }
+                            .tag(7) // Unique tag for this tab
+                        
+                        TeacherWhitelist()
+                            .tabItem {
+                                Image(systemName: "lock.open")
+                                Text("WhiteLists")
+                            }
+                            .tag(8) // Unique tag for this tab
+                        
+                        TeacherBlacklist()
+                            .tabItem {
+                                Image(systemName: "lock.fill")
+                                Text("BlackLists")
+                            }
+                            .tag(9) // Unique tag for this tab
+                        
+                        TeacherSettingsView(showNextView: $showNextView)
+                            .tabItem {
+                                Image(systemName: "gear")
+                                Text("Settings")
+                            }
+                            .tag(10) // Unique tag for this tab
             }
-            .onAppear {
-                firestoreManager.fetchTeachers()  // Fetch teachers when the view appears
-                loadActiveSchedule()
-            }
-            .preferredColorScheme(isDarkMode ? .dark : .light)
-            .tabItem {
-                Image(systemName: "house")
-                Text("Home")
-            }
-            
-            TeacherAllRequestsView()
-                .tabItem {
-                    Image(systemName: "hand.raised")
-                    Text("Requests")
-                }
-            TeacherClassListView()
-                .tabItem {
-                    Image(systemName: "list.bullet")
-                    Text("My Classes")
-                }
-            
-           
-            TeacherScheduleView()
-                .tabItem {
-                    Image(systemName: "bell")
-                    Text("Schedule")
-                }
-            ClassIDGenerationView()
-                .tabItem {
-                    Image(systemName: "plus.square")
-                    Text("Create New Class")
-                }
-
-            TeacherManageUsers()
-                .tabItem {
-                    Image(systemName: "person.2")
-                    Text("Students")
-                }
-            TeacherManageClasses()
-                .tabItem {
-                    Image(systemName: "menucard.fill")
-                    Text("All Classes")
-                }
-                .environmentObject(studentList)
-            BluetoothManagerView()
-                .tabItem {
-                    Image(systemName: "app.connected.to.app.below.fill")
-                    Text("Connectivity Manager")
-                }
-            TeacherWhitelist()
-                .tabItem {
-                    Image(systemName: "lock.open")
-                    Text("WhiteLists")
-                }
-            TeacherBlacklist()
-                .tabItem {
-                    Image(systemName: "lock.fill")
-                    Text("BlackLists")
-                }
-            
-            TeacherSettingsView(showNextView: $showNextView)
-                .tabItem {
-                    Image(systemName: "gear")
-                    Text("Settings")
-                }
         }
     }
-    
     // Load the active schedule's periods
     func loadActiveSchedule() {
         let db = Firestore.firestore()

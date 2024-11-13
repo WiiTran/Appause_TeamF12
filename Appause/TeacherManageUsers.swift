@@ -6,9 +6,8 @@ import SwiftUI
 
 struct TeacherManageUsers: View {
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject var studentList: StudentList
-    @State var studentName = ""
-    @State private var selectedStudent: StudentData? = nil
+    @EnvironmentObject var firestoreManager: FirestoreManager
+    @State private var studentName = ""
 
     var body: some View {
         NavigationStack {
@@ -27,48 +26,55 @@ struct TeacherManageUsers: View {
                 .cornerRadius(btnStyle.getPathRadius())
                 .padding(.top)
 
-                Spacer()
+                // Title for users section
+                Text("Students")
+                    .font(.title)
+                    .padding(.bottom, 10)
 
                 // Search Bar for Filtering Students
                 TextField("Search for Registered Users", text: $studentName)
                     .multilineTextAlignment(.center)
-                    .overlay(RoundedRectangle(cornerRadius: 5)
-                        .stroke(lineWidth: 1))
+                    .padding()
+                    .overlay(RoundedRectangle(cornerRadius: 5).stroke())
                     .frame(maxWidth: UIScreen.main.bounds.size.width * 0.75)
-                    .padding(.bottom, 25)
-                    .padding(.top, 30)
 
                 // List of Students
-                List(studentList.students) { student in  // Removed `$`
-                    if studentName.isEmpty || student.name.lowercased().contains(studentName.lowercased()) {
-                        NavigationLink(value: student) {
-                            Text(student.name)
-                                .font(.callout)
-                                .foregroundColor(btnStyle.getBtnFontColor())
-                        }
+                List(filteredStudents(), id: \.studentId) { student in
+                    VStack(alignment: .leading) {
+                        Text(student.Name)
+                            .font(.headline)
+                        Text("StudentID: \(String(student.email.prefix(6)))")
+                            .font(.subheadline)
+                        
                     }
+                    .padding()
                 }
-                .overlay(RoundedRectangle(cornerRadius: 10, style: .circular)
-                    .stroke(lineWidth: 5))
-                .frame(maxWidth: UIScreen.main.bounds.size.width * 0.80,
-                       maxHeight: UIScreen.main.bounds.size.height * 0.75)
-                .padding(.bottom, 300)
-                .cornerRadius(5)
-
+                .frame(maxWidth: .infinity, maxHeight: .infinity) // Take up full available space
             }
-            // Navigation Destination to TeacherUserRequestView
-            .navigationDestination(for: StudentData.self) { student in
-                TeacherUserRequestView(stackingPermitted: .constant(nil), student: student)
-                    .navigationBarHidden(true)
+            .onAppear {
+                firestoreManager.fetchStudents()
             }
         }
+        .toolbar(.hidden)  // Hides the navigation bar
         .preferredColorScheme(btnStyle.getTeacherScheme() == 0 ? .light : .dark)
+        .frame(maxWidth: .infinity, maxHeight: .infinity) // Make the main view take up the entire screen
+    }
+    
+    // Helper function to filter students by name based on search input
+    func filteredStudents() -> [ClassStudent] {
+        if studentName.isEmpty {
+            return firestoreManager.Students
+        } else {
+            return firestoreManager.Students.filter { student in
+                student.Name.lowercased().contains(studentName.lowercased())
+            }
+        }
     }
 }
 
 struct TeacherManageUsers_Previews: PreviewProvider {
     static var previews: some View {
         TeacherManageUsers()
-            .environmentObject(StudentList())  // Inject StudentList as an environment object here
+            .environmentObject(FirestoreManager())
     }
 }

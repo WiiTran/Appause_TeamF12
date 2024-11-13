@@ -52,7 +52,7 @@ final class UnblockRequestViewUITests: XCTestCase {
         
         
      
-        sleep(1)  // Wait for 1 second
+        sleep(2)  // Wait for 1 second
         // Tap the Submit Request button
 //        let requestButton = app.buttons["Submit Reqest"]
 //        XCTAssertTrue(requestButton.exists, "Request button should exist")
@@ -60,7 +60,7 @@ final class UnblockRequestViewUITests: XCTestCase {
         app.buttons["Submit Request"].tap()
         
         
-        sleep(1)  // Wait for 1 second
+        sleep(2)  // Wait for 1 second
         
         // Locate the text fields and buttons
         let studentIDTextField = app.textFields["studentIDTextField"]
