@@ -21,6 +21,10 @@ struct StudentClassModel: Identifiable {
 
 
 struct ClassListView: View {
+    //navigation variables
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.presentationMode) var presentationMode
+    
     @State private var classes: [ClassModel] = []
     @State private var classesInfo: [StudentClassModel] = []
     @State private var isLoading = true
@@ -31,7 +35,21 @@ struct ClassListView: View {
     
     var body: some View {
         VStack {
-            
+            Text("MAIN / CLASSES ")
+                .onTapGesture {
+                    withAnimation { self.presentationMode.wrappedValue.dismiss() }
+                }
+                .fontWeight(btnStyle.getFont())
+                .foregroundColor(btnStyle.getPathFontColor())
+                .frame(width: btnStyle.getWidth(),
+                       height: btnStyle.getHeight(),
+                       alignment: btnStyle.getAlignment())
+                .padding()
+                .background(btnStyle.getPathColor())
+                .cornerRadius(btnStyle.getPathRadius())
+                .padding(.top, 20)
+
+            Spacer()
             
             Text("My Classes")
                 .font(.largeTitle)
