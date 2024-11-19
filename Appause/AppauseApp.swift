@@ -20,6 +20,7 @@ struct AppauseApp: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     private let viewSwitcher = ViewSwitcher() // Initialize ViewSwitcher here
+    @StateObject private var themeManager = ThemeManager()
     @StateObject private var firestoreManager = FirestoreManager() //
     @StateObject private var studentList = StudentList()
     
@@ -30,8 +31,13 @@ struct AppauseApp: App {
                                 .environmentObject(ScheduleState.scheduleState)
                                 .environmentObject(firestoreManager) // Add FirestoreManager
                                 .environmentObject(studentList)
+                                .environmentObject(themeManager)
+                                .preferredColorScheme(themeManager.isDarkMode ? .dark : .light)
         }
     }
+}
+class ThemeManager: ObservableObject {
+    @Published var isDarkMode: Bool = false
 }
 
 class AppDelegate: NSObject, UIApplicationDelegate {
