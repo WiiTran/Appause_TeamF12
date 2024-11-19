@@ -11,14 +11,15 @@ struct TeacherSettingsView: View {
     @Binding var showNextView: DisplayState
     
     @State var firstButton = "MAIN / SETTINGS"
-//    @State var secondButton = "Change Password"
     @State var fourthButton = "Disable Bluetooth"
     @State var fifthButton = "Dark Mode"
     
+    @EnvironmentObject var themeManager: ThemeManager
     @EnvironmentObject var viewSwitcher: ViewSwitcher
     
-    // Track the dark mode setting with @AppStorage to persist across views
-    @AppStorage("isDarkMode") private var isDarkMode: Bool = false
+//    // Track the dark mode setting with @AppStorage to persist across views
+//    @AppStorage("isDarkMode") private var isDarkMode: Bool = false
+  
     
 //    // Fetch the 2FA setting for the current logged-in user
 //    @State var isTwoFactorEnabled: Bool = {
@@ -76,9 +77,10 @@ struct TeacherSettingsView: View {
 //            
             // Dark Mode Toggle
             Button(action: {
-                // Toggle the dark mode value
-                isDarkMode.toggle()
-                fifthButton = isDarkMode ? "Light Mode" : "Dark Mode"
+                withAnimation {
+                    themeManager.isDarkMode.toggle()
+                }
+                fifthButton = themeManager.isDarkMode ? "Light Mode" : "Dark Mode"
             }) {
                 Text(fifthButton)
                     .fontWeight(btnStyle.getFont())
@@ -106,7 +108,7 @@ struct TeacherSettingsView: View {
             .background(Color.red)
             .cornerRadius(200)
         }
-        .preferredColorScheme(isDarkMode ? .dark : .light)
+        .preferredColorScheme(themeManager.isDarkMode ? .dark : .light)
     }
 }
 
@@ -114,6 +116,7 @@ struct TeacherSettingsView_Previews: PreviewProvider {
     @State static private var showNextView: DisplayState = .teacherSettings
     static var previews: some View {
         TeacherSettingsView(showNextView: $showNextView)
+            .environmentObject(ThemeManager())
     }
 }
 
