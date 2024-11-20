@@ -51,6 +51,7 @@
 		3EA9F4162CBE922E008903AD /* TeacherSignUpUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA9F4152CBE922E008903AD /* TeacherSignUpUITests.swift */; };
 		3EA9F4182CBE9256008903AD /* StudentSignInUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA9F4172CBE9256008903AD /* StudentSignInUITests.swift */; };
 		3EA9F41A2CBE9280008903AD /* TeacherSignInUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA9F4192CBE9280008903AD /* TeacherSignInUITests.swift */; };
+		3EB1806C2CEE39900094B7E7 /* UnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB1806B2CEE39900094B7E7 /* UnitTest.swift */; };
 		3EB48E172CBE907A00B41BAD /* AppauseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB48E162CBE907A00B41BAD /* AppauseUITests.swift */; };
 		3EB48E192CBE907A00B41BAD /* AppauseUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB48E182CBE907A00B41BAD /* AppauseUITestsLaunchTests.swift */; };
 		3EE6213B2CDAD3C200F18F4A /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 3EE6213A2CDAD3C200F18F4A /* FirebaseAuth */; };
@@ -139,6 +140,7 @@
 		3EA9F4152CBE922E008903AD /* TeacherSignUpUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherSignUpUITests.swift; sourceTree = "<group>"; };
 		3EA9F4172CBE9256008903AD /* StudentSignInUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentSignInUITests.swift; sourceTree = "<group>"; };
 		3EA9F4192CBE9280008903AD /* TeacherSignInUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherSignInUITests.swift; sourceTree = "<group>"; };
+		3EB1806B2CEE39900094B7E7 /* UnitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitTest.swift; sourceTree = "<group>"; };
 		3EB48E142CBE907A00B41BAD /* AppauseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppauseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EB48E162CBE907A00B41BAD /* AppauseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppauseUITests.swift; sourceTree = "<group>"; };
 		3EB48E182CBE907A00B41BAD /* AppauseUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppauseUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -280,6 +282,7 @@
 				3E100B182CAC11410006E0D3 /* PasswordRequirementsTests.swift */,
 				3E100B1A2CAC11AE0006E0D3 /* EmailValidationTest.swift */,
 				3E79A6642CE4BA1F00A2A5B6 /* EmailValidationStudent.swift */,
+				3EB1806B2CEE39900094B7E7 /* UnitTest.swift */,
 			);
 			path = AppauseTests;
 			sourceTree = "<group>";
@@ -508,6 +511,7 @@
 				3E79A6652CE4BA1F00A2A5B6 /* EmailValidationStudent.swift in Sources */,
 				3E100B192CAC11410006E0D3 /* PasswordRequirementsTests.swift in Sources */,
 				3E100B1B2CAC11AE0006E0D3 /* EmailValidationTest.swift in Sources */,
+				3EB1806C2CEE39900094B7E7 /* UnitTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -667,11 +671,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CREATE_INFOPLIST_SECTION_IN_BINARY = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Appause/Preview Content\"";
-				DEVELOPMENT_TEAM = 9UY79QFFH9;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 53NSY6KM9Q;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
@@ -692,6 +698,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = csus.TmF12.Appause;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = AppausePL;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -704,11 +711,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CREATE_INFOPLIST_SECTION_IN_BINARY = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Appause/Preview Content\"";
-				DEVELOPMENT_TEAM = 9UY79QFFH9;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 53NSY6KM9Q;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
@@ -729,6 +738,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = csus.TmF12.Appause;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = AppausePL;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

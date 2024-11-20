@@ -18,7 +18,7 @@ class ViewSwitcher: ObservableObject{
 @main
 struct AppauseApp: App {
     
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate 
     private let viewSwitcher = ViewSwitcher() // Initialize ViewSwitcher here
     @StateObject private var themeManager = ThemeManager()
     @StateObject private var firestoreManager = FirestoreManager() //
