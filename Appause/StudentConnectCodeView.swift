@@ -24,7 +24,7 @@ struct StudentConnectCodeView: View {
 
     var body: some View {
         VStack(spacing: 16) {
-            Text("MAIN / CLASSES / ADD CLASS")
+            Text("MAIN / MY CLASSES / ADD CLASS")
                 .onTapGesture {
                     withAnimation { self.presentationMode.wrappedValue.dismiss() }
                 }

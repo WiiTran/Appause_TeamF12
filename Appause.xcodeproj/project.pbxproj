@@ -73,6 +73,7 @@
 		ED2B5A8E2C9A12EE008AC0AA /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2B5A8D2C9A12EE008AC0AA /* AuthManager.swift */; };
 		ED8FB51A2C910F7B00DFB478 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED8FB5192C910F7B00DFB478 /* GoogleService-Info.plist */; };
 		ED8FB51B2C910F7B00DFB478 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED8FB5192C910F7B00DFB478 /* GoogleService-Info.plist */; };
+		EDF7E5172CEC3D6D00C5B449 /* StudentClassListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF7E5162CEC3D6D00C5B449 /* StudentClassListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -159,6 +160,7 @@
 		C8D38EF62BD3881700F0D2BA /* TeacherSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherSettingsView.swift; sourceTree = "<group>"; };
 		ED2B5A8D2C9A12EE008AC0AA /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		ED8FB5192C910F7B00DFB478 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EDF7E5162CEC3D6D00C5B449 /* StudentClassListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentClassListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,9 +241,10 @@
 				3E0956D82BD1E79A0037B462 /* StudentConnectCodeView.swift */,
 				3E17374D2BD8A39400D0F290 /* StudentDeleteAdminView.swift */,
 				3EA44B262BCF43F100732432 /* StudentMainView.swift */,
+				EDF7E5162CEC3D6D00C5B449 /* StudentClassListView.swift */,
 				9B20E1F92CBF90C9001F2491 /* studentRequestUnlockView.swift */,
-				3E4FD4D42CD07C8B00174942 /* studentRequestUnlockView.swift */,
 				C8D38EF42BD35D9E00F0D2BA /* StudentSettingsView.swift */,
+				3E4FD4D42CD07C8B00174942 /* studentRequestUnlockView.swift */,
 				3E35C4E72CBF69940012357A /* TeacherAddScheduleView.swift */,
 				3E17375F2BD8A6F700D0F290 /* TeacherAllRequestsView.swift */,
 				3E79A6602CE4B39900A2A5B6 /* TeacherRegisterView.swift */,
@@ -475,6 +478,7 @@
 				3EE621412CDADB2200F18F4A /* FeedbackFormView.swift in Sources */,
 				3E1737542BD8A4A300D0F290 /* TeacherManageUsers.swift in Sources */,
 				3E1737422BD8A29A00D0F290 /* PWCodeVerificationView.swift in Sources */,
+				EDF7E5172CEC3D6D00C5B449 /* StudentClassListView.swift in Sources */,
 				9B53910C2CCB0029006B254F /* unlockRequestList.swift in Sources */,
 				3E17375C2BD8A69600D0F290 /* TeacherAppDescription.swift in Sources */,
 				3E79A6572CE40F0100A2A5B6 /* TeacherManageClasses.swift in Sources */,
