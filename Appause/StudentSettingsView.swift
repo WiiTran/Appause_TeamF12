@@ -73,31 +73,31 @@ struct StudentSettingsView: View {
             //            .padding()
             
             
-            
-            //            Button(action: {
-            //                btnStyle.setStudentScheme()
-            //                colorScheme = btnStyle.getStudentScheme()
-            //                if colorScheme == 0 {
-            //                    fifthButton = "Dark Mode"
-            //                } else {
-            //                    fifthButton = "Light Mode"
-            //                }
-            //            }) {
-            //                Text(fifthButton)
-            //                    .fontWeight(btnStyle.getFont())
-            //                    .foregroundColor(btnStyle.getBtnFontColor())
-            //                    .frame(width: btnStyle.getWidth(),
-            //                           height: btnStyle.getHeight(),
-            //                           alignment: btnStyle.getAlignment())
-            //            }
-            //            .padding()
-            //            .background(btnStyle.getBtnColor())
-            //            .border(btnStyle.getBorderColor(), width: btnStyle.getBorderWidth())
-            //            .cornerRadius(btnStyle.getBtnRadius())
-            //            //.padding(.bottom, 300)
-            //            Spacer()
-            //        }
-            //        .preferredColorScheme(colorScheme == 0 ? .light : .dark)
+        
+                        Button(action: {
+                            btnStyle.setStudentScheme()
+                            colorScheme = btnStyle.getStudentScheme()
+                            if colorScheme == 0 {
+                                fifthButton = "Dark Mode"
+                            } else {
+                                fifthButton = "Light Mode"
+                            }
+                        }) {
+                            Text(fifthButton)
+                                .fontWeight(btnStyle.getFont())
+                                .foregroundColor(btnStyle.getBtnFontColor())
+                                .frame(width: btnStyle.getWidth(),
+                                       height: btnStyle.getHeight(),
+                                       alignment: btnStyle.getAlignment())
+                        }
+                        .padding()
+                        .background(btnStyle.getBtnColor())
+                        .border(btnStyle.getBorderColor(), width: btnStyle.getBorderWidth())
+                        .cornerRadius(btnStyle.getBtnRadius())
+                        //.padding(.bottom, 300)
+                        Spacer()
+                    }
+                    .preferredColorScheme(colorScheme == 0 ? .light : .dark)
         }
     }
     
@@ -107,4 +107,4 @@ struct StudentSettingsView: View {
             StudentSettingsView(showNextView: $showNextView)
         }
     }
-}
+
