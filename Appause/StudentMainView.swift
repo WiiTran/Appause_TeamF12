@@ -21,7 +21,8 @@ struct StudentMainView: View {
     @State private var frameWidth: CGFloat = 300
     @State private var frameHeight: CGFloat = 20
     
-    @State var secondButtonName = "Add Classes"
+    @State var firstButtonName = "Add Classes"
+    @State var secondButtonName = "My Classes"
     @State var thirdButtonName = "All Classes"
     @State var fourthButtonName = "Settings"
     @State var fifthButtonName = "Submit Request"
@@ -43,8 +44,28 @@ struct StudentMainView: View {
                 
                 Spacer()
                 
-                // Classes Button
+                // Add Classes Button
                 NavigationLink(destination: StudentConnectCodeView().navigationBarHidden(true)) {
+                    HStack {
+                        Text(firstButtonName)
+                            .padding(.leading, 25)
+                            .foregroundColor(btnStyle.getBtnFontColor())
+                            .frame(width: btnStyle.getWidth(), height: btnStyle.getHeight(), alignment: btnStyle.getAlignment())
+                            .fontWeight(btnStyle.getFont())
+                        Image(systemName: "plus")
+                            .fontWeight(btnStyle.getFont())
+                            .imageScale(.large)
+                            .foregroundColor(btnStyle.getBtnFontColor())
+                    }
+                }
+                .padding()
+                .background(btnStyle.getBtnColor())
+                .border(btnStyle.getBorderColor(), width: btnStyle.getBorderWidth())
+                .cornerRadius(btnStyle.getBtnRadius())
+                .padding(.bottom, 10)
+                
+                // My Classes Button
+                NavigationLink(destination: ClassListView().navigationBarHidden(true)) {
                     HStack {
                         Text(secondButtonName)
                             .padding(.leading, 25)

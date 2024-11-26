@@ -57,7 +57,7 @@ struct TeacherClassListView: View {
                         if let period = classItem.period {
                             Text("Period: \(period)")
                         }
-//                        Text("Days: \(classItem.days.joined(separator: ", "))")
+//                       s")
                         Text("Time: \(classItem.startTime) - \(classItem.endTime)")
                     }
                     .padding()
