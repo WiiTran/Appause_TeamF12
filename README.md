@@ -26,33 +26,33 @@
 <h2>Key Features</h2>
   <ul>
     <li>App Home Screen</li>
-<img src="https://github.com/WiiTran/Appause_TeamF12/blob/87c159b42188e0cda9f8bfc65456e3cc75b49219/readmepng/home.png">
+<img src="https://github.com/WiiTran/Appause_TeamF12/blob/483b31ac0fe49c1e189556e95251655d462c6d24/readmepng/newapphome.png">
     <li>Teacher Home Screen</li>
-<img src="https://github.com/WiiTran/Appause_TeamF12/blob/87c159b42188e0cda9f8bfc65456e3cc75b49219/readmepng/teacherhome.png">
+<img src="https://github.com/WiiTran/Appause_TeamF12/blob/483b31ac0fe49c1e189556e95251655d462c6d24/readmepng/newteacherhome.png">
     <li>Teacher Request View</li>
-<img src="https://github.com/WiiTran/Appause_TeamF12/blob/87c159b42188e0cda9f8bfc65456e3cc75b49219/readmepng/teacherrequest.png">
+<img src="https://github.com/WiiTran/Appause_TeamF12/blob/483b31ac0fe49c1e189556e95251655d462c6d24/readmepng/newteacherrequest.png">
     <li>Teacher Whitelist View</li>
-<img src="https://github.com/WiiTran/Appause_TeamF12/blob/87c159b42188e0cda9f8bfc65456e3cc75b49219/readmepng/whitelist.png">
+<img src="https://github.com/WiiTran/Appause_TeamF12/blob/483b31ac0fe49c1e189556e95251655d462c6d24/readmepng/newteacherwhitelist.png">
     <li>Teacher BlackList View</li>
-<img src="https://github.com/WiiTran/Appause_TeamF12/blob/87c159b42188e0cda9f8bfc65456e3cc75b49219/readmepng/blacklist.png">
+<img src="https://github.com/WiiTran/Appause_TeamF12/blob/483b31ac0fe49c1e189556e95251655d462c6d24/readmepng/newteacherblacklist.png">
       <li>Teacher Schedule View</li>
-<img src="https://github.com/WiiTran/Appause_TeamF12/blob/87c159b42188e0cda9f8bfc65456e3cc75b49219/readmepng/schedule.png">
+<img src="https://github.com/WiiTran/Appause_TeamF12/blob/483b31ac0fe49c1e189556e95251655d462c6d24/readmepng/newteacherschedule.png">
     <li>Teacher Connectivity View</li>
-<img src="https://github.com/WiiTran/Appause_TeamF12/blob/87c159b42188e0cda9f8bfc65456e3cc75b49219/readmepng/connectivity.png">
+<img src="https://github.com/WiiTran/Appause_TeamF12/blob/483b31ac0fe49c1e189556e95251655d462c6d24/readmepng/newteacherconnect.png">
     <li>Teacher Student List View</li>
-<img src="https://github.com/WiiTran/Appause_TeamF12/blob/87c159b42188e0cda9f8bfc65456e3cc75b49219/readmepng/studentlist.png">
+<img src="https://github.com/WiiTran/Appause_TeamF12/blob/483b31ac0fe49c1e189556e95251655d462c6d24/readmepng/newteachermanage.png">
     <li>Teacher Save Class View</li>
-<img src="https://github.com/WiiTran/Appause_TeamF12/blob/87c159b42188e0cda9f8bfc65456e3cc75b49219/readmepng/saveclass.png">
+<img src="https://github.com/WiiTran/Appause_TeamF12/blob/483b31ac0fe49c1e189556e95251655d462c6d24/readmepng/newteacheradd.png">
     <li>Student Home Screen</li>
-<img src="https://github.com/WiiTran/Appause_TeamF12/blob/87c159b42188e0cda9f8bfc65456e3cc75b49219/readmepng/studenthome.png">
+<img src="https://github.com/WiiTran/Appause_TeamF12/blob/483b31ac0fe49c1e189556e95251655d462c6d24/readmepng/newstudenthome.png">
     <li>Student Add Class View</li>
-<img src="https://github.com/WiiTran/Appause_TeamF12/blob/87c159b42188e0cda9f8bfc65456e3cc75b49219/readmepng/addclass.png">
+<img src="https://github.com/WiiTran/Appause_TeamF12/blob/483b31ac0fe49c1e189556e95251655d462c6d24/readmepng/newstudentclass.png">
     <li>Student My Classes View</li>
-<img src="https://github.com/WiiTran/Appause_TeamF12/blob/87c159b42188e0cda9f8bfc65456e3cc75b49219/readmepng/myclasses.png">
+<img src="https://github.com/WiiTran/Appause_TeamF12/blob/483b31ac0fe49c1e189556e95251655d462c6d24/readmepng/newstudentmyclass.png">
     <li>Student Request View</li>
-<img src="https://github.com/WiiTran/Appause_TeamF12/blob/87c159b42188e0cda9f8bfc65456e3cc75b49219/readmepng/submitrequest.png">
+<img src="https://github.com/WiiTran/Appause_TeamF12/blob/483b31ac0fe49c1e189556e95251655d462c6d24/readmepng/newstudentrequest.png">
     <li>Student Feedback View</li>
-<img src="https://github.com/WiiTran/Appause_TeamF12/blob/87c159b42188e0cda9f8bfc65456e3cc75b49219/readmepng/submitfeedback.png">
+<img src="https://github.com/WiiTran/Appause_TeamF12/blob/483b31ac0fe49c1e189556e95251655d462c6d24/readmepng/newfeedback.png">
   </ul>
 
 <h2>Testing</h2>
