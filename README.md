@@ -28,15 +28,15 @@
     <li>App Home Screen</li>
 <img src="https://github.com/WiiTran/Appause_TeamF12/blob/483b31ac0fe49c1e189556e95251655d462c6d24/readmepng/newapphome.png">
     <li>Teacher Home Screen</li>
-<img src="https://github.com/WiiTran/Appause_TeamF12/blob/483b31ac0fe49c1e189556e95251655d462c6d24/readmepng/newteacherhome.png">
+<img src="https://github.com/WiiTran/Appause_TeamF12/blob/483b31ac0fe49c1e189556e95251655d462c6d24/readmepng/newteacherhome.png" width="310" height="510">
     <li>Teacher Request View</li>
-<img src="https://github.com/WiiTran/Appause_TeamF12/blob/483b31ac0fe49c1e189556e95251655d462c6d24/readmepng/newteacherrequest.png">
+<img src="https://github.com/WiiTran/Appause_TeamF12/blob/483b31ac0fe49c1e189556e95251655d462c6d24/readmepng/newteacherrequest.png" width="310" height="510">
     <li>Teacher Whitelist View</li>
 <img src="https://github.com/WiiTran/Appause_TeamF12/blob/483b31ac0fe49c1e189556e95251655d462c6d24/readmepng/newteacherwhitelist.png">
     <li>Teacher BlackList View</li>
 <img src="https://github.com/WiiTran/Appause_TeamF12/blob/483b31ac0fe49c1e189556e95251655d462c6d24/readmepng/newteacherblacklist.png">
       <li>Teacher Schedule View</li>
-<img src="https://github.com/WiiTran/Appause_TeamF12/blob/483b31ac0fe49c1e189556e95251655d462c6d24/readmepng/newteacherschedule.png">
+<img src="https://github.com/WiiTran/Appause_TeamF12/blob/483b31ac0fe49c1e189556e95251655d462c6d24/readmepng/newteacherschedule.png" width="310" height="510">
     <li>Teacher Connectivity View</li>
 <img src="https://github.com/WiiTran/Appause_TeamF12/blob/483b31ac0fe49c1e189556e95251655d462c6d24/readmepng/newteacherconnect.png">
     <li>Teacher Student List View</li>
