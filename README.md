@@ -15,13 +15,13 @@
 <h3>Andy Pham (<a href="https://github.com/ap2024">GitHub</a>)</h3><br/><br/>
 
 <h2>Project Overview </h2>
-<p> This project focuses on assisting teachers in the educational setting. While the development faced issues with shut down ability and the connectivity between devices, the app contains most of the functionality apart from that. As this is a continued project, we are happy to express the further development to the application. </p>
+<p> This project focuses on assisting teachers in the educational setting. While the development faced issues with shut down ability and the connectivity between devices, the app contains most of the intended functionality apart from that. As this is a continued project, we look forward to observing the further development to the application by another team. </p>
 
 <h2>Project Purpose</h2>
-<p> As cell phones become a part of students life, educational teachers like Mr. Brimberry are trying to find a balance with its functionality within the classroom setting. This app developed with the purpose limiting the distractions in class and increase engagement within the classrooms. His experience with students accessing their phones during classes provided him a reason to seek out a way to direct the focus of students without disconnecting them from the usefulness of cell phones. </p>
+<p> As cell phones become a part of students life, teachers such as Mr. Brimberry are trying to find a balance with its functionality within the classroom setting. This app developed with the purpose limiting the distractions in class and increasing engagement within the classrooms. His experience with students accessing their phones during classes provided him a reason to seek out a way to direct the focus of students without disconnecting them from the usefulness of cell phones. </p>
 
 <h2>Project Description</h2>
-<p> This IOS mobile application was developed using Swift and Xcode. As this was a continued project, the code has been rewritten and expanded into a new functioning application. New features both requested by the client and brainstormed by the team were added in to bring more functionality to the teacher and student user interfaces. Firebase database has also been connected to expand the functionality of the key features such as teacher, student, and class information. </p>
+<p> This IOS mobile application was developed using Swift and Xcode. The app is intended to function via bluetooth/network connection to connect present student and teacher IPhones. The teacher will then be able to disallow access of students to any application downloaded on their IPhone, excluding the Phone application that allows the student to make phone calls. Students would be able to request to have apps unblocked, after which the teacher could approve access to temporarily or permanently, or deny this request altogether. As this was a continued project, the code has been rewritten and expanded into a new functioning application. New features both requested by the client and brainstormed by the team were added in to bring more functionality to the teacher and student user interfaces. Firebase database has also been connected to expand the functionality of the key features such as teacher, student, and class information. </p>
 
 <h2>Key Features</h2>
   <ul>
